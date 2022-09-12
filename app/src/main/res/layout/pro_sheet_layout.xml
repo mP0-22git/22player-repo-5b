@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline50"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="150dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5"
+        />
+
+    <ImageView
+        android:id="@+id/iv_preview"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/template"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/gradient_black"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/gradient_black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/iv_preview"
+        />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:src="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gradient_black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:fontFamily="@font/boldfont"
+        android:text="@string/buy_pro_pack"
+        android:textColor="#ffffff"
+        android:textSize="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/buy_button" />
+
+    <Button
+        android:id="@+id/buy_button"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:text="@string/go_pro"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        android:background="@drawable/button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/guideline50"
+        app:layout_constraintTop_toBottomOf="@id/guideline50"
+        android:layout_marginStart="12dp"
+        />
+
+    <TextView
+        android:id="@+id/desc0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/no_ads"
+        android:textSize="17dp"
+        android:fontFamily="@font/semiboldfont"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buy_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="12dp"
+        android:drawableStart="@drawable/ic_check_circle_24"
+        android:drawablePadding="5dp"
+        />
+
+
+    <TextView
+        android:id="@+id/desc1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/custom_themes"
+        android:textSize="17dp"
+        android:fontFamily="@font/semiboldfont"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/desc0"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="12dp"
+        android:drawableStart="@drawable/ic_check_circle_24"
+        android:drawablePadding="5dp"
+        />
+
+    <TextView
+        android:id="@+id/desc1sub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Starry night, Blurry and many more"
+        android:textSize="14dp"
+        android:alpha="0.8"
+        android:drawableStart="@drawable/ic_check_circle_24"
+        android:drawableTint="@android:color/transparent"
+        android:fontFamily="@font/regularfont"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/desc1"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="5dp"
+        android:drawablePadding="5dp"
+        />
+
+    <TextView
+        android:id="@+id/desc2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/pro_features"
+        android:textSize="17dp"
+        android:fontFamily="@font/semiboldfont"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/desc1sub"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="12dp"
+        android:drawableStart="@drawable/ic_check_circle_24"
+        android:drawablePadding="5dp"
+        />
+
+    <TextView
+        android:id="@+id/desc2sub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Folders, sleep timer, color customization"
+        android:textSize="14dp"
+        android:alpha="0.8"
+        android:drawableStart="@drawable/ic_check_circle_24"
+        android:drawableTint="@android:color/transparent"
+        android:fontFamily="@font/regularfont"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/desc2"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="5dp"
+        android:drawablePadding="5dp"
+        />
+
+    <TextView
+        android:id="@+id/desc3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/future_updates"
+        android:textSize="17dp"
+        android:fontFamily="@font/semiboldfont"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/desc2sub"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="12dp"
+        android:drawableStart="@drawable/ic_check_circle_24"
+        android:drawablePadding="5dp"
+        />
+
+    <Button
+        android:id="@+id/restore_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Restore Purchase"
+        android:textColor="@color/white"
+        android:textSize="12dp"
+        android:alpha="0.5"
+        android:textAllCaps="false"
+        android:background="@android:color/transparent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/desc3"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+        />
+
+    <ImageView
+        android:id="@+id/close_button"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginStart="12dp"
+        android:padding="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/ic_close_white_24dp"
+        />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/gradient_purchase_activity"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

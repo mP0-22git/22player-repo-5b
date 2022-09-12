@@ -1,0 +1,13 @@
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.kabouzeid.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory android:title="About">
+
+    <com.kabouzeid.appthemehelper.common.prefs.supportv7.ATEPreference
+        app:iconSpaceReserved="false"
+        android:key="credits"
+        android:title="Licenses and privacy" />
+
+    </com.kabouzeid.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
+
+</androidx.preference.PreferenceScreen>
