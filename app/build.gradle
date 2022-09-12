@@ -37,11 +37,11 @@ static def getProperty(@Nullable Properties properties, String name) {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 32
     buildToolsVersion '29.0.3'
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 30
+        targetSdkVersion 32
 
         renderscriptTargetApi 30
         vectorDrawables.useSupportLibrary = true
