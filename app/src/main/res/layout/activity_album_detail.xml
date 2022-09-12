@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,6 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="@dimen/toolbar_elevation"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/status_bar_padding"
         tools:ignore="UnusedAttribute">
 
         <androidx.appcompat.widget.Toolbar
@@ -26,9 +30,33 @@
 
     </FrameLayout>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+
+        <ImageView
+            android:id="@+id/blur_header_image"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/detail_header_height"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <ImageView
+            android:id="@+id/blur_header_gradient"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/detail_header_height"
+            android:tint="?fabIconColor"
+            android:src="@drawable/gradient_black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
         <com.github.ksoichiro.android.observablescrollview.ObservableRecyclerView
             android:id="@+id/list"
@@ -39,25 +67,158 @@
             android:dividerHeight="0dp"
             android:scrollbars="none" />
 
-        <FrameLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
             android:orientation="vertical">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/header"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/detail_header_height"
-                android:background="?attr/defaultFooterColor"
+                android:background="@android:color/transparent"
                 android:elevation="@dimen/toolbar_elevation"
                 android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 tools:ignore="UnusedAttribute">
 
                 <!--placeholder image view, the actual image view can't go here or the shared element transition won't work right-->
                 <View
+                    android:id="@+id/placeholder_image"
                     android:layout_width="@dimen/detail_header_image_height"
                     android:layout_height="@dimen/detail_header_image_height"
-                    android:layout_margin="16dp" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/album_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/placeholder_image"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textColor="?textColor"
+                    android:fontFamily="@font/semiboldfont"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:textAlignment="center"
+                    android:textSize="18dp"
+                    android:text="Album Name"
+                    />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/album_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/album_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    >
+
+                    <TextView
+                        android:id="@+id/artist_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/album_year_text"
+                        android:fontFamily="@font/regularfont"
+                        android:alpha="0.8"
+                        android:textColor="?textColor"
+                        android:textSize="12dp"
+                        android:layout_marginEnd="6dp"
+                        />
+
+                    <ImageView
+                        android:layout_width="5dp"
+                        android:layout_height="5dp"
+                        android:src="@drawable/ic_baseline_circle_24"
+                        android:tint="?textColor"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/artist_text"
+                        app:layout_constraintEnd_toStartOf="@id/album_year_text"
+                        />
+
+                    <TextView
+                        android:id="@+id/album_year_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toEndOf="@id/artist_text"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/song_count_text"
+                        android:fontFamily="@font/regularfont"
+                        android:alpha="0.8"
+                        android:textSize="12dp"
+                        android:textColor="?textColor"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginEnd="6dp"
+                        />
+
+                    <ImageView
+                        android:layout_width="5dp"
+                        android:layout_height="5dp"
+                        android:src="@drawable/ic_baseline_circle_24"
+                        android:tint="?textColor"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/album_year_text"
+                        app:layout_constraintEnd_toStartOf="@id/song_count_text"
+                        />
+
+                    <TextView
+                        android:id="@+id/song_count_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toEndOf="@id/album_year_text"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/duration_text"
+                        android:fontFamily="@font/regularfont"
+                        android:alpha="0.8"
+                        android:textSize="12dp"
+                        android:textColor="?textColor"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginEnd="6dp"
+                        />
+
+                    <ImageView
+                        android:layout_width="5dp"
+                        android:layout_height="5dp"
+                        android:src="@drawable/ic_baseline_circle_24"
+                        android:tint="?textColor"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/song_count_text"
+                        app:layout_constraintEnd_toStartOf="@id/duration_text"
+                        />
+
+                    <TextView
+                        android:id="@+id/duration_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toEndOf="@id/song_count_text"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:fontFamily="@font/regularfont"
+                        android:alpha="0.8"
+                        android:textSize="12dp"
+                        android:textColor="?textColor"
+                        android:layout_marginStart="6dp"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -77,24 +238,19 @@
                         android:paddingRight="16dp"
                         android:paddingStart="0dp">
 
-                        <ImageView
-                            android:id="@+id/artist_icon"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginLeft="0dp"
-                            android:layout_marginRight="8dp"
-                            android:layout_marginStart="0dp"
-                            app:srcCompat="@drawable/ic_person_white_24dp"
-                            tools:ignore="ContentDescription,UnusedAttribute" />
+                    </LinearLayout>
 
-                        <TextView
-                            android:ellipsize="end"
-                            android:maxLines="@integer/detail_header_tile_maxLines"
-                            android:id="@+id/artist_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingEnd="16dp"
+                        android:paddingLeft="0dp"
+                        android:paddingRight="16dp"
+                        android:paddingStart="0dp">
+
 
                     </LinearLayout>
 
@@ -109,23 +265,6 @@
                         android:paddingRight="16dp"
                         android:paddingStart="0dp">
 
-                        <ImageView
-                            android:id="@+id/song_count_icon"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginLeft="0dp"
-                            android:layout_marginRight="8dp"
-                            android:layout_marginStart="0dp"
-                            app:srcCompat="@drawable/ic_music_note_white_24dp"
-                            tools:ignore="ContentDescription,UnusedAttribute" />
-
-                        <TextView
-                            android:id="@+id/song_count_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -138,75 +277,32 @@
                         android:paddingLeft="0dp"
                         android:paddingRight="16dp"
                         android:paddingStart="0dp">
-
-                        <ImageView
-                            android:id="@+id/duration_icon"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginLeft="0dp"
-                            android:layout_marginRight="8dp"
-                            android:layout_marginStart="0dp"
-                            app:srcCompat="@drawable/ic_timer_white_24dp"
-                            tools:ignore="ContentDescription,UnusedAttribute" />
-
-                        <TextView
-                            android:id="@+id/duration_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingEnd="16dp"
-                        android:paddingLeft="0dp"
-                        android:paddingRight="16dp"
-                        android:paddingStart="0dp">
-
-                        <ImageView
-                            android:id="@+id/album_year_icon"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginLeft="0dp"
-                            android:layout_marginRight="8dp"
-                            android:layout_marginStart="0dp"
-                            app:srcCompat="@drawable/ic_event_white_24dp"
-                            tools:ignore="ContentDescription,UnusedAttribute" />
-
-                        <TextView
-                            android:id="@+id/album_year_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
                     </LinearLayout>
 
                 </LinearLayout>
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent" />
 
-        </FrameLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
             android:id="@+id/image"
             android:layout_width="@dimen/detail_header_image_height"
             android:layout_height="@dimen/detail_header_image_height"
-            android:layout_margin="16dp"
             android:scaleType="centerCrop"
+            android:elevation="5dp"
+            android:layout_gravity="center_horizontal"
             android:src="@drawable/default_album_art"
             android:transitionName="@string/transition_album_art"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/blur_header_image"
+            app:layout_constraintBottom_toBottomOf="@id/blur_header_image"
             tools:ignore="ContentDescription,UnusedAttribute" />
 
         <View
@@ -214,7 +310,12 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/detail_header_height"
             android:elevation="@dimen/toolbar_elevation"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="UnusedAttribute" />
-    </FrameLayout>
 
-</LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

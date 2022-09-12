@@ -32,6 +32,7 @@ import com.kabouzeid.trebl.adapter.song.AlbumSongAdapter;
 import com.kabouzeid.trebl.dialogs.AddToPlaylistDialog;
 import com.kabouzeid.trebl.dialogs.DeleteSongsDialog;
 import com.kabouzeid.trebl.dialogs.SleepTimerDialog;
+import com.kabouzeid.trebl.glide.BlurTransformation;
 import com.kabouzeid.trebl.glide.PhonographColoredTarget;
 import com.kabouzeid.trebl.glide.SongGlideRequest;
 import com.kabouzeid.trebl.helper.MusicPlayerRemote;
@@ -52,6 +53,7 @@ import com.kabouzeid.trebl.util.MusicUtil;
 import com.kabouzeid.trebl.util.NavigationUtil;
 import com.kabouzeid.trebl.util.PhonographColorUtil;
 import com.kabouzeid.trebl.util.PreferenceUtil;
+import com.kabouzeid.trebl.util.Util;
 
 import java.util.List;
 import java.util.Locale;
@@ -78,23 +80,18 @@ public class AlbumDetailActivity extends AbsSlidingMusicPanelActivity implements
     ObservableRecyclerView recyclerView;
     @BindView(R.id.image)
     ImageView albumArtImageView;
+    @BindView(R.id.blur_header_image)
+    ImageView blurAlbumArtImageView;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.header)
     View headerView;
     @BindView(R.id.header_overlay)
     View headerOverlay;
-
-    @BindView(R.id.artist_icon)
-    ImageView artistIconImageView;
-    @BindView(R.id.duration_icon)
-    ImageView durationIconImageView;
-    @BindView(R.id.song_count_icon)
-    ImageView songCountIconImageView;
-    @BindView(R.id.album_year_icon)
-    ImageView albumYearIconImageView;
     @BindView(R.id.artist_text)
     TextView artistTextView;
+    @BindView(R.id.album_text)
+    TextView albumTextView;
     @BindView(R.id.duration_text)
     TextView durationTextView;
     @BindView(R.id.song_count_text)
@@ -140,7 +137,7 @@ public class AlbumDetailActivity extends AbsSlidingMusicPanelActivity implements
 
             // Change alpha of overlay
             float headerAlpha = Math.max(0, Math.min(1, (float) 2 * scrollY / headerViewHeight));
-            headerOverlay.setBackgroundColor(ColorUtil.withAlpha(toolbarColor, headerAlpha));
+            //headerOverlay.setBackgroundColor(ColorUtil.withAlpha(toolbarColor, headerAlpha));
 
             // Translate name text
             headerView.setTranslationY(Math.max(-scrollY, -headerViewHeight));
@@ -175,28 +172,38 @@ public class AlbumDetailActivity extends AbsSlidingMusicPanelActivity implements
                         setColors(color);
                     }
                 });
+
+        SongGlideRequest.Builder.from(Glide.with(this), getAlbum().safeGetFirstSong())
+                .checkIgnoreMediaStore(this)
+                .generatePalette(this).build()
+                .transform(new BlurTransformation.Builder(this).build())
+                .dontAnimate()
+                .into(new PhonographColoredTarget(blurAlbumArtImageView) {
+                    @Override
+                    public void onColorReady(int color) {
+                        setColors(color);
+                    }
+                });
+
+
     }
 
     private void setColors(int color) {
         toolbarColor = color;
-        headerView.setBackgroundColor(color);
+        //headerView.setBackgroundColor(color);
 
         setNavigationbarColor(color);
         setTaskDescriptionColor(color);
 
-        toolbar.setBackgroundColor(color);
+        //toolbar.setBackgroundColor(color);
         setSupportActionBar(toolbar); // needed to auto readjust the toolbar content color
-        setStatusbarColor(color);
+        //setStatusbarColor(color);
 
         int secondaryTextColor = MaterialValueHelper.getSecondaryTextColor(this, ColorUtil.isColorLight(color));
-        artistIconImageView.setColorFilter(secondaryTextColor, PorterDuff.Mode.SRC_IN);
-        durationIconImageView.setColorFilter(secondaryTextColor, PorterDuff.Mode.SRC_IN);
-        songCountIconImageView.setColorFilter(secondaryTextColor, PorterDuff.Mode.SRC_IN);
-        albumYearIconImageView.setColorFilter(secondaryTextColor, PorterDuff.Mode.SRC_IN);
-        artistTextView.setTextColor(MaterialValueHelper.getPrimaryTextColor(this, ColorUtil.isColorLight(color)));
-        durationTextView.setTextColor(secondaryTextColor);
-        songCountTextView.setTextColor(secondaryTextColor);
-        albumYearTextView.setTextColor(secondaryTextColor);
+        //artistTextView.setTextColor(MaterialValueHelper.getPrimaryTextColor(this, ColorUtil.isColorLight(color)));
+        //durationTextView.setTextColor(secondaryTextColor);
+        //songCountTextView.setTextColor(secondaryTextColor);
+        //albumYearTextView.setTextColor(secondaryTextColor);
     }
 
     @Override
@@ -417,8 +424,9 @@ public class AlbumDetailActivity extends AbsSlidingMusicPanelActivity implements
             loadWiki();
         }
 
-        getSupportActionBar().setTitle(album.getTitle());
+        getSupportActionBar().setTitle("");
         artistTextView.setText(album.getArtistName());
+        albumTextView.setText(album.getTitle());
         songCountTextView.setText(MusicUtil.getSongCountString(this, album.getSongCount()));
         durationTextView.setText(MusicUtil.getReadableDurationString(MusicUtil.getTotalDuration(this, album.songs)));
         albumYearTextView.setText(MusicUtil.getYearString(album.getYear()));
