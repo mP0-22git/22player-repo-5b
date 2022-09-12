@@ -82,12 +82,9 @@ public class ArtistDetailActivity extends AbsSlidingMusicPanelActivity implement
     @BindView(R.id.header_overlay)
     View headerOverlay;
 
-    @BindView(R.id.duration_icon)
-    ImageView durationIconImageView;
-    @BindView(R.id.song_count_icon)
-    ImageView songCountIconImageView;
-    @BindView(R.id.album_count_icon)
-    ImageView albumCountIconImageView;
+
+    @BindView(R.id.artist_text)
+    TextView artistTextView;
     @BindView(R.id.duration_text)
     TextView durationTextView;
     @BindView(R.id.song_count_text)
@@ -118,7 +115,7 @@ public class ArtistDetailActivity extends AbsSlidingMusicPanelActivity implement
 
             // Change alpha of overlay
             float headerAlpha = Math.max(0, Math.min(1, (float) 2 * scrollY / headerViewHeight));
-            headerOverlay.setBackgroundColor(ColorUtil.withAlpha(toolbarColor, headerAlpha));
+            //headerOverlay.setBackgroundColor(ColorUtil.withAlpha(toolbarColor, headerAlpha));
 
             // Translate name text
             headerView.setTranslationY(Math.max(-scrollY, -headerViewHeight));
@@ -285,22 +282,19 @@ public class ArtistDetailActivity extends AbsSlidingMusicPanelActivity implement
 
     private void setColors(int color) {
         toolbarColor = color;
-        headerView.setBackgroundColor(color);
+        //headerView.setBackgroundColor(color);
 
         setNavigationbarColor(color);
         setTaskDescriptionColor(color);
 
-        toolbar.setBackgroundColor(color);
+        //toolbar.setBackgroundColor(color);
         setSupportActionBar(toolbar); // needed to auto readjust the toolbar content color
-        setStatusbarColor(color);
+        //setStatusbarColor(color);
 
         int secondaryTextColor = MaterialValueHelper.getSecondaryTextColor(this, ColorUtil.isColorLight(color));
-        durationIconImageView.setColorFilter(secondaryTextColor, PorterDuff.Mode.SRC_IN);
-        songCountIconImageView.setColorFilter(secondaryTextColor, PorterDuff.Mode.SRC_IN);
-        albumCountIconImageView.setColorFilter(secondaryTextColor, PorterDuff.Mode.SRC_IN);
-        durationTextView.setTextColor(secondaryTextColor);
-        songCountTextView.setTextColor(secondaryTextColor);
-        albumCountTextView.setTextColor(secondaryTextColor);
+        //durationTextView.setTextColor(secondaryTextColor);
+        //songCountTextView.setTextColor(secondaryTextColor);
+        //albumCountTextView.setTextColor(secondaryTextColor);
     }
 
     private void setUpToolbar() {
@@ -439,7 +433,8 @@ public class ArtistDetailActivity extends AbsSlidingMusicPanelActivity implement
             loadBiography();
         }
 
-        getSupportActionBar().setTitle(artist.getName());
+        getSupportActionBar().setTitle("");
+        artistTextView.setText(artist.getName());
         songCountTextView.setText(MusicUtil.getSongCountString(this, artist.getSongCount()));
         albumCountTextView.setText(MusicUtil.getAlbumCountString(this, artist.getAlbumCount()));
         durationTextView.setText(MusicUtil.getReadableDurationString(MusicUtil.getTotalDuration(this, artist.getSongs())));
