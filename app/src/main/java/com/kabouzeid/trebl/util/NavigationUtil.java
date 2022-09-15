@@ -29,11 +29,7 @@ public class NavigationUtil {
         intent.putExtra(ArtistDetailActivity.EXTRA_ARTIST_ID, artistId);
 
         //noinspection unchecked
-        if (sharedElements != null && sharedElements.length > 0) {
-            activity.startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(activity, sharedElements).toBundle());
-        } else {
-            activity.startActivity(intent);
-        }
+        activity.startActivity(intent);
     }
 
     public static void goToAlbum(@NonNull final Activity activity, final long albumId, @Nullable Pair... sharedElements) {

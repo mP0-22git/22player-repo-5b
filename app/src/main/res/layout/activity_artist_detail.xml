@@ -43,7 +43,7 @@
             android:layout_height="@dimen/detail_header_height"
             android:scaleType="centerCrop"
             android:src="@drawable/default_artist_image"
-            android:transitionName="@string/transition_artist_image"
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -97,6 +97,17 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+                <ImageView
+                    android:id="@+id/blur_header_gradient2"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/detail_header_height"
+                    android:src="@drawable/gradient_black"
+                    android:tint="?fabIconColor"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     />
 
                 <TextView
