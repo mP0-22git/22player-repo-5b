@@ -151,7 +151,7 @@ public class MusicLibraryPagerAdapter extends FragmentPagerAdapter {
         SONGS(SongsFragment.class),
         ALBUMS(AlbumsFragment.class),
         ARTISTS(ArtistsFragment.class),
-        GENRES(GenresFragment.class),
+        //GENRES(GenresFragment.class),
         PLAYLISTS(PlaylistsFragment.class),
         MORE(MoreFragment.class);
 
