@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--The unused FrameLayout layout is necessary to prevent a crash on rotate-->
+
+    <com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:sothree="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/player_sliding_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="false"
+        android:focusable="true"
+        android:gravity="bottom"
+        sothree:umanoFadeColor="#00000000"
+        sothree:umanoOverlay="true"
+        sothree:umanoPanelHeight="0dp"
+        sothree:umanoScrollableView="@+id/player_recycler_view"
+        sothree:umanoShadowHeight="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <View
+                android:id="@+id/color_background"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <View
+                android:id="@+id/gradient_background_light"
+                android:background="@drawable/gradient_nowplaying_light"
+                android:visibility="?lightVisibilityMode"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <View
+                android:id="@+id/gradient_background_dark"
+                android:background="@drawable/gradient_nowplaying_dark"
+                android:visibility="?darkVisibilityMode"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:id="@+id/blur_album_background"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                />
+
+            <ImageView
+                android:id="@+id/blur_gradient"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/gradient_dark"
+                android:scaleType="centerCrop"
+                />
+
+            <View
+                android:id="@+id/color_background2"
+                android:background="@color/black"
+                android:alpha="0.0"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/player_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                sothree:layout_constraintTop_toBottomOf="@id/toolbar_container"
+                sothree:layout_constraintStart_toStartOf="parent"
+                sothree:layout_constraintEnd_toEndOf="parent"
+                >
+
+                <com.kabouzeid.trebl.views.WidthFitSquareLayout
+                    android:id="@+id/album_cover_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="80dp"
+                    android:layout_marginEnd="0dp">
+
+                    <fragment
+                        android:id="@+id/player_album_cover_fragment"
+                        class="com.kabouzeid.trebl.ui.fragments.player.BlurPlayerAlbumCoverFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.kabouzeid.trebl.views.WidthFitSquareLayout>
+
+                <TextView
+                    android:id="@+id/song_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/semiboldfont"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:textAlignment="center"
+                    android:textSize="18dp"
+                    android:text="Song Name"
+                    sothree:layout_constraintStart_toStartOf="parent"
+                    sothree:layout_constraintEnd_toEndOf="parent"
+                    sothree:layout_constraintTop_toBottomOf="@id/album_cover_container"
+                    />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/song_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/song_title"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    >
+
+                    <TextView
+                        android:id="@+id/artist_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/regularfont"
+                        android:alpha="0.8"
+                        android:textColor="@color/white"
+                        android:textSize="12dp"
+                        android:text="artist name"
+                        sothree:layout_constraintStart_toStartOf="parent"
+                        sothree:layout_constraintTop_toTopOf="parent"
+                        sothree:layout_constraintBottom_toBottomOf="parent"
+                        />
+
+                    <ImageView
+                        android:id="@+id/details_spacer"
+                        android:layout_width="5dp"
+                        android:layout_height="5dp"
+                        android:src="@drawable/ic_baseline_circle_24"
+                        android:tint="@color/white"
+                        android:alpha="0.8"
+                        android:layout_marginStart="6dp"
+                        sothree:layout_constraintTop_toTopOf="parent"
+                        sothree:layout_constraintBottom_toBottomOf="parent"
+                        sothree:layout_constraintStart_toEndOf="@id/artist_text"
+                        />
+
+                    <TextView
+                        android:id="@+id/album_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/regularfont"
+                        android:alpha="0.8"
+                        android:textColor="@color/white"
+                        android:textSize="12dp"
+                        android:text="album name"
+                        android:layout_marginStart="6dp"
+                        sothree:layout_constraintTop_toTopOf="parent"
+                        sothree:layout_constraintBottom_toBottomOf="parent"
+                        sothree:layout_constraintStart_toEndOf="@id/details_spacer"
+                        />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <fragment
+                android:id="@+id/playback_controls_fragment"
+                class="com.kabouzeid.trebl.ui.fragments.player.blur.BlurPlayerPlaybackControlsFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                sothree:layout_constraintTop_toBottomOf="@id/player_content"
+                sothree:layout_constraintBottom_toTopOf="@id/options_panel"
+                sothree:layout_constraintStart_toStartOf="parent"
+                sothree:layout_constraintEnd_toEndOf="parent"
+                />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/options_panel"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="12dp"
+                sothree:layout_constraintBottom_toBottomOf="parent"
+                sothree:layout_constraintStart_toStartOf="parent"
+                sothree:layout_constraintEnd_toEndOf="parent">
+
+                <ImageView
+                    android:id="@+id/button_queue"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="7dp"
+                    android:src="@drawable/ic_queue_music_white_24dp"
+                    sothree:layout_constraintStart_toStartOf="parent"
+                    sothree:layout_constraintEnd_toEndOf="parent"
+                    sothree:layout_constraintTop_toTopOf="parent"
+                    sothree:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+                <ImageView
+                    android:id="@+id/button_sleep_timer"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_outline_nightlight_24"
+                    android:layout_marginEnd="32dp"
+                    sothree:layout_constraintEnd_toStartOf="@id/button_queue"
+                    sothree:layout_constraintTop_toTopOf="parent"
+                    sothree:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+                <ImageView
+                    android:id="@+id/button_eq"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_menu_eq_24dp"
+                    android:layout_marginStart="32dp"
+                    sothree:layout_constraintStart_toEndOf="@id/button_queue"
+                    sothree:layout_constraintTop_toTopOf="parent"
+                    sothree:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <FrameLayout
+                android:id="@+id/toolbar_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                sothree:layout_constraintStart_toStartOf="parent"
+                sothree:layout_constraintEnd_toEndOf="parent"
+                sothree:layout_constraintTop_toTopOf="parent"
+                >
+
+                <include layout="@layout/shadow_statusbar_toolbar"
+                    android:visibility="gone"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.kabouzeid.trebl.views.StatusBarView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/status_bar_padding" />
+
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/player_toolbar"
+                        style="@style/Toolbar"
+                        android:background="@android:color/transparent" />
+
+                </LinearLayout>
+
+
+            </FrameLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.kabouzeid.trebl.views.StatusBarMarginFrameLayout
+            android:id="@+id/player_panel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/status_bar_padding"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/playing_queue_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="-8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="8dp"
+                sothree:cardCornerRadius="10dp"
+                app:cardBackgroundColor="?cardBackgroundColor"
+                app:cardElevation="0dp"
+                app:cardUseCompatPadding="false">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <!--This is necessary for the drag sorting to work at the top-->
+                    <View
+                        android:id="@+id/draggable_area"
+                        android:layout_width="72dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/card_content"
+                        android:layout_alignTop="@+id/card_content"
+                        android:layout_marginTop="120dp" />
+
+                    <LinearLayout
+                        android:id="@+id/card_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <include
+                            android:id="@+id/current_song"
+                            layout="@layout/item_list" />
+
+                        <TextView
+                            android:id="@+id/player_queue_sub_header"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="16dp"
+                            android:paddingRight="16dp"
+                            android:text="@string/up_next"
+                            android:fontFamily="@font/semiboldfont"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                            android:textColor="?android:textColorSecondary" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/player_recycler_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="8dp"
+                            android:requiresFadingEdge="vertical" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </com.kabouzeid.trebl.views.StatusBarMarginFrameLayout>
+
+    </com.sothree.slidinguppanel.SlidingUpPanelLayout>
+
+</FrameLayout>
