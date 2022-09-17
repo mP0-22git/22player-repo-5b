@@ -19,6 +19,7 @@ import com.kabouzeid.trebl.helper.MusicPlayerRemote;
 import com.kabouzeid.trebl.ui.fragments.player.AbsPlayerFragment;
 import com.kabouzeid.trebl.ui.fragments.player.MiniPlayerFragment;
 import com.kabouzeid.trebl.ui.fragments.player.NowPlayingScreen;
+import com.kabouzeid.trebl.ui.fragments.player.blur.BlurPlayerFragment;
 import com.kabouzeid.trebl.ui.fragments.player.card.CardPlayerFragment;
 import com.kabouzeid.trebl.ui.fragments.player.flat.FlatPlayerFragment;
 import com.kabouzeid.trebl.util.PreferenceUtil;

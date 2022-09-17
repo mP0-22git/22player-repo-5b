@@ -1,9 +1,12 @@
 package com.kabouzeid.trebl.ui.fragments.player.blur;
 
+import static com.kabouzeid.trebl.ui.widget.avsb.AudioVisualSeekBar.TAG;
+
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,8 +30,10 @@ import com.kabouzeid.trebl.helper.MusicPlayerRemote;
 import com.kabouzeid.trebl.helper.MusicProgressViewUpdateHelper;
 import com.kabouzeid.trebl.helper.PlayPauseButtonOnClickHandler;
 import com.kabouzeid.trebl.misc.SimpleOnSeekbarChangeListener;
+import com.kabouzeid.trebl.model.Song;
 import com.kabouzeid.trebl.service.MusicService;
 import com.kabouzeid.trebl.ui.fragments.AbsMusicServiceFragment;
+import com.kabouzeid.trebl.ui.widget.avsb.AudioVisualSeekBar;
 import com.kabouzeid.trebl.util.MusicUtil;
 import com.kabouzeid.trebl.views.PlayPauseDrawable;
 
@@ -57,9 +62,8 @@ public class BlurPlayerPlaybackControlsFragment extends AbsMusicServiceFragment 
     ImageButton repeatButton;
     @BindView(R.id.player_shuffle_button)
     ImageButton shuffleButton;
-
-    @BindView(R.id.player_progress_slider)
-    SeekBar progressSlider;
+    @BindView(R.id.visual_seek_bar)
+    AudioVisualSeekBar mVisualSeekBar;
     @BindView(R.id.player_song_total_time)
     TextView songTotalTime;
     @BindView(R.id.player_song_current_progress)
@@ -121,6 +125,7 @@ public class BlurPlayerPlaybackControlsFragment extends AbsMusicServiceFragment 
         updatePlayPauseDrawableState(false);
         updateRepeatState();
         updateShuffleState();
+        updatePlayingSongInfo();
     }
 
     @Override
@@ -137,6 +142,13 @@ public class BlurPlayerPlaybackControlsFragment extends AbsMusicServiceFragment 
             forwardTenButton.setVisibility(View.GONE);
             replayTenButton.setVisibility(View.GONE);
         }
+        mVisualSeekBar.postDelayed(mUpdateProgress, 10);
+    }
+
+    @Override
+    public void onPlayingMetaChanged() {
+        super.onPlayingMetaChanged();
+        updatePlayingSongInfo();
     }
 
     @Override
@@ -298,23 +310,68 @@ public class BlurPlayerPlaybackControlsFragment extends AbsMusicServiceFragment 
     }
 
     private void setUpProgressSlider() {
-        int color = MaterialValueHelper.getPrimaryTextColor(getContext(), false);
-
-        progressSlider.setOnSeekBarChangeListener(new SimpleOnSeekbarChangeListener() {
+        mVisualSeekBar.setOnSeekBarChangeListener(new AudioVisualSeekBar.OnSeekBarChangeListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (fromUser) {
-                    MusicPlayerRemote.seekTo(progress);
-                    onUpdateProgressViews(MusicPlayerRemote.getSongProgressMillis(), MusicPlayerRemote.getSongDurationMillis());
-                }
+            public void onSeekBarSeekTo(AudioVisualSeekBar seekBar, int position) {
+                MusicPlayerRemote.seekTo(position);
+                onUpdateProgressViews(MusicPlayerRemote.getSongProgressMillis(), MusicPlayerRemote.getSongDurationMillis());
+            }
+
+            @Override
+            public void onSeekBarTouchDown(AudioVisualSeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onSeekBarTouchUp(AudioVisualSeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onSeekBarSeeking(int seekingValue) {
+                onUpdateProgressViews(seekingValue, MusicPlayerRemote.getSongDurationMillis());
             }
         });
     }
 
+    private int overflowcounter = 0;
+    boolean fragmentPaused = false;
+
+    public Runnable mUpdateProgress = new Runnable() {
+        @Override
+        public void run() {
+            long position = MusicPlayerRemote.getSongProgressMillis();
+                if (mVisualSeekBar != null) {
+                    mVisualSeekBar.setProgress((int) position);
+                }
+            overflowcounter--;
+            if (MusicPlayerRemote.isPlaying()) {
+                int delay = (int) (150 - (position) % 100);
+                if (overflowcounter < 0 && !fragmentPaused) {
+                    overflowcounter++;
+                    if(mVisualSeekBar!=null) {
+                        mVisualSeekBar.postDelayed(mUpdateProgress, delay);
+                    }
+                }
+            }
+        }
+    };
+
+    private void updatePlayingSongInfo() {
+        Song song = MusicPlayerRemote.getCurrentSong();
+        String path = song.data;
+        long duration = song.duration;
+        if (duration > 0 && path != null && !path.isEmpty() && mVisualSeekBar.getCurrentSongID() != song.id) {
+            Log.d(TAG, "start visualize " + path + "dur = " + duration + ", pos = " + MusicPlayerRemote.getSongProgressMillis());
+            mVisualSeekBar.visualize(song, duration, MusicPlayerRemote.getSongProgressMillis());
+        } else {
+            Log.d(TAG, "ignore visualize " + path);
+        }
+        mVisualSeekBar.postDelayed(mUpdateProgress, 10);
+    }
+
     @Override
     public void onUpdateProgressViews(int progress, int total) {
-        progressSlider.setMax(total);
-        progressSlider.setProgress(progress);
         songTotalTime.setText(MusicUtil.getReadableDurationString(total));
         songCurrentProgress.setText(MusicUtil.getReadableDurationString(progress));
     }

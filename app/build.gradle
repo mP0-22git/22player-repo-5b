@@ -157,4 +157,8 @@ dependencies {
     implementation 'com.h6ah4i.android.widget.verticalseekbar:verticalseekbar:0.7.0'
 
     implementation 'me.tankery.lib:circularSeekBar:1.4.0'
+
+    //audio visual seek bar
+    implementation 'com.daasuu:EasingInterpolator:1.0.0'
+    implementation 'androidx.dynamicanimation:dynamicanimation:1.0.0'
 }
