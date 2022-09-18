@@ -186,11 +186,27 @@
             android:elevation="0dp"
             app:elevation="0dp"
             app:fabCustomSize="60dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:pressedTranslationZ="2dp" />
+
+        <ImageButton
+            android:id="@+id/player_play_pause_button"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_centerInParent="true"
+            android:background="?attr/roundSelector"
+            android:padding="22dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingPrefix"
+            tools:src="@drawable/ic_pause_white_24dp" />
 
     </RelativeLayout>
 

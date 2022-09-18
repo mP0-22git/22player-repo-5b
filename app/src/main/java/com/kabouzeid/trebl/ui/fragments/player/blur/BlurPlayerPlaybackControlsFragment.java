@@ -2,6 +2,10 @@ package com.kabouzeid.trebl.ui.fragments.player.blur;
 
 import static com.kabouzeid.trebl.ui.widget.avsb.AudioVisualSeekBar.TAG;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.TimeInterpolator;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -21,6 +25,7 @@ import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kabouzeid.appthemehelper.util.MaterialValueHelper;
@@ -37,6 +42,9 @@ import com.kabouzeid.trebl.ui.widget.avsb.AudioVisualSeekBar;
 import com.kabouzeid.trebl.util.MusicUtil;
 import com.kabouzeid.trebl.views.PlayPauseDrawable;
 
+import java.util.Collection;
+import java.util.LinkedList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -48,6 +56,8 @@ public class BlurPlayerPlaybackControlsFragment extends AbsMusicServiceFragment 
 
     private Unbinder unbinder;
 
+    @BindView(R.id.player_play_pause_button)
+    ImageButton playPauseButton;
     @BindView(R.id.player_play_pause_fab)
     FloatingActionButton playPauseFab;
     @BindView(R.id.player_prev_button)
@@ -70,11 +80,16 @@ public class BlurPlayerPlaybackControlsFragment extends AbsMusicServiceFragment 
     TextView songCurrentProgress;
 
     private PlayPauseDrawable playerFabPlayPauseDrawable;
+    private PlayPauseDrawable playPauseDrawable;
 
     private int lastPlaybackControlsColor;
     private int lastDisabledPlaybackControlsColor;
 
     private MusicProgressViewUpdateHelper progressViewUpdateHelper;
+
+    private AnimatorSet musicControllerAnimationSet;
+
+    private boolean hidden = false;
 
     private Animation rotate1;
     private Animation rotate2;
@@ -195,15 +210,32 @@ public class BlurPlayerPlaybackControlsFragment extends AbsMusicServiceFragment 
         });
     }
 
+    private void setUpPlayPauseButton() {
+        playPauseDrawable = new PlayPauseDrawable(getActivity());
+        playPauseButton.setImageDrawable(playPauseDrawable);
+        updatePlayPauseColor();
+        playPauseButton.setColorFilter(Color.WHITE);
+        playPauseButton.setOnClickListener(new PlayPauseButtonOnClickHandler());
+        playPauseButton.post(() -> {
+            if (playPauseButton != null) {
+                playPauseButton.setPivotX(playPauseButton.getWidth() / 2);
+                playPauseButton.setPivotY(playPauseButton.getHeight() / 2);
+            }
+        });
+    }
+
     protected void updatePlayPauseDrawableState(boolean animate) {
         if (MusicPlayerRemote.isPlaying()) {
             playerFabPlayPauseDrawable.setPause(animate);
+            playPauseDrawable.setPause(animate);
         } else {
             playerFabPlayPauseDrawable.setPlay(animate);
+            playPauseDrawable.setPlay(animate);
         }
     }
 
     private void setUpMusicControllers() {
+        setUpPlayPauseButton();
         setUpPlayPauseFab();
         setUpPrevNext();
         setUpRepeatButton();
@@ -236,6 +268,10 @@ public class BlurPlayerPlaybackControlsFragment extends AbsMusicServiceFragment 
             MusicPlayerRemote.back();
             return false;
         });
+    }
+
+    private void updatePlayPauseColor() {
+        playPauseButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN);
     }
 
     private void updateProgressTextColor() {
@@ -292,7 +328,7 @@ public class BlurPlayerPlaybackControlsFragment extends AbsMusicServiceFragment 
         }
     }
 
-    public void show() {
+   /* public void show() {
         playPauseFab.animate()
                 .scaleX(1f)
                 .scaleY(1f)
@@ -306,6 +342,69 @@ public class BlurPlayerPlaybackControlsFragment extends AbsMusicServiceFragment 
             playPauseFab.setScaleX(0f);
             playPauseFab.setScaleY(0f);
             playPauseFab.setRotation(0f);
+        }
+    }*/
+
+    public void show() {
+        if (hidden) {
+            if (musicControllerAnimationSet == null) {
+                TimeInterpolator interpolator = new FastOutSlowInInterpolator();
+                final int duration = 300;
+
+                LinkedList<Animator> animators = new LinkedList<>();
+
+                addAnimation(animators, playPauseButton, interpolator, duration, 0);
+                addAnimation(animators, nextButton, interpolator, duration, 100);
+                addAnimation(animators, prevButton, interpolator, duration, 100);
+                addAnimation(animators, replayTenButton, interpolator, duration, 100);
+                addAnimation(animators, forwardTenButton, interpolator, duration, 100);
+                addAnimation(animators, shuffleButton, interpolator, duration, 200);
+                addAnimation(animators, repeatButton, interpolator, duration, 200);
+
+                musicControllerAnimationSet = new AnimatorSet();
+                musicControllerAnimationSet.playTogether(animators);
+            } else {
+                musicControllerAnimationSet.cancel();
+            }
+            musicControllerAnimationSet.start();
+        }
+
+        hidden = false;
+    }
+
+    public void hide() {
+        if (musicControllerAnimationSet != null) {
+            musicControllerAnimationSet.cancel();
+        }
+        prepareForAnimation(playPauseButton);
+        prepareForAnimation(nextButton);
+        prepareForAnimation(prevButton);
+        prepareForAnimation(shuffleButton);
+        prepareForAnimation(repeatButton);
+        prepareForAnimation(replayTenButton);
+        prepareForAnimation(forwardTenButton);
+
+        hidden = true;
+    }
+
+    private static void addAnimation(Collection<Animator> animators, View view, TimeInterpolator interpolator, int duration, int delay) {
+        Animator scaleX = ObjectAnimator.ofFloat(view, View.SCALE_X, 0f, 1f);
+        scaleX.setInterpolator(interpolator);
+        scaleX.setDuration(duration);
+        scaleX.setStartDelay(delay);
+        animators.add(scaleX);
+
+        Animator scaleY = ObjectAnimator.ofFloat(view, View.SCALE_Y, 0f, 1f);
+        scaleY.setInterpolator(interpolator);
+        scaleY.setDuration(duration);
+        scaleY.setStartDelay(delay);
+        animators.add(scaleY);
+    }
+
+    private static void prepareForAnimation(View view) {
+        if (view != null) {
+            view.setScaleX(0f);
+            view.setScaleY(0f);
         }
     }
 
