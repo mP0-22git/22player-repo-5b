@@ -167,12 +167,12 @@ public class SettingsActivity extends AbsBaseActivity implements ColorChooserDia
 
         @Override
         public void onCreatePreferences(Bundle bundle, String s) {
-            addPreferencesFromResource(R.xml.pref_library);
             addPreferencesFromResource(R.xml.pref_colors);
             addPreferencesFromResource(R.xml.pref_notification);
             addPreferencesFromResource(R.xml.pref_now_playing_screen);
             addPreferencesFromResource(R.xml.pref_images);
             addPreferencesFromResource(R.xml.pref_lockscreen);
+            addPreferencesFromResource(R.xml.pref_library);
             addPreferencesFromResource(R.xml.pref_audio);
             addPreferencesFromResource(R.xml.pref_playlists);
             addPreferencesFromResource(R.xml.pref_blacklist);

@@ -7,6 +7,7 @@
         <com.kabouzeid.trebl.preferences.NowPlayingScreenPreference
             app:iconSpaceReserved="false"
             android:key="now_playing_screen_id"
+            app:isPreferenceVisible="false"
             android:title="@string/pref_title_now_playing_screen_appearance" />
 
         <com.kabouzeid.appthemehelper.common.prefs.supportv7.ATESwitchPreference
