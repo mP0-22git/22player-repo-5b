@@ -45,7 +45,7 @@ import com.kabouzeid.trebl.model.Song;
 import com.kabouzeid.trebl.model.lyrics.Lyrics;
 import com.kabouzeid.trebl.ui.activities.base.AbsSlidingMusicPanelActivity;
 import com.kabouzeid.trebl.ui.fragments.player.AbsPlayerFragment;
-import com.kabouzeid.trebl.ui.fragments.player.PlayerAlbumCoverFragment;
+import com.kabouzeid.trebl.ui.fragments.player.FlatPlayerAlbumCoverFragment;
 import com.kabouzeid.trebl.util.ImageUtil;
 import com.kabouzeid.trebl.util.MusicUtil;
 import com.kabouzeid.trebl.util.Util;
@@ -57,7 +57,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class FlatPlayerFragment extends AbsPlayerFragment implements PlayerAlbumCoverFragment.Callbacks, SlidingUpPanelLayout.PanelSlideListener {
+public class FlatPlayerFragment extends AbsPlayerFragment implements FlatPlayerAlbumCoverFragment.Callbacks, SlidingUpPanelLayout.PanelSlideListener {
 
     private Unbinder unbinder;
 
@@ -81,7 +81,7 @@ public class FlatPlayerFragment extends AbsPlayerFragment implements PlayerAlbum
     private int lastColor;
 
     private FlatPlayerPlaybackControlsFragment playbackControlsFragment;
-    private PlayerAlbumCoverFragment playerAlbumCoverFragment;
+    private FlatPlayerAlbumCoverFragment playerAlbumCoverFragment;
 
     private LinearLayoutManager layoutManager;
 
@@ -225,7 +225,7 @@ public class FlatPlayerFragment extends AbsPlayerFragment implements PlayerAlbum
 
     private void setUpSubFragments() {
         playbackControlsFragment = (FlatPlayerPlaybackControlsFragment) getChildFragmentManager().findFragmentById(R.id.playback_controls_fragment);
-        playerAlbumCoverFragment = (PlayerAlbumCoverFragment) getChildFragmentManager().findFragmentById(R.id.player_album_cover_fragment);
+        playerAlbumCoverFragment = (FlatPlayerAlbumCoverFragment) getChildFragmentManager().findFragmentById(R.id.player_album_cover_fragment);
 
         playerAlbumCoverFragment.setCallbacks(this);
     }

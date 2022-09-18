@@ -47,7 +47,7 @@
 
             <fragment
                 android:id="@+id/player_album_cover_fragment"
-                class="com.kabouzeid.trebl.ui.fragments.player.PlayerAlbumCoverFragment"
+                class="com.kabouzeid.trebl.ui.fragments.player.FlatPlayerAlbumCoverFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
