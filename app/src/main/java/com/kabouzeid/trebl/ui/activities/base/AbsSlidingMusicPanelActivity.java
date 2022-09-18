@@ -63,6 +63,9 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
             case FLAT:
                 fragment = new FlatPlayerFragment();
                 break;
+            case BLUR:
+                fragment = new BlurPlayerFragment();
+                break;
             case CARD:
             default:
                 fragment = new CardPlayerFragment();
