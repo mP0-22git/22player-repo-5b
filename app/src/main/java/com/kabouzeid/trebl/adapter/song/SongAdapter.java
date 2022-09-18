@@ -118,18 +118,6 @@ public class SongAdapter extends AbsMultiSelectAdapter<SongAdapter.ViewHolder, S
 
     }
 
-    private void setColors(int color, ViewHolder holder) {
-        if (holder.paletteColorContainer != null) {
-            holder.paletteColorContainer.setBackgroundColor(color);
-            if (holder.title != null) {
-                holder.title.setTextColor(MaterialValueHelper.getPrimaryTextColor(activity, ColorUtil.isColorLight(color)));
-            }
-            if (holder.text != null) {
-                holder.text.setTextColor(MaterialValueHelper.getSecondaryTextColor(activity, ColorUtil.isColorLight(color)));
-            }
-        }
-    }
-
     protected void loadAlbumCover(Song song, final ViewHolder holder) {
         if (holder.image == null) return;
 
@@ -140,15 +128,12 @@ public class SongAdapter extends AbsMultiSelectAdapter<SongAdapter.ViewHolder, S
                     @Override
                     public void onLoadCleared(Drawable placeholder) {
                         super.onLoadCleared(placeholder);
-                        setColors(getDefaultFooterColor(), holder);
+
                     }
 
                     @Override
                     public void onColorReady(int color) {
-                        if (usePalette)
-                            setColors(color, holder);
-                        else
-                            setColors(getDefaultFooterColor(), holder);
+
                     }
                 });
     }

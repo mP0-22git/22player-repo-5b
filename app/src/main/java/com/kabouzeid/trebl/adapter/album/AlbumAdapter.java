@@ -120,12 +120,12 @@ public class AlbumAdapter extends AbsMultiSelectAdapter<AlbumAdapter.ViewHolder,
 
     protected void setColors(int color, ViewHolder holder) {
         if (holder.paletteColorContainer != null) {
-            holder.paletteColorContainer.setBackgroundColor(color);
+            //holder.paletteColorContainer.setBackgroundColor(color);
             if (holder.title != null) {
-                holder.title.setTextColor(MaterialValueHelper.getPrimaryTextColor(activity, ColorUtil.isColorLight(color)));
+                //holder.title.setTextColor(MaterialValueHelper.getPrimaryTextColor(activity, ColorUtil.isColorLight(color)));
             }
             if (holder.text != null) {
-                holder.text.setTextColor(MaterialValueHelper.getSecondaryTextColor(activity, ColorUtil.isColorLight(color)));
+                //holder.text.setTextColor(MaterialValueHelper.getSecondaryTextColor(activity, ColorUtil.isColorLight(color)));
             }
         }
     }
