@@ -17,7 +17,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="104dp"
             android:layout_height="104dp"
-            app:cardCornerRadius="10dp">
+            app:cardCornerRadius="0dp">
 
         <ImageView
             android:id="@+id/image"
