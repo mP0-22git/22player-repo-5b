@@ -80,6 +80,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 />
 
+            <!--
             <TextView
                 android:id="@+id/genresTitle"
                 android:layout_width="wrap_content"
@@ -96,6 +97,7 @@
                 app:layout_constraintTop_toTopOf="@id/toolbar"
                 app:layout_constraintStart_toStartOf="parent"
                 />
+                -->
 
             <TextView
                 android:id="@+id/playlistTitle"
@@ -143,6 +145,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/tab_height"
             app:tabContentStart="72dp"
+            app:tabIndicatorHeight="0dp"
             app:tabMode="fixed" />
 
     </com.google.android.material.appbar.AppBarLayout>
