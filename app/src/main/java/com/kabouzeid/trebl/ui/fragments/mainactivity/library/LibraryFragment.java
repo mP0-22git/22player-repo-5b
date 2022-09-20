@@ -31,7 +31,6 @@ import android.widget.TextView;
 
 import com.afollestad.materialcab.MaterialCab;
 import com.kabouzeid.appthemehelper.ThemeStore;
-import com.kabouzeid.appthemehelper.common.ATHToolbarActivity;
 import com.kabouzeid.appthemehelper.util.TabLayoutUtil;
 import com.kabouzeid.appthemehelper.util.ToolbarContentTintHelper;
 import com.kabouzeid.trebl.R;
@@ -81,9 +80,6 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
 
     @BindView(R.id.artistTitle)
     TextView artistTitle;
-
-    //@BindView(R.id.genresTitle)
-    //TextView genresTitle;
 
     @BindView(R.id.playlistTitle)
     TextView playlistTitle;
@@ -183,12 +179,6 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         }else if(PreferenceUtil.getInstance(getActivity()).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("energetic")){
             appbar.setBackgroundColor(Color.YELLOW);
             toolbar.setBackgroundColor(Color.YELLOW);
-       /* }else if(PreferenceUtil.getInstance(getActivity()).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("darkfade")){
-            appbar.setBackgroundColor(Color.TRANSPARENT);
-            toolbar.setBackgroundColor(Color.TRANSPARENT);*]
-        }else if(PreferenceUtil.getInstance(getActivity()).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("lightfade")){
-            appbar.setBackgroundColor(Color.TRANSPARENT);
-            toolbar.setBackgroundColor(Color.TRANSPARENT);*/
         }
         getActivity().setTitle(R.string.emptystring);
         getMainActivity().setSupportActionBar(toolbar);
@@ -208,8 +198,6 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
             tabs.getTabAt(1).getIcon().setAlpha(51);
             tabs.getTabAt(2).setIcon(R.drawable.ic_artist_white_24dp);
             tabs.getTabAt(2).getIcon().setAlpha(51);
-            //tabs.getTabAt(3).setIcon(R.drawable.ic_genre_white_24dp);
-            //tabs.getTabAt(3).getIcon().setAlpha(51);
             tabs.getTabAt(3).setIcon(R.drawable.ic_playlist_white_20dp);
             tabs.getTabAt(3).getIcon().setAlpha(51);
             tabs.getTabAt(4).setIcon(R.drawable.ic_settings_white_24dp);
@@ -232,9 +220,6 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
             case 2:
                 artistTitle.animate().alpha(1.0f).translationX(0);
                 break;
-            /*case 3:
-                genresTitle.animate().alpha(1.0f).translationX(0);
-                break;*/
             case 3:
                 playlistTitle.animate().alpha(1.0f).translationX(0);
                 break;
@@ -324,8 +309,6 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         }
         Activity activity = getActivity();
         if (activity == null) return;
-        //note: ATH for toolbar tinting disabled to increase compatibility for newer themes
-        //ToolbarContentTintHelper.handleOnCreateOptionsMenu(getActivity(), toolbar, menu, ATHToolbarActivity.getToolbarBackgroundColor(toolbar));
     }
 
     @Override
@@ -575,7 +558,6 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         tabs.getTabAt(0).getIcon().setAlpha(51);
         tabs.getTabAt(1).getIcon().setAlpha(51);
         tabs.getTabAt(2).getIcon().setAlpha(51);
-        //tabs.getTabAt(3).getIcon().setAlpha(51);
         tabs.getTabAt(3).getIcon().setAlpha(51);
         tabs.getTabAt(4).getIcon().setAlpha(51);
         tabs.getTabAt(PreferenceUtil.getInstance(getActivity()).getLastPage()).getIcon().setAlpha(255);
@@ -584,7 +566,6 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
                 libraryTitle.animate().alpha(1.0f).translationX(0);
                 albumTitle.animate().alpha(0.0f).translationX(albumTitle.getWidth());
                 artistTitle.animate().alpha(0.0f).translationX(artistTitle.getWidth());
-                //genresTitle.animate().alpha(0.0f).translationX(genresTitle.getWidth());
                 playlistTitle.animate().alpha(0.0f).translationX(playlistTitle.getWidth());
                 moreTitle.animate().alpha(0.0f).translationX(moreTitle.getWidth());
                 break;
@@ -592,7 +573,6 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
                 libraryTitle.animate().alpha(0.0f).translationX(-libraryTitle.getWidth());
                 albumTitle.animate().alpha(1.0f).translationX(0);
                 artistTitle.animate().alpha(0.0f).translationX(artistTitle.getWidth());
-                //genresTitle.animate().alpha(0.0f).translationX(genresTitle.getWidth());
                 playlistTitle.animate().alpha(0.0f).translationX(playlistTitle.getWidth());
                 moreTitle.animate().alpha(0.0f).translationX(moreTitle.getWidth());
                 break;
@@ -600,23 +580,13 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
                 libraryTitle.animate().alpha(0.0f).translationX(-libraryTitle.getWidth());
                 albumTitle.animate().alpha(0.0f).translationX(-albumTitle.getWidth());
                 artistTitle.animate().alpha(1.0f).translationX(0);
-                //genresTitle.animate().alpha(0.0f).translationX(genresTitle.getWidth());
                 playlistTitle.animate().alpha(0.0f).translationX(playlistTitle.getWidth());
                 moreTitle.animate().alpha(0.0f).translationX(moreTitle.getWidth());
                 break;
-            /*case 3:
-                libraryTitle.animate().alpha(0.0f).translationX(-libraryTitle.getWidth());
-                albumTitle.animate().alpha(0.0f).translationX(-albumTitle.getWidth());
-                artistTitle.animate().alpha(0.0f).translationX(-artistTitle.getWidth());
-                genresTitle.animate().alpha(1.0f).translationX(0);
-                playlistTitle.animate().alpha(0.0f).translationX(playlistTitle.getWidth());
-                moreTitle.animate().alpha(0.0f).translationX(moreTitle.getWidth());
-                break;*/
             case 3:
                 libraryTitle.animate().alpha(0.0f).translationX(-libraryTitle.getWidth());
                 albumTitle.animate().alpha(0.0f).translationX(-albumTitle.getWidth());
                 artistTitle.animate().alpha(0.0f).translationX(-artistTitle.getWidth());
-                //genresTitle.animate().alpha(0.0f).translationX(-genresTitle.getWidth());
                 playlistTitle.animate().alpha(1.0f).translationX(0);
                 moreTitle.animate().alpha(0.0f).translationX(moreTitle.getWidth());
                 break;
@@ -624,7 +594,6 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
                 libraryTitle.animate().alpha(0.0f).translationX(-libraryTitle.getWidth());
                 albumTitle.animate().alpha(0.0f).translationX(-albumTitle.getWidth());
                 artistTitle.animate().alpha(0.0f).translationX(-artistTitle.getWidth());
-                //genresTitle.animate().alpha(0.0f).translationX(-genresTitle.getWidth());
                 playlistTitle.animate().alpha(0.0f).translationX(-playlistTitle.getWidth());
                 moreTitle.animate().alpha(1.0f).translationX(0);
                 break;

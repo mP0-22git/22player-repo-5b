@@ -4,10 +4,8 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.app.Activity;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -22,10 +20,8 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -418,21 +414,7 @@ public class CardPlayerFragment extends AbsPlayerFragment implements PlayerAlbum
 
     @Override
     public void onPanelSlide(View view, float slide) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            float density = getResources().getDisplayMetrics().density;
 
-           // float cardElevation = (6 * slide + 2) * density;
-           // if (!isValidElevation(cardElevation)) return; // we have received some crash reports in setCardElevation()
-           // playingQueueCard.setCardElevation(cardElevation);
-
-           // float buttonElevation = (2 * Math.max(0, (1 - (slide * 16))) + 2) * density;
-           // if (!isValidElevation(buttonElevation)) return;
-           //  playbackControlsFragment.playPauseFab.setElevation(buttonElevation);
-        }
-    }
-
-    private boolean isValidElevation(float elevation) {
-        return elevation >= -Float.MAX_VALUE && elevation <= Float.MAX_VALUE;
     }
 
     @Override
@@ -481,12 +463,10 @@ public class CardPlayerFragment extends AbsPlayerFragment implements PlayerAlbum
 
             animatorSet.play(backgroundAnimator);
 
-          //  if (!ATHUtil.isWindowBackgroundDark(fragment.getActivity())) {
-                int adjustedLastColor = ColorUtil.isColorLight(fragment.lastColor) ? ColorUtil.darkenColor(fragment.lastColor) : fragment.lastColor;
-                int adjustedNewColor = ColorUtil.isColorLight(newColor) ? ColorUtil.darkenColor(newColor) : newColor;
-                Animator subHeaderAnimator = ViewUtil.createTextColorTransition(fragment.playerQueueSubHeader, adjustedLastColor, adjustedNewColor);
-                animatorSet.play(subHeaderAnimator);
-           // }
+            int adjustedLastColor = ColorUtil.isColorLight(fragment.lastColor) ? ColorUtil.darkenColor(fragment.lastColor) : fragment.lastColor;
+            int adjustedNewColor = ColorUtil.isColorLight(newColor) ? ColorUtil.darkenColor(newColor) : newColor;
+            Animator subHeaderAnimator = ViewUtil.createTextColorTransition(fragment.playerQueueSubHeader, adjustedLastColor, adjustedNewColor);
+            animatorSet.play(subHeaderAnimator);
 
             animatorSet.setDuration(ViewUtil.PHONOGRAPH_ANIM_TIME);
             return animatorSet;
@@ -516,7 +496,6 @@ public class CardPlayerFragment extends AbsPlayerFragment implements PlayerAlbum
             currentSongViewHolder.separator.setVisibility(View.GONE);
             currentSongViewHolder.shortSeparator.setVisibility(View.GONE);
             currentSongViewHolder.image.setScaleType(ImageView.ScaleType.CENTER);
-            //currentSongViewHolder.image.setColorFilter(ATHUtil.resolveColor(fragment.getActivity(), R.attr.iconColor, ThemeStore.textColorSecondary(fragment.getActivity())), PorterDuff.Mode.SRC_IN);
             currentSongViewHolder.image.setImageResource(R.drawable.ic_volume_up_white_24dp);
             currentSongViewHolder.itemView.setOnClickListener(v -> {
                 // toggle the panel

@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -47,18 +46,14 @@ import com.kabouzeid.trebl.dialogs.LyricsDialog;
 import com.kabouzeid.trebl.dialogs.SleepTimerDialog;
 import com.kabouzeid.trebl.dialogs.SongShareDialog;
 import com.kabouzeid.trebl.glide.BlurTransformation;
-import com.kabouzeid.trebl.glide.PhonographColoredTarget;
-import com.kabouzeid.trebl.glide.SongGlideRequest;
 import com.kabouzeid.trebl.helper.MusicPlayerRemote;
 import com.kabouzeid.trebl.helper.menu.SongMenuHelper;
 import com.kabouzeid.trebl.model.Song;
 import com.kabouzeid.trebl.model.lyrics.Lyrics;
 import com.kabouzeid.trebl.ui.activities.EqualizerActivity;
-import com.kabouzeid.trebl.ui.activities.MainActivity;
 import com.kabouzeid.trebl.ui.activities.base.AbsSlidingMusicPanelActivity;
 import com.kabouzeid.trebl.ui.fragments.player.AbsPlayerFragment;
 import com.kabouzeid.trebl.ui.fragments.player.BlurPlayerAlbumCoverFragment;
-import com.kabouzeid.trebl.ui.fragments.player.PlayerAlbumCoverFragment;
 import com.kabouzeid.trebl.util.ImageUtil;
 import com.kabouzeid.trebl.util.MusicUtil;
 import com.kabouzeid.trebl.util.NavigationUtil;
@@ -97,7 +92,6 @@ public class BlurPlayerFragment extends AbsPlayerFragment implements BlurPlayerA
     TextView artistText;
     @BindView(R.id.album_text)
     TextView albumText;
-
     @BindView(R.id.blur_album_background)
     ImageView blurAlbumBackground;
     @BindView(R.id.button_eq)
@@ -164,30 +158,17 @@ public class BlurPlayerFragment extends AbsPlayerFragment implements BlurPlayerA
         // for some reason the xml attribute doesn't get applied here.
         playingQueueCard.setCardBackgroundColor(ATHUtil.resolveColor(getActivity(), R.attr.cardBackgroundColor));
 
-        equalizerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(PreferenceUtil.getInstance(getActivity()).readSharedPrefsString("select_equalizer","appeq").equals("appeq")){
-                    startActivity(new Intent(getActivity(), EqualizerActivity.class));
-                }else{
-                    NavigationUtil.openEqualizer(getActivity());
-                }
+        equalizerButton.setOnClickListener(view13 -> {
+            if(PreferenceUtil.getInstance(getActivity()).readSharedPrefsString("select_equalizer","appeq").equals("appeq")){
+                startActivity(new Intent(getActivity(), EqualizerActivity.class));
+            }else{
+                NavigationUtil.openEqualizer(getActivity());
             }
         });
 
-        queueButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                slidingUpPanelLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
-            }
-        });
+        queueButton.setOnClickListener(view12 -> slidingUpPanelLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED));
 
-        sleepButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new SleepTimerDialog().show(getFragmentManager(), "SET_SLEEP_TIMER");
-            }
-        });
+        sleepButton.setOnClickListener(view1 -> new SleepTimerDialog().show(getFragmentManager(), "SET_SLEEP_TIMER"));
     }
 
     @Override
@@ -501,21 +482,7 @@ public class BlurPlayerFragment extends AbsPlayerFragment implements BlurPlayerA
 
     @Override
     public void onPanelSlide(View view, float slide) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            float density = getResources().getDisplayMetrics().density;
 
-           // float cardElevation = (6 * slide + 2) * density;
-           // if (!isValidElevation(cardElevation)) return; // we have received some crash reports in setCardElevation()
-           // playingQueueCard.setCardElevation(cardElevation);
-
-           // float buttonElevation = (2 * Math.max(0, (1 - (slide * 16))) + 2) * density;
-           // if (!isValidElevation(buttonElevation)) return;
-           //  playbackControlsFragment.playPauseFab.setElevation(buttonElevation);
-        }
-    }
-
-    private boolean isValidElevation(float elevation) {
-        return elevation >= -Float.MAX_VALUE && elevation <= Float.MAX_VALUE;
     }
 
     @Override
@@ -599,7 +566,6 @@ public class BlurPlayerFragment extends AbsPlayerFragment implements BlurPlayerA
             currentSongViewHolder.separator.setVisibility(View.GONE);
             currentSongViewHolder.shortSeparator.setVisibility(View.GONE);
             currentSongViewHolder.image.setScaleType(ImageView.ScaleType.CENTER);
-            //currentSongViewHolder.image.setColorFilter(ATHUtil.resolveColor(fragment.getActivity(), R.attr.iconColor, ThemeStore.textColorSecondary(fragment.getActivity())), PorterDuff.Mode.SRC_IN);
             currentSongViewHolder.image.setImageResource(R.drawable.ic_volume_up_white_24dp);
             currentSongViewHolder.itemView.setOnClickListener(v -> {
                 // toggle the panel

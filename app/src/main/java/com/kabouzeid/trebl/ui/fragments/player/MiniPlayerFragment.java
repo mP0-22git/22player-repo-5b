@@ -3,7 +3,6 @@ package com.kabouzeid.trebl.ui.fragments.player;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -13,7 +12,6 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
-import androidx.palette.graphics.Palette;
 
 import android.util.TypedValue;
 import android.view.GestureDetector;
@@ -22,32 +20,22 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
-import com.kabouzeid.appthemehelper.ThemeStore;
-import com.kabouzeid.appthemehelper.util.ATHUtil;
-import com.kabouzeid.appthemehelper.util.MaterialValueHelper;
 import com.kabouzeid.trebl.R;
-import com.kabouzeid.trebl.glide.BlurTransformation;
 import com.kabouzeid.trebl.glide.PhonographColoredTarget;
 import com.kabouzeid.trebl.glide.SongGlideRequest;
-import com.kabouzeid.trebl.glide.palette.BitmapPaletteWrapper;
 import com.kabouzeid.trebl.helper.MusicPlayerRemote;
 import com.kabouzeid.trebl.helper.MusicProgressViewUpdateHelper;
 import com.kabouzeid.trebl.helper.PlayPauseButtonOnClickHandler;
 import com.kabouzeid.trebl.ui.fragments.AbsMusicServiceFragment;
-import com.kabouzeid.trebl.util.Util;
 import com.kabouzeid.trebl.views.PlayPauseDrawable;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
 /**
  * @author Karim Abou Zeid (kabouzeid)
@@ -142,14 +130,11 @@ public class MiniPlayerFragment extends AbsMusicServiceFragment implements Music
                         ValueAnimator anim = new ValueAnimator();
                         anim.setIntValues(lastColor, color);
                         anim.setEvaluator(new ArgbEvaluator());
-                        anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                            @Override
-                            public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                                if(miniPlayerBgTint!=null) {
-                                    miniPlayerBgTint.setBackgroundColor((Integer) valueAnimator.getAnimatedValue());
-                                    progressIndicator.setIndicatorColor(color);
-                                    dummyIndicator.setTrackColor((Integer)valueAnimator.getAnimatedValue());
-                                }
+                        anim.addUpdateListener(valueAnimator -> {
+                            if(miniPlayerBgTint!=null) {
+                                miniPlayerBgTint.setBackgroundColor((Integer) valueAnimator.getAnimatedValue());
+                                progressIndicator.setIndicatorColor(color);
+                                dummyIndicator.setTrackColor((Integer)valueAnimator.getAnimatedValue());
                             }
                         });
                         anim.setDuration(1000);

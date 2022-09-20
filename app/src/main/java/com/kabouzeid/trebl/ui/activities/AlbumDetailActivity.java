@@ -2,7 +2,6 @@ package com.kabouzeid.trebl.ui.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,8 +24,6 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.util.DialogUtils;
 import com.bumptech.glide.Glide;
 import com.github.ksoichiro.android.observablescrollview.ObservableRecyclerView;
-import com.kabouzeid.appthemehelper.util.ColorUtil;
-import com.kabouzeid.appthemehelper.util.MaterialValueHelper;
 import com.kabouzeid.trebl.R;
 import com.kabouzeid.trebl.adapter.song.AlbumSongAdapter;
 import com.kabouzeid.trebl.dialogs.AddToPlaylistDialog;
@@ -53,7 +50,6 @@ import com.kabouzeid.trebl.util.MusicUtil;
 import com.kabouzeid.trebl.util.NavigationUtil;
 import com.kabouzeid.trebl.util.PhonographColorUtil;
 import com.kabouzeid.trebl.util.PreferenceUtil;
-import com.kabouzeid.trebl.util.Util;
 
 import java.util.List;
 import java.util.Locale;
@@ -135,10 +131,6 @@ public class AlbumDetailActivity extends AbsSlidingMusicPanelActivity implements
         public void onScrollChanged(int scrollY, boolean b, boolean b2) {
             scrollY += headerViewHeight;
 
-            // Change alpha of overlay
-            float headerAlpha = Math.max(0, Math.min(1, (float) 2 * scrollY / headerViewHeight));
-            //headerOverlay.setBackgroundColor(ColorUtil.withAlpha(toolbarColor, headerAlpha));
-
             // Translate name text
             headerView.setTranslationY(Math.max(-scrollY, -headerViewHeight));
             headerOverlay.setTranslationY(Math.max(-scrollY, -headerViewHeight));
@@ -190,20 +182,11 @@ public class AlbumDetailActivity extends AbsSlidingMusicPanelActivity implements
 
     private void setColors(int color) {
         toolbarColor = color;
-        //headerView.setBackgroundColor(color);
 
         setNavigationbarColor(color);
         setTaskDescriptionColor(color);
 
-        //toolbar.setBackgroundColor(color);
         setSupportActionBar(toolbar); // needed to auto readjust the toolbar content color
-        //setStatusbarColor(color);
-
-        int secondaryTextColor = MaterialValueHelper.getSecondaryTextColor(this, ColorUtil.isColorLight(color));
-        //artistTextView.setTextColor(MaterialValueHelper.getPrimaryTextColor(this, ColorUtil.isColorLight(color)));
-        //durationTextView.setTextColor(secondaryTextColor);
-        //songCountTextView.setTextColor(secondaryTextColor);
-        //albumYearTextView.setTextColor(secondaryTextColor);
     }
 
     @Override

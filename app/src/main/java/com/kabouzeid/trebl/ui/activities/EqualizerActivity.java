@@ -19,8 +19,6 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.Switch;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,8 +29,6 @@ import androidx.core.content.ContextCompat;
 import com.kabouzeid.trebl.R;
 import com.kabouzeid.trebl.util.NavigationUtil;
 import com.kabouzeid.trebl.util.PreferenceUtil;
-
-import java.util.ArrayList;
 
 import me.tankery.lib.circularseekbar.CircularSeekBar;
 

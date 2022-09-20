@@ -2,7 +2,6 @@ package com.kabouzeid.trebl.ui.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
@@ -34,8 +33,6 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.util.DialogUtils;
 import com.bumptech.glide.Glide;
 import com.github.ksoichiro.android.observablescrollview.ObservableListView;
-import com.kabouzeid.appthemehelper.util.ColorUtil;
-import com.kabouzeid.appthemehelper.util.MaterialValueHelper;
 import com.kabouzeid.trebl.R;
 import com.kabouzeid.trebl.adapter.album.HorizontalAlbumAdapter;
 import com.kabouzeid.trebl.adapter.song.ArtistSongAdapter;
@@ -112,10 +109,6 @@ public class ArtistDetailActivity extends AbsSlidingMusicPanelActivity implement
         @Override
         public void onScrollChanged(int scrollY, boolean b, boolean b2) {
             scrollY += headerViewHeight;
-
-            // Change alpha of overlay
-            float headerAlpha = Math.max(0, Math.min(1, (float) 2 * scrollY / headerViewHeight));
-            //headerOverlay.setBackgroundColor(ColorUtil.withAlpha(toolbarColor, headerAlpha));
 
             // Translate name text
             headerView.setTranslationY(Math.max(-scrollY, -headerViewHeight));
@@ -282,19 +275,11 @@ public class ArtistDetailActivity extends AbsSlidingMusicPanelActivity implement
 
     private void setColors(int color) {
         toolbarColor = color;
-        //headerView.setBackgroundColor(color);
 
         setNavigationbarColor(color);
         setTaskDescriptionColor(color);
 
-        //toolbar.setBackgroundColor(color);
         setSupportActionBar(toolbar); // needed to auto readjust the toolbar content color
-        //setStatusbarColor(color);
-
-        int secondaryTextColor = MaterialValueHelper.getSecondaryTextColor(this, ColorUtil.isColorLight(color));
-        //durationTextView.setTextColor(secondaryTextColor);
-        //songCountTextView.setTextColor(secondaryTextColor);
-        //albumCountTextView.setTextColor(secondaryTextColor);
     }
 
     private void setUpToolbar() {
