@@ -1,14 +1,19 @@
 package com.kabouzeid.trebl.ui.fragments.player;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
+import androidx.palette.graphics.Palette;
 
 import android.util.TypedValue;
 import android.view.GestureDetector;
@@ -21,12 +26,17 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.kabouzeid.appthemehelper.ThemeStore;
 import com.kabouzeid.appthemehelper.util.ATHUtil;
+import com.kabouzeid.appthemehelper.util.MaterialValueHelper;
 import com.kabouzeid.trebl.R;
 import com.kabouzeid.trebl.glide.BlurTransformation;
 import com.kabouzeid.trebl.glide.PhonographColoredTarget;
 import com.kabouzeid.trebl.glide.SongGlideRequest;
+import com.kabouzeid.trebl.glide.palette.BitmapPaletteWrapper;
 import com.kabouzeid.trebl.helper.MusicPlayerRemote;
 import com.kabouzeid.trebl.helper.MusicProgressViewUpdateHelper;
 import com.kabouzeid.trebl.helper.PlayPauseButtonOnClickHandler;
@@ -57,8 +67,17 @@ public class MiniPlayerFragment extends AbsMusicServiceFragment implements Music
 
     @BindView(R.id.mini_player_play_pause_button)
     ImageView miniPlayerPlayPauseButton;
-    @BindView(R.id.progress_bar)
-    MaterialProgressBar progressBar;
+
+    @BindView(R.id.progress_indicator)
+    CircularProgressIndicator progressIndicator;
+
+    @BindView(R.id.progress_indicator_dummy)
+    CircularProgressIndicator dummyIndicator;
+
+    @BindView(R.id.mini_player_bg_tint)
+    ImageView miniPlayerBgTint;
+
+    int lastColor = Color.BLACK;
 
     private PlayPauseDrawable miniPlayerPlayPauseDrawable;
 
@@ -93,7 +112,6 @@ public class MiniPlayerFragment extends AbsMusicServiceFragment implements Music
 
     private void setUpMiniPlayer() {
         setUpPlayPauseButton();
-        progressBar.setSupportProgressTintList(ColorStateList.valueOf(ThemeStore.accentColor(getActivity())));
     }
 
     private void setUpPlayPauseButton() {
@@ -102,6 +120,8 @@ public class MiniPlayerFragment extends AbsMusicServiceFragment implements Music
         theme.resolveAttribute(R.attr.textColor, typedValue, true);
         @ColorInt int color = typedValue.data;
         miniPlayerPlayPauseDrawable = new PlayPauseDrawable(getActivity());
+        miniPlayerPlayPauseButton.setScaleX(0.8f);
+        miniPlayerPlayPauseButton.setScaleY(0.8f);
         miniPlayerPlayPauseButton.setImageDrawable(miniPlayerPlayPauseDrawable);
         miniPlayerPlayPauseButton.setColorFilter(color,PorterDuff.Mode.SRC_IN);
         miniPlayerPlayPauseButton.setOnClickListener(new PlayPauseButtonOnClickHandler());
@@ -111,10 +131,33 @@ public class MiniPlayerFragment extends AbsMusicServiceFragment implements Music
         miniPlayerTitle.setText(MusicPlayerRemote.getCurrentSong().title);
         miniPlayerArtist.setText(MusicPlayerRemote.getCurrentSong().artistName);
 
-        Glide.with(getActivity()).load(Util.getAlbumArtUri(MusicPlayerRemote.getCurrentSong().albumId))
+        SongGlideRequest.Builder.from(Glide.with(getActivity()), MusicPlayerRemote.getCurrentSong())
+                .checkIgnoreMediaStore(getActivity())
+                .generatePalette(getActivity()).build()
                 .placeholder(R.drawable.default_album_art)
                 .error(R.drawable.default_album_art)
-                .into(miniPlayerImage);
+                .into(new PhonographColoredTarget(miniPlayerImage) {
+                    @Override
+                    public void onColorReady(int color) {
+                        progressIndicator.setIndicatorColor(color);
+                        ValueAnimator anim = new ValueAnimator();
+                        anim.setIntValues(lastColor, color);
+                        anim.setEvaluator(new ArgbEvaluator());
+                        anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                            @Override
+                            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                                miniPlayerBgTint.setBackgroundColor((Integer)valueAnimator.getAnimatedValue());
+                                dummyIndicator.setTrackColor((Integer)valueAnimator.getAnimatedValue());
+                            }
+                        });
+
+                        anim.setDuration(1000);
+                        anim.setInterpolator(new FastOutSlowInInterpolator());
+                        anim.start();
+                        lastColor = color;
+                    }
+                });
+
     }
 
     @Override
@@ -135,9 +178,8 @@ public class MiniPlayerFragment extends AbsMusicServiceFragment implements Music
 
     @Override
     public void onUpdateProgressViews(int progress, int total) {
-        progressBar.setMax(total);
-        progressBar.setProgress(progress);
-
+        progressIndicator.setMax(total);
+        progressIndicator.setProgress(progress);
     }
 
     @Override
