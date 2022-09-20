@@ -139,18 +139,19 @@ public class MiniPlayerFragment extends AbsMusicServiceFragment implements Music
                 .into(new PhonographColoredTarget(miniPlayerImage) {
                     @Override
                     public void onColorReady(int color) {
-                        progressIndicator.setIndicatorColor(color);
                         ValueAnimator anim = new ValueAnimator();
                         anim.setIntValues(lastColor, color);
                         anim.setEvaluator(new ArgbEvaluator());
                         anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                             @Override
                             public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                                miniPlayerBgTint.setBackgroundColor((Integer)valueAnimator.getAnimatedValue());
-                                dummyIndicator.setTrackColor((Integer)valueAnimator.getAnimatedValue());
+                                if(miniPlayerBgTint!=null) {
+                                    miniPlayerBgTint.setBackgroundColor((Integer) valueAnimator.getAnimatedValue());
+                                    progressIndicator.setIndicatorColor(color);
+                                    dummyIndicator.setTrackColor((Integer)valueAnimator.getAnimatedValue());
+                                }
                             }
                         });
-
                         anim.setDuration(1000);
                         anim.setInterpolator(new FastOutSlowInInterpolator());
                         anim.start();
