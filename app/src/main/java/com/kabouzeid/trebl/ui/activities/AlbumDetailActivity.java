@@ -50,6 +50,7 @@ import com.kabouzeid.trebl.util.MusicUtil;
 import com.kabouzeid.trebl.util.NavigationUtil;
 import com.kabouzeid.trebl.util.PhonographColorUtil;
 import com.kabouzeid.trebl.util.PreferenceUtil;
+import com.kabouzeid.trebl.util.Util;
 
 import java.util.List;
 import java.util.Locale;
@@ -165,18 +166,12 @@ public class AlbumDetailActivity extends AbsSlidingMusicPanelActivity implements
                     }
                 });
 
-        SongGlideRequest.Builder.from(Glide.with(this), getAlbum().safeGetFirstSong())
-                .checkIgnoreMediaStore(this)
-                .generatePalette(this).build()
+        Glide.with(getApplicationContext()).load(Util.getAlbumArtUri(getAlbum().getId()))
                 .transform(new BlurTransformation.Builder(this).build())
-                .dontAnimate()
-                .into(new PhonographColoredTarget(blurAlbumArtImageView) {
-                    @Override
-                    public void onColorReady(int color) {
-                        setColors(color);
-                    }
-                });
-
+                .placeholder(R.drawable.default_blur)
+                .error(R.drawable.default_blur)
+                .override(50,50)
+                .into(blurAlbumArtImageView);
 
     }
 
