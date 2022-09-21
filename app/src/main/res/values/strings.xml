@@ -104,10 +104,10 @@
     <string name="action_show_lyrics">Show lyrics</string>
     <string name="light_theme_name">Material Light</string>
     <string name="dark_theme_name">Material Dark</string>
-    <string name="midnight_theme_name">Black</string>
-    <string name="black_theme_name">Midnight Black</string>
+    <string name="black_theme_name">Black</string>
     <string name="white_theme_name">White</string>
-    <string name="starry_theme_name">Starry</string>
+    <string name="starry_theme_name">Starry Sky (Animated)</string>
+    <string name="midnight_theme_name">Midnight Stars (Animated)</string>
     <string name="blurry_theme_name">Blurry</string>
     <string name="retrowave_theme_name">Retrowave</string>
     <string name="energetic_theme_name">Energetic</string>
@@ -342,7 +342,7 @@
     <string name="custom_themes">All Themes</string>
     <string name="no_ads">No Ads</string>
     <string name="go_pro">Purchase</string>
-    <string name="buy_pro_pack">Buy Pro Pack</string>
+    <string name="buy_pro_pack">Unlock Everything</string>
     <string name="future_updates">Future Pro Updates</string>
 
     <string name="app_eq">App EQ</string>

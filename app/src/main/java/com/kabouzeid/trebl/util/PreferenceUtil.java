@@ -149,6 +149,8 @@ public final class PreferenceUtil {
                 return R.style.Theme_Phonograph_Light;
             case "starry":
                 return R.style.Theme_Phonograph_Stars;
+            case "midnight":
+                return R.style.Theme_Phonograph_Midnight_;
             case "blurry":
                 return R.style.Theme_Phonograph_Blur;
             case "retrowave":

@@ -10,6 +10,8 @@
 
     <style name="Theme.Phonograph.Stars." parent="Theme.Phonograph.Base.Stars" />
 
+    <style name="Theme.Phonograph.Midnight." parent="Theme.Phonograph.Base.Midnight" />
+
     <style name="Theme.Phonograph.Blur" parent="Theme.Phonograph.Base.Blur" />
 
     <style name="Theme.Phonograph.Retrowave" parent="Theme.Phonograph.Base.Retrowave" />

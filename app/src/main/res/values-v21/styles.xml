@@ -25,6 +25,11 @@
         <item name="android:windowSharedElementsUseOverlay">false</item>
     </style>
 
+    <style name="Theme.Phonograph.Midnight" parent="Theme.Phonograph.Base.Stars">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowSharedElementsUseOverlay">false</item>
+    </style>
+
     <style name="Theme.Phonograph.Blur" parent="Theme.Phonograph.Base.Blur">
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowSharedElementsUseOverlay">false</item>

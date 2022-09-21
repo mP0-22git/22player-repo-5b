@@ -170,6 +170,9 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         }else if(PreferenceUtil.getInstance(getActivity()).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("starry")){
             appbar.setBackgroundColor(Color.TRANSPARENT);
             toolbar.setBackgroundColor(Color.TRANSPARENT);
+        }else if(PreferenceUtil.getInstance(getActivity()).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("midnight")){
+            appbar.setBackgroundColor(Color.TRANSPARENT);
+            toolbar.setBackgroundColor(Color.TRANSPARENT);
         }else if(PreferenceUtil.getInstance(getActivity()).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("blurry")){
             appbar.setBackgroundColor(Color.TRANSPARENT);
             toolbar.setBackgroundColor(Color.TRANSPARENT);

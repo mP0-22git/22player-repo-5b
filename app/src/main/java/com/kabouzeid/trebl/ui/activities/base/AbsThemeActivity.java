@@ -82,6 +82,8 @@ public abstract class AbsThemeActivity extends ATHToolbarActivity {
             setLightStatusbar(true);*/
         }else if(PreferenceUtil.getInstance(this).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("starry")){
             setStatusbarColor(Color.TRANSPARENT);
+        }else if(PreferenceUtil.getInstance(this).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("midnight")){
+            setStatusbarColor(Color.TRANSPARENT);
         }else if(PreferenceUtil.getInstance(this).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("blurry")){
             setStatusbarColor(Color.TRANSPARENT);
         }else if(PreferenceUtil.getInstance(this).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("retrowave")){

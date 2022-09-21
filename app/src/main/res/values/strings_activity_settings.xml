@@ -1,11 +1,12 @@
 <resources>
 
     <string-array name="pref_general_theme_list_titles">
-        <item>@string/midnight_theme_name</item>
+        <item>@string/black_theme_name</item>
         <item>@string/white_theme_name</item>
         <item>@string/light_theme_name</item>
         <item>@string/dark_theme_name</item>
         <item>@string/starry_theme_name</item>
+        <item>@string/midnight_theme_name</item>
         <item>@string/blurry_theme_name</item>
         <item>@string/retrowave_theme_name</item>
         <item>@string/energetic_theme_name</item>
@@ -22,6 +23,7 @@
         <item>light</item>
         <item>dark</item>
         <item>starry</item>
+        <item>midnight</item>
         <item>blurry</item>
         <item>retrowave</item>
         <item>energetic</item>

@@ -134,6 +134,8 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Negati
 
         if(PreferenceUtil.getInstance(this).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("starry")){
             setStarBg();
+        }else if(PreferenceUtil.getInstance(this).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("midnight")){
+            starryBg.setVisibility(View.GONE);
         }
 
         blurryBg.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -434,7 +436,7 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Negati
     @Override
     protected void onStart() {
         super.onStart();
-        if(PreferenceUtil.getInstance(this).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("starry")){
+        if(PreferenceUtil.getInstance(this).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("starry")||PreferenceUtil.getInstance(this).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("midnight")){
             starsView.onStart();
         }
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
@@ -443,7 +445,7 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Negati
     @Override
     protected void onStop() {
         super.onStop();
-        if(PreferenceUtil.getInstance(this).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("starry")) {
+        if(PreferenceUtil.getInstance(this).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("starry")||PreferenceUtil.getInstance(this).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("midnight")) {
             starsView.onStop();
         }
         if(dialog!=null){

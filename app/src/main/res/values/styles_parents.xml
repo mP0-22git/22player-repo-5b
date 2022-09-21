@@ -158,6 +158,26 @@
         <item name="fabIconColor">@color/black</item>
     </style>
 
+    <style name="Theme.Phonograph.Base.Midnight" parent="@style/Theme.Phonograph.Base">
+        <item name="android:windowBackground">@android:color/black</item>
+        <item name="dividerColor">#18FFFFFF</item>
+        <item name="defaultFooterColor">@android:color/transparent</item>
+        <item name="cardBackgroundColor">#000000</item>
+        <item name="playlistCardBackground">@android:color/transparent</item>
+        <item name="md_background_color">@color/md_grey_900</item>
+        <item name="starsVisibilityMode">visible</item>
+        <item name="blurVisibilityMode">gone</item>
+        <item name="darkVisibilityMode">visible</item>
+        <item name="lightVisibilityMode">gone</item>
+        <item name="lightKenVisibilityMode">gone</item>
+        <item name="darkKenVisibilityMode">gone</item>
+        <item name="KenVisibilityMode">gone</item>
+        <item name="textColor">#ffffff</item>
+        <item name="libraryTitleColor">#ffffff</item>
+        <item name="materialSecondary">#20ffffff</item>
+        <item name="fabIconColor">@color/black</item>
+    </style>
+
     <style name="Theme.Phonograph.Base.Blur" parent="@style/Theme.Phonograph.Base">
         <item name="android:windowBackground">@android:color/black</item>
         <item name="dividerColor">#18FFFFFF</item>

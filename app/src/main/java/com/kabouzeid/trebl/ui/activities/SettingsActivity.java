@@ -220,6 +220,12 @@ public class SettingsActivity extends AbsBaseActivity implements ColorChooserDia
                     return false;
                 }
 
+                if (themeName.equals("midnight") && !App.isProVersion()) {
+                    Toast.makeText(getActivity(), "This theme is a pro feature", Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(getContext(), PurchaseActivity.class));
+                    return false;
+                }
+
                 if (themeName.equals("blurry") && !App.isProVersion()) {
                     Toast.makeText(getActivity(), "This theme is a pro feature", Toast.LENGTH_LONG).show();
                     startActivity(new Intent(getContext(), PurchaseActivity.class));
