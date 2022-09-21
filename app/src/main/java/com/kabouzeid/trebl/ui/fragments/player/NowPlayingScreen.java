@@ -6,9 +6,9 @@ import androidx.annotation.StringRes;
 import com.kabouzeid.trebl.R;
 
 public enum NowPlayingScreen {
-    CARD(R.string.card, R.drawable.np_card, 0),
-    FLAT(R.string.flat, R.drawable.np_flat, 1),
-    BLUR(R.string.blur, R.drawable.np_flat, 2);
+    CARD(R.string.card, R.drawable.nowplaying_1, 0),
+    FLAT(R.string.flat, R.drawable.nowplaying_2, 1),
+    BLUR(R.string.blur, R.drawable.nowplaying_3, 2);
 
     @StringRes
     public final int titleRes;
