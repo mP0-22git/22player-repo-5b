@@ -11,13 +11,12 @@
         android:layout_height="match_parent"
         android:layout_marginTop="150dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5"
-        />
+        app:layout_constraintGuide_percent="0.5" />
 
-    <ImageView
+    <com.flaviofaria.kenburnsview.KenBurnsView
         android:id="@+id/iv_preview"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="350dp"
         android:scaleType="centerCrop"
         android:src="@drawable/template"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,11 +29,10 @@
         android:layout_height="0dp"
         android:scaleType="centerCrop"
         android:src="@drawable/gradient_black"
+        app:layout_constraintBottom_toBottomOf="@id/iv_preview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/iv_preview"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/title"
@@ -42,211 +40,156 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginTop="12dp"
-        android:layout_marginBottom="12dp"
         android:fontFamily="@font/boldfont"
         android:text="@string/buy_pro_pack"
         android:textColor="#ffffff"
         android:textSize="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/buy_button" />
+        app:layout_constraintBottom_toTopOf="@id/subTitle"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/subTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="12dp"
+        android:fontFamily="@font/semiboldfont"
+        android:alpha="0.7"
+        android:text="Pro pack unlocks all themes, pro features and supports development."
+        android:textColor="#ffffff"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toTopOf="@id/buy_button"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/buy_button"
         android:layout_width="250dp"
         android:layout_height="50dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/button"
         android:text="@string/go_pro"
+        android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="18dp"
         android:textStyle="bold"
-        android:textAllCaps="false"
-        android:background="@drawable/button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/desc1"
-        android:layout_marginBottom="12dp"
+        app:layout_constraintBottom_toTopOf="@id/desc0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <TextView
+        android:id="@+id/desc0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        />
+        android:layout_marginEnd="12dp"
+        android:drawableStart="@drawable/ic_no_ads"
+        android:drawablePadding="5dp"
+        android:fontFamily="@font/semiboldfont"
+        android:text="No Ads Ever"
+        android:textColor="@color/white"
+        android:textSize="17dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_preview" />
 
     <TextView
         android:id="@+id/desc1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/custom_themes"
-        android:textSize="17dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="12dp"
+        android:drawableStart="@drawable/ic_all_themes"
+        android:drawablePadding="5dp"
         android:fontFamily="@font/semiboldfont"
+        android:text="@string/custom_themes"
         android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_preview"
+        android:textSize="17dp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp"
 
-        android:drawableStart="@drawable/ic_check_circle_24"
-        android:drawablePadding="5dp"
-        />
-
-    <TextView
-        android:id="@+id/desc1sub"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Starry night, Blurry and more."
-        android:textSize="14dp"
-        android:alpha="0.8"
-        android:drawableStart="@drawable/ic_check_circle_24"
-        android:drawableTint="@android:color/transparent"
-        android:fontFamily="@font/regularfont"
-        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/desc1"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginTop="5dp"
-        android:drawablePadding="5dp"
-        />
+        app:layout_constraintTop_toBottomOf="@id/desc0" />
 
     <TextView
         android:id="@+id/desc2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/pro_features"
-        android:textSize="17dp"
-        android:fontFamily="@font/semiboldfont"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/desc1sub"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp"
         android:layout_marginTop="12dp"
-        android:drawableStart="@drawable/ic_check_circle_24"
-        android:drawablePadding="5dp"
-        />
-
-    <TextView
-        android:id="@+id/desc2sub"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Folders, sleep timer, color customization."
-        android:textSize="14dp"
-        android:alpha="0.8"
-        android:drawableStart="@drawable/ic_check_circle_24"
-        android:drawableTint="@android:color/transparent"
-        android:fontFamily="@font/regularfont"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/desc2"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="12dp"
         android:layout_marginEnd="12dp"
-        android:layout_marginTop="5dp"
+        android:drawableStart="@drawable/ic_pro_features"
         android:drawablePadding="5dp"
-        />
+        android:fontFamily="@font/semiboldfont"
+        android:text="@string/pro_features"
+        android:textColor="@color/white"
+        android:textSize="17dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/desc1" />
 
     <TextView
         android:id="@+id/desc3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/future_updates"
-        android:textSize="17dp"
-        android:fontFamily="@font/semiboldfont"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/desc2sub"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp"
         android:layout_marginTop="12dp"
-        android:drawableStart="@drawable/ic_check_circle_24"
-        android:drawablePadding="5dp"
-        />
-
-    <TextView
-        android:id="@+id/desc3sub"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Includes any pro pack content added in the future, and supports development."
-        android:textSize="14dp"
-        android:alpha="0.8"
-        android:drawableStart="@drawable/ic_check_circle_24"
-        android:drawableTint="@android:color/transparent"
-        android:fontFamily="@font/regularfont"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/desc3"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="12dp"
         android:layout_marginEnd="12dp"
-        android:layout_marginTop="5dp"
+        android:drawableStart="@drawable/ic_now_playing_screens"
         android:drawablePadding="5dp"
-        />
+        android:fontFamily="@font/semiboldfont"
+        android:text="All Now Playing Screens"
+        android:textColor="@color/white"
+        android:textSize="17dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/desc2" />
 
     <TextView
         android:id="@+id/desc4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="No Ads Ever"
-        android:textSize="17dp"
-        android:fontFamily="@font/semiboldfont"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/desc3sub"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp"
         android:layout_marginTop="12dp"
-        android:drawableStart="@drawable/ic_check_circle_24"
-        android:drawablePadding="5dp"
-        />
-
-    <TextView
-        android:id="@+id/desc4sub"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="This app is not ad supported, and aims to stay ad-free. The pro version will always stay ad-free."
-        android:textSize="14dp"
-        android:alpha="0.8"
-        android:drawableStart="@drawable/ic_check_circle_24"
-        android:drawableTint="@android:color/transparent"
-        android:fontFamily="@font/regularfont"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/desc4"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="12dp"
         android:layout_marginEnd="12dp"
-        android:layout_marginTop="5dp"
+        android:drawableStart="@drawable/ic_future_updates"
         android:drawablePadding="5dp"
-        />
+        android:fontFamily="@font/semiboldfont"
+        android:text="Future Pro Updates"
+        android:textColor="@color/white"
+        android:textSize="17dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/desc3" />
 
     <ImageView
         android:id="@+id/close_button"
         android:layout_width="22dp"
         android:layout_height="22dp"
-        android:layout_marginTop="12dp"
         android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
         android:padding="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:src="@drawable/ic_close_white_24dp"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/emptyview"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/desc4sub"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/desc4" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/emptyview"
-        app:layout_constraintTop_toTopOf="parent"
         android:src="@drawable/gradient_purchase_activity"
-        />
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/emptyview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
