@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.kabouzeid.trebl.App;
 import com.kabouzeid.trebl.R;
+import com.kabouzeid.trebl.dialogs.NowPlayingPickerDialog;
 import com.kabouzeid.trebl.dialogs.ScanMediaFolderChooserDialog;
 import com.kabouzeid.trebl.ui.activities.MainActivity;
 import com.kabouzeid.trebl.ui.activities.PurchaseActivity;
@@ -24,7 +25,7 @@ import com.kabouzeid.trebl.ui.fragments.mainactivity.folders.FoldersFragment;
 
 
 public class MoreFragment extends Fragment {
-    private ConstraintLayout foldersButton,settingsButton,scanButton, proButton;
+    private ConstraintLayout foldersButton,settingsButton,scanButton, proButton, playerButton;
 
     @Nullable
     MainActivity.MainActivityFragmentCallbacks currentFragment;
@@ -60,6 +61,7 @@ public class MoreFragment extends Fragment {
         settingsButton = view.findViewById(R.id.settingsButton);
         scanButton = view.findViewById(R.id.scanButton);
         proButton = view.findViewById(R.id.pro_layout);
+        playerButton = view.findViewById(R.id.playerButton);
 
         settingsButton.setOnClickListener(view1 -> new Handler().postDelayed(() -> startActivity(new Intent(getActivity(), SettingsActivity.class)), 200));
 
@@ -79,6 +81,11 @@ public class MoreFragment extends Fragment {
 
         proButton.setOnClickListener(v -> startActivity((new Intent(getActivity(), PurchaseActivity.class))));
 
+        playerButton.setOnClickListener(view12 -> {
+            NowPlayingPickerDialog dialog = new NowPlayingPickerDialog();
+            dialog.show(getChildFragmentManager(),"CHOOSE NOW PLAYING SCREEN");
+        });
+        
         Intent webIntent = new Intent();
         webIntent.setAction(Intent.ACTION_VIEW);
         webIntent.addCategory(Intent.CATEGORY_BROWSABLE);
