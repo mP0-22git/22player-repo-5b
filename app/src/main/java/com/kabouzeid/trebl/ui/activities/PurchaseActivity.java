@@ -18,6 +18,7 @@ import com.anjlab.android.iab.v3.SkuDetails;
 import com.kabouzeid.trebl.App;
 import com.kabouzeid.trebl.R;
 import com.kabouzeid.trebl.ui.activities.base.AbsBaseActivity;
+import com.sofakingforever.stars.AnimatedStarsView;
 
 import java.util.List;
 
@@ -36,6 +37,9 @@ public class PurchaseActivity extends AbsBaseActivity implements BillingProcesso
 
     @BindView(R.id.close_button)
     ImageView closeButton;
+
+    @BindView( R.id.stars)
+    AnimatedStarsView starsView;
 
     private BillingProcessor billingProcessor;
 
@@ -138,10 +142,12 @@ public class PurchaseActivity extends AbsBaseActivity implements BillingProcesso
     @Override
     protected void onStart() {
         super.onStart();
+        starsView.onStart();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
+        starsView.onStart();
     }
 }
