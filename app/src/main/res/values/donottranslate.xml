@@ -17,7 +17,7 @@
 
     <string name="card" translatable="false">Card</string>
     <string name="flat" translatable="false">Flat</string>
-    <string name="blur" translatable="false">Blur</string>
+    <string name="blur" translatable="false">Blur Pro (Beta)</string>
 
     <string-array name="donation_ids" translatable="false">
         <item>donation_1</item>
