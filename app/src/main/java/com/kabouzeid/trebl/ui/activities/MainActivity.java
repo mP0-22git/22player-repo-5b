@@ -523,18 +523,13 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Negati
         blurryBg.setAlpha(0.0f);
         blurryBg.setScaleX(1);
         blurryBg.setScaleY(1);
-        //note: error circumvention caused by outdated context
-        Glide.with(getApplicationContext()).load(Util.getAlbumArtUri(MusicPlayerRemote.getCurrentSong().albumId))
-                .transform(new BlurTransformation.Builder(MainActivity.this).build())
-                .placeholder(R.drawable.default_blur)
-                .error(R.drawable.default_blur)
-                .into(blurryBg);
 
         handler.postDelayed(() -> {
             Glide.with(getApplicationContext()).load(Util.getAlbumArtUri(MusicPlayerRemote.getCurrentSong().albumId))
                     .transform(new BlurTransformation.Builder(MainActivity.this).build())
                     .placeholder(R.drawable.default_blur)
                     .error(R.drawable.default_blur)
+                    .override(30,30)
                     .into(blurryBg);
             blurryBg.animate().scaleX(1.3f).scaleY(1.3f).alpha(1.0f).setDuration(1000).setInterpolator(new DecelerateInterpolator());
         }, 500);
