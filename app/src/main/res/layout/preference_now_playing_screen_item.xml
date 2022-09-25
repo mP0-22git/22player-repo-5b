@@ -12,8 +12,9 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="16dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        android:textColor="?android:textColorSecondary"
+        android:textSize="18dp"
+        android:textColor="?textColor"
+        android:fontFamily="@font/semiboldfont"
         tools:text="Card layout" />
 
     <ImageView
