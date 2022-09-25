@@ -76,9 +76,6 @@ public class ArtistDetailActivity extends AbsSlidingMusicPanelActivity implement
     Toolbar toolbar;
     @BindView(R.id.header)
     View headerView;
-    @BindView(R.id.header_overlay)
-    View headerOverlay;
-
 
     @BindView(R.id.artist_text)
     TextView artistTextView;
@@ -112,7 +109,6 @@ public class ArtistDetailActivity extends AbsSlidingMusicPanelActivity implement
 
             // Translate name text
             headerView.setTranslationY(Math.max(-scrollY, -headerViewHeight));
-            headerOverlay.setTranslationY(Math.max(-scrollY, -headerViewHeight));
             artistImage.setTranslationY(Math.max(-scrollY, -headerViewHeight));
         }
     };
