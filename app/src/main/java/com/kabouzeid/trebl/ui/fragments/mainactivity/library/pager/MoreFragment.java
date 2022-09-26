@@ -185,9 +185,8 @@ public class MoreFragment extends Fragment {
         viewPager.setPageMargin((int) ViewUtil.convertDpToPixel(32, getResources()));
         viewPager.setCurrentItem(PreferenceUtil.getInstance(getContext()).getNowPlayingScreen().ordinal());
 
-        Button set = playerDialog.findViewById(R.id.set);
-        set.setTextColor(ThemeStore.accentColor(getActivity()));
-        set.setOnClickListener(view -> playerDialog.dismiss());
+        Button selectButton = playerDialog.findViewById(R.id.button_select_player);
+        selectButton.setTextColor(ThemeStore.accentColor(getActivity()));
 
         InkPageIndicator pageIndicator = playerDialog.findViewById(R.id.page_indicator);
         pageIndicator.setViewPager(viewPager);
@@ -210,12 +209,14 @@ public class MoreFragment extends Fragment {
             }
         });
 
-        playerDialog.setOnDismissListener(dialogInterface -> {
+        selectButton.setOnClickListener(view -> {
             if(viewPagerPosition!=2){
                 PreferenceUtil.getInstance(getContext()).setNowPlayingScreen(NowPlayingScreen.values()[viewPagerPosition]);
+                playerDialog.dismiss();
                 getActivity().recreate();
             }else if(App.isProVersion() && viewPagerPosition==2){
                 PreferenceUtil.getInstance(getContext()).setNowPlayingScreen(NowPlayingScreen.values()[viewPagerPosition]);
+                playerDialog.dismiss();
                 getActivity().recreate();
             }else{
                 Toast.makeText(getActivity(), "This is a pro feature", Toast.LENGTH_LONG).show();

@@ -35,13 +35,13 @@
         />
 
     <Button
-        android:id="@+id/set"
+        android:id="@+id/button_select_player"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/now_playing_screen_view_pager"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="Set"
+        android:text="Select"
         android:background="@android:color/transparent"
         android:fontFamily="@font/semiboldfont"
         android:textSize="15sp"
@@ -57,7 +57,7 @@
         app:dotDiameter="8dp"
         app:dotGap="8dp"
         app:pageIndicatorColor="?android:textColorHint"
-        app:layout_constraintTop_toBottomOf="@id/set"
+        app:layout_constraintTop_toBottomOf="@id/button_select_player"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
