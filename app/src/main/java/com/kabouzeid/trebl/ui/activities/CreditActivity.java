@@ -25,8 +25,8 @@ public class CreditActivity extends AppCompatActivity {
     LinearLayout openGithub;
     LinearLayout PrivacyPolicy;
 
-    private static String GITHUB = "";
-    private static String PRIVACYPOLICY = "";
+    private static String GITHUB = "https://github.com/mP0-22git/22player-repo-5b";
+    private static String PRIVACYPOLICY = "https://github.com/mP0-22git/22player-repo-5b/blob/dev/privacypolicy.txt";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
