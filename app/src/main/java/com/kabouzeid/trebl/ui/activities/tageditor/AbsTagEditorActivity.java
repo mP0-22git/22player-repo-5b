@@ -283,6 +283,7 @@ public abstract class AbsTagEditorActivity extends AbsBaseActivity {
 
                 Artwork artwork = null;
                 File albumArtFile = null;
+                final String albumArtMimeType = "image/png";
                 if (info.artworkInfo != null && info.artworkInfo.artwork != null) {
                     try {
                         albumArtFile = MusicUtil.createAlbumArtFile().getCanonicalFile();
@@ -332,7 +333,11 @@ public abstract class AbsTagEditorActivity extends AbsBaseActivity {
                 Context context = getContext();
                 if (context != null) {
                     if (wroteArtwork) {
-                        MusicUtil.insertAlbumArt(context, info.artworkInfo.albumId, albumArtFile.getPath());
+                        MusicUtil.insertAlbumArt(
+                                context,
+                                info.artworkInfo.albumId,
+                                albumArtFile.getPath(),
+                                albumArtMimeType);
                     } else if (deletedArtwork) {
                         MusicUtil.deleteAlbumArt(context, info.artworkInfo.albumId);
                     }
@@ -358,6 +363,9 @@ public abstract class AbsTagEditorActivity extends AbsBaseActivity {
         }
 
         private void scan(String[] toBeScanned) {
+            if (toBeScanned == null) {
+                return;
+            }
             Context context = getContext();
             MediaScannerConnection.scanFile(applicationContext, toBeScanned, null, context instanceof Activity ? new UpdateToastMediaScannerCompletionListener((Activity) context, toBeScanned) : null);
         }
