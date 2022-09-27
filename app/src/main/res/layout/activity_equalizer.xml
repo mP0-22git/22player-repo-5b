@@ -55,17 +55,6 @@
             android:textStyle="bold"
             android:fontFamily="@font/boldfont" />
 
-        <TextView
-            android:id="@+id/custom_title_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Beta"
-            android:textColor="#50FFFFFF"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:fontFamily="@font/boldfont" />
-
-
     </androidx.appcompat.widget.Toolbar>
 
     <RelativeLayout
