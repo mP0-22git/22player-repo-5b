@@ -91,17 +91,19 @@ public class BlurPlayerAlbumCoverFragment extends AbsMusicServiceFragment implem
 
         //note: carousel implementation
         if(!Util.isLandscape(getResources())){
-            viewPager.setPageMargin((int) (getResources().getDisplayMetrics().widthPixels * -0.1));
-            viewPager.setOffscreenPageLimit(14);
-            viewPager.setPageTransformer(false, new ViewPager.PageTransformer() {
-                @Override public void transformPage(View page, float position) {
+            try {
+                viewPager.setPageMargin((int) (getResources().getDisplayMetrics().widthPixels * -0.1));
+                viewPager.setOffscreenPageLimit(14);
+                viewPager.setPageTransformer(false, (page, position) -> {
                     page.setScaleX(0.9f - Math.abs(position * 0.2f));
                     page.setScaleY(0.9f - Math.abs(position * 0.2f));
                     page.setAlpha(1.0f - Math.abs(position * 0.0f));
-                }
-            });
+                });
+            }catch(IllegalArgumentException ignored){
+                //note: Suppress rare crash here java.lang.IllegalArgumentException: Cannot set 'scaleX' to Float.NaN
+                //bug solution unknown
+            }
         }
-
     }
 
     @Override
