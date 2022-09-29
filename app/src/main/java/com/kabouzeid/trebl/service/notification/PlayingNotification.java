@@ -1,5 +1,6 @@
 package com.kabouzeid.trebl.service.notification;
 
+import android.app.ForegroundServiceStartNotAllowedException;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -55,21 +56,29 @@ public abstract class PlayingNotification {
         if (notifyMode != newNotifyMode && newNotifyMode == NOTIFY_MODE_BACKGROUND) {
             service.stopForeground(false);
         }
-        /*
-        if (newNotifyMode == NOTIFY_MODE_FOREGROUND) {
-            service.startForeground(NOTIFICATION_ID, notification);
-        } else if (newNotifyMode == NOTIFY_MODE_BACKGROUND) {
-            notificationManager.notify(NOTIFICATION_ID, notification);
-        }
-        */
-        //IMPORTANT NOTE: This is an attempt to avoid the crashes caused by the android 12 foreground limitations.
+
         if (newNotifyMode == NOTIFY_MODE_FOREGROUND) {
             if (Build.VERSION.SDK_INT > Build.VERSION_CODES.R) {
+                try{
                 service.startForeground(
                         NOTIFICATION_ID,
                         notification,
                         ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK
                 );
+                }catch(ForegroundServiceStartNotAllowedException ignored){
+                    /* Important Note: In android 12 and up, a foreground service cannot be started from background
+                    * i.e if app is idle or playback is interrupted by something like an alarm, the app will sometimes go into
+                    * background mode. Upon resumption a ForegroundServiceNotAllowedException is thrown.
+                    *
+                    * https://developer.android.com/guide/components/foreground-services#background-start-restrictions
+                    *
+                    * One proposed solution restricts stopForeground(false) to everything below SDK 31.
+                    * This makes the notification player impossible to dismiss, so a dismiss button is added to the notification.
+                    * SDK 33 onwards users can dismiss the foreground service notification even if it isn't stopped or removed from the foreground.
+                    *
+                    * Another temporary solution is to catch the exception with no recourse, as is done here. Although UX is potentially impacted,
+                    * it will serve while other options are explored.*/
+                }
             } else {
                 service.startForeground(NOTIFICATION_ID,notification);
             }
