@@ -131,7 +131,7 @@ public class MusicUtil {
 
     @NonNull
     public static String getYearString(int year) {
-        return year > 0 ? String.valueOf(year) : "-";
+        return year > 0 ? String.valueOf(year) : "";
     }
 
     public static long getTotalDuration(@NonNull final Context context, @NonNull List<Song> songs) {

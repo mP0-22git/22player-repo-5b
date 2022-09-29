@@ -78,6 +78,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="20dp"
                     />
 
                 <TextView
@@ -97,112 +98,86 @@
                     android:text="Album Name"
                     />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/album_details"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/album_text"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    >
-
-                    <TextView
-                        android:id="@+id/artist_text"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/album_details"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/album_text"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/album_year_text"
-                        android:fontFamily="@font/regularfont"
-                        android:alpha="0.8"
-                        android:textColor="?textColor"
-                        android:textSize="12dp"
-                        android:layout_marginEnd="6dp"
-                        />
-
-                    <ImageView
-                        android:layout_width="5dp"
-                        android:layout_height="5dp"
-                        android:src="@drawable/ic_baseline_circle_24"
-                        android:tint="?textColor"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/artist_text"
-                        app:layout_constraintEnd_toStartOf="@id/album_year_text"
-                        />
-
-                    <TextView
-                        android:id="@+id/album_year_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintStart_toEndOf="@id/artist_text"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/song_count_text"
-                        android:fontFamily="@font/regularfont"
-                        android:alpha="0.8"
-                        android:textSize="12dp"
-                        android:textColor="?textColor"
-                        android:layout_marginStart="6dp"
-                        android:layout_marginEnd="6dp"
-                        />
-
-                    <ImageView
-                        android:layout_width="5dp"
-                        android:layout_height="5dp"
-                        android:src="@drawable/ic_baseline_circle_24"
-                        android:tint="?textColor"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/album_year_text"
-                        app:layout_constraintEnd_toStartOf="@id/song_count_text"
-                        />
-
-                    <TextView
-                        android:id="@+id/song_count_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintStart_toEndOf="@id/album_year_text"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/duration_text"
-                        android:fontFamily="@font/regularfont"
-                        android:alpha="0.8"
-                        android:textSize="12dp"
-                        android:textColor="?textColor"
-                        android:layout_marginStart="6dp"
-                        android:layout_marginEnd="6dp"
-                        />
-
-                    <ImageView
-                        android:layout_width="5dp"
-                        android:layout_height="5dp"
-                        android:src="@drawable/ic_baseline_circle_24"
-                        android:tint="?textColor"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/song_count_text"
-                        app:layout_constraintEnd_toStartOf="@id/duration_text"
-                        />
-
-                    <TextView
-                        android:id="@+id/duration_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintStart_toEndOf="@id/song_count_text"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        android:fontFamily="@font/regularfont"
-                        android:alpha="0.8"
-                        android:textSize="12dp"
-                        android:textColor="?textColor"
-                        android:layout_marginStart="6dp"
-                        />
+                        >
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        <TextView
+                            android:id="@+id/artist_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:textColor="?textColor"
+                            android:textSize="15dp"
+                            android:textStyle="bold"
+                            />
+
+                        <TextView
+                            android:id="@+id/song_count_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/artist_text"
+                            android:alpha="0.7"
+                            android:textSize="12dp"
+                            android:textColor="?textColor"
+                            />
+
+                        <ImageView
+                            android:layout_width="2dp"
+                            android:layout_height="2dp"
+                            android:src="@drawable/ic_baseline_circle_24"
+                            app:tint="?textColor"
+                            app:layout_constraintStart_toEndOf="@id/song_count_text"
+                            app:layout_constraintEnd_toStartOf="@id/duration_text"
+                            app:layout_constraintTop_toTopOf="@id/song_count_text"
+                            app:layout_constraintBottom_toBottomOf="@id/song_count_text"
+                            />
+
+                        <TextView
+                            android:id="@+id/duration_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toEndOf="@id/song_count_text"
+                            app:layout_constraintTop_toBottomOf="@id/artist_text"
+                            android:alpha="0.7"
+                            android:textSize="12dp"
+                            android:textColor="?textColor"
+                            android:layout_marginStart="12dp"
+                            />
+
+                        <ImageView
+                            android:layout_width="2dp"
+                            android:layout_height="2dp"
+                            android:src="@drawable/ic_baseline_circle_24"
+                            app:tint="?textColor"
+                            app:layout_constraintStart_toEndOf="@id/duration_text"
+                            app:layout_constraintEnd_toStartOf="@id/album_year_text"
+                            app:layout_constraintTop_toTopOf="@id/song_count_text"
+                            app:layout_constraintBottom_toBottomOf="@id/song_count_text"
+                            />
+
+                        <TextView
+                            android:id="@+id/album_year_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toEndOf="@id/duration_text"
+                            app:layout_constraintTop_toBottomOf="@id/artist_text"
+                            android:alpha="0.7"
+                            android:textSize="12dp"
+                            android:textColor="?textColor"
+                            android:layout_marginStart="12dp"
+                            />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -215,6 +190,7 @@
             android:layout_gravity="center_horizontal"
             android:src="@drawable/default_album_art"
             android:transitionName="@string/transition_album_art"
+            android:layout_marginBottom="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/blur_header_image"
