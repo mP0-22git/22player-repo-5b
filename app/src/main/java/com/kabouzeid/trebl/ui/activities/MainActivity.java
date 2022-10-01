@@ -96,7 +96,7 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Negati
     @Nullable
     private View navigationDrawerHeader;
 
-    private boolean blockRequestPermissions, themePicked;
+    private boolean blockRequestPermissions;
 
     int launchCount;
 
@@ -140,14 +140,6 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Negati
 
         blurryBg.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
-        themePicked = mPreferences.getBoolean("themePicked",false);
-        if(!themePicked){
-            new Handler().postDelayed(this::showDialog,50);
-            mPreferences.edit().putBoolean("themePicked",true).apply();
-            mPreferences.edit().putInt("launchTimes",0).apply();
-            mPreferences.edit().putInt("numOfAccess",0).apply();
-        }
-
         proDialog = new Dialog(this);
         proDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         proDialog.setContentView(R.layout.pro_sheet_dialog);
@@ -158,8 +150,10 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Negati
         closeButton = proDialog.findViewById(R.id.close_button);
         closeButton.setOnClickListener(v -> proDialog.dismiss());
 
+        checkFirstRun();
+
         launchCount = mPreferences.getInt("launchTimes",0);
-        if(launchCount%5==0 && launchCount!=25 && launchCount!=0 && !App.isProVersion()){
+        if(launchCount%5==0 && launchCount!=0 && !App.isProVersion()){
             showProDialog();
         }
         mPreferences.edit().putInt("launchTimes",launchCount+1).apply();
@@ -172,7 +166,7 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Negati
                 .setNegativeReviewListener(this)
                 .setReviewListener(this)
                 .setSupportEmail("")
-                .showAfter(4);
+                .showAfter(5);
     }
 
     @Override
@@ -291,6 +285,19 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Negati
 
     private void checkSetUpPro() {
         navigationView.getMenu().setGroupVisible(R.id.navigation_drawer_menu_category_buy_pro, !App.isProVersion());
+    }
+
+    public void checkFirstRun() {
+        boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE).getBoolean("isFirstRun", true);
+        if (isFirstRun){
+            showDialog();
+            mPreferences.edit().putInt("launchTimes",0).apply();
+            mPreferences.edit().putInt("numOfAccess",0).apply();
+            getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                    .edit()
+                    .putBoolean("isFirstRun", false)
+                    .apply();
+        }
     }
 
     private void updateNavigationDrawerHeader() {
