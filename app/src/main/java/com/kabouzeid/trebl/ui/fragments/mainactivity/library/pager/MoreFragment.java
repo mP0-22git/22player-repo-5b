@@ -112,7 +112,7 @@ public class MoreFragment extends Fragment {
         webIntent.setAction(Intent.ACTION_VIEW);
         webIntent.addCategory(Intent.CATEGORY_BROWSABLE);
 
-        if (!App.isProVersion()){
+        if (App.isProVersion()){
             proButton.setVisibility(View.GONE);
         }else{
             proButton.setVisibility(View.VISIBLE);
