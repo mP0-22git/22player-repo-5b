@@ -35,7 +35,14 @@ public class PlayingNotificationImpl24 extends PlayingNotification {
 
         final Song song = service.getCurrentSong();
 
-        final boolean isPlaying = service.isPlaying();
+        // note: Temporarily attempt to suppress IllegalStateException
+        boolean isPlayingTemp;
+        try {
+            isPlayingTemp = service.isPlaying();
+        }catch (IllegalStateException e){
+            isPlayingTemp = false;
+        }
+        final boolean isPlaying = isPlayingTemp;
 
         final int playButtonResId = isPlaying
                 ? R.drawable.ic_pause_white_24dp : R.drawable.ic_play_arrow_white_24dp;
