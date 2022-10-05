@@ -119,30 +119,35 @@ public class MiniPlayerFragment extends AbsMusicServiceFragment implements Music
         miniPlayerTitle.setText(MusicPlayerRemote.getCurrentSong().title);
         miniPlayerArtist.setText(MusicPlayerRemote.getCurrentSong().artistName);
 
-        SongGlideRequest.Builder.from(Glide.with(getActivity()), MusicPlayerRemote.getCurrentSong())
-                .checkIgnoreMediaStore(getActivity())
-                .generatePalette(getActivity()).build()
-                .placeholder(R.drawable.default_album_art)
-                .error(R.drawable.default_album_art)
-                .into(new PhonographColoredTarget(miniPlayerImage) {
-                    @Override
-                    public void onColorReady(int color) {
-                        ValueAnimator anim = new ValueAnimator();
-                        anim.setIntValues(lastColor, color);
-                        anim.setEvaluator(new ArgbEvaluator());
-                        anim.addUpdateListener(valueAnimator -> {
-                            if(miniPlayerBgTint!=null) {
-                                miniPlayerBgTint.setBackgroundColor((Integer) valueAnimator.getAnimatedValue());
-                                progressIndicator.setIndicatorColor(color);
-                                dummyIndicator.setTrackColor((Integer)valueAnimator.getAnimatedValue());
-                            }
-                        });
-                        anim.setDuration(1000);
-                        anim.setInterpolator(new FastOutSlowInInterpolator());
-                        anim.start();
-                        lastColor = color;
-                    }
-                });
+        try {
+            SongGlideRequest.Builder.from(Glide.with(getActivity()), MusicPlayerRemote.getCurrentSong())
+                    .checkIgnoreMediaStore(getActivity())
+                    .generatePalette(getActivity()).build()
+                    .placeholder(R.drawable.default_album_art)
+                    .error(R.drawable.default_album_art)
+                    .into(new PhonographColoredTarget(miniPlayerImage) {
+                        @Override
+                        public void onColorReady(int color) {
+                            ValueAnimator anim = new ValueAnimator();
+                            anim.setIntValues(lastColor, color);
+                            anim.setEvaluator(new ArgbEvaluator());
+                            anim.addUpdateListener(valueAnimator -> {
+                                if (miniPlayerBgTint != null) {
+                                    miniPlayerBgTint.setBackgroundColor((Integer) valueAnimator.getAnimatedValue());
+                                    progressIndicator.setIndicatorColor(color);
+                                    dummyIndicator.setTrackColor((Integer) valueAnimator.getAnimatedValue());
+                                }
+                            });
+                            anim.setDuration(1000);
+                            anim.setInterpolator(new FastOutSlowInInterpolator());
+                            anim.start();
+                            lastColor = color;
+                        }
+                    });
+        }catch (IllegalStateException e){
+            //note : suppress rare illegalstatexception occurs here:
+            //You must provide a Model of a type for which there is a registered ModelLoader
+        }
 
     }
 
