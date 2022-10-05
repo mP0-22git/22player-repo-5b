@@ -44,13 +44,17 @@ public class MusicLibraryPagerAdapter extends FragmentPagerAdapter {
 
         for (CategoryInfo categoryInfo : categoryInfos) {
             if (categoryInfo.visible) {
-                MusicFragments fragment = MusicFragments.valueOf(categoryInfo.category.toString());
-                Holder holder = new Holder();
-                holder.mClassName = fragment.getFragmentClass().getName();
-                holder.title = mContext.getResources()
-                        .getString(categoryInfo.category.stringRes)
-                        .toUpperCase(Locale.getDefault());
-                mHolderList.add(holder);
+                try {
+                    MusicFragments fragment = MusicFragments.valueOf(categoryInfo.category.toString());
+                    Holder holder = new Holder();
+                    holder.mClassName = fragment.getFragmentClass().getName();
+                    holder.title = mContext.getResources()
+                            .getString(categoryInfo.category.stringRes)
+                            .toUpperCase(Locale.getDefault());
+                    mHolderList.add(holder);
+                }catch (NullPointerException e){
+                    //note: attempt to temporarily suppress crash as a result of removing the genres tab.
+                }
             }
         }
 
