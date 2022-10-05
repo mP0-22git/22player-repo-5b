@@ -1,8 +1,12 @@
 package com.kabouzeid.trebl.ui.widget.avsb;
 
+import android.util.Log;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.WorkerThread;
 
+import com.kabouzeid.trebl.dialogs.SongDetailDialog;
 import com.kabouzeid.trebl.interactors.AppExecutors;
 import com.kabouzeid.trebl.interactors.MainThreadUtils;
 import com.kabouzeid.trebl.model.Song;
@@ -14,6 +18,8 @@ class VisualSeekBarParser implements ProgressListener {
 
     /* Parser response message: use to check the result */
     private String mMessage = "";
+
+    public static final String TAG = VisualSeekBarParser.class.getSimpleName();
 
     protected com.kabouzeid.trebl.ui.widget.soundfile.SoundFile mSoundFile;
     protected boolean mInitialized;
@@ -95,26 +101,34 @@ class VisualSeekBarParser implements ProgressListener {
     @WorkerThread
     private void parse() {
         // run in the background
+        // note: Suppressed AVSB parse errors while AVSB is being tested and improved
+        try {
         parseSoundFileData();
-        parseVisualData();
-
+        }catch (NullPointerException e){
+            Log.e(TAG, "Failed to parse sound file data to AVSB", e);
+        }
+        try {
+            parseVisualData();
+        }catch (NegativeArraySizeException e){
+            Log.e(TAG, "Failed to parse visual data to AVSB", e);
+        }
     }
 
     @WorkerThread
     private void parseSoundFileData() {
-        mNumFrames = mSoundFile.getNumFrames();
-        //Log.d(TAG, "calculateSound: "+mNumFrames);
-        mSampleRate = mSoundFile.getSampleRate();
-        mSamplesPerFrame = mSoundFile.getSamplesPerFrame();
-        mParseDuration = mNumFrames * mSamplesPerFrame / mSampleRate + 0.0f;
-        mIntDuration = (int) mParseDuration;
-        mFrameGain = mSoundFile.getFrameGains();
-        mMaxGain = 0;
-        mMinGain = 255;
-        for (int i = 0; i < mNumFrames; i++) {
-            if (mMaxGain < mFrameGain[i]) mMaxGain = mFrameGain[i];
-            if (mMinGain > mFrameGain[i]) mMinGain = mFrameGain[i];
-        }
+            mNumFrames = mSoundFile.getNumFrames();
+            //Log.d(TAG, "calculateSound: "+mNumFrames);
+            mSampleRate = mSoundFile.getSampleRate();
+            mSamplesPerFrame = mSoundFile.getSamplesPerFrame();
+            mParseDuration = mNumFrames * mSamplesPerFrame / mSampleRate + 0.0f;
+            mIntDuration = (int) mParseDuration;
+            mFrameGain = mSoundFile.getFrameGains();
+            mMaxGain = 0;
+            mMinGain = 255;
+            for (int i = 0; i < mNumFrames; i++) {
+                if (mMaxGain < mFrameGain[i]) mMaxGain = mFrameGain[i];
+                if (mMinGain > mFrameGain[i]) mMinGain = mFrameGain[i];
+            }
     }
 
     @WorkerThread
