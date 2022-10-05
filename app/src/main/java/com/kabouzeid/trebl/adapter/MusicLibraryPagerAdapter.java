@@ -41,10 +41,9 @@ public class MusicLibraryPagerAdapter extends FragmentPagerAdapter {
 
     public void setCategoryInfos(@NonNull List<CategoryInfo> categoryInfos) {
         mHolderList.clear();
-
-        for (CategoryInfo categoryInfo : categoryInfos) {
-            if (categoryInfo.visible) {
-                try {
+        try {
+            for (CategoryInfo categoryInfo : categoryInfos) {
+                if (categoryInfo.visible) {
                     MusicFragments fragment = MusicFragments.valueOf(categoryInfo.category.toString());
                     Holder holder = new Holder();
                     holder.mClassName = fragment.getFragmentClass().getName();
@@ -52,10 +51,10 @@ public class MusicLibraryPagerAdapter extends FragmentPagerAdapter {
                             .getString(categoryInfo.category.stringRes)
                             .toUpperCase(Locale.getDefault());
                     mHolderList.add(holder);
-                }catch (NullPointerException e){
-                    //note: attempt to temporarily suppress crash as a result of removing the genres tab.
                 }
             }
+        }catch (NullPointerException e){
+            //note: attempt to temporarily suppress crash as a result of removing the genres tab.
         }
 
         alignCache();
