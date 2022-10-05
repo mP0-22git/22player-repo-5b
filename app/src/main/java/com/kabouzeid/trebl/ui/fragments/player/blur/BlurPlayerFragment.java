@@ -51,6 +51,7 @@ import com.kabouzeid.trebl.helper.menu.SongMenuHelper;
 import com.kabouzeid.trebl.model.Song;
 import com.kabouzeid.trebl.model.lyrics.Lyrics;
 import com.kabouzeid.trebl.ui.activities.EqualizerActivity;
+import com.kabouzeid.trebl.ui.activities.MainActivity;
 import com.kabouzeid.trebl.ui.activities.base.AbsSlidingMusicPanelActivity;
 import com.kabouzeid.trebl.ui.fragments.player.AbsPlayerFragment;
 import com.kabouzeid.trebl.ui.fragments.player.BlurPlayerAlbumCoverFragment;
@@ -268,18 +269,13 @@ public class BlurPlayerFragment extends AbsPlayerFragment implements BlurPlayerA
         blurAlbumBackground.setAlpha(0.0f);
         blurAlbumBackground.setScaleX(1);
         blurAlbumBackground.setScaleY(1);
-        //note: error circumvention caused by outdated context
-        Glide.with(getActivity()).load(Util.getAlbumArtUri(MusicPlayerRemote.getCurrentSong().albumId))
-                .transform(new BlurTransformation.Builder(getActivity()).build())
-                .placeholder(R.drawable.default_blur)
-                .error(R.drawable.default_blur)
-                .into(blurAlbumBackground);
 
         handler.postDelayed(() -> {
             Glide.with(getActivity()).load(Util.getAlbumArtUri(MusicPlayerRemote.getCurrentSong().albumId))
                     .transform(new BlurTransformation.Builder(getActivity()).build())
                     .placeholder(R.drawable.default_blur)
                     .error(R.drawable.default_blur)
+                    .override(30,30)
                     .into(blurAlbumBackground);
             blurAlbumBackground.animate().scaleX(1.3f).scaleY(1.3f).alpha(1.0f).setDuration(1000).setInterpolator(new DecelerateInterpolator());
         }, 500);
