@@ -172,47 +172,6 @@
             android:layout_height="56dp"
             android:layout_centerInParent="true" />
 
-        <ImageView
-            android:id="@+id/orb1"
-            android:layout_width="140dp"
-            android:layout_height="200dp"
-            android:scaleType="centerCrop"
-            android:tint="?textColor"
-            android:layout_centerInParent="true"
-            android:src="@drawable/orb_ring_1"
-            android:visibility="?darkVisibilityMode"
-            app:layout_constraintStart_toStartOf="@id/player_play_pause_fab"
-            app:layout_constraintEnd_toEndOf="@id/player_play_pause_fab"
-            app:layout_constraintTop_toTopOf="@id/player_play_pause_fab"
-            app:layout_constraintBottom_toBottomOf="@id/player_play_pause_fab"
-            />
-
-        <ImageView
-            android:id="@+id/orb2"
-            android:layout_width="140dp"
-            android:layout_height="200dp"
-            android:layout_centerInParent="true"
-            android:scaleType="centerCrop"
-            android:tint="@color/white"
-            android:visibility="?darkVisibilityMode"
-            android:src="@drawable/orb_blob_2"
-            app:layout_constraintBottom_toBottomOf="@id/player_play_pause_fab"
-            app:layout_constraintEnd_toEndOf="@id/player_play_pause_fab"
-            app:layout_constraintStart_toStartOf="@id/player_play_pause_fab"
-            app:layout_constraintTop_toTopOf="@id/player_play_pause_fab" />
-
-        <ImageView
-            android:id="@+id/orb3"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_centerInParent="true"
-            android:scaleType="centerCrop"
-            android:src="@drawable/orb_plain"
-            app:layout_constraintBottom_toBottomOf="@id/player_play_pause_fab"
-            app:layout_constraintEnd_toEndOf="@id/player_play_pause_fab"
-            app:layout_constraintStart_toStartOf="@id/player_play_pause_fab"
-            app:layout_constraintTop_toTopOf="@id/player_play_pause_fab" />
-
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/player_play_pause_fab"
             style="@style/Fab"

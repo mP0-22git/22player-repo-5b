@@ -81,17 +81,10 @@ public class BlurPlayerPlaybackControlsFragment extends AbsMusicServiceFragment 
 
     private boolean hidden = false;
 
-    private Animation rotate1;
-    private Animation rotate2;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         progressViewUpdateHelper = new MusicProgressViewUpdateHelper(this);
-        rotate1 = AnimationUtils.loadAnimation(getActivity(),R.anim.rotate1);
-        rotate1.setFillAfter(true);
-        rotate2 = AnimationUtils.loadAnimation(getActivity(),R.anim.rotate2);
-        rotate2.setFillAfter(true);
     }
 
     @Override

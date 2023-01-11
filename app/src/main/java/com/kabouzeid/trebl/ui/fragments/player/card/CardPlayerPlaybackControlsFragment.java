@@ -59,17 +59,12 @@ public class CardPlayerPlaybackControlsFragment extends AbsMusicServiceFragment 
     ImageButton repeatButton;
     @BindView(R.id.player_shuffle_button)
     ImageButton shuffleButton;
-
     @BindView(R.id.player_progress_slider)
     SeekBar progressSlider;
     @BindView(R.id.player_song_total_time)
     TextView songTotalTime;
     @BindView(R.id.player_song_current_progress)
     TextView songCurrentProgress;
-    @BindView(R.id.orb1)
-    ImageView orb1;
-    @BindView(R.id.orb2)
-    ImageView orb2;
 
     private PlayPauseDrawable playerFabPlayPauseDrawable;
 
@@ -78,17 +73,11 @@ public class CardPlayerPlaybackControlsFragment extends AbsMusicServiceFragment 
 
     private MusicProgressViewUpdateHelper progressViewUpdateHelper;
 
-    private Animation rotate1;
-    private Animation rotate2;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         progressViewUpdateHelper = new MusicProgressViewUpdateHelper(this);
-        rotate1 = AnimationUtils.loadAnimation(getActivity(),R.anim.rotate1);
-        rotate1.setFillAfter(true);
-        rotate2 = AnimationUtils.loadAnimation(getActivity(),R.anim.rotate2);
-        rotate2.setFillAfter(true);
     }
 
     @Override
@@ -102,8 +91,6 @@ public class CardPlayerPlaybackControlsFragment extends AbsMusicServiceFragment 
         unbinder = ButterKnife.bind(this, view);
         setUpMusicControllers();
         updateProgressTextColor();
-        orb1.startAnimation(rotate1);
-        orb2.startAnimation(rotate2);
     }
 
     @Override
@@ -144,13 +131,6 @@ public class CardPlayerPlaybackControlsFragment extends AbsMusicServiceFragment 
             prevButton.setVisibility(View.VISIBLE);
             forwardTenButton.setVisibility(View.GONE);
             replayTenButton.setVisibility(View.GONE);
-        }
-        if(MusicPlayerRemote.isPlaying()){
-            orb1.animate().alpha(1f).setDuration(600).setInterpolator(new DecelerateInterpolator());
-            orb2.animate().alpha(1f).setDuration(600).setInterpolator(new DecelerateInterpolator());
-        }else{
-            orb1.animate().alpha(0f).setDuration(1000);
-            orb2.animate().alpha(0f).setDuration(1000);
         }
     }
 
