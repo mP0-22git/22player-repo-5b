@@ -53,14 +53,20 @@
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry" />
 
-        <com.kabouzeid.trebl.ui.widget.avsb.AudioVisualSeekBar
-            android:id="@+id/visual_seek_bar"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:alpha="0.5"
+        <SeekBar
+            android:id="@+id/player_progress_slider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:progressDrawable="@drawable/custom_seekbar"
+            android:progressBackgroundTint="?textColor"
+            android:thumb="@drawable/custom_thumb"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/player_song_current_progress"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
