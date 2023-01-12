@@ -30,7 +30,9 @@ import com.kabouzeid.trebl.glide.SongGlideRequest;
 import com.kabouzeid.trebl.helper.MusicPlayerRemote;
 import com.kabouzeid.trebl.helper.MusicProgressViewUpdateHelper;
 import com.kabouzeid.trebl.helper.PlayPauseButtonOnClickHandler;
+import com.kabouzeid.trebl.ui.activities.EqualizerActivity;
 import com.kabouzeid.trebl.ui.fragments.AbsMusicServiceFragment;
+import com.kabouzeid.trebl.util.PreferenceUtil;
 import com.kabouzeid.trebl.views.PlayPauseDrawable;
 
 import butterknife.BindView;
@@ -135,6 +137,7 @@ public class MiniPlayerFragment extends AbsMusicServiceFragment implements Music
                                 if (miniPlayerBgTint != null) {
                                     miniPlayerBgTint.setBackgroundColor((Integer) valueAnimator.getAnimatedValue());
                                     progressIndicator.setIndicatorColor(color);
+                                    PreferenceUtil.getInstance(getActivity()).writeSharedPrefs("currentPalette", color);
                                     dummyIndicator.setTrackColor((Integer) valueAnimator.getAnimatedValue());
                                 }
                             });

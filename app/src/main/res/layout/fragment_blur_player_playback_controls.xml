@@ -30,10 +30,10 @@
             android:singleLine="true"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/guideline50"
+            app:layout_constraintBottom_toTopOf="@id/player_progress_slider"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="@color/white"
-            android:textSize="18sp"
+            android:textSize="19.2sp"
             tools:ignore="RtlHardcoded,RtlSymmetry" />
 
         <TextView
@@ -41,13 +41,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/regularfont"
-
             android:layout_marginTop="1dp"
             android:singleLine="true"
             android:alpha="0.8"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guideline50"
+            app:layout_constraintTop_toBottomOf="@id/player_progress_slider"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="@color/white"
             android:textSize="12sp"
@@ -57,16 +56,18 @@
             android:id="@+id/player_progress_slider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:progressDrawable="@drawable/custom_seekbar"
+            android:progressDrawable="@drawable/blur_player_seekbar"
             android:progressBackgroundTint="?textColor"
             android:thumb="@drawable/custom_thumb"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/player_song_current_progress"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

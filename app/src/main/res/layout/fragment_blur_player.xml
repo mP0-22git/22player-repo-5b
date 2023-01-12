@@ -64,7 +64,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/player_content"
                 android:layout_width="match_parent"
@@ -107,7 +106,6 @@
                     sothree:layout_constraintEnd_toEndOf="parent"
                     sothree:layout_constraintTop_toBottomOf="@id/album_cover_container"
                     />
-
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/song_details"
                     android:layout_width="wrap_content"
@@ -165,7 +163,6 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -191,13 +188,25 @@
                 sothree:layout_constraintEnd_toEndOf="parent">
 
                 <ImageView
+                    android:id="@+id/button_eq"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_eq"
+                    sothree:layout_constraintStart_toStartOf="parent"
+                    sothree:layout_constraintEnd_toEndOf="parent"
+                    sothree:layout_constraintTop_toTopOf="parent"
+                    sothree:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+                <ImageView
                     android:id="@+id/button_queue"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:padding="7dp"
                     android:src="@drawable/ic_queue_music_white_24dp"
-                    sothree:layout_constraintStart_toStartOf="parent"
-                    sothree:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginStart="32dp"
+                    sothree:layout_constraintStart_toEndOf="@id/button_eq"
                     sothree:layout_constraintTop_toTopOf="parent"
                     sothree:layout_constraintBottom_toBottomOf="parent"
                     />
@@ -206,28 +215,13 @@
                     android:id="@+id/button_sleep_timer"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:padding="8dp"
+                    android:padding="9dp"
                     android:src="@drawable/ic_outline_nightlight_24"
                     android:layout_marginEnd="32dp"
-                    sothree:layout_constraintEnd_toStartOf="@id/button_queue"
+                    sothree:layout_constraintEnd_toStartOf="@id/button_eq"
                     sothree:layout_constraintTop_toTopOf="parent"
                     sothree:layout_constraintBottom_toBottomOf="parent"
                     />
-
-                <ImageView
-                    android:id="@+id/button_eq"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:padding="8dp"
-                    android:src="@drawable/ic_eq"
-                    android:layout_marginStart="32dp"
-                    sothree:layout_constraintStart_toEndOf="@id/button_queue"
-                    sothree:layout_constraintTop_toTopOf="parent"
-                    sothree:layout_constraintBottom_toBottomOf="parent"
-                    />
-
-
-
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

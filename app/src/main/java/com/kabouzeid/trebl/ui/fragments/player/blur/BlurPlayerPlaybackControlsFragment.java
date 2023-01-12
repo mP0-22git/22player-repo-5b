@@ -2,16 +2,16 @@ package com.kabouzeid.trebl.ui.fragments.player.blur;
 
 import android.animation.Animator;
 import android.animation.AnimatorSet;
+import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.TimeInterpolator;
+import android.animation.ValueAnimator;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -30,6 +30,7 @@ import com.kabouzeid.trebl.misc.SimpleOnSeekbarChangeListener;
 import com.kabouzeid.trebl.service.MusicService;
 import com.kabouzeid.trebl.ui.fragments.AbsMusicServiceFragment;
 import com.kabouzeid.trebl.util.MusicUtil;
+import com.kabouzeid.trebl.util.PreferenceUtil;
 import com.kabouzeid.trebl.views.PlayPauseDrawable;
 
 import java.util.Collection;
@@ -80,6 +81,8 @@ public class BlurPlayerPlaybackControlsFragment extends AbsMusicServiceFragment 
     private AnimatorSet musicControllerAnimationSet;
 
     private boolean hidden = false;
+
+    private int paletteColor = Color.WHITE;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -385,6 +388,7 @@ public class BlurPlayerPlaybackControlsFragment extends AbsMusicServiceFragment 
 
     private void setUpProgressSlider() {
         int color = MaterialValueHelper.getPrimaryTextColor(getContext(), false);
+        progressSlider.getProgressDrawable().setColorFilter(paletteColor, PorterDuff.Mode.SRC_ATOP);
         progressSlider.setOnSeekBarChangeListener(new SimpleOnSeekbarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -403,5 +407,19 @@ public class BlurPlayerPlaybackControlsFragment extends AbsMusicServiceFragment 
         progressSlider.setProgress(progress);
         songTotalTime.setText(MusicUtil.getReadableDurationString(total));
         songCurrentProgress.setText(MusicUtil.getReadableDurationString(progress));
+        if(paletteColor != PreferenceUtil.getInstance(getActivity()).readSharedPrefsInt("currentPalette", Color.WHITE)){
+            ValueAnimator anim = new ValueAnimator();
+            anim.setIntValues(paletteColor, PreferenceUtil.getInstance(getActivity()).readSharedPrefsInt("currentPalette", Color.WHITE));
+            anim.setEvaluator(new ArgbEvaluator());
+            anim.addUpdateListener(valueAnimator -> {
+                if (progressSlider != null) {
+                    progressSlider.getProgressDrawable().setColorFilter((Integer) valueAnimator.getAnimatedValue(), PorterDuff.Mode.SRC_ATOP);
+                }
+            });
+            anim.setDuration(1000);
+            anim.setInterpolator(new FastOutSlowInInterpolator());
+            anim.start();
+            paletteColor = PreferenceUtil.getInstance(getActivity()).readSharedPrefsInt("currentPalette", Color.WHITE);
+        }
     }
 }
