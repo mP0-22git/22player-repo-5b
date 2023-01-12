@@ -57,19 +57,22 @@
                 android:scaleType="centerCrop"
                 />
 
-            <View
-                android:id="@+id/color_background2"
-                android:background="@color/black"
-                android:alpha="0.0"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline50"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                sothree:layout_constraintGuide_percent="0.61"
+                />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/player_content"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_height="0dp"
+
+                android:layout_marginBottom="12dp"
                 sothree:layout_constraintTop_toBottomOf="@id/toolbar_container"
+                sothree:layout_constraintBottom_toTopOf="@id/song_text_holder"
                 sothree:layout_constraintStart_toStartOf="parent"
                 sothree:layout_constraintEnd_toEndOf="parent"
                 >
@@ -77,12 +80,11 @@
                 <com.kabouzeid.trebl.views.WidthFitSquareLayout
                     android:id="@+id/album_cover_container"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentTop="true"
+                    android:layout_height="wrap_content"
+                    sothree:layout_constraintTop_toTopOf="parent"
+                    sothree:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginStart="0dp"
-                    android:layout_marginTop="80dp"
                     android:layout_marginEnd="0dp">
-
                     <fragment
                         android:id="@+id/player_album_cover_fragment"
                         class="com.kabouzeid.trebl.ui.fragments.player.BlurPlayerAlbumCoverFragment"
@@ -90,22 +92,34 @@
                         android:layout_height="wrap_content" />
                 </com.kabouzeid.trebl.views.WidthFitSquareLayout>
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/song_text_holder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                sothree:layout_constraintStart_toStartOf="parent"
+                sothree:layout_constraintEnd_toEndOf="parent"
+                sothree:layout_constraintBottom_toTopOf="@id/playback_controls_fragment"
+                >
+
                 <TextView
                     android:id="@+id/song_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
                     android:fontFamily="@font/semiboldfont"
-                    android:layout_marginTop="12dp"
                     android:layout_marginStart="32dp"
                     android:layout_marginEnd="32dp"
                     android:textAlignment="center"
-                    android:textSize="18dp"
+                    android:textSize="19.2dp"
                     android:text="Song Name"
                     sothree:layout_constraintStart_toStartOf="parent"
                     sothree:layout_constraintEnd_toEndOf="parent"
-                    sothree:layout_constraintTop_toBottomOf="@id/album_cover_container"
+                    sothree:layout_constraintTop_toTopOf="parent"
                     />
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/song_details"
                     android:layout_width="wrap_content"
@@ -166,13 +180,13 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+
             <fragment
                 android:id="@+id/playback_controls_fragment"
                 class="com.kabouzeid.trebl.ui.fragments.player.blur.BlurPlayerPlaybackControlsFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                sothree:layout_constraintTop_toBottomOf="@id/player_content"
+                android:layout_marginBottom="12dp"
                 sothree:layout_constraintBottom_toTopOf="@id/options_panel"
                 sothree:layout_constraintStart_toStartOf="parent"
                 sothree:layout_constraintEnd_toEndOf="parent"
