@@ -13,6 +13,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
@@ -28,11 +29,13 @@ import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.afollestad.materialcab.MaterialCab;
 import com.kabouzeid.appthemehelper.ThemeStore;
 import com.kabouzeid.appthemehelper.util.TabLayoutUtil;
 import com.kabouzeid.appthemehelper.util.ToolbarContentTintHelper;
+import com.kabouzeid.trebl.App;
 import com.kabouzeid.trebl.R;
 import com.kabouzeid.trebl.adapter.MusicLibraryPagerAdapter;
 import com.kabouzeid.trebl.dialogs.CreatePlaylistDialog;
@@ -123,6 +126,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
 
         setUpToolbar();
         setUpViewPager();
+
 
     }
 
@@ -290,6 +294,11 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         inflater.inflate(R.menu.menu_main, menu);
         if (isPlaylistPage()) {
             menu.add(0, R.id.action_new_playlist, 0, R.string.new_playlist_title);
+        }
+        if (!App.isProVersion()) {
+            MenuItem pro_item = menu.add(Menu.NONE, R.id.action_pro, Menu.NONE, getString(R.string.buy_pro))
+                    .setIcon(R.drawable.ic_pro_features);
+            pro_item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         }
         Fragment currentFragment = getCurrentFragment();
         if (currentFragment instanceof AbsLibraryPagerRecyclerViewCustomGridSizeFragment && currentFragment.isAdded()) {
