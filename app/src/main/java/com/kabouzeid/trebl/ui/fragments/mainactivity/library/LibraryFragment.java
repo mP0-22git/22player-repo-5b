@@ -90,6 +90,9 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     @BindView(R.id.moreTitle)
     TextView moreTitle;
 
+    @BindView(R.id.shuffle_fab)
+    FloatingActionButton fab_shuffle;
+
     SharedPreferences mPreferences;
 
     private MusicLibraryPagerAdapter pagerAdapter;
@@ -126,7 +129,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
 
         setUpToolbar();
         setUpViewPager();
-
+        setUpShuffleFab();
 
     }
 
@@ -189,6 +192,10 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         }
         getActivity().setTitle(R.string.emptystring);
         getMainActivity().setSupportActionBar(toolbar);
+    }
+
+    private void setUpShuffleFab(){
+        fab_shuffle.setOnClickListener(view -> MusicPlayerRemote.openAndShuffleQueue(SongLoader.getAllSongs(getActivity()), true));
     }
 
     private void setUpViewPager() {

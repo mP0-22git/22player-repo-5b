@@ -131,10 +131,21 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/shuffle_fab"
+        style="@style/Fab"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin_top_left_right"
+        app:srcCompat="@drawable/ic_fab_shuffle"
+        android:backgroundTint="?textColor"
+        />
+
+
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

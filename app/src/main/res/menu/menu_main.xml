@@ -26,7 +26,7 @@
         android:id="@+id/action_shuffle_all"
         android:icon="@drawable/ic_menu_shuffle_24dp"
         android:title="@string/action_shuffle_all"
-        app:showAsAction="always" />
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/action_shuffle_all2"
