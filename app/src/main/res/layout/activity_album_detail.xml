@@ -98,34 +98,36 @@
                     android:text="Album Name"
                     />
 
+                <TextView
+                    android:id="@+id/artist_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/album_text"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textAlignment="center"
+                    android:textColor="?textColor"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    />
+
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/album_details"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/album_text"
+                        app:layout_constraintTop_toBottomOf="@id/artist_text"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         >
 
                         <TextView
-                            android:id="@+id/artist_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            android:textColor="?textColor"
-                            android:textSize="15dp"
-                            android:textStyle="bold"
-                            />
-
-                        <TextView
                             android:id="@+id/song_count_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/artist_text"
+                            app:layout_constraintTop_toTopOf="parent"
                             android:alpha="0.7"
                             android:textSize="12dp"
                             android:textColor="?textColor"
@@ -147,7 +149,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             app:layout_constraintStart_toEndOf="@id/song_count_text"
-                            app:layout_constraintTop_toBottomOf="@id/artist_text"
+                            app:layout_constraintTop_toTopOf="parent"
                             android:alpha="0.7"
                             android:textSize="12dp"
                             android:textColor="?textColor"
@@ -170,7 +172,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             app:layout_constraintStart_toEndOf="@id/duration_text"
-                            app:layout_constraintTop_toBottomOf="@id/artist_text"
+                            app:layout_constraintTop_toTopOf="parent"
                             android:alpha="0.7"
                             android:textSize="12dp"
                             android:textColor="?textColor"
