@@ -101,4 +101,11 @@ Vill du radera <b>%1$d</b> låtar?
     <string name="shop_sub3">Inkluderar ny oskärpaspelare med en ren minimal design.</string>
     <string name="shop_desc4">Framtida Pro-uppdateringar</string>
     <string name="shop_sub4">Inkluderar allt pro-innehåll som läggs till i framtida uppdateringar!</string>
+    <string name="intro_dialog_title">Välj ett tema</string>
+    <string name="intro_dialog_sub">Ändra detta när som helst i inställningarna.</string>
+    <string name="intro_dialog_white_button">vit</string>
+    <string name="intro_dialog_black_button">svart</string>
+    <string name="intro_dialog_pro_title">Lås upp Pro-teman</string>
+    <string name="intro_dialog_pro_pack">Pro-paket</string>
+    <string name="intro_dialog_pro_desc">Unlock all themes and pro features.</string>
 </resources>

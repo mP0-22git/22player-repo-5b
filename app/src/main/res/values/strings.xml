@@ -364,6 +364,14 @@
     <string name="shop_desc4">Future Pro Updates</string>
     <string name="shop_sub4">Includes any pro content added in future updates!</string>
 
+    <string name="intro_dialog_title">Pick a theme</string>
+    <string name="intro_dialog_sub">Change this at any time in settings.</string>
+    <string name="intro_dialog_white_button">white</string>
+    <string name="intro_dialog_black_button">black</string>
+    <string name="intro_dialog_pro_title">Unlock Pro Themes</string>
+    <string name="intro_dialog_pro_pack">Pro Pack</string>
+    <string name="intro_dialog_pro_desc">Unlock all themes and pro features.</string>
+
 
 
 

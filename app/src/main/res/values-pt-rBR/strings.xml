@@ -316,4 +316,11 @@
     <string name="shop_sub3">Inclui novo leitor Blur com um design minimalista e limpo.</string>
     <string name="shop_desc4">Futuras atualizações do Pro</string>
     <string name="shop_sub4">Inclui qualquer conteúdo profissional adicionado em atualizações futuras!</string>
+    <string name="intro_dialog_title">Escolha um tema</string>
+    <string name="intro_dialog_sub">Altere isso a qualquer momento nas configurações.</string>
+    <string name="intro_dialog_white_button">Branco</string>
+    <string name="intro_dialog_black_button">preto</string>
+    <string name="intro_dialog_pro_title">Desbloquear Temas Pro</string>
+    <string name="intro_dialog_pro_pack">Pacote Pro</string>
+    <string name="intro_dialog_pro_desc">Desbloqueie todos os temas e recursos profissionais.</string>
 </resources>

@@ -324,4 +324,11 @@
     <string name="shop_sub3">Enthält einen neuen Blur-Player mit einem sauberen, minimalistischen Design.</string>
     <string name="shop_desc4">Zukünftige Pro-Updates</string>
     <string name="shop_sub4">Enthält alle professionellen Inhalte, die in zukünftigen Updates hinzugefügt werden!</string>
+    <string name="intro_dialog_title">Wählen Sie ein Thema</string>
+    <string name="intro_dialog_sub">Ändern Sie dies jederzeit in den Einstellungen.</string>
+    <string name="intro_dialog_white_button">weiß</string>
+    <string name="intro_dialog_black_button">schwarz</string>
+    <string name="intro_dialog_pro_title">Pro Themes freischalten</string>
+    <string name="intro_dialog_pro_pack">Pro-Paket</string>
+    <string name="intro_dialog_pro_desc">Schalte alle Themen und Pro-Funktionen frei.</string>
 </resources>

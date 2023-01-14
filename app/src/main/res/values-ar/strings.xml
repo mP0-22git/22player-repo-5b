@@ -324,4 +324,12 @@
     <string name="shop_sub3">يتضمن مشغل Blur الجديد بتصميم بسيط نظيف.</string>
     <string name="shop_desc4">تحديثات برو المستقبلية</string>
     <string name="shop_sub4">يتضمن أي محتوى احترافي تمت إضافته في التحديثات المستقبلية!</string>
+    <string name="intro_dialog_title">اختيار نسق</string>
+    <string name="intro_dialog_sub">قم بتغيير هذا في أي وقت في الإعدادات.</string>
+    <string name="intro_dialog_white_button">أبيض</string>
+    <string name="intro_dialog_black_button">أسود</string>
+    <string name="intro_dialog_pro_title">فتح المواضيع برو</string>
+    <string name="intro_dialog_pro_pack">حزمة برو</string>
+    <string name="intro_dialog_pro_desc">افتح جميع السمات والميزات الاحترافية.</string>
+    <string name="app_name" translatable="false">مشغل موسيقى</string>
 </resources>

@@ -229,4 +229,11 @@
     <string name="shop_sub3">Inclui novo jogador blur com um design mínimo limpo.</string>
     <string name="shop_desc4">Future Pro Updates</string>
     <string name="shop_sub4">Inclui qualquer conteúdo profissional adicionado em futuras atualizações!</string>
+    <string name="intro_dialog_pro_desc">Desbloqueie todos os temas e funcionalidades profissionais.</string>
+    <string name="intro_dialog_pro_pack">Pacote Pro</string>
+    <string name="intro_dialog_pro_title">Desbloquear Temas Pro</string>
+    <string name="intro_dialog_black_button">preto</string>
+    <string name="intro_dialog_white_button">Branco</string>
+    <string name="intro_dialog_sub">Altere isto a qualquer momento nas definições.</string>
+    <string name="intro_dialog_title">Escolha um tema</string>
 </resources>

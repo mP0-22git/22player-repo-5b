@@ -316,4 +316,11 @@
     <string name="shop_sub3">Bao gồm trình phát Blur mới với thiết kế tối giản sạch sẽ.</string>
     <string name="shop_desc4">Cập nhật Future Pro</string>
     <string name="shop_sub4">Bao gồm bất kỳ nội dung chuyên nghiệp nào được thêm vào trong các bản cập nhật trong tương lai!</string>
+    <string name="intro_dialog_pro_desc">Mở khóa tất cả các chủ đề và tính năng chuyên nghiệp.</string>
+    <string name="intro_dialog_pro_pack">Gói Pro</string>
+    <string name="intro_dialog_pro_title">Mở khóa chủ đề Pro</string>
+    <string name="intro_dialog_black_button">đen</string>
+    <string name="intro_dialog_white_button">trắng</string>
+    <string name="intro_dialog_sub">Thay đổi tùy chọn này bất kỳ lúc nào trong cài đặt.</string>
+    <string name="intro_dialog_title">Chọn một chủ đề</string>
 </resources>

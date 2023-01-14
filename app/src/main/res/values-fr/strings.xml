@@ -324,4 +324,11 @@
     <string name="shop_sub3">Comprend un nouveau lecteur de flou avec un design minimaliste épuré.</string>
     <string name="shop_desc4">Futures mises à jour Pro</string>
     <string name="shop_sub4">Inclut tout contenu pro ajouté dans les futures mises à jour !</string>
+    <string name="intro_dialog_title">Choisissez un thème</string>
+    <string name="intro_dialog_sub">Modifiez cela à tout moment dans les paramètres.</string>
+    <string name="intro_dialog_white_button">blanc</string>
+    <string name="intro_dialog_black_button">noir</string>
+    <string name="intro_dialog_pro_title">Déverrouiller les thèmes Pro</string>
+    <string name="intro_dialog_pro_pack">Pro Pack</string>
+    <string name="intro_dialog_pro_desc">Déverrouillez tous les thèmes et fonctionnalités pro.</string>
 </resources>

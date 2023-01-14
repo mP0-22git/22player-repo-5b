@@ -316,4 +316,11 @@
     <string name="shop_sub3">Termasuk pemutar Blur baru dengan desain minimal yang bersih.</string>
     <string name="shop_desc4">Pembaruan Pro Di Masa Depan</string>
     <string name="shop_sub4">Termasuk konten pro apa pun yang ditambahkan di pembaruan mendatang!</string>
+    <string name="intro_dialog_title">Pilih tema</string>
+    <string name="intro_dialog_sub">Ubah ini kapan saja di pengaturan.</string>
+    <string name="intro_dialog_white_button">putih</string>
+    <string name="intro_dialog_black_button">hitam</string>
+    <string name="intro_dialog_pro_title">Buka Kunci Tema Pro</string>
+    <string name="intro_dialog_pro_pack">Paket Pro</string>
+    <string name="intro_dialog_pro_desc">Buka kunci semua tema dan fitur pro.</string>
 </resources>

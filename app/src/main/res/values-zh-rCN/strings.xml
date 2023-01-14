@@ -316,4 +316,11 @@
     <string name="shop_sub3">包括新的模糊播放器，具有简洁的最小设计。</string>
     <string name="shop_desc4">未来专业版更新</string>
     <string name="shop_sub4">包括未来更新中添加的任何专业内容！</string>
+    <string name="intro_dialog_title">选择一个主题</string>
+    <string name="intro_dialog_sub">随时在设置中更改此设置。</string>
+    <string name="intro_dialog_white_button">白</string>
+    <string name="intro_dialog_black_button">黑</string>
+    <string name="intro_dialog_pro_title">解锁专业主题</string>
+    <string name="intro_dialog_pro_pack">专业包</string>
+    <string name="intro_dialog_pro_desc">解锁所有主题和专业功能。</string>
 </resources>

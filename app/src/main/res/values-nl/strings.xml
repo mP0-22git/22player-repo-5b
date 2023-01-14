@@ -309,4 +309,11 @@
     <string name="shop_sub3">Inclusief nieuwe Blur-speler met een strak minimaal ontwerp.</string>
     <string name="shop_sub4">Bevat alle professionele inhoud die in toekomstige updates wordt toegevoegd!</string>
     <string name="shop_desc4">Toekomstige Pro-updates</string>
+    <string name="intro_dialog_title">Kies een thema</string>
+    <string name="intro_dialog_sub">Wijzig dit op elk gewenst moment in de instellingen.</string>
+    <string name="intro_dialog_white_button">wit</string>
+    <string name="intro_dialog_black_button">zwart</string>
+    <string name="intro_dialog_pro_title">Ontgrendel Pro-thema\'s</string>
+    <string name="intro_dialog_pro_pack">Pro-pakket</string>
+    <string name="intro_dialog_pro_desc">Ontgrendel alle thema\'s en professionele functies.</string>
 </resources>

@@ -316,4 +316,11 @@
     <string name="shop_sub3">Incluye un nuevo reproductor Blur con un diseño minimalista limpio.</string>
     <string name="shop_desc4">Futuras actualizaciones Pro</string>
     <string name="shop_sub4">¡Incluye cualquier contenido profesional agregado en futuras actualizaciones!</string>
+    <string name="intro_dialog_title">Elige un tema</string>
+    <string name="intro_dialog_sub">Cambie esto en cualquier momento en la configuración.</string>
+    <string name="intro_dialog_white_button">brillante</string>
+    <string name="intro_dialog_black_button">oscuro</string>
+    <string name="intro_dialog_pro_title">Desbloquear temas profesionales</string>
+    <string name="intro_dialog_pro_pack">Paquete Pro</string>
+    <string name="intro_dialog_pro_desc">Desbloquea todos los temas y funciones profesionales.</string>
 </resources>

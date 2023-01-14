@@ -324,4 +324,11 @@
     <string name="shop_sub3">クリーンな最小限のデザインの新しいぼかしプレーヤーが含まれています。</string>
     <string name="shop_desc4">今後のプロアップデート</string>
     <string name="shop_sub4">今後のアップデートで追加されたプロコンテンツが含まれています!</string>
+    <string name="intro_dialog_title">テーマを選ぶ</string>
+    <string name="intro_dialog_sub">これは設定でいつでも変更できます。</string>
+    <string name="intro_dialog_white_button">白い</string>
+    <string name="intro_dialog_black_button">黒い</string>
+    <string name="intro_dialog_pro_title">プロテーマのロックを解除する</string>
+    <string name="intro_dialog_pro_pack">プロパック</string>
+    <string name="intro_dialog_pro_desc">すべてのテーマとプロ機能のロックを解除します。</string>
 </resources>
