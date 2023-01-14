@@ -304,4 +304,16 @@
     <string name="dialog_ringtone_message">Cho phép Phonograph thay đổi cài đặt âm thanh</string>
     <string name="rating_text">Bạn có thích ứng dụng này không? Chúng tôi rất muốn biết về nó! Cảm ơn bạn đã dành thời gian của bạn.</string>
     <string name="rating_title">Xin lỗi vì đã làm gián đoạn, nhưng đánh giá của bạn rất quan trọng đối với chúng tôi :)</string>
+    <string name="shop_title">Mở khóa mọi thứ</string>
+    <string name="shop_sub">Gói Pro mở khóa tất cả các chủ đề, tính năng chuyên nghiệp và hỗ trợ phát triển.</string>
+    <string name="shop_desc0">Không có quảng cáo bao giờ</string>
+    <string name="shop_sub0">Ứng dụng này không được hỗ trợ quảng cáo và nhằm mục đích duy trì như vậy. Phiên bản Pro sẽ luôn không có quảng cáo.</string>
+    <string name="shop_desc1">Tất cả chủ đề</string>
+    <string name="shop_sub1">Đêm hoạt hình đầy sao, mờ ảo, tràn đầy năng lượng và hơn thế nữa!</string>
+    <string name="shop_desc2">Tính năng Pro</string>
+    <string name="shop_sub2">Bao gồm hẹn giờ ngủ, tùy chỉnh và hơn thế nữa!</string>
+    <string name="shop_desc3">Tất cả màn hình hiện đang phát</string>
+    <string name="shop_sub3">Bao gồm trình phát Blur mới với thiết kế tối giản sạch sẽ.</string>
+    <string name="shop_desc4">Cập nhật Future Pro</string>
+    <string name="shop_sub4">Bao gồm bất kỳ nội dung chuyên nghiệp nào được thêm vào trong các bản cập nhật trong tương lai!</string>
 </resources>

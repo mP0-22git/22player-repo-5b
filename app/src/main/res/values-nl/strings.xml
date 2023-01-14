@@ -297,4 +297,16 @@
     <string name="sort_order_year">Jaar</string>
     <string name="rating_text">Vind je de app leuk? We horen het graag! Dank u voor uw tijd.</string>
     <string name="rating_title">Sorry dat ik onderbreek, maar uw beoordeling is erg belangrijk voor ons :)</string>
+    <string name="shop_title">Ontgrendel alles</string>
+    <string name="shop_sub">Pro pack ontgrendelt alle thema\'s, pro-functies en ondersteunt ontwikkeling.</string>
+    <string name="shop_desc0">Nooit advertenties</string>
+    <string name="shop_sub0">Deze app wordt niet ondersteund door advertenties en is bedoeld om dat zo te houden. Pro-versie zal altijd advertentievrij zijn.</string>
+    <string name="shop_desc1">Alle thema\'s</string>
+    <string name="shop_sub1">Geanimeerde sterrennacht, wazig, energiek en meer!</string>
+    <string name="shop_desc2">Pro-functies</string>
+    <string name="shop_sub2">Inclusief slaaptimer, maatwerk en meer!</string>
+    <string name="shop_desc3">Alle nu afgespeelde schermen</string>
+    <string name="shop_sub3">Inclusief nieuwe Blur-speler met een strak minimaal ontwerp.</string>
+    <string name="shop_sub4">Bevat alle professionele inhoud die in toekomstige updates wordt toegevoegd!</string>
+    <string name="shop_desc4">Toekomstige Pro-updates</string>
 </resources>

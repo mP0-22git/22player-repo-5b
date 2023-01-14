@@ -304,4 +304,16 @@
     <string name="dialog_ringtone_message">Izinkan phonograph mengubah pengaturan audio</string>
     <string name="rating_text">Apakah Anda suka aplikasi ini? Kami ingin mengetahuinya! Terima kasih atas waktu Anda.</string>
     <string name="rating_title">Maaf mengganggu, tetapi peringkat Anda sangat penting bagi kami :)</string>
+    <string name="shop_title">Buka Kunci Semuanya</string>
+    <string name="shop_sub">Paket Pro membuka kunci semua tema, fitur pro, dan mendukung pengembangan.</string>
+    <string name="shop_desc0">Tidak Ada Iklan yang Pernah Ada</string>
+    <string name="shop_sub0">Aplikasi ini tidak didukung iklan dan bertujuan untuk tetap seperti itu. Versi Pro akan selalu bebas iklan.</string>
+    <string name="shop_desc1">Semua Tema</string>
+    <string name="shop_sub1">Animasi malam berbintang, buram, energik, dan banyak lagi!</string>
+    <string name="shop_desc2">Fitur Pro</string>
+    <string name="shop_sub2">Termasuk pengatur waktu tidur, penyesuaian, dan banyak lagi!</string>
+    <string name="shop_desc3">Semua Sekarang Diputar Layar</string>
+    <string name="shop_sub3">Termasuk pemutar Blur baru dengan desain minimal yang bersih.</string>
+    <string name="shop_desc4">Pembaruan Pro Di Masa Depan</string>
+    <string name="shop_sub4">Termasuk konten pro apa pun yang ditambahkan di pembaruan mendatang!</string>
 </resources>

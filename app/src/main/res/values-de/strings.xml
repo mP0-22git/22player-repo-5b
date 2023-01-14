@@ -312,4 +312,16 @@
     <string name="future_updates">Zukünftige Premium-Updates</string>
     <string name="rating_text">Gefällt Ihnen die App? Wir würden es gerne wissen! Vielen Dank für Ihre Zeit.</string>
     <string name="rating_title">Es tut mir leid, dass ich unterbreche.</string>
+    <string name="shop_title">Alles freischalten</string>
+    <string name="shop_sub">Pro Pack schaltet alle Themen frei, Pro-Funktionen und unterstützt die Entwicklung.</string>
+    <string name="shop_desc0">Keine Werbung</string>
+    <string name="shop_sub0">Diese App ist nicht werbefinanziert und zielt darauf ab, dies auch zu bleiben. Die Pro-Version wird immer werbefrei sein.</string>
+    <string name="shop_desc1">Alle Themen</string>
+    <string name="shop_sub1">Animierte Sternennacht, verschwommen, energisch und mehr!</string>
+    <string name="shop_desc2">Pro-Funktionen</string>
+    <string name="shop_sub2">Inklusive Sleep-Timer, Anpassung und mehr!</string>
+    <string name="shop_desc3">Alle jetzt abspielenden Bildschirme</string>
+    <string name="shop_sub3">Enthält einen neuen Blur-Player mit einem sauberen, minimalistischen Design.</string>
+    <string name="shop_desc4">Zukünftige Pro-Updates</string>
+    <string name="shop_sub4">Enthält alle professionellen Inhalte, die in zukünftigen Updates hinzugefügt werden!</string>
 </resources>

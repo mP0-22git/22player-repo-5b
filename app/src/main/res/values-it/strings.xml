@@ -313,4 +313,16 @@
     <string name="future_updates">futuri aggiornamenti premium</string>
     <string name="rating_text">Ti piace l\'app? Ci piacerebbe saperlo! Grazie per il vostro tempo.</string>
     <string name="rating_title">Ci scusiamo se interrompo, ma la tua valutazione è molto importante per noi :)</string>
+    <string name="shop_title">Sblocca tutto</string>
+    <string name="shop_sub">Pro pack sblocca tutti i temi, le funzionalità professionali e supporta lo sviluppo.</string>
+    <string name="shop_desc0">Nessuna pubblicità mai</string>
+    <string name="shop_sub0">Questa app non è supportata dalla pubblicità e mira a rimanere tale. La versione Pro sarà sempre senza pubblicità.</string>
+    <string name="shop_desc1">Tutti i temi</string>
+    <string name="shop_sub1">Notte stellata animata, sfocata, energica e molto altro!</string>
+    <string name="shop_desc2">Caratteristiche Pro</string>
+    <string name="shop_sub2">Include timer di spegnimento, personalizzazione e altro ancora!</string>
+    <string name="shop_desc3">Tutti gli schermi ora in riproduzione</string>
+    <string name="shop_sub3">Include il nuovo lettore Blur con un design pulito e minimale.</string>
+    <string name="shop_sub4">Include tutti i contenuti professionali aggiunti negli aggiornamenti futuri!</string>
+    <string name="shop_desc4">Futuri aggiornamenti Pro</string>
 </resources>

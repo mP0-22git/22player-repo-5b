@@ -304,4 +304,16 @@
     <string name="future_updates">futuras actualizaciones premium</string>
     <string name="rating_text">¿Te gusta la aplicación? ¡Nos encantaría saberlo! Gracias por su tiempo.</string>
     <string name="rating_title">Lamento interrumpir, pero su calificación es muy importante para nosotros :)</string>
+    <string name="shop_title">Desbloquea todo</string>
+    <string name="shop_sub">Pro pack desbloquea todos los temas, funciones profesionales y admite el desarrollo.</string>
+    <string name="shop_desc0">Sin anuncios nunca</string>
+    <string name="shop_sub0">Esta aplicación no es compatible con anuncios y tiene como objetivo permanecer así. La versión Pro siempre estará libre de anuncios.</string>
+    <string name="shop_desc1">Todos los temas</string>
+    <string name="shop_sub1">¡Noche estrellada animada, borrosa, enérgica y más!</string>
+    <string name="shop_desc2">Características Pro</string>
+    <string name="shop_sub2">¡Incluye temporizador de apagado, personalización y más!</string>
+    <string name="shop_desc3">Todas las pantallas de reproducción ahora</string>
+    <string name="shop_sub3">Incluye un nuevo reproductor Blur con un diseño minimalista limpio.</string>
+    <string name="shop_desc4">Futuras actualizaciones Pro</string>
+    <string name="shop_sub4">¡Incluye cualquier contenido profesional agregado en futuras actualizaciones!</string>
 </resources>

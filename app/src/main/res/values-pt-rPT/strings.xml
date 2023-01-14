@@ -217,4 +217,16 @@
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Vai ser reencaminhado para o site do rastreador de problemas.</string>
     <string name="rating_text">Gosta da aplicação? Adoraríamos saber! Obrigado pelo seu tempo.</string>
     <string name="rating_title">Desculpe interromper, mas a sua classificação é muito importante para nós :)</string>
+    <string name="shop_title">Desbloquear Tudo</string>
+    <string name="shop_sub">O pack Pro desbloqueia todos os temas, funcionalidades profissionais e suporta o desenvolvimento.</string>
+    <string name="shop_desc0">Nenhum anúncio nunca</string>
+    <string name="shop_sub0">Esta aplicação não é suportada por anúncios e pretende continuar assim. A versão pro será sempre gratuita.</string>
+    <string name="shop_desc1">Todos os Temas</string>
+    <string name="shop_sub1">Noite estrelada animada, borrada, enérgica e muito mais!</string>
+    <string name="shop_desc2">Funcionalidades Pro</string>
+    <string name="shop_sub2">Incluindo temporizador de sono, personalização e muito mais!</string>
+    <string name="shop_desc3">Todos os ecrãs agora reproduzindo</string>
+    <string name="shop_sub3">Inclui novo jogador blur com um design mínimo limpo.</string>
+    <string name="shop_desc4">Future Pro Updates</string>
+    <string name="shop_sub4">Inclui qualquer conteúdo profissional adicionado em futuras atualizações!</string>
 </resources>

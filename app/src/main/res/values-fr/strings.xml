@@ -312,4 +312,16 @@
     <string name="future_updates">Futures mises à jour premium</string>
     <string name="rating_text">Aimez-vous l\'application? Nous aimerions le savoir! Je vous remercie de votre attention.</string>
     <string name="rating_title">Désolé de vous interrompre, mais votre note est très importante pour nous :)</string>
+    <string name="shop_title">Déverrouillez tout</string>
+    <string name="shop_sub">Le pack Pro déverrouille tous les thèmes, fonctionnalités pro et prend en charge le développement.</string>
+    <string name="shop_desc0">Aucune publicité jamais</string>
+    <string name="shop_sub0">Cette application n\'est pas financée par la publicité et vise à le rester. La version Pro sera toujours sans publicité.</string>
+    <string name="shop_desc1">Tous les thèmes</string>
+    <string name="shop_sub1">Nuit étoilée animée, floue, énergique et plus encore!</string>
+    <string name="shop_desc2">Caractéristiques Pro</string>
+    <string name="shop_sub2">Y compris la minuterie de sommeil, la personnalisation et plus encore!</string>
+    <string name="shop_desc3">Tous les écrans de lecture maintenant</string>
+    <string name="shop_sub3">Comprend un nouveau lecteur de flou avec un design minimaliste épuré.</string>
+    <string name="shop_desc4">Futures mises à jour Pro</string>
+    <string name="shop_sub4">Inclut tout contenu pro ajouté dans les futures mises à jour !</string>
 </resources>

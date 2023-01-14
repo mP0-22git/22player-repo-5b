@@ -304,4 +304,16 @@
     <string name="dialog_ringtone_message">允许 Phonograph 调整音频设定</string>
     <string name="rating_text">你喜欢这个应用程序吗？我们很想知道它！谢谢你的时间。</string>
     <string name="rating_title">很抱歉打扰，但您的评分对我们非常重要:)</string>
+    <string name="shop_title">解锁一切</string>
+    <string name="shop_sub">专业包解锁所有主题、专业功能并支持开发。</string>
+    <string name="shop_desc0">从来没有广告</string>
+    <string name="shop_sub0">此应用程序不受广告支持，旨在保持这种状态。专业版将始终无广告。</string>
+    <string name="shop_desc1">所有主题</string>
+    <string name="shop_sub1">动画星夜，模糊，精力充沛等等！</string>
+    <string name="shop_desc2">专业版功能</string>
+    <string name="shop_sub2">包括睡眠定时器，定制等等！</string>
+    <string name="shop_desc3">所有正在播放的屏幕</string>
+    <string name="shop_sub3">包括新的模糊播放器，具有简洁的最小设计。</string>
+    <string name="shop_desc4">未来专业版更新</string>
+    <string name="shop_sub4">包括未来更新中添加的任何专业内容！</string>
 </resources>

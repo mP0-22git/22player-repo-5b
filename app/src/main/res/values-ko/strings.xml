@@ -307,4 +307,16 @@
     <string name="future_updates">향후 프리미엄 업데이트</string>
     <string name="rating_text">앱이 마음에 드십니까? 우리는 그것에 대해 알고 싶습니다! 시간 내 주셔서 감사합니다.</string>
     <string name="rating_title">방해해서 미안하지만 귀하의 평가는 우리에게 매우 중요합니다 :)</string>
+    <string name="shop_title">모든 것을 잠금 해제하십시오</string>
+    <string name="shop_sub">프로 팩은 모든 테마, 프로 기능을 잠금 해제하고 개발을 지원합니다.</string>
+    <string name="shop_desc0">광고 없음</string>
+    <string name="shop_sub0">이 앱은 광고를 지원하지 않으며 광고를 유지하는 것을 목표로 합니다. 프로 버전은 항상 광고가 없습니다.</string>
+    <string name="shop_desc1">모든 테마</string>
+    <string name="shop_sub1">애니메이션 별이 빛나는 밤, 흐릿하고 활기찬 등!</string>
+    <string name="shop_desc2">프로 기능</string>
+    <string name="shop_sub2">취침 타이머, 사용자 정의 등을 포함합니다!</string>
+    <string name="shop_desc3">이제 모두 재생 중인 화면</string>
+    <string name="shop_sub3">깔끔한 미니멀 디자인의 새로운 Blur 플레이어가 포함되어 있습니다.</string>
+    <string name="shop_desc4">향후 프로 업데이트</string>
+    <string name="shop_sub4">향후 업데이트에 추가되는 모든 프로 콘텐츠가 포함되어 있습니다!</string>
 </resources>

@@ -312,4 +312,16 @@
     <string name="future_updates">التحديثات المميزة المستقبلية</string>
     <string name="rating_title">آسف للمقاطعة ، لكن تقييمك مهم جدا بالنسبة لنا :)</string>
     <string name="rating_text">هل تحب التطبيق؟ نود أن نعرف عن ذلك! شكرا لك على وقتك.</string>
+    <string name="shop_title">افتح كل شيء</string>
+    <string name="shop_sub">حزمة بريميوم يفتح جميع السمات والميزات الاحترافية ويدعم التطوير.</string>
+    <string name="shop_desc0">لا إعلانات على الإطلاق</string>
+    <string name="shop_sub0">هذا التطبيق غير مدعوم بالإعلانات ويهدف إلى البقاء على هذا النحو. سيكون الإصدار المحترف دائما خاليا من الإعلانات.</string>
+    <string name="shop_desc1">جميع الثيمات</string>
+    <string name="shop_sub1">ليلة متحركة مرصعة بالنجوم ، ضبابية ، حيوية وأكثر!</string>
+    <string name="shop_desc2">الميزات الاحترافية</string>
+    <string name="shop_sub2">بما في ذلك مؤقت النوم والتخصيص والمزيد!</string>
+    <string name="shop_desc3">الكل يعرض الآن على الشاشات</string>
+    <string name="shop_sub3">يتضمن مشغل Blur الجديد بتصميم بسيط نظيف.</string>
+    <string name="shop_desc4">تحديثات برو المستقبلية</string>
+    <string name="shop_sub4">يتضمن أي محتوى احترافي تمت إضافته في التحديثات المستقبلية!</string>
 </resources>

@@ -312,4 +312,16 @@
     <string name="buy_pro_pack">プレミアムバージョンを購入する</string>
     <string name="rating_text">あなたはアプリが好きですか?私たちはそれについて知りたいです!お時間をいただきありがとうございます。</string>
     <string name="rating_title">中断して申し訳ありませんが、あなたの評価は私たちにとって非常に重要です:)</string>
+    <string name="shop_title">すべてのロックを解除</string>
+    <string name="shop_sub">プロパックは、すべてのテーマ、プロ機能のロックを解除し、開発をサポートします。</string>
+    <string name="shop_desc0">広告なし</string>
+    <string name="shop_sub0">このアプリは広告でサポートされておらず、その状態を維持することを目的としています。Proバージョンは常に広告なしになります。</string>
+    <string name="shop_desc1">すべてのテーマ</string>
+    <string name="shop_sub1">アニメーションの星空の夜、ぼやけた、エネルギッシュなど!</string>
+    <string name="shop_desc2">プロ機能</string>
+    <string name="shop_sub2">スリープタイマー、カスタマイズなどを含みます!</string>
+    <string name="shop_desc3">現在再生中のすべての画面</string>
+    <string name="shop_sub3">クリーンな最小限のデザインの新しいぼかしプレーヤーが含まれています。</string>
+    <string name="shop_desc4">今後のプロアップデート</string>
+    <string name="shop_sub4">今後のアップデートで追加されたプロコンテンツが含まれています!</string>
 </resources>

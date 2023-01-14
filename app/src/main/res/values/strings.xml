@@ -351,4 +351,20 @@
     <string name="rating_text">Do you like the app? We\'d love to know about it! Thank you for your time.</string>
     <string name="rating_title">Sorry to interrupt, but your rating is very important to us :)</string>
 
+    <string name="shop_title">Unlock Everything</string>
+    <string name="shop_sub">Pro pack unlocks all themes, pro features and supports development.</string>
+    <string name="shop_desc0">No Ads Ever</string>
+    <string name="shop_sub0">This app isn\'t ad supported and aims to stay that way. Pro version will always be ad free.</string>
+    <string name="shop_desc1">All Themes</string>
+    <string name="shop_sub1">Animated starry night, blurry, energetic and more!</string>
+    <string name="shop_desc2">Pro Features</string>
+    <string name="shop_sub2">Including sleep timer, customization and more!</string>
+    <string name="shop_desc3">All Now Playing Screens</string>
+    <string name="shop_sub3">Includes new Blur player with a clean minimal design.</string>
+    <string name="shop_desc4">Future Pro Updates</string>
+    <string name="shop_sub4">Includes any pro content added in future updates!</string>
+
+
+
+
 </resources>
