@@ -79,4 +79,6 @@
     <string name="song">Song</string>
     <string name="search_hint">Søk i biblioteket...</string>
     <string name="new_playlist_title">Ny speleliste</string>
+    <string name="rating_text">Liker du appen? Vi vil gjerne vite om det! Takk for tiden din.</string>
+    <string name="rating_title">Beklager å avbryte, men vurderingen din er veldig viktig for oss :)</string>
 </resources>

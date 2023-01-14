@@ -305,4 +305,6 @@
     <string name="no_ads">광고 없음</string>
     <string name="buy_pro_pack">프리미엄 버전 구매</string>
     <string name="future_updates">향후 프리미엄 업데이트</string>
+    <string name="rating_text">앱이 마음에 드십니까? 우리는 그것에 대해 알고 싶습니다! 시간 내 주셔서 감사합니다.</string>
+    <string name="rating_title">방해해서 미안하지만 귀하의 평가는 우리에게 매우 중요합니다 :)</string>
 </resources>

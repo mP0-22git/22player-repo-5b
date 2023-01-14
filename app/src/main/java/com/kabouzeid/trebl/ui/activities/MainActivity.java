@@ -159,8 +159,8 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Negati
         mPreferences.edit().putInt("launchTimes",launchCount+1).apply();
 
         FiveStarsDialog fiveStarsDialog = new FiveStarsDialog(this,"");
-        fiveStarsDialog.setRateText("Thank you for your time.")
-                .setTitle("I'd love your feedback :)")
+        fiveStarsDialog.setRateText(getString(R.string.rating_text))
+                .setTitle(getString(R.string.rating_title))
                 .setForceMode(false)
                 .setUpperBound(4)
                 .setNegativeReviewListener(this)

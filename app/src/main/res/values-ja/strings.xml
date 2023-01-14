@@ -310,4 +310,6 @@
     <string name="custom_themes">カスタムテーマ</string>
     <string name="future_updates">将来のプレミアムアップデート</string>
     <string name="buy_pro_pack">プレミアムバージョンを購入する</string>
+    <string name="rating_text">あなたはアプリが好きですか?私たちはそれについて知りたいです!お時間をいただきありがとうございます。</string>
+    <string name="rating_title">中断して申し訳ありませんが、あなたの評価は私たちにとって非常に重要です:)</string>
 </resources>

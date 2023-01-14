@@ -295,4 +295,6 @@
     <string name="sort_order_artist">Artiest</string>
     <string name="sort_order_album">Album</string>
     <string name="sort_order_year">Jaar</string>
+    <string name="rating_text">Vind je de app leuk? We horen het graag! Dank u voor uw tijd.</string>
+    <string name="rating_title">Sorry dat ik onderbreek, maar uw beoordeling is erg belangrijk voor ons :)</string>
 </resources>

@@ -310,4 +310,6 @@
     <string name="pro_features">Zusätzliche Funktionen</string>
     <string name="buy_pro_pack">Premium-Version kaufen</string>
     <string name="future_updates">Zukünftige Premium-Updates</string>
+    <string name="rating_text">Gefällt Ihnen die App? Wir würden es gerne wissen! Vielen Dank für Ihre Zeit.</string>
+    <string name="rating_title">Es tut mir leid, dass ich unterbreche.</string>
 </resources>

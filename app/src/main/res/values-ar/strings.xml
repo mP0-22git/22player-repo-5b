@@ -310,4 +310,6 @@
     <string name="go_pro">شراء نسخة متميزة</string>
     <string name="buy_pro_pack">شراء نسخة متميزة</string>
     <string name="future_updates">التحديثات المميزة المستقبلية</string>
+    <string name="rating_title">آسف للمقاطعة ، لكن تقييمك مهم جدا بالنسبة لنا :)</string>
+    <string name="rating_text">هل تحب التطبيق؟ نود أن نعرف عن ذلك! شكرا لك على وقتك.</string>
 </resources>

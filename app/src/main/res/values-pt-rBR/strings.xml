@@ -302,4 +302,6 @@
     <string name="finish_current_music_sleep_timer">Finalizar última música</string>
     <string name="dialog_ringtone_title">Definir toque</string>
     <string name="dialog_ringtone_message">Permitir que o Phonograph modifique as configurações de áudio</string>
+    <string name="rating_text">Você gosta do aplicativo? Adoraríamos saber sobre isso! Obrigado pelo seu tempo.</string>
+    <string name="rating_title">Desculpe interromper, mas sua classificação é muito importante para nós :)</string>
 </resources>

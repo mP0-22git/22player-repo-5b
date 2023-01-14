@@ -302,4 +302,6 @@
     <string name="pro_features">Características adicionales</string>
     <string name="buy_pro_pack">comprar versión premium</string>
     <string name="future_updates">futuras actualizaciones premium</string>
+    <string name="rating_text">¿Te gusta la aplicación? ¡Nos encantaría saberlo! Gracias por su tiempo.</string>
+    <string name="rating_title">Lamento interrumpir, pero su calificación es muy importante para nosotros :)</string>
 </resources>

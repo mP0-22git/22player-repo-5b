@@ -303,4 +303,6 @@
     <string name="no_ads">brak reklam</string>
     <string name="future_updates">przyszłe aktualizacje premium</string>
     <string name="buy_pro_pack">kup wersję premium</string>
+    <string name="rating_text">Czy podoba Ci się aplikacja? Chcielibyśmy o tym wiedzieć! Dziękuję za poświęcony czas.</string>
+    <string name="rating_title">Przepraszamy, że przerywam, ale Twoja ocena jest dla nas bardzo ważna :)</string>
 </resources>

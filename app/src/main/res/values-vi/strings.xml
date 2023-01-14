@@ -302,4 +302,6 @@
     <string name="finish_current_music_sleep_timer">Phát hết bài cuối</string>
     <string name="dialog_ringtone_title">Cài nhạc chuông</string>
     <string name="dialog_ringtone_message">Cho phép Phonograph thay đổi cài đặt âm thanh</string>
+    <string name="rating_text">Bạn có thích ứng dụng này không? Chúng tôi rất muốn biết về nó! Cảm ơn bạn đã dành thời gian của bạn.</string>
+    <string name="rating_title">Xin lỗi vì đã làm gián đoạn, nhưng đánh giá của bạn rất quan trọng đối với chúng tôi :)</string>
 </resources>

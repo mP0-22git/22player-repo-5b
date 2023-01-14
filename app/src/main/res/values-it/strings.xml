@@ -311,4 +311,6 @@
     <string name="go_pro">acquista premium</string>
     <string name="buy_pro_pack">acquista la versione premium</string>
     <string name="future_updates">futuri aggiornamenti premium</string>
+    <string name="rating_text">Ti piace l\'app? Ci piacerebbe saperlo! Grazie per il vostro tempo.</string>
+    <string name="rating_title">Ci scusiamo se interrompo, ma la tua valutazione è molto importante per noi :)</string>
 </resources>

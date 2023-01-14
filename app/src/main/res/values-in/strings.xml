@@ -302,4 +302,6 @@
     <string name="finish_current_music_sleep_timer">Selesaikan lagu terakhir</string>
     <string name="dialog_ringtone_title">Setel sebagai nada dering</string>
     <string name="dialog_ringtone_message">Izinkan phonograph mengubah pengaturan audio</string>
+    <string name="rating_text">Apakah Anda suka aplikasi ini? Kami ingin mengetahuinya! Terima kasih atas waktu Anda.</string>
+    <string name="rating_title">Maaf mengganggu, tetapi peringkat Anda sangat penting bagi kami :)</string>
 </resources>

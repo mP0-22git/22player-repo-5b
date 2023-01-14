@@ -87,4 +87,6 @@ Vill du radera <b>%1$d</b> låtar?
     <string name="pref_summary_colored_navigation_bar">I vilken vy navigeringslisten skall vara färgad</string>
     <string name="search_hint">Sök i ditt bibliotek ...</string>
     <string name="new_playlist_title">Ny spellista</string>
+    <string name="rating_text">Gillar du appen? Vi vill gärna veta om det! Tack för din tid.</string>
+    <string name="rating_title">Ledsen att avbryta, men ditt betyg är mycket viktigt för oss :)</string>
 </resources>
