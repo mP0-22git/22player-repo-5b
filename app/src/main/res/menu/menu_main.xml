@@ -28,10 +28,6 @@
         android:title="@string/action_shuffle_all"
         app:showAsAction="never" />
 
-    <item
-        android:id="@+id/action_shuffle_all2"
-        android:title="@string/action_shuffle_all"
-        app:showAsAction="never" />
 
     <item
         android:id="@+id/action_grid_size"
