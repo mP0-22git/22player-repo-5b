@@ -323,4 +323,9 @@
     <string name="intro_dialog_pro_title">Desbloquear Temas Pro</string>
     <string name="intro_dialog_pro_pack">Pacote Pro</string>
     <string name="intro_dialog_pro_desc">Desbloqueie todos os temas e recursos profissionais.</string>
+    <string name="settings_pro_desc">Desbloqueie todos os temas, recursos profissionais e SEM anúncios</string>
+    <string name="settings_pro_title">Obtenha o Premium</string>
+    <string name="settings_change_player">Tema em reprodução</string>
+    <string name="settings_change_theme">Alterar tema</string>
+    <string name="settings_change_background">Alterar papel de parede</string>
 </resources>

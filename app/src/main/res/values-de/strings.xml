@@ -331,4 +331,9 @@
     <string name="intro_dialog_pro_title">Pro Themes freischalten</string>
     <string name="intro_dialog_pro_pack">Pro-Paket</string>
     <string name="intro_dialog_pro_desc">Schalte alle Themen und Pro-Funktionen frei.</string>
+    <string name="settings_change_theme">Design ändern</string>
+    <string name="settings_change_player">Jetzt Thema abspielen</string>
+    <string name="settings_change_background">Hintergrundbild ändern</string>
+    <string name="settings_pro_title">Holen Sie sich Premium</string>
+    <string name="settings_pro_desc">Schalte alle Themes, Pro-Funktionen und NO Ads frei</string>
 </resources>

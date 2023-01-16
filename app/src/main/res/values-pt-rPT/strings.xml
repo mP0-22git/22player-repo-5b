@@ -236,4 +236,9 @@
     <string name="intro_dialog_white_button">Branco</string>
     <string name="intro_dialog_sub">Altere isto a qualquer momento nas definições.</string>
     <string name="intro_dialog_title">Escolha um tema</string>
+    <string name="settings_change_theme">Alterar tema</string>
+    <string name="settings_change_player">Agora jogando tema</string>
+    <string name="settings_change_background">Alterar papel de parede</string>
+    <string name="settings_pro_title">Obter Premium</string>
+    <string name="settings_pro_desc">Desbloqueie todos os temas, funcionalidades profissionais e NO Ads</string>
 </resources>

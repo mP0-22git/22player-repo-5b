@@ -323,4 +323,9 @@
     <string name="intro_dialog_white_button">trắng</string>
     <string name="intro_dialog_sub">Thay đổi tùy chọn này bất kỳ lúc nào trong cài đặt.</string>
     <string name="intro_dialog_title">Chọn một chủ đề</string>
+    <string name="settings_change_theme">Thay đổi chủ đề</string>
+    <string name="settings_change_player">Đang phát chủ đề</string>
+    <string name="settings_change_background">Thay đổi hình nền</string>
+    <string name="settings_pro_title">Nhận Premium</string>
+    <string name="settings_pro_desc">Mở khóa tất cả các chủ đề, tính năng chuyên nghiệp và KHÔNG có quảng cáo</string>
 </resources>

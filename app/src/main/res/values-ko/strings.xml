@@ -326,4 +326,9 @@
     <string name="intro_dialog_black_button">검정</string>
     <string name="intro_dialog_pro_title">프로 테마 잠금 해제</string>
     <string name="intro_dialog_pro_pack">프로 팩</string>
+    <string name="settings_change_theme">테마 변경</string>
+    <string name="settings_change_player">이제 테마 재생 중</string>
+    <string name="settings_change_background">배경 화면 변경</string>
+    <string name="settings_pro_title">프리미엄 받기</string>
+    <string name="settings_pro_desc">모든 테마, 프로 기능 및 광고 없음 잠금 해제</string>
 </resources>

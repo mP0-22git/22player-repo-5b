@@ -323,4 +323,9 @@
     <string name="intro_dialog_pro_title">解锁专业主题</string>
     <string name="intro_dialog_pro_pack">专业包</string>
     <string name="intro_dialog_pro_desc">解锁所有主题和专业功能。</string>
+    <string name="settings_pro_desc">解锁所有主题，专业功能和无广告</string>
+    <string name="settings_change_theme">更改主题</string>
+    <string name="settings_change_player">正在播放主题</string>
+    <string name="settings_change_background">更换壁纸</string>
+    <string name="settings_pro_title">获得溢价</string>
 </resources>

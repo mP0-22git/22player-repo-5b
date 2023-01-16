@@ -330,4 +330,9 @@ El contenido de las carpetas de la lista negra está oculto en tu biblioteca"</s
     <string name="intro_dialog_pro_title">Desbloquear temas profesionales</string>
     <string name="intro_dialog_pro_pack">Paquete Pro</string>
     <string name="intro_dialog_pro_desc">Desbloquea todos los temas y funciones profesionales.</string>
+    <string name="settings_pro_desc">Desbloquea todos los temas, funciones profesionales y SIN anuncios</string>
+    <string name="settings_pro_title">Obtén Premium</string>
+    <string name="settings_change_background">Cambiar fondo de pantalla</string>
+    <string name="settings_change_player">Tema de reproducción en curso</string>
+    <string name="settings_change_theme">Cambiar tema</string>
 </resources>

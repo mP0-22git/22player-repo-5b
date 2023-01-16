@@ -108,4 +108,9 @@ Vill du radera <b>%1$d</b> låtar?
     <string name="intro_dialog_pro_title">Lås upp Pro-teman</string>
     <string name="intro_dialog_pro_pack">Pro-paket</string>
     <string name="intro_dialog_pro_desc">Unlock all themes and pro features.</string>
+    <string name="settings_change_theme">Ändra tema</string>
+    <string name="settings_change_player">Spelar nu tema</string>
+    <string name="settings_change_background">Ändra bakgrundsbild</string>
+    <string name="settings_pro_title">Skaffa Premium</string>
+    <string name="settings_pro_desc">Lås upp alla teman, proffsfunktioner och INGA annonser</string>
 </resources>

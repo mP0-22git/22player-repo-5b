@@ -316,4 +316,9 @@
     <string name="intro_dialog_pro_title">Ontgrendel Pro-thema\'s</string>
     <string name="intro_dialog_pro_pack">Pro-pakket</string>
     <string name="intro_dialog_pro_desc">Ontgrendel alle thema\'s en professionele functies.</string>
+    <string name="settings_change_theme">Thema wijzigen</string>
+    <string name="settings_change_player">Nu spelen thema</string>
+    <string name="settings_change_background">Achtergrond wijzigen</string>
+    <string name="settings_pro_title">Koop Premium</string>
+    <string name="settings_pro_desc">Ontgrendel alle thema\'s, professionele functies en GEEN advertenties</string>
 </resources>

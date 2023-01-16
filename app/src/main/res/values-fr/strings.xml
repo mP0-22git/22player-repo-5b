@@ -331,4 +331,9 @@
     <string name="intro_dialog_pro_title">Déverrouiller les thèmes Pro</string>
     <string name="intro_dialog_pro_pack">Pro Pack</string>
     <string name="intro_dialog_pro_desc">Déverrouillez tous les thèmes et fonctionnalités pro.</string>
+    <string name="settings_pro_desc">Déverrouillez tous les thèmes, fonctionnalités pro et AUCUNE publicité</string>
+    <string name="settings_pro_title">Obtenez Premium</string>
+    <string name="settings_change_background">Changer le fond d\'écran</string>
+    <string name="settings_change_player">Thème en cours de lecture</string>
+    <string name="settings_change_theme">Changer de thème</string>
 </resources>

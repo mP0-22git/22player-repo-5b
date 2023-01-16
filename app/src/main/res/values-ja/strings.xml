@@ -331,4 +331,9 @@
     <string name="intro_dialog_pro_title">プロテーマのロックを解除する</string>
     <string name="intro_dialog_pro_pack">プロパック</string>
     <string name="intro_dialog_pro_desc">すべてのテーマとプロ機能のロックを解除します。</string>
+    <string name="settings_pro_desc">すべてのテーマ、プロ機能、広告なしのロックを解除します</string>
+    <string name="settings_pro_title">プレミアムをゲット</string>
+    <string name="settings_change_background">壁紙を変更する</string>
+    <string name="settings_change_player">現在再生中のテーマ</string>
+    <string name="settings_change_theme">テーマを変更する</string>
 </resources>

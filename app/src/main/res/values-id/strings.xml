@@ -323,4 +323,9 @@
     <string name="intro_dialog_pro_title">Buka Kunci Tema Pro</string>
     <string name="intro_dialog_pro_pack">Paket Pro</string>
     <string name="intro_dialog_pro_desc">Buka kunci semua tema dan fitur pro.</string>
+    <string name="settings_pro_desc">Buka kunci semua tema, fitur pro, dan TANPA Iklan</string>
+    <string name="settings_pro_title">Dapatkan Premium</string>
+    <string name="settings_change_background">Ubah wallpaper</string>
+    <string name="settings_change_player">Sekarang memainkan tema</string>
+    <string name="settings_change_theme">Ubah tema</string>
 </resources>

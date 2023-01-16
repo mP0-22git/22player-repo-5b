@@ -332,4 +332,9 @@
     <string name="intro_dialog_pro_title">Sblocca temi Pro</string>
     <string name="intro_dialog_pro_pack">Pacchetto Pro</string>
     <string name="intro_dialog_pro_desc">Sblocca tutti i temi e le funzionalità professionali.</string>
+    <string name="settings_change_theme">Cambia tema</string>
+    <string name="settings_change_player">Ora in riproduzione del tema</string>
+    <string name="settings_change_background">Cambia sfondo</string>
+    <string name="settings_pro_title">Ottieni Premium</string>
+    <string name="settings_pro_desc">Sblocca tutti i temi, le funzionalità professionali e NESSUNA pubblicità</string>
 </resources>
