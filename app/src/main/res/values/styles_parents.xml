@@ -42,7 +42,7 @@
         <item name="materialSecondary">#10ffffff</item>
         <item name="fabIconColor">@color/black</item>
         <item name="circularProgressTrack">#20ffffff</item>
-        <item name="buttonBackground">#e1e1e1</item>
+        <item name="buttonBackground">#2d2d2d</item>
     </style>
 
     <style name="Theme.Phonograph.Base.Light" parent="Theme.AppCompat.Light.NoActionBar">
