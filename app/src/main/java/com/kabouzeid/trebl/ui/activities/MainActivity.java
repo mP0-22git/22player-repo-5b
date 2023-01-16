@@ -66,7 +66,7 @@ import com.kabouzeid.trebl.ui.rating.FiveStarsDialog;
 import com.kabouzeid.trebl.ui.rating.NegativeReviewListener;
 import com.kabouzeid.trebl.ui.rating.ReviewListener;
 
-public class MainActivity extends AbsSlidingMusicPanelActivity implements NegativeReviewListener, ReviewListener, BillingProcessor.IBillingHandler{
+public class MainActivity extends AbsSlidingMusicPanelActivity implements NegativeReviewListener, ReviewListener{
 
     public static final String TAG = MainActivity.class.getSimpleName();
     public static final int APP_INTRO_REQUEST = 100;
@@ -100,19 +100,12 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Negati
 
     int launchCount;
 
-    private Dialog dialog, proDialog;
-
-    private BillingProcessor billingProcessor;
-
-    private Button buyButton;
-
-    private ImageView closeButton;
+    private Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         mPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        billingProcessor = new BillingProcessor(this, App.GOOGLE_PLAY_LICENSE_KEY, this);
 
         super.onCreate(savedInstanceState);
         setDrawUnderStatusbar();
@@ -140,21 +133,11 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Negati
 
         blurryBg.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
-        proDialog = new Dialog(this);
-        proDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        proDialog.setContentView(R.layout.pro_sheet_dialog);
-
-        buyButton = proDialog.findViewById(R.id.buy_button);
-        buyButton.setOnClickListener(v -> billingProcessor.purchase(this, App.PRO_VERSION_PRODUCT_ID));
-
-        closeButton = proDialog.findViewById(R.id.close_button);
-        closeButton.setOnClickListener(v -> proDialog.dismiss());
-
         checkFirstRun();
 
         launchCount = mPreferences.getInt("launchTimes",0);
-        if(launchCount%5==0 && launchCount!=0 && !App.isProVersion()){
-            showProDialog();
+        if(launchCount % 5 == 0 && launchCount != 0 && !App.isProVersion()){
+            startActivity(new Intent(this, PurchaseActivity.class));
         }
         mPreferences.edit().putInt("launchTimes",launchCount+1).apply();
 
@@ -184,14 +167,6 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Negati
     protected void onDestroy() {
         super.onDestroy();
         App.setOnProVersionChangedListener(null);
-    }
-
-    private void showProDialog(){
-        proDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-        proDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        proDialog.getWindow().setWindowAnimations(R.style.DialogAnimation);
-        proDialog.getWindow().setGravity(Gravity.BOTTOM);
-        proDialog.show();
     }
 
     private void showDialog(){
@@ -458,9 +433,6 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Negati
         if(dialog!=null){
             dialog.dismiss();
         }
-        if(proDialog!=null){
-            proDialog.dismiss();
-        }
     }
 
     @Override
@@ -485,44 +457,6 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Negati
 
     public interface MainActivityFragmentCallbacks {
         boolean handleBackPress();
-    }
-
-    @Override
-    public void onProductPurchased(@NonNull String productId, @Nullable PurchaseInfo details) {
-        Toast.makeText(this, R.string.thank_you, Toast.LENGTH_SHORT).show();
-        App.notifyProVersionChanged();
-    }
-
-    @Override
-    public void onPurchaseHistoryRestored() {
-        if (App.isProVersion()) {
-            Toast.makeText(this, R.string.restored_previous_purchase_please_restart, Toast.LENGTH_LONG).show();
-            App.notifyProVersionChanged();
-        } else {
-            Toast.makeText(this, R.string.no_purchase_found, Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    public void onBillingError(int errorCode, @Nullable Throwable error) {
-        Log.e(TAG, "Billing error: code = " + errorCode, error);
-    }
-
-    @Override
-    public void onBillingInitialized() {
-        billingProcessor.getPurchaseListingDetailsAsync(App.PRO_VERSION_PRODUCT_ID, new BillingProcessor.ISkuDetailsResponseListener() {
-            @Override
-            public void onSkuDetailsResponse(@Nullable List<SkuDetails> products) {
-                if (products != null && !products.isEmpty()) {
-                    buyButton.setText(products.get(0).priceText);
-                }
-            }
-
-            @Override
-            public void onSkuDetailsError(String error) {
-
-            }
-        });
     }
 
     public void updateBlurAlbumBackground(){
