@@ -82,6 +82,13 @@
         app:starsView_starColors="@array/star_colors_small"
         app:starsView_starCount="100" />
 
+    <ImageView
+        android:id="@+id/custom_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        />
+
     <FrameLayout
         android:id="@+id/fl1"
         android:layout_width="match_parent"

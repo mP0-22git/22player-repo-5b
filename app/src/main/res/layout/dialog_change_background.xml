@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/dialog_background"
+    >
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline50"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:layout_marginStart="22dp"
+        android:textSize="18sp"
+        android:fontFamily="@font/semiboldfont"
+        android:textColor="?textColor"
+        android:text="Change Background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <ImageView
+        android:id="@+id/reset_button"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginStart="12dp"
+        android:background="@drawable/theme_button_bg"
+        android:backgroundTint="?buttonBackground"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guideline50"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
+    <TextView
+        android:id="@+id/label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/semiboldfont"
+        android:textColor="?textColor"
+        android:text="Reset background"
+        android:textSize="12dp"
+        app:layout_constraintEnd_toEndOf="@id/reset_button"
+        app:layout_constraintStart_toStartOf="@id/reset_button"
+        app:layout_constraintTop_toBottomOf="@id/reset_button" />
+
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_bg_reset_24"
+        app:layout_constraintBottom_toBottomOf="@id/reset_button"
+        app:layout_constraintEnd_toEndOf="@id/reset_button"
+        app:layout_constraintStart_toStartOf="@id/reset_button"
+        app:layout_constraintTop_toTopOf="@id/reset_button" />
+
+    <ImageView
+        android:id="@+id/pick_button"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/theme_button_bg"
+        android:backgroundTint="?buttonBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/guideline50"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_bg_pick_24"
+        app:layout_constraintBottom_toBottomOf="@id/pick_button"
+        app:layout_constraintEnd_toEndOf="@id/pick_button"
+        app:layout_constraintStart_toStartOf="@id/pick_button"
+        app:layout_constraintTop_toTopOf="@id/pick_button" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/semiboldfont"
+        android:textColor="?textColor"
+        android:text="Pick background"
+        android:textSize="12dp"
+        app:layout_constraintEnd_toEndOf="@id/pick_button"
+        app:layout_constraintStart_toStartOf="@id/pick_button"
+        app:layout_constraintTop_toBottomOf="@id/pick_button" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

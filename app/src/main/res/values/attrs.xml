@@ -59,5 +59,6 @@
         <enum name="gone" value="2" />
     </attr>
 
+    <attr name="buttonBackground" format="color" />
 
 </resources>

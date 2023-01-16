@@ -42,6 +42,7 @@
         <item name="materialSecondary">#10ffffff</item>
         <item name="fabIconColor">@color/black</item>
         <item name="circularProgressTrack">#20ffffff</item>
+        <item name="buttonBackground">#e1e1e1</item>
     </style>
 
     <style name="Theme.Phonograph.Base.Light" parent="Theme.AppCompat.Light.NoActionBar">
@@ -84,6 +85,7 @@
         <item name="materialSecondary">#E0E0E0</item>
         <item name="fabIconColor">@color/white</item>
         <item name="circularProgressTrack">#20000000</item>
+        <item name="buttonBackground">#e1e1e1</item>
     </style>
 
     <style name="Theme.Phonograph.Base.Black" parent="@style/Theme.Phonograph.Base">
@@ -104,6 +106,7 @@
         <item name="libraryTitleColor">#ffffff</item>
         <item name="materialSecondary">#212121</item>
         <item name="fabIconColor">@color/black</item>
+        <item name="buttonBackground">#2d2d2d</item>
     </style>
 
     <style name="Theme.Phonograph.Base.White" parent="@style/Theme.AppCompat.Light.NoActionBar">
@@ -136,6 +139,7 @@
         <item name="libraryTitleColor">#000000</item>
         <item name="materialSecondary">#E0E0E0</item>
         <item name="fabIconColor">@color/white</item>
+        <item name="buttonBackground">#e1e1e1</item>
     </style>
 
     <style name="Theme.Phonograph.Base.Stars" parent="@style/Theme.Phonograph.Base">
@@ -156,6 +160,7 @@
         <item name="libraryTitleColor">#ffffff</item>
         <item name="materialSecondary">#20ffffff</item>
         <item name="fabIconColor">@color/black</item>
+        <item name="buttonBackground">#2d2d2d</item>
     </style>
 
     <style name="Theme.Phonograph.Base.Midnight" parent="@style/Theme.Phonograph.Base">
@@ -176,6 +181,7 @@
         <item name="libraryTitleColor">#ffffff</item>
         <item name="materialSecondary">#20ffffff</item>
         <item name="fabIconColor">@color/black</item>
+        <item name="buttonBackground">#2d2d2d</item>
     </style>
 
     <style name="Theme.Phonograph.Base.Blur" parent="@style/Theme.Phonograph.Base">
@@ -196,6 +202,7 @@
         <item name="libraryTitleColor">#ffffff</item>
         <item name="materialSecondary">#20ffffff</item>
         <item name="fabIconColor">@color/black</item>
+        <item name="buttonBackground">#2d2d2d</item>
 
     </style>
 
@@ -217,6 +224,7 @@
         <item name="libraryTitleColor">#ECA089</item>
         <item name="materialSecondary">#20ffffff</item>
         <item name="fabIconColor">@color/black</item>
+        <item name="buttonBackground">#2d2d2d</item>
 
     </style>
 
@@ -238,6 +246,7 @@
         <item name="libraryTitleColor">#000000</item>
         <item name="materialSecondary">#20ffffff</item>
         <item name="fabIconColor">@color/black</item>
+        <item name="buttonBackground">#2d2d2d</item>
 
     </style>
 
@@ -259,6 +268,7 @@
         <item name="libraryTitleColor">@color/white</item>
         <item name="materialSecondary">#20ffffff</item>
         <item name="fabIconColor">@color/black</item>
+        <item name="buttonBackground">#2d2d2d</item>
 
     </style>
 
@@ -292,6 +302,7 @@
         <item name="libraryTitleColor">#000000</item>
         <item name="materialSecondary">#E0E0E0</item>
         <item name="fabIconColor">@color/white</item>
+        <item name="buttonBackground">#2d2d2d</item>
     </style>
 
 

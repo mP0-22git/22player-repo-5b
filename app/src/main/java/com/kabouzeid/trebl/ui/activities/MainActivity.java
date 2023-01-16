@@ -88,6 +88,9 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Negati
     @BindView(R.id.blurry_bg)
     ImageView blurryBg;
 
+    @BindView(R.id.custom_bg)
+    ImageView customBg;
+
     SharedPreferences mPreferences;
 
     @Nullable
@@ -132,6 +135,8 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Negati
         }
 
         blurryBg.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+        setCustomBg();
 
         checkFirstRun();
 
@@ -452,6 +457,15 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Negati
             starryBg.setImageResource(R.drawable.gradient_stars_3);
         } else if (randomBg == 3) {
             starryBg.setImageResource(R.drawable.gradient_stars_4);
+        }
+    }
+
+    public void setCustomBg(){
+        SharedPreferences pref = this.getPreferences(this.MODE_PRIVATE);
+        String imageUriString = pref.getString("imageUri", "");
+        if(!imageUriString.isEmpty()) {
+            Uri imageUri = Uri.parse(imageUriString);
+            Glide.with(this).load(imageUri).into(customBg);
         }
     }
 
