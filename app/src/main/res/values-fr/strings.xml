@@ -336,4 +336,8 @@
     <string name="settings_change_background">Changer le fond d\'écran</string>
     <string name="settings_change_player">Thème en cours de lecture</string>
     <string name="settings_change_theme">Changer de thème</string>
+    <string name="shop_desc">Le pack Premium déverrouille tous les thèmes, fonctionnalités premium et inclut toutes les futures mises à jour premium.</string>
+    <string name="this_is_pro">Il s\'agit d\'une fonctionnalité premium</string>
+    <string name="shop_custom_bg">Changer le fond d\'écran</string>
+    <string name="shop_custom_bg_desc">Choisissez un fond d\'écran dans votre galerie</string>
 </resources>

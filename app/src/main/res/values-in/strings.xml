@@ -328,4 +328,8 @@
     <string name="settings_change_background">Ubah wallpaper</string>
     <string name="settings_change_player">Sekarang memainkan tema</string>
     <string name="settings_change_theme">Ubah tema</string>
+    <string name="shop_desc">Paket premium membuka kunci semua tema, fitur premium, dan mencakup pembaruan premium apa pun di masa mendatang.</string>
+    <string name="this_is_pro">Ini adalah fitur premium</string>
+    <string name="shop_custom_bg">Ubah wallpaper</string>
+    <string name="shop_custom_bg_desc">Pilih wallpaper dari galeri Anda</string>
 </resources>

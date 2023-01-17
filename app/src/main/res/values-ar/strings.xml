@@ -331,10 +331,13 @@
     <string name="intro_dialog_pro_title">فتح المواضيع برو</string>
     <string name="intro_dialog_pro_pack">حزمة برو</string>
     <string name="intro_dialog_pro_desc">افتح جميع السمات والميزات الاحترافية.</string>
-    <string name="app_name" translatable="false">مشغل موسيقى</string>
     <string name="settings_change_theme">تغيير النسق</string>
     <string name="settings_change_player">يتم تشغيل السمة الآن</string>
     <string name="settings_change_background">تغيير خلفية الشاشة</string>
     <string name="settings_pro_title">احصل على بريميوم</string>
     <string name="settings_pro_desc">افتح جميع السمات والميزات الاحترافية وبدون إعلانات</string>
+    <string name="this_is_pro">هذه ميزة احترافية</string>
+    <string name="shop_custom_bg">تغيير خلفية الشاشة</string>
+    <string name="shop_custom_bg_desc">اختر خلفية من معرض الصور الخاص بك</string>
+    <string name="shop_desc">تفتح الحزمة المميزة جميع السمات والميزات المتميزة وتتضمن أي تحديثات متميزة في المستقبل.</string>
 </resources>

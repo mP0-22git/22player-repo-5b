@@ -241,4 +241,8 @@
     <string name="settings_change_background">Alterar papel de parede</string>
     <string name="settings_pro_title">Obter Premium</string>
     <string name="settings_pro_desc">Desbloqueie todos os temas, funcionalidades profissionais e NO Ads</string>
+    <string name="this_is_pro">O pacote premium desbloqueia todos os temas, funcionalidades premium e inclui futuras atualizações premium.</string>
+    <string name="shop_custom_bg">Change wallpaper</string>
+    <string name="shop_custom_bg_desc">Escolha um papel de parede da sua galeria</string>
+    <string name="shop_desc">O pacote premium desbloqueia todos os temas, funcionalidades premium e inclui futuras atualizações premium.</string>
 </resources>

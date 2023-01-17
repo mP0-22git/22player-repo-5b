@@ -328,4 +328,8 @@
     <string name="settings_change_background">Thay đổi hình nền</string>
     <string name="settings_pro_title">Nhận Premium</string>
     <string name="settings_pro_desc">Mở khóa tất cả các chủ đề, tính năng chuyên nghiệp và KHÔNG có quảng cáo</string>
+    <string name="shop_desc">Gói cao cấp mở khóa tất cả các chủ đề, tính năng cao cấp và bao gồm mọi bản cập nhật cao cấp trong tương lai.</string>
+    <string name="this_is_pro">Đây là một tính năng cao cấp</string>
+    <string name="shop_custom_bg">Thay đổi hình nền</string>
+    <string name="shop_custom_bg_desc">Chọn hình nền từ thư viện của bạn</string>
 </resources>

@@ -336,4 +336,8 @@
     <string name="settings_change_background">Hintergrundbild ändern</string>
     <string name="settings_pro_title">Holen Sie sich Premium</string>
     <string name="settings_pro_desc">Schalte alle Themes, Pro-Funktionen und NO Ads frei</string>
+    <string name="shop_custom_bg_desc">Wählen Sie ein Hintergrundbild aus Ihrer Galerie</string>
+    <string name="this_is_pro">Dies ist eine Premium-Funktion</string>
+    <string name="shop_custom_bg">Hintergrundbild ändern</string>
+    <string name="shop_desc">Das Premium-Paket schaltet alle Themen und Premium-Funktionen frei und enthält alle zukünftigen Premium-Updates.</string>
 </resources>

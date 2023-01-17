@@ -337,4 +337,8 @@
     <string name="settings_change_background">Cambia sfondo</string>
     <string name="settings_pro_title">Ottieni Premium</string>
     <string name="settings_pro_desc">Sblocca tutti i temi, le funzionalità professionali e NESSUNA pubblicità</string>
+    <string name="shop_custom_bg_desc">Scegli uno sfondo dalla tua galleria</string>
+    <string name="shop_custom_bg">Cambia sfondo</string>
+    <string name="this_is_pro">Questa è una funzionalità premium</string>
+    <string name="shop_desc">Il pacchetto Premium sblocca tutti i temi, le funzionalità premium e include eventuali aggiornamenti premium futuri.</string>
 </resources>

@@ -363,6 +363,10 @@
     <string name="shop_sub3">Includes new Blur player with a clean minimal design.</string>
     <string name="shop_desc4">Future Pro Updates</string>
     <string name="shop_sub4">Includes any pro content added in future updates!</string>
+    <string name="shop_custom_bg">Change wallpaper</string>
+    <string name="shop_custom_bg_desc">Choose a wallpaper from your gallery</string>
+    <string name="shop_desc">Pro pack unlocks all themes, pro features and includes any future pro updates.</string>
+
 
     <string name="intro_dialog_title">Pick a theme</string>
     <string name="intro_dialog_sub">Change this at any time in settings.</string>
@@ -377,6 +381,8 @@
     <string name="settings_pro_title">Get Pro</string>
     <string name="settings_pro_desc">Unlock all themes, pro features and NO Ads</string>
     <string name="settings_change_player">Now playing theme</string>
+
+    <string name="this_is_pro">This is a premium feature</string>
 
 
 </resources>

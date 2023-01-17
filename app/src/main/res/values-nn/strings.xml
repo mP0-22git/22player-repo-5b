@@ -105,4 +105,8 @@
     <string name="settings_change_background">Endre bakgrunn</string>
     <string name="settings_pro_title">Få Premium</string>
     <string name="settings_pro_desc">Lås opp alle temaer, pro-funksjoner og INGEN annonser</string>
+    <string name="shop_desc">Premium Pack låser opp alle temaer, premiumfunksjoner og inkluderer eventuelle fremtidige premiumoppdateringer.</string>
+    <string name="this_is_pro">Dette er en premiumfunksjon</string>
+    <string name="shop_custom_bg">Endre bakgrunn</string>
+    <string name="shop_custom_bg_desc">Velg et bakgrunnsbilde fra galleriet ditt</string>
 </resources>

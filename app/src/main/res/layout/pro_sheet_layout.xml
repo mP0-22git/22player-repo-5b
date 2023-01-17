@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="150dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.45"
+        app:layout_constraintGuide_percent="0.4"
         />
 
     <ImageView
@@ -46,23 +46,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         />
 
-    <com.sofakingforever.stars.AnimatedStarsView
-        android:id="@+id/stars"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:starsView_bigStarThreshold="10dp"
-        app:starsView_meteoritesColors="@array/meteorites_colors"
-        app:starsView_meteoritesEnabled="true"
-        app:starsView_meteoritesInterval="2000"
-        app:starsView_maxStarSize="3dp"
-        app:starsView_minStarSize="1dp"
-        android:background="@android:color/transparent"
-        app:starsView_starColors="@array/star_colors_small"
-        app:starsView_starCount="100"
-        app:layout_constraintTop_toBottomOf="@id/buy_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
-
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
@@ -85,7 +68,7 @@
         android:layout_marginEnd="12dp"
         android:fontFamily="@font/semiboldfont"
         android:alpha="0.8"
-        android:text="@string/shop_sub"
+        android:text="@string/shop_desc"
         android:textColor="#ffffff"
         android:textSize="15dp"
         app:layout_constraintBottom_toTopOf="@id/buy_button"
@@ -107,16 +90,34 @@
         android:layout_marginStart="12dp"
         />
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buy_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
     <TextView
         android:id="@+id/desc0"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/shop_desc0"
-        android:textSize="15dp"
+        android:textSize="19.2dp"
         android:fontFamily="@font/semiboldfont"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/buy_button"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="12dp"
         android:layout_marginEnd="12dp"
@@ -150,7 +151,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/shop_desc1"
-        android:textSize="15dp"
+        android:textSize="19.2dp"
         android:fontFamily="@font/semiboldfont"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
@@ -188,7 +189,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/shop_desc2"
-        android:textSize="15dp"
+        android:textSize="19.2dp"
         android:fontFamily="@font/semiboldfont"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
@@ -226,7 +227,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/shop_desc3"
-        android:textSize="15dp"
+        android:textSize="19.2dp"
         android:fontFamily="@font/semiboldfont"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
@@ -263,8 +264,8 @@
         android:id="@+id/desc4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/shop_desc4"
-        android:textSize="15dp"
+        android:text="@string/shop_custom_bg"
+        android:textSize="19.2dp"
         android:fontFamily="@font/semiboldfont"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
@@ -273,7 +274,7 @@
         android:layout_marginStart="12dp"
         android:layout_marginEnd="12dp"
         android:layout_marginTop="12dp"
-        android:drawableStart="@drawable/ic_future_updates"
+        android:drawableStart="@drawable/ic_baseline_wallpaper_24"
         android:drawablePadding="5dp"
         />
 
@@ -281,7 +282,7 @@
         android:id="@+id/desc4sub"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/shop_sub4"
+        android:text="@string/shop_custom_bg_desc"
         android:textSize="12sp"
         android:alpha="0.8"
         android:drawableStart="@drawable/ic_check_circle_24"
@@ -297,22 +298,28 @@
         android:drawablePadding="5dp"
         />
 
-    <Button
-        android:id="@+id/restore_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/restore"
-        android:textColor="@color/white"
-        android:textSize="12sp"
-        android:alpha="0.5"
-        android:textAllCaps="false"
-        android:background="@android:color/transparent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/desc4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginTop="20dp"
-        />
+        <Button
+            android:id="@+id/restore_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/restore"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:alpha="0.5"
+            android:textAllCaps="false"
+            android:background="@android:color/transparent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/desc4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="30dp"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+
 
     <ImageView
         android:id="@+id/close_button"

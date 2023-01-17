@@ -336,4 +336,8 @@
     <string name="settings_change_background">壁紙を変更する</string>
     <string name="settings_change_player">現在再生中のテーマ</string>
     <string name="settings_change_theme">テーマを変更する</string>
+    <string name="shop_desc">プレミアムパックは、すべてのテーマ、プレミアム機能のロックを解除し、将来のプレミアムアップデートを含みます。</string>
+    <string name="shop_custom_bg_desc">ギャラリーから壁紙を選択してください</string>
+    <string name="shop_custom_bg">壁紙を変更する</string>
+    <string name="this_is_pro">これはプレミアム機能です</string>
 </resources>

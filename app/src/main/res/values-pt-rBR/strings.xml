@@ -328,4 +328,8 @@
     <string name="settings_change_player">Tema em reprodução</string>
     <string name="settings_change_theme">Alterar tema</string>
     <string name="settings_change_background">Alterar papel de parede</string>
+    <string name="this_is_pro">Este é um recurso premium</string>
+    <string name="shop_custom_bg">Alterar papel de parede</string>
+    <string name="shop_custom_bg_desc">Escolha um papel de parede da sua galeria</string>
+    <string name="shop_desc">O pacote Premium desbloqueia todos os temas, recursos premium e inclui quaisquer atualizações premium futuras.</string>
 </resources>

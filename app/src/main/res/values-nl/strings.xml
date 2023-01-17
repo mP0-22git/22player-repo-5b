@@ -321,4 +321,8 @@
     <string name="settings_change_background">Achtergrond wijzigen</string>
     <string name="settings_pro_title">Koop Premium</string>
     <string name="settings_pro_desc">Ontgrendel alle thema\'s, professionele functies en GEEN advertenties</string>
+    <string name="shop_custom_bg_desc">Kies een achtergrond uit uw galerij</string>
+    <string name="this_is_pro">Dit is een premium functie</string>
+    <string name="shop_custom_bg">Achtergrond wijzigen</string>
+    <string name="shop_desc">Premium pack ontgrendelt alle thema\'s, premium functies en bevat eventuele toekomstige premium updates.</string>
 </resources>

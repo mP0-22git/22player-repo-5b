@@ -335,4 +335,8 @@ El contenido de las carpetas de la lista negra está oculto en tu biblioteca"</s
     <string name="settings_change_background">Cambiar fondo de pantalla</string>
     <string name="settings_change_player">Tema de reproducción en curso</string>
     <string name="settings_change_theme">Cambiar tema</string>
+    <string name="shop_desc">El paquete Premium desbloquea todos los temas, funciones premium e incluye cualquier actualización premium futura.</string>
+    <string name="shop_custom_bg">Cambiar fondo de pantalla</string>
+    <string name="shop_custom_bg_desc">Elige un fondo de pantalla de tu galería</string>
+    <string name="this_is_pro">Esta es una característica premium</string>
 </resources>

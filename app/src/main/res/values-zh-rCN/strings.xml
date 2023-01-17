@@ -328,4 +328,8 @@
     <string name="settings_change_player">正在播放主题</string>
     <string name="settings_change_background">更换壁纸</string>
     <string name="settings_pro_title">获得溢价</string>
+    <string name="shop_desc">高级包可解锁所有主题、高级功能，并包括任何未来的高级更新。</string>
+    <string name="this_is_pro">这是一项高级功能</string>
+    <string name="shop_custom_bg">更换壁纸</string>
+    <string name="shop_custom_bg_desc">从图库中选择壁纸</string>
 </resources>
