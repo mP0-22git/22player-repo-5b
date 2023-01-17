@@ -3,7 +3,6 @@ package com.kabouzeid.trebl.ui.fragments.mainactivity.library.pager;
 import static android.app.Activity.RESULT_OK;
 
 import android.app.Dialog;
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -45,9 +44,6 @@ import com.kabouzeid.trebl.ui.fragments.mainactivity.folders.FoldersFragment;
 import com.kabouzeid.trebl.ui.fragments.player.NowPlayingScreen;
 import com.kabouzeid.trebl.util.PreferenceUtil;
 import com.kabouzeid.trebl.util.ViewUtil;
-
-import java.net.URI;
-
 
 public class MoreFragment extends Fragment {
     private ConstraintLayout foldersButton,settingsButton,scanButton, proButton, playerButton, themeButton, bgButton;
@@ -302,7 +298,6 @@ public class MoreFragment extends Fragment {
         currentUri = pref.getString("imageUri", "");
 
         resetButton.setOnClickListener(view -> {
-
             SharedPreferences.Editor editor = pref.edit();
             editor.remove("imageUri");
             editor.apply();
