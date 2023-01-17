@@ -132,7 +132,14 @@ public class MoreFragment extends Fragment {
             proButton.setVisibility(View.VISIBLE);
         }
 
-        bgButton.setOnClickListener(view15 -> showBgDialog());
+        bgButton.setOnClickListener(view15 -> {
+            if (!App.isProVersion()) {
+                Toast.makeText(getActivity(), R.string.this_is_pro, Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getActivity(), PurchaseActivity.class));
+            }else{
+                showBgDialog();
+            }
+        });
     }
 
     @Override
