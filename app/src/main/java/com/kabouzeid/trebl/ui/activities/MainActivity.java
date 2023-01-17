@@ -136,7 +136,9 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Negati
 
         blurryBg.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
-        setCustomBg();
+        if (App.isProVersion()) {
+            setCustomBg();
+        }
 
         checkFirstRun();
 

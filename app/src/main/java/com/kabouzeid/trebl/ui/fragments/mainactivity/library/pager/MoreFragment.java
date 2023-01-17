@@ -122,20 +122,13 @@ public class MoreFragment extends Fragment {
         webIntent.setAction(Intent.ACTION_VIEW);
         webIntent.addCategory(Intent.CATEGORY_BROWSABLE);
 
-        if (!App.isProVersion()){
+        if (App.isProVersion()){
             proButton.setVisibility(View.GONE);
         }else{
             proButton.setVisibility(View.VISIBLE);
         }
 
-        bgButton.setOnClickListener(view15 -> {
-            if (!App.isProVersion()) {
-                Toast.makeText(getActivity(), R.string.this_is_pro, Toast.LENGTH_LONG).show();
-                startActivity(new Intent(getActivity(), PurchaseActivity.class));
-            }else{
-                showBgDialog();
-            }
-        });
+        bgButton.setOnClickListener(view15 -> showBgDialog());
     }
 
     @Override
@@ -301,14 +294,20 @@ public class MoreFragment extends Fragment {
             SharedPreferences.Editor editor = pref.edit();
             editor.remove("imageUri");
             editor.apply();
+            bgDialog.dismiss();
             getActivity().recreate();
         });
 
         pickButton.setOnClickListener(view -> {
-            SharedPreferences.Editor editor = pref.edit();
-            editor.remove("imageUri");
-            editor.apply();
-            pickFromGallery();
+            if (App.isProVersion()){
+                SharedPreferences.Editor editor = pref.edit();
+                editor.remove("imageUri");
+                editor.apply();
+                pickFromGallery();
+            } else {
+                Toast.makeText(getActivity(), R.string.this_is_pro, Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getActivity(), PurchaseActivity.class));
+            }
         });
 
         bgDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
