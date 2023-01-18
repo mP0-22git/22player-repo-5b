@@ -340,4 +340,14 @@
     <string name="shop_custom_bg">تغيير خلفية الشاشة</string>
     <string name="shop_custom_bg_desc">اختر خلفية من معرض الصور الخاص بك</string>
     <string name="shop_desc">تفتح الحزمة المميزة جميع السمات والميزات المتميزة وتتضمن أي تحديثات متميزة في المستقبل.</string>
+    <string name="change_bg_dialog_title">تغيير الخلفية</string>
+    <string name="change_bg_dialog_desc">سيتم تطبيق الخلفية جنبا إلى جنب مع الموضوع الحالي</string>
+    <string name="change_bg_dialog_reset_button">إعادة تعيين الخلفية</string>
+    <string name="change_bg_dialog_pick_button">اختيار الخلفية</string>
+    <string name="white_theme_name">أبيض</string>
+    <string name="starry_theme_name">السماء المرصعة بالنجوم (رسوم متحركة)</string>
+    <string name="midnight_theme_name">نجوم منتصف الليل (رسوم متحركة)</string>
+    <string name="blurry_theme_name">طمس</string>
+    <string name="retrowave_theme_name">ريترو</string>
+    <string name="energetic_theme_name">نشيط</string>
 </resources>

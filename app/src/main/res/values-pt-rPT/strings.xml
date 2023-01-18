@@ -245,4 +245,14 @@
     <string name="shop_custom_bg">Change wallpaper</string>
     <string name="shop_custom_bg_desc">Escolha um papel de parede da sua galeria</string>
     <string name="shop_desc">O pacote premium desbloqueia todos os temas, funcionalidades premium e inclui futuras atualizações premium.</string>
+    <string name="change_bg_dialog_pick_button">Escolha o fundo</string>
+    <string name="change_bg_dialog_reset_button">Fundo de reset</string>
+    <string name="change_bg_dialog_desc">O fundo será aplicado juntamente com o tema atual</string>
+    <string name="change_bg_dialog_title">Alterar fundo</string>
+    <string name="white_theme_name">Branco</string>
+    <string name="starry_theme_name">Céu Estrelado (Animado)</string>
+    <string name="midnight_theme_name">Estrelas da Meia-Noite (Animada)</string>
+    <string name="blurry_theme_name">Borrão</string>
+    <string name="retrowave_theme_name">Retro</string>
+    <string name="energetic_theme_name">Energético</string>
 </resources>

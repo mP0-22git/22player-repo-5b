@@ -109,4 +109,14 @@
     <string name="this_is_pro">Dette er en premiumfunksjon</string>
     <string name="shop_custom_bg">Endre bakgrunn</string>
     <string name="shop_custom_bg_desc">Velg et bakgrunnsbilde fra galleriet ditt</string>
+    <string name="change_bg_dialog_pick_button">Velg bakgrunn</string>
+    <string name="change_bg_dialog_reset_button">Tilbakestill bakgrunn</string>
+    <string name="change_bg_dialog_title">Endre bakgrunn</string>
+    <string name="change_bg_dialog_desc">Bakgrunn vil bli brukt sammen med gjeldende tema</string>
+    <string name="white_theme_name">Hvit</string>
+    <string name="starry_theme_name">Stjernehimmelen (animert)</string>
+    <string name="midnight_theme_name">Midnattsstjerner (animert)</string>
+    <string name="blurry_theme_name">Dimme</string>
+    <string name="retrowave_theme_name">Retro</string>
+    <string name="energetic_theme_name">Energisk</string>
 </resources>

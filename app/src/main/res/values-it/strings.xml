@@ -341,4 +341,14 @@
     <string name="shop_custom_bg">Cambia sfondo</string>
     <string name="this_is_pro">Questa è una funzionalità premium</string>
     <string name="shop_desc">Il pacchetto Premium sblocca tutti i temi, le funzionalità premium e include eventuali aggiornamenti premium futuri.</string>
+    <string name="change_bg_dialog_title">Cambia sfondo</string>
+    <string name="change_bg_dialog_desc">Lo sfondo verrà applicato insieme al tema corrente</string>
+    <string name="change_bg_dialog_reset_button">Ripristina sfondo</string>
+    <string name="change_bg_dialog_pick_button">Scegli sfondo</string>
+    <string name="energetic_theme_name">Energico</string>
+    <string name="retrowave_theme_name">Retrò</string>
+    <string name="blurry_theme_name">Sfocatura</string>
+    <string name="starry_theme_name">Cielo stellato (animato)</string>
+    <string name="white_theme_name">White</string>
+    <string name="midnight_theme_name">Cielo di mezzanotte (Animato)</string>
 </resources>

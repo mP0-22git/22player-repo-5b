@@ -19,13 +19,29 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
         android:layout_marginStart="22dp"
-        android:textSize="18sp"
+        android:textSize="19.2sp"
         android:fontFamily="@font/semiboldfont"
         android:textColor="?textColor"
-        android:text="Change Background"
+        android:text="@string/change_bg_dialog_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:layout_marginEnd="22dp"
+        android:textSize="12sp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/semiboldfont"
+        android:textColor="?textColor"
+        android:text="@string/change_bg_dialog_desc"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title"
         />
 
     <ImageView
@@ -39,7 +55,7 @@
         android:backgroundTint="?buttonBackground"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/guideline50"
-        app:layout_constraintTop_toBottomOf="@id/title" />
+        app:layout_constraintTop_toBottomOf="@id/desc" />
 
     <TextView
         android:id="@+id/label"
@@ -48,7 +64,7 @@
         android:layout_marginTop="5dp"
         android:fontFamily="@font/semiboldfont"
         android:textColor="?textColor"
-        android:text="Reset background"
+        android:text="@string/change_bg_dialog_reset_button"
         android:textSize="12dp"
         app:layout_constraintEnd_toEndOf="@id/reset_button"
         app:layout_constraintStart_toStartOf="@id/reset_button"
@@ -74,7 +90,7 @@
         android:backgroundTint="?buttonBackground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/guideline50"
-        app:layout_constraintTop_toBottomOf="@id/title" />
+        app:layout_constraintTop_toBottomOf="@id/desc" />
 
     <ImageView
         android:layout_width="24dp"
@@ -91,7 +107,7 @@
         android:layout_marginTop="5dp"
         android:fontFamily="@font/semiboldfont"
         android:textColor="?textColor"
-        android:text="Pick background"
+        android:text="@string/change_bg_dialog_pick_button"
         android:textSize="12dp"
         app:layout_constraintEnd_toEndOf="@id/pick_button"
         app:layout_constraintStart_toStartOf="@id/pick_button"

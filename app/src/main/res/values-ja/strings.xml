@@ -340,4 +340,14 @@
     <string name="shop_custom_bg_desc">ギャラリーから壁紙を選択してください</string>
     <string name="shop_custom_bg">壁紙を変更する</string>
     <string name="this_is_pro">これはプレミアム機能です</string>
+    <string name="change_bg_dialog_pick_button">背景を選択</string>
+    <string name="change_bg_dialog_reset_button">背景をリセット</string>
+    <string name="change_bg_dialog_desc">背景は現在のテーマと一緒に適用されます</string>
+    <string name="change_bg_dialog_title">背景を変更</string>
+    <string name="midnight_theme_name">ミッドナイトスカイ(アニメーション)</string>
+    <string name="starry_theme_name">星空(アニメ)</string>
+    <string name="white_theme_name">白い</string>
+    <string name="blurry_theme_name">滲む</string>
+    <string name="retrowave_theme_name">レトロ</string>
+    <string name="energetic_theme_name">エネルギッシュ</string>
 </resources>

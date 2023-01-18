@@ -340,4 +340,14 @@
     <string name="this_is_pro">Il s\'agit d\'une fonctionnalité premium</string>
     <string name="shop_custom_bg">Changer le fond d\'écran</string>
     <string name="shop_custom_bg_desc">Choisissez un fond d\'écran dans votre galerie</string>
+    <string name="change_bg_dialog_pick_button">Choisir l\'arrière-plan</string>
+    <string name="change_bg_dialog_reset_button">Réinitialiser l\'arrière-plan</string>
+    <string name="change_bg_dialog_desc">L\'arrière-plan sera appliqué avec le thème actuel</string>
+    <string name="change_bg_dialog_title">Changer d\'arrière-plan</string>
+    <string name="white_theme_name">Blanc</string>
+    <string name="starry_theme_name">Ciel étoilé (animé)</string>
+    <string name="midnight_theme_name">Midnight Stars (animé)</string>
+    <string name="blurry_theme_name">Brouiller</string>
+    <string name="retrowave_theme_name">Rétro</string>
+    <string name="energetic_theme_name">Énergique</string>
 </resources>

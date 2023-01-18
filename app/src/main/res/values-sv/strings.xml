@@ -117,4 +117,15 @@ Vill du radera <b>%1$d</b> låtar?
     <string name="shop_custom_bg">Ändra bakgrundsbild</string>
     <string name="shop_custom_bg_desc">Välj en bakgrundsbild från ditt galleri</string>
     <string name="shop_desc">Premium-paketet låser upp alla teman, premiumfunktioner och inkluderar eventuella framtida premiumuppdateringar.</string>
+    <string name="change_bg_dialog_pick_button">Välj bakgrund</string>
+    <string name="change_bg_dialog_reset_button">Återställ bakgrund</string>
+    <string name="change_bg_dialog_desc">Bakgrunden kommer att tillämpas tillsammans med aktuellt tema</string>
+    <string name="change_bg_dialog_title">Ändra bakgrund</string>
+    <string name="black_theme_name">Svart</string>
+    <string name="white_theme_name">Vit</string>
+    <string name="starry_theme_name">Stjärnhimmel (animerad)</string>
+    <string name="midnight_theme_name">Midnattsstjärnor (animerade)</string>
+    <string name="blurry_theme_name">Oskärpa</string>
+    <string name="retrowave_theme_name">Retro</string>
+    <string name="energetic_theme_name">Energisk</string>
 </resources>

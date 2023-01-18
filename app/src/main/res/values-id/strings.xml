@@ -332,4 +332,14 @@
     <string name="this_is_pro">Ini adalah fitur premium</string>
     <string name="shop_custom_bg">Ubah wallpaper</string>
     <string name="shop_custom_bg_desc">Pilih wallpaper dari galeri Anda</string>
+    <string name="change_bg_dialog_reset_button">Setel ulang latar belakang</string>
+    <string name="change_bg_dialog_pick_button">Pilih latar belakang</string>
+    <string name="change_bg_dialog_desc">Latar belakang akan diterapkan bersama dengan tema saat ini</string>
+    <string name="change_bg_dialog_title">Ubah Latar Belakang</string>
+    <string name="energetic_theme_name">Lincah</string>
+    <string name="retrowave_theme_name">Retro</string>
+    <string name="midnight_theme_name">Midnight Stars (animasi)</string>
+    <string name="starry_theme_name">Starry Sky (animasi)</string>
+    <string name="white_theme_name">Putih</string>
+    <string name="blurry_theme_name">Kabur</string>
 </resources>

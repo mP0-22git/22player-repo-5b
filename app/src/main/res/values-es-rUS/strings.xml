@@ -99,7 +99,7 @@
     <string name="action_show_lyrics">Mostrar letra</string>
     <string name="light_theme_name">Claro</string>
     <string name="dark_theme_name">Oscuro</string>
-    <string name="black_theme_name">Negro (AMOLED)</string>
+    <string name="black_theme_name">Black (AMOLED)</string>
     <string name="always">Siempre</string>
     <string name="only_on_wifi">Sólo con WiFi</string>
     <string name="never">Nunca</string>
@@ -264,7 +264,7 @@
     <string name="playing_notification_description">La notificación de reproducción proporciona acciones para reproducir/pausar, etc.</string>
     <string name="playing_notification_name">Notificación de reproducción</string>
     <string name="only_the_first_5_colors_available">Solo los primeros 5 colores están disponibles en la versión gratuita.</string>
-    <string name="black_theme_is_a_pro_feature">El tema negro es una función de Phonograph Pro.</string>
+    <string name="black_theme_is_a_pro_feature">El tema black es una función de Phonograph Pro.</string>
     <string name="sleep_timer_is_a_pro_feature">El temporizador de apagado es una función de Phonograph Pro</string>
     <string name="folder_view_is_a_pro_feature">La vista de carpetas es una función de Phonograph Pro.</string>
     <string name="restoring_purchase">Restaurando compra...</string>
@@ -332,4 +332,14 @@
     <string name="shop_custom_bg">Cambiar fondo de pantalla</string>
     <string name="shop_custom_bg_desc">Elige un fondo de pantalla de tu galería</string>
     <string name="shop_desc">El paquete Premium desbloquea todos los temas, funciones premium e incluye cualquier actualización premium futura.</string>
+    <string name="change_bg_dialog_pick_button">Elegir fondo</string>
+    <string name="change_bg_dialog_reset_button">Restablecer fondo</string>
+    <string name="change_bg_dialog_desc">Los antecedentes se aplicarán junto con el tema actual</string>
+    <string name="change_bg_dialog_title">Cambiar fondo</string>
+    <string name="energetic_theme_name">Enérgico</string>
+    <string name="retrowave_theme_name">Retro</string>
+    <string name="blurry_theme_name">Desdibujar</string>
+    <string name="midnight_theme_name">Medianoche (Animado)</string>
+    <string name="starry_theme_name">Cielo estrellado (Animado)</string>
+    <string name="white_theme_name">Blanco</string>
 </resources>

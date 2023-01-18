@@ -332,4 +332,14 @@
     <string name="this_is_pro">Đây là một tính năng cao cấp</string>
     <string name="shop_custom_bg">Thay đổi hình nền</string>
     <string name="shop_custom_bg_desc">Chọn hình nền từ thư viện của bạn</string>
+    <string name="change_bg_dialog_title">Thay đổi nền</string>
+    <string name="change_bg_dialog_desc">Nền sẽ được áp dụng cùng với chủ đề hiện tại</string>
+    <string name="change_bg_dialog_reset_button">Đặt lại nền</string>
+    <string name="change_bg_dialog_pick_button">Chọn nền</string>
+    <string name="energetic_theme_name">Đầy nghị lực</string>
+    <string name="retrowave_theme_name">Retro</string>
+    <string name="blurry_theme_name">Mờ</string>
+    <string name="starry_theme_name">Starry sky (Hoạt hình)</string>
+    <string name="white_theme_name">White</string>
+    <string name="midnight_theme_name">Nửa đêm (Hoạt hình)</string>
 </resources>

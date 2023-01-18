@@ -325,4 +325,14 @@
     <string name="this_is_pro">Dit is een premium functie</string>
     <string name="shop_custom_bg">Achtergrond wijzigen</string>
     <string name="shop_desc">Premium pack ontgrendelt alle thema\'s, premium functies en bevat eventuele toekomstige premium updates.</string>
+    <string name="change_bg_dialog_title">Achtergrond wijzigen</string>
+    <string name="change_bg_dialog_desc">Achtergrond wordt samen met het huidige thema toegepast</string>
+    <string name="change_bg_dialog_reset_button">Achtergrond opnieuw instellen</string>
+    <string name="change_bg_dialog_pick_button">Kies achtergrond</string>
+    <string name="energetic_theme_name">Energiek</string>
+    <string name="retrowave_theme_name">Retro</string>
+    <string name="blurry_theme_name">Vervagen</string>
+    <string name="midnight_theme_name">Midnight Stars (Geanimeerd)</string>
+    <string name="starry_theme_name">Starry Sky (Geanimeerd)</string>
+    <string name="white_theme_name">Wit</string>
 </resources>

@@ -340,4 +340,14 @@
     <string name="this_is_pro">Dies ist eine Premium-Funktion</string>
     <string name="shop_custom_bg">Hintergrundbild ändern</string>
     <string name="shop_desc">Das Premium-Paket schaltet alle Themen und Premium-Funktionen frei und enthält alle zukünftigen Premium-Updates.</string>
+    <string name="change_bg_dialog_title">Hintergrund ändern</string>
+    <string name="change_bg_dialog_desc">Hintergrund wird zusammen mit dem aktuellen Thema angewendet</string>
+    <string name="change_bg_dialog_reset_button">Hintergrund zurücksetzen</string>
+    <string name="change_bg_dialog_pick_button">Hintergrund auswählen</string>
+    <string name="energetic_theme_name">Energisch</string>
+    <string name="retrowave_theme_name">Retro</string>
+    <string name="blurry_theme_name">Verwischen</string>
+    <string name="midnight_theme_name">Mitternachtssterne (animiert)</string>
+    <string name="starry_theme_name">Sternenhimmel (animiert)</string>
+    <string name="white_theme_name">Weiß</string>
 </resources>

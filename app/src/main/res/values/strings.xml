@@ -108,12 +108,9 @@
     <string name="white_theme_name">White</string>
     <string name="starry_theme_name">Starry Sky (Animated)</string>
     <string name="midnight_theme_name">Midnight Stars (Animated)</string>
-    <string name="blurry_theme_name">Blurry</string>
-    <string name="retrowave_theme_name">Retrowave</string>
+    <string name="blurry_theme_name">Blur</string>
+    <string name="retrowave_theme_name">Retro</string>
     <string name="energetic_theme_name">Energetic</string>
-   <!-- <string name="darkfade_theme_name">Dark Fade</string>
-    <string name="lightfade_theme_name">Light Fade</string>
-    -->
 
     <string name="always">Always</string>
     <string name="only_on_wifi">Only on Wi-Fi</string>
@@ -383,6 +380,12 @@
     <string name="settings_change_player">Now playing theme</string>
 
     <string name="this_is_pro">This is a premium feature</string>
+
+    <string name="change_bg_dialog_title">Change Background</string>
+    <string name="change_bg_dialog_desc">Background will be applied along with current theme</string>
+    <string name="change_bg_dialog_reset_button">Reset background</string>
+    <string name="change_bg_dialog_pick_button">Pick background</string>
+
 
 
 </resources>

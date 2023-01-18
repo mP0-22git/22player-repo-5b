@@ -335,4 +335,14 @@
     <string name="shop_custom_bg">배경 화면 변경</string>
     <string name="shop_custom_bg_desc">갤러리에서 배경 화면 선택</string>
     <string name="shop_desc">프리미엄 팩은 모든 테마, 프리미엄 기능을 잠금 해제하고 향후 프리미엄 업데이트를 포함합니다.</string>
+    <string name="change_bg_dialog_title">배경 변경</string>
+    <string name="change_bg_dialog_desc">배경은 현재 테마와 함께 적용됩니다.</string>
+    <string name="change_bg_dialog_reset_button">배경 재설정</string>
+    <string name="change_bg_dialog_pick_button">배경 선택</string>
+    <string name="energetic_theme_name">정력적인</string>
+    <string name="retrowave_theme_name">복고풍</string>
+    <string name="blurry_theme_name">흐리게</string>
+    <string name="midnight_theme_name">미드나잇 스타즈 (애니메이션)</string>
+    <string name="starry_theme_name">별이 빛나는 하늘 (애니메이션)</string>
+    <string name="white_theme_name">하얀</string>
 </resources>
