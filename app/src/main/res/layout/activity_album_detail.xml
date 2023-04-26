@@ -136,7 +136,7 @@
                         <ImageView
                             android:layout_width="2dp"
                             android:layout_height="2dp"
-                            android:src="@drawable/ic_baseline_circle_24"
+                            android:src="@drawable/ic_circle_white_24dp"
                             app:tint="?textColor"
                             app:layout_constraintStart_toEndOf="@id/song_count_text"
                             app:layout_constraintEnd_toStartOf="@id/duration_text"
@@ -159,7 +159,7 @@
                         <ImageView
                             android:layout_width="2dp"
                             android:layout_height="2dp"
-                            android:src="@drawable/ic_baseline_circle_24"
+                            android:src="@drawable/ic_circle_white_24dp"
                             app:tint="?textColor"
                             app:layout_constraintStart_toEndOf="@id/duration_text"
                             app:layout_constraintEnd_toStartOf="@id/album_year_text"

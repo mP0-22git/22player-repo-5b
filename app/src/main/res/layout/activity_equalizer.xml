@@ -381,7 +381,8 @@
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:background="@drawable/ic_circle"
+        android:background="@drawable/ic_circle_white_24dp"
+        android:backgroundTint="#20ffffff"
         app:layout_constraintStart_toStartOf="@id/flat"
         app:layout_constraintEnd_toEndOf="@id/flat"
         app:layout_constraintBottom_toBottomOf="@id/flat"

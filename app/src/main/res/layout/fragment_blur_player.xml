@@ -148,9 +148,9 @@
 
                     <ImageView
                         android:id="@+id/details_spacer"
-                        android:layout_width="5dp"
-                        android:layout_height="5dp"
-                        android:src="@drawable/ic_baseline_circle_24"
+                        android:layout_width="3dp"
+                        android:layout_height="3dp"
+                        android:src="@drawable/ic_circle_white_24dp"
                         android:tint="@color/white"
                         android:alpha="0.8"
                         android:layout_marginStart="6dp"
