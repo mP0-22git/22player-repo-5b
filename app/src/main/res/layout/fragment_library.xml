@@ -81,6 +81,24 @@
                 />
 
             <TextView
+                android:id="@+id/genresTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/genres"
+                android:fontFamily="@font/boldfont"
+                android:textSize="24sp"
+                android:alpha="0"
+                android:gravity="center_vertical"
+                android:layout_marginStart="21dp"
+                android:layout_marginEnd="21dp"
+                android:textColor="?libraryTitleColor"
+                app:layout_constraintBottom_toBottomOf="@id/toolbar"
+                app:layout_constraintTop_toTopOf="@id/toolbar"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+
+
+            <TextView
                 android:id="@+id/playlistTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"

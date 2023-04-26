@@ -93,6 +93,9 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     @BindView(R.id.shuffle_fab)
     FloatingActionButton fab_shuffle;
 
+    @BindView(R.id.genresTitle)
+    TextView genresTitle;
+
     SharedPreferences mPreferences;
 
     private MusicLibraryPagerAdapter pagerAdapter;
@@ -212,17 +215,13 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
             tabs.getTabAt(1).getIcon().setAlpha(51);
             tabs.getTabAt(2).setIcon(R.drawable.ic_artist_white_24dp);
             tabs.getTabAt(2).getIcon().setAlpha(51);
-            tabs.getTabAt(3).setIcon(R.drawable.ic_playlist_white_20dp);
+            tabs.getTabAt(3).setIcon(R.drawable.ic_genre_white_24dp);
             tabs.getTabAt(3).getIcon().setAlpha(51);
-            tabs.getTabAt(4).setIcon(R.drawable.ic_settings_white_24dp);
+            tabs.getTabAt(4).setIcon(R.drawable.ic_playlist_white_20dp);
             tabs.getTabAt(4).getIcon().setAlpha(51);
-            try{
-                tabs.getTabAt(PreferenceUtil.getInstance(getActivity()).getLastPage()).getIcon().setAlpha(255);
-            }catch (Exception e){
-                /*Removal of genres tab may cause a null pointer exception here if the user closed the old version of the
-                app with the genre tab open*/
-            }
-
+            tabs.getTabAt(5).setIcon(R.drawable.ic_settings_white_24dp);
+            tabs.getTabAt(5).getIcon().setAlpha(51);
+            tabs.getTabAt(PreferenceUtil.getInstance(getActivity()).getLastPage()).getIcon().setAlpha(255);
 
         switch(PreferenceUtil.getInstance(getActivity()).getLastPage()){
             case 0:
@@ -235,9 +234,12 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
                 artistTitle.animate().alpha(1.0f).translationX(0);
                 break;
             case 3:
-                playlistTitle.animate().alpha(1.0f).translationX(0);
+                genresTitle.animate().alpha(1.0f).translationX(0);
                 break;
             case 4:
+                playlistTitle.animate().alpha(1.0f).translationX(0);
+                break;
+            case 5:
                 moreTitle.animate().alpha(1.0f).translationX(0);
                 break;
         }
@@ -576,12 +578,14 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         tabs.getTabAt(2).getIcon().setAlpha(51);
         tabs.getTabAt(3).getIcon().setAlpha(51);
         tabs.getTabAt(4).getIcon().setAlpha(51);
+        tabs.getTabAt(5).getIcon().setAlpha(51);
         tabs.getTabAt(PreferenceUtil.getInstance(getActivity()).getLastPage()).getIcon().setAlpha(255);
         switch (PreferenceUtil.getInstance(getActivity()).getLastPage()){
             case 0:
                 libraryTitle.animate().alpha(1.0f).translationX(0);
                 albumTitle.animate().alpha(0.0f).translationX(albumTitle.getWidth());
                 artistTitle.animate().alpha(0.0f).translationX(artistTitle.getWidth());
+                genresTitle.animate().alpha(0.0f).translationX(genresTitle.getWidth());
                 playlistTitle.animate().alpha(0.0f).translationX(playlistTitle.getWidth());
                 moreTitle.animate().alpha(0.0f).translationX(moreTitle.getWidth());
                 break;
@@ -589,6 +593,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
                 libraryTitle.animate().alpha(0.0f).translationX(-libraryTitle.getWidth());
                 albumTitle.animate().alpha(1.0f).translationX(0);
                 artistTitle.animate().alpha(0.0f).translationX(artistTitle.getWidth());
+                genresTitle.animate().alpha(0.0f).translationX(genresTitle.getWidth());
                 playlistTitle.animate().alpha(0.0f).translationX(playlistTitle.getWidth());
                 moreTitle.animate().alpha(0.0f).translationX(moreTitle.getWidth());
                 break;
@@ -596,20 +601,31 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
                 libraryTitle.animate().alpha(0.0f).translationX(-libraryTitle.getWidth());
                 albumTitle.animate().alpha(0.0f).translationX(-albumTitle.getWidth());
                 artistTitle.animate().alpha(1.0f).translationX(0);
+                genresTitle.animate().alpha(0.0f).translationX(genresTitle.getWidth());
                 playlistTitle.animate().alpha(0.0f).translationX(playlistTitle.getWidth());
-                moreTitle.animate().alpha(0.0f).translationX(moreTitle.getWidth());
-                break;
-            case 3:
-                libraryTitle.animate().alpha(0.0f).translationX(-libraryTitle.getWidth());
-                albumTitle.animate().alpha(0.0f).translationX(-albumTitle.getWidth());
-                artistTitle.animate().alpha(0.0f).translationX(-artistTitle.getWidth());
-                playlistTitle.animate().alpha(1.0f).translationX(0);
                 moreTitle.animate().alpha(0.0f).translationX(moreTitle.getWidth());
                 break;
             case 4:
                 libraryTitle.animate().alpha(0.0f).translationX(-libraryTitle.getWidth());
                 albumTitle.animate().alpha(0.0f).translationX(-albumTitle.getWidth());
                 artistTitle.animate().alpha(0.0f).translationX(-artistTitle.getWidth());
+                genresTitle.animate().alpha(0.0f).translationX(-genresTitle.getWidth());
+                playlistTitle.animate().alpha(1.0f).translationX(0);
+                moreTitle.animate().alpha(0.0f).translationX(moreTitle.getWidth());
+                break;
+            case 3:
+                libraryTitle.animate().alpha(0.0f).translationX(-libraryTitle.getWidth());
+                albumTitle.animate().alpha(0.0f).translationX(-albumTitle.getWidth());
+                artistTitle.animate().alpha(0.0f).translationX(-artistTitle.getWidth());
+                genresTitle.animate().alpha(1.0f).translationX(0);
+                playlistTitle.animate().alpha(0.0f).translationX(playlistTitle.getWidth());
+                moreTitle.animate().alpha(0.0f).translationX(moreTitle.getWidth());
+                break;
+            case 5:
+                libraryTitle.animate().alpha(0.0f).translationX(-libraryTitle.getWidth());
+                albumTitle.animate().alpha(0.0f).translationX(-albumTitle.getWidth());
+                artistTitle.animate().alpha(0.0f).translationX(-artistTitle.getWidth());
+                genresTitle.animate().alpha(0.0f).translationX(-genresTitle.getWidth());
                 playlistTitle.animate().alpha(0.0f).translationX(-playlistTitle.getWidth());
                 moreTitle.animate().alpha(1.0f).translationX(0);
                 break;
