@@ -61,4 +61,9 @@
 
     <attr name="buttonBackground" format="color" />
 
+    <array name="animated_gradient_text_colors">
+        <item>#E9B17B</item>
+        <item>#ee786e</item>
+    </array>
+
 </resources>

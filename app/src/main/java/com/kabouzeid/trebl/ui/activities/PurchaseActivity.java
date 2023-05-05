@@ -42,7 +42,7 @@ public class PurchaseActivity extends AbsBaseActivity implements BillingProcesso
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.pro_sheet_layout);
+        setContentView(R.layout.activity_purchase);
         setDrawUnderStatusbar();
         ButterKnife.bind(this);
 
@@ -54,19 +54,17 @@ public class PurchaseActivity extends AbsBaseActivity implements BillingProcesso
         restoreButton.setEnabled(false);
         purchaseButton.setEnabled(false);
 
-        restoreButton.setOnClickListener(v -> {
-            billingProcessor.loadOwnedPurchasesFromGoogleAsync(new BillingProcessor.IPurchasesResponseListener() {
-                @Override
-                public void onPurchasesSuccess() {
+        restoreButton.setOnClickListener(v -> billingProcessor.loadOwnedPurchasesFromGoogleAsync(new BillingProcessor.IPurchasesResponseListener() {
+            @Override
+            public void onPurchasesSuccess() {
 
-                }
+            }
 
-                @Override
-                public void onPurchasesError() {
+            @Override
+            public void onPurchasesError() {
 
-                }
-            });
-        });
+            }
+        }));
 
         purchaseButton.setOnClickListener(v -> billingProcessor.purchase(PurchaseActivity.this, App.PRO_VERSION_PRODUCT_ID));
 
