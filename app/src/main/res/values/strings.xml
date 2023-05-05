@@ -346,8 +346,8 @@
     <string name="app_eq">App EQ</string>
     <string name="system_eq">System EQ (if available)</string>
 
-    <string name="rating_text">Do you like the app? We\'d love to know about it! Thank you for your time.</string>
-    <string name="rating_title">Sorry to interrupt, but your rating is very important to us :)</string>
+    <string name="rating_text">Thank you for your feedback!</string>
+    <string name="rating_title">We\'re working hard for a better user experience</string>
 
     <string name="shop_title">Unlock Everything</string>
     <string name="shop_sub">Pro pack unlocks all themes, pro features and supports development.</string>

@@ -13,9 +13,6 @@ import android.provider.MediaStore;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.anjlab.android.iab.v3.BillingProcessor;
-import com.anjlab.android.iab.v3.PurchaseInfo;
-import com.anjlab.android.iab.v3.SkuDetails;
 import com.google.android.material.navigation.NavigationView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
@@ -29,7 +26,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,10 +59,8 @@ import java.util.Random;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.kabouzeid.trebl.ui.rating.FiveStarsDialog;
-import com.kabouzeid.trebl.ui.rating.NegativeReviewListener;
-import com.kabouzeid.trebl.ui.rating.ReviewListener;
 
-public class MainActivity extends AbsSlidingMusicPanelActivity implements NegativeReviewListener, ReviewListener{
+public class MainActivity extends AbsSlidingMusicPanelActivity {
 
     public static final String TAG = MainActivity.class.getSimpleName();
     public static final int APP_INTRO_REQUEST = 100;
@@ -148,27 +142,9 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Negati
         }
         mPreferences.edit().putInt("launchTimes",launchCount+1).apply();
 
-        FiveStarsDialog fiveStarsDialog = new FiveStarsDialog(this,"");
-        fiveStarsDialog.setRateText(getString(R.string.rating_text))
-                .setTitle(getString(R.string.rating_title))
-                .setForceMode(false)
-                .setUpperBound(4)
-                .setNegativeReviewListener(this)
-                .setReviewListener(this)
-                .setSupportEmail("")
-                .showAfter(5);
+        FiveStarsDialog fiveStarsDialog = new FiveStarsDialog(this);
+        fiveStarsDialog.setUpperBound(5).showAfter(5);
     }
-
-    @Override
-    public void onNegativeReview(int stars) {
-        Log.d(TAG, "Negative review " + stars);
-    }
-
-    @Override
-    public void onReview(int stars) {
-        Log.d(TAG, "Review " + stars);
-    }
-
 
     @Override
     protected void onDestroy() {
