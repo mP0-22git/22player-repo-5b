@@ -304,11 +304,10 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         if (isPlaylistPage()) {
             menu.add(0, R.id.action_new_playlist, 0, R.string.new_playlist_title);
         }
-        if (!App.isProVersion()) {
-            MenuItem pro_item = menu.add(Menu.NONE, R.id.action_pro, Menu.NONE, getString(R.string.buy_pro))
-                    .setIcon(R.drawable.ic_menu_pro_24dp);
-            pro_item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        }
+
+        MenuItem proMenuItem = menu.findItem(R.id.action_pro);
+        proMenuItem.setVisible(!App.isProVersion());
+
         Fragment currentFragment = getCurrentFragment();
         if (currentFragment instanceof AbsLibraryPagerRecyclerViewCustomGridSizeFragment && currentFragment.isAdded()) {
             AbsLibraryPagerRecyclerViewCustomGridSizeFragment absLibraryRecyclerViewCustomGridSizeFragment = (AbsLibraryPagerRecyclerViewCustomGridSizeFragment) currentFragment;
