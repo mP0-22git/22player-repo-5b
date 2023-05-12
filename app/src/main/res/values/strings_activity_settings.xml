@@ -10,11 +10,6 @@
         <item>@string/blurry_theme_name</item>
         <item>@string/retrowave_theme_name</item>
         <item>@string/energetic_theme_name</item>
-
-        <!--
-        <item>@string/darkfade_theme_name</item>
-        <item>@string/lightfade_theme_name</item> -->
-
     </string-array>
 
     <string-array name="pref_general_theme_list_values">
@@ -27,10 +22,6 @@
         <item>blurry</item>
         <item>retrowave</item>
         <item>energetic</item>
-        <!--<item>darkfade</item>
-        <item>lightfade</item>
-        -->
-
     </string-array>
 
     <string-array name="pref_select_eq">

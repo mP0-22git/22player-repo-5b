@@ -77,9 +77,6 @@ public abstract class AbsThemeActivity extends ATHToolbarActivity {
         }else if(PreferenceUtil.getInstance(this).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("white")){
             setStatusbarColor(Color.TRANSPARENT);
             setLightStatusbar(true);
-        /*}else if(PreferenceUtil.getInstance(this).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("lightfade")){
-            setStatusbarColor(Color.TRANSPARENT);
-            setLightStatusbar(true);*/
         }else if(PreferenceUtil.getInstance(this).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("starry")){
             setStatusbarColor(Color.TRANSPARENT);
         }else if(PreferenceUtil.getInstance(this).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("midnight")){
@@ -93,9 +90,6 @@ public abstract class AbsThemeActivity extends ATHToolbarActivity {
             setStatusbarColor(Color.YELLOW);
             setLightStatusbar(true);
         }
-       /* else if(PreferenceUtil.getInstance(this).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("darkfade")){
-            setStatusbarColor(Color.TRANSPARENT);
-        }*/
     }
 
     public void setTaskDescriptionColor(@ColorInt int color) {

@@ -69,8 +69,6 @@ public class SettingsActivity extends AbsBaseActivity implements ColorChooserDia
             toolbar.setBackgroundColor(Color.BLACK);
         }else if(PreferenceUtil.getInstance(this).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("light")) {
             toolbar.setBackgroundColor(ThemeStore.primaryColor(this));
-        /*}else if(PreferenceUtil.getInstance(this).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("lightfade")) {
-            toolbar.setBackgroundColor(ThemeStore.primaryColor(this));*/
         }else if(PreferenceUtil.getInstance(this).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("dark")) {
             toolbar.setBackgroundColor(ThemeStore.primaryColor(this));
         }else{
@@ -255,18 +253,6 @@ public class SettingsActivity extends AbsBaseActivity implements ColorChooserDia
                     startActivity(new Intent(getContext(), PurchaseActivity.class));
                     return false;
                 }
-
-                /*if (themeName.equals("darkfade") && !App.isProVersion()) {
-                    Toast.makeText(getActivity(), "This theme is a pro feature", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(getContext(), PurchaseActivity.class));
-                    return false;
-                }
-
-                if (themeName.equals("lightfade") && !App.isProVersion()) {
-                    Toast.makeText(getActivity(), "This theme is a pro feature", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(getContext(), PurchaseActivity.class));
-                    return false;
-                }*/
 
                 setSummary(generalTheme, o);
 

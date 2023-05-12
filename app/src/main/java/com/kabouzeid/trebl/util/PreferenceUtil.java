@@ -157,10 +157,6 @@ public final class PreferenceUtil {
                 return R.style.Theme_Phonograph_Retrowave;
             case "energetic":
                 return R.style.Theme_Phonograph_Energetic;
-            /*case "darkfade":
-                return R.style.Theme_Phonograph_DarkFade;
-            case "lightfade":
-                return R.style.Theme_Phonograph_LightFade;*/
             default:
                 return R.style.Theme_Phonograph_Light;
         }
