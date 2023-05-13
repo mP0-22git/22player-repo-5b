@@ -5,9 +5,8 @@
 
     <item
         android:id="@+id/action_pro"
-        android:icon="@drawable/ic_new"
+        android:icon="@drawable/ic_menu_pro_24dp"
         android:title="@string/action_pro"
-        android:visible="false"
         app:showAsAction="always" />
 
     <item
