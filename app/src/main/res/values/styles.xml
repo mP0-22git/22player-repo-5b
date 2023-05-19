@@ -34,10 +34,6 @@
 
     <style name="Fab" parent="FabParent" />
 
-    <style name="MusicProgressSlider" parent="MusicProgressSliderParent">
-        <item name="android:thumbOffset">0dp</item>
-    </style>
-
     <style name="Toolbar">
         <item name="titleMarginStart">16dp</item>
         <item name="android:layout_width">match_parent</item>

@@ -275,7 +275,7 @@ public class SettingsActivity extends AbsBaseActivity implements ColorChooserDia
                 return true;
             });
 
-            final ATEColorPreference primaryColorPref = (ATEColorPreference) findPreference("primary_color");
+            final ATEColorPreference primaryColorPref = findPreference("primary_color");
             final int primaryColor = ThemeStore.primaryColor(getActivity());
             primaryColorPref.setColor(primaryColor, ColorUtil.darkenColor(primaryColor));
             primaryColorPref.setOnPreferenceClickListener(preference -> {
@@ -288,7 +288,7 @@ public class SettingsActivity extends AbsBaseActivity implements ColorChooserDia
                 return true;
             });
 
-            final ATEColorPreference accentColorPref = (ATEColorPreference) findPreference("accent_color");
+            final ATEColorPreference accentColorPref = findPreference("accent_color");
             final int accentColor = ThemeStore.accentColor(getActivity());
             accentColorPref.setColor(accentColor, ColorUtil.darkenColor(accentColor));
             accentColorPref.setOnPreferenceClickListener(preference -> {
@@ -301,7 +301,7 @@ public class SettingsActivity extends AbsBaseActivity implements ColorChooserDia
                 return true;
             });
 
-            TwoStatePreference colorNavBar = (TwoStatePreference) findPreference("should_color_navigation_bar");
+            TwoStatePreference colorNavBar = findPreference("should_color_navigation_bar");
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
                 colorNavBar.setVisible(false);
             } else {
@@ -315,7 +315,7 @@ public class SettingsActivity extends AbsBaseActivity implements ColorChooserDia
                 });
             }
 
-            final TwoStatePreference classicNotification = (TwoStatePreference) findPreference("classic_notification");
+            final TwoStatePreference classicNotification = findPreference("classic_notification");
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
                 classicNotification.setVisible(false);
             } else {
@@ -327,7 +327,7 @@ public class SettingsActivity extends AbsBaseActivity implements ColorChooserDia
                 });
             }
 
-            final TwoStatePreference coloredNotification = (TwoStatePreference) findPreference("colored_notification");
+            final TwoStatePreference coloredNotification = findPreference("colored_notification");
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 coloredNotification.setEnabled(PreferenceUtil.getInstance(getActivity()).classicNotification());
             } else {
@@ -339,7 +339,7 @@ public class SettingsActivity extends AbsBaseActivity implements ColorChooserDia
                 });
             }
 
-            final TwoStatePreference colorAppShortcuts = (TwoStatePreference) findPreference("should_color_app_shortcuts");
+            final TwoStatePreference colorAppShortcuts = findPreference("should_color_app_shortcuts");
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N_MR1) {
                 colorAppShortcuts.setVisible(false);
             } else {
@@ -362,34 +362,14 @@ public class SettingsActivity extends AbsBaseActivity implements ColorChooserDia
                 Toast.makeText(getActivity(), "Done! Restart app to take effect.", Toast.LENGTH_LONG).show();
                 return true;
             });
-          /*  if (!hasEqualizer()) {
-                equalizer.setEnabled(false);
-                equalizer.setSummary(getResources().getString(R.string.no_equalizer));
-            }
-            equalizer.setOnPreferenceClickListener(preference -> {
-                NavigationUtil.openEqualizer(getActivity());
+
+            final Preference credits = findPreference("credits");
+            credits.setOnPreferenceClickListener(preference -> {
+                startActivity(new Intent(getActivity(),CreditActivity.class));
                 return true;
             });
 
-           */
-
-            final Preference credits = findPreference("credits");
-            credits.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    startActivity(new Intent(getActivity(),CreditActivity.class));
-                    return true;
-                }
-            });
-
             updateNowPlayingScreenSummary();
-        }
-
-        private boolean hasEqualizer() {
-            final Intent effects = new Intent(AudioEffect.ACTION_DISPLAY_AUDIO_EFFECT_CONTROL_PANEL);
-            PackageManager pm = getActivity().getPackageManager();
-            ResolveInfo ri = pm.resolveActivity(effects, 0);
-            return ri != null;
         }
 
         @Override

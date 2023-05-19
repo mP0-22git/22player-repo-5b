@@ -15,38 +15,6 @@
         android:src="@drawable/gradient_stars_1"
         />
 
-    <!--
-    <com.flaviofaria.kenburnsview.KenBurnsView
-        android:id="@+id/album_bg"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@android:color/transparent"
-        android:visibility="?KenVisibilityMode"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
-
-    <ImageView
-        android:id="@+id/gradient_light_bg"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:visibility="?lightKenVisibilityMode"
-        android:src="@drawable/gradient_ken_light"
-        />
-
-    <ImageView
-        android:id="@+id/gradient_dark_bg"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:visibility="?darkKenVisibilityMode"
-        android:src="@drawable/gradient_ken_dark"
-        />
-        -->
-
     <ImageView
         android:id="@+id/blurry_bg"
         android:layout_width="match_parent"
