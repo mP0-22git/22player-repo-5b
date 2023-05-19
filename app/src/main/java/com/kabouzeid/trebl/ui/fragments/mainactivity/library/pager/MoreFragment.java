@@ -280,7 +280,7 @@ public class MoreFragment extends Fragment {
     }
 
     private void showBgDialog(){
-        ImageView resetButton, pickButton;
+        Button resetButton, pickButton;
         bgDialog = new Dialog(getActivity());
         bgDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         bgDialog.setContentView(R.layout.dialog_change_background);
