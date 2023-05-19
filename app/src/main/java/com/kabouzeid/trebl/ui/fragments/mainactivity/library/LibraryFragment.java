@@ -75,26 +75,20 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     @BindView(R.id.pager)
     ViewPager pager;
 
-    @BindView(R.id.libraryTitle)
-    TextView libraryTitle;
+    @BindView(R.id.title_primary)
+    TextView title_primary;
 
-    @BindView(R.id.albumTitle)
-    TextView albumTitle;
-
-    @BindView(R.id.artistTitle)
-    TextView artistTitle;
-
-    @BindView(R.id.playlistTitle)
-    TextView playlistTitle;
-
-    @BindView(R.id.moreTitle)
-    TextView moreTitle;
+    @BindView(R.id.title_secondary)
+    TextView title_secondary;
 
     @BindView(R.id.shuffle_fab)
     FloatingActionButton fab_shuffle;
 
-    @BindView(R.id.genresTitle)
-    TextView genresTitle;
+    TextView activeTitle, inactiveTitle;
+
+    private static final int TITLE_TRANSLATION_DISTANCE = 200;
+
+    private String[] labels;
 
     SharedPreferences mPreferences;
 
@@ -206,43 +200,12 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         pager.setAdapter(pagerAdapter);
         pager.setOffscreenPageLimit(pagerAdapter.getCount() - 1);
 
-        mPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        tabs.setupWithViewPager(pager);
 
-            tabs.setupWithViewPager(pager);
-            tabs.getTabAt(0).setIcon(R.drawable.ic_music_note_white_24dp);
-            tabs.getTabAt(0).getIcon().setAlpha(51);
-            tabs.getTabAt(1).setIcon(R.drawable.ic_album_white_24dp);
-            tabs.getTabAt(1).getIcon().setAlpha(51);
-            tabs.getTabAt(2).setIcon(R.drawable.ic_artist_white_24dp);
-            tabs.getTabAt(2).getIcon().setAlpha(51);
-            tabs.getTabAt(3).setIcon(R.drawable.ic_genre_white_24dp);
-            tabs.getTabAt(3).getIcon().setAlpha(51);
-            tabs.getTabAt(4).setIcon(R.drawable.ic_playlist_white_20dp);
-            tabs.getTabAt(4).getIcon().setAlpha(51);
-            tabs.getTabAt(5).setIcon(R.drawable.ic_settings_white_24dp);
-            tabs.getTabAt(5).getIcon().setAlpha(51);
-            tabs.getTabAt(PreferenceUtil.getInstance(getActivity()).getLastPage()).getIcon().setAlpha(255);
+        int lastPage = PreferenceUtil.getInstance(getActivity()).getLastPage();
 
-        switch(PreferenceUtil.getInstance(getActivity()).getLastPage()){
-            case 0:
-                libraryTitle.animate().alpha(1.0f).translationX(0);
-                break;
-            case 1:
-                albumTitle.animate().alpha(1.0f).translationX(0);
-                break;
-            case 2:
-                artistTitle.animate().alpha(1.0f).translationX(0);
-                break;
-            case 3:
-                genresTitle.animate().alpha(1.0f).translationX(0);
-                break;
-            case 4:
-                playlistTitle.animate().alpha(1.0f).translationX(0);
-                break;
-            case 5:
-                moreTitle.animate().alpha(1.0f).translationX(0);
-                break;
-        }
+        setUpTabIcons(tabs, lastPage);
+        setUpTitles(lastPage);
 
         int primaryColor = ThemeStore.primaryColor(getActivity());
         int normalColor = ToolbarContentTintHelper.toolbarSubtitleColor(getActivity(), primaryColor);
@@ -257,6 +220,29 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
             pager.setCurrentItem(PreferenceUtil.getInstance(getContext()).getLastPage());
         }
         pager.addOnPageChangeListener(this);
+    }
+
+    private void setUpTabIcons(TabLayout tabLayout, int activeTabPosition) {
+        int[] icons = {
+            R.drawable.ic_music_note_white_24dp,
+            R.drawable.ic_album_white_24dp,
+            R.drawable.ic_artist_white_24dp,
+            R.drawable.ic_genre_white_24dp,
+            R.drawable.ic_playlist_white_20dp,
+            R.drawable.ic_settings_white_24dp
+        };
+
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            TabLayout.Tab tab = tabLayout.getTabAt(i);
+            tab.setIcon(icons[i]);
+            tab.getIcon().setAlpha(i == activeTabPosition ? 255 : 51);
+        }
+    }
+
+    private void setUpTitles(int lastPage) {
+        labels = getResources().getStringArray(R.array.labels_array);
+        activeTitle = title_primary;
+        activeTitle.setText(labels[lastPage]);
     }
 
     private void updateTabVisibility() {
@@ -575,65 +561,34 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
 
     @Override
     public void onPageSelected(int position) {
-        PreferenceUtil.getInstance(getActivity()).setLastPage(position);
-        tabs.getTabAt(0).getIcon().setAlpha(51);
-        tabs.getTabAt(1).getIcon().setAlpha(51);
-        tabs.getTabAt(2).getIcon().setAlpha(51);
-        tabs.getTabAt(3).getIcon().setAlpha(51);
-        tabs.getTabAt(4).getIcon().setAlpha(51);
-        tabs.getTabAt(5).getIcon().setAlpha(51);
-        tabs.getTabAt(PreferenceUtil.getInstance(getActivity()).getLastPage()).getIcon().setAlpha(255);
-        switch (PreferenceUtil.getInstance(getActivity()).getLastPage()){
-            case 0:
-                libraryTitle.animate().alpha(1.0f).translationX(0);
-                albumTitle.animate().alpha(0.0f).translationX(albumTitle.getWidth());
-                artistTitle.animate().alpha(0.0f).translationX(artistTitle.getWidth());
-                genresTitle.animate().alpha(0.0f).translationX(genresTitle.getWidth());
-                playlistTitle.animate().alpha(0.0f).translationX(playlistTitle.getWidth());
-                moreTitle.animate().alpha(0.0f).translationX(moreTitle.getWidth());
-                break;
-            case 1:
-                libraryTitle.animate().alpha(0.0f).translationX(-libraryTitle.getWidth());
-                albumTitle.animate().alpha(1.0f).translationX(0);
-                artistTitle.animate().alpha(0.0f).translationX(artistTitle.getWidth());
-                genresTitle.animate().alpha(0.0f).translationX(genresTitle.getWidth());
-                playlistTitle.animate().alpha(0.0f).translationX(playlistTitle.getWidth());
-                moreTitle.animate().alpha(0.0f).translationX(moreTitle.getWidth());
-                break;
-            case 2:
-                libraryTitle.animate().alpha(0.0f).translationX(-libraryTitle.getWidth());
-                albumTitle.animate().alpha(0.0f).translationX(-albumTitle.getWidth());
-                artistTitle.animate().alpha(1.0f).translationX(0);
-                genresTitle.animate().alpha(0.0f).translationX(genresTitle.getWidth());
-                playlistTitle.animate().alpha(0.0f).translationX(playlistTitle.getWidth());
-                moreTitle.animate().alpha(0.0f).translationX(moreTitle.getWidth());
-                break;
-            case 4:
-                libraryTitle.animate().alpha(0.0f).translationX(-libraryTitle.getWidth());
-                albumTitle.animate().alpha(0.0f).translationX(-albumTitle.getWidth());
-                artistTitle.animate().alpha(0.0f).translationX(-artistTitle.getWidth());
-                genresTitle.animate().alpha(0.0f).translationX(-genresTitle.getWidth());
-                playlistTitle.animate().alpha(1.0f).translationX(0);
-                moreTitle.animate().alpha(0.0f).translationX(moreTitle.getWidth());
-                break;
-            case 3:
-                libraryTitle.animate().alpha(0.0f).translationX(-libraryTitle.getWidth());
-                albumTitle.animate().alpha(0.0f).translationX(-albumTitle.getWidth());
-                artistTitle.animate().alpha(0.0f).translationX(-artistTitle.getWidth());
-                genresTitle.animate().alpha(1.0f).translationX(0);
-                playlistTitle.animate().alpha(0.0f).translationX(playlistTitle.getWidth());
-                moreTitle.animate().alpha(0.0f).translationX(moreTitle.getWidth());
-                break;
-            case 5:
-                libraryTitle.animate().alpha(0.0f).translationX(-libraryTitle.getWidth());
-                albumTitle.animate().alpha(0.0f).translationX(-albumTitle.getWidth());
-                artistTitle.animate().alpha(0.0f).translationX(-artistTitle.getWidth());
-                genresTitle.animate().alpha(0.0f).translationX(-genresTitle.getWidth());
-                playlistTitle.animate().alpha(0.0f).translationX(-playlistTitle.getWidth());
-                moreTitle.animate().alpha(1.0f).translationX(0);
-                break;
-        }
+        PreferenceUtil preferenceUtil = PreferenceUtil.getInstance(getActivity());
+        int lastPage = preferenceUtil.getLastPage();
+        preferenceUtil.setLastPage(position);
 
+        updateTabIcons(lastPage, position);
+        updateTitles(lastPage, position);
+    }
+
+    public void updateTabIcons(int lastTab, int currentTab) {
+        tabs.getTabAt(lastTab).getIcon().setAlpha(51);
+        tabs.getTabAt(currentTab).getIcon().setAlpha(255);
+    }
+
+    public void updateTitles(int lastPage, int currentPage) {
+        // swap active title
+        inactiveTitle = activeTitle;
+        activeTitle = activeTitle == title_primary ? title_secondary : title_primary;
+        activeTitle.setText(labels[currentPage]);
+
+        // Determine direction of swipe
+        int direction = (lastPage - currentPage) < 0 ? 1 : -1;
+
+        // pull in active title
+        activeTitle.setTranslationX(direction * TITLE_TRANSLATION_DISTANCE);
+        activeTitle.animate().alpha(1.0f).translationX(0);
+
+        // push out inactive title
+        inactiveTitle.animate().alpha(0.0f).translationX(-direction * TITLE_TRANSLATION_DISTANCE);
     }
 
     @Override

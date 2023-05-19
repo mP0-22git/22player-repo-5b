@@ -389,4 +389,12 @@
 
 
 
+    <string-array name="labels_array">
+        <item>@string/library</item>
+        <item>@string/albums</item>
+        <item>@string/artists</item>
+        <item>@string/genres</item>
+        <item>@string/playlists</item>
+        <item>@string/more</item>
+    </string-array>
 </resources>
