@@ -425,17 +425,13 @@ public class MainActivity extends AbsSlidingMusicPanelActivity {
     }
 
     public void setStarBg(){
-        Random randomInt = new Random();
-        int randomBg = randomInt.nextInt(4);
-        if (randomBg == 0) {
-            starryBg.setImageResource(R.drawable.gradient_stars_1);
-        } else if (randomBg == 1) {
-            starryBg.setImageResource(R.drawable.gradient_stars_2);
-        } else if (randomBg == 2) {
-            starryBg.setImageResource(R.drawable.gradient_stars_3);
-        } else if (randomBg == 3) {
-            starryBg.setImageResource(R.drawable.gradient_stars_4);
-        }
+        int[] backgrounds = {
+                R.drawable.gradient_stars_1,
+                R.drawable.gradient_stars_2,
+                R.drawable.gradient_stars_3,
+                R.drawable.gradient_stars_4
+        };
+        starryBg.setImageResource(backgrounds[new Random().nextInt(4)]);
     }
 
     public void setCustomBg(){
