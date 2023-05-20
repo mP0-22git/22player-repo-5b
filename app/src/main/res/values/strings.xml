@@ -62,7 +62,6 @@
     <string name="label_sampling_rate">Sampling rate</string>
     <string name="action_go_to_artist">Go to artist</string>
     <string name="action_go_to_album">Go to album</string>
-    <string name="label_playing_queue">Playing queue</string>
     <string name="no_results">No results</string>
     <string name="updating">Updating…</string>
     <string name="added_title_to_playing_queue">"Added 1 title to the playing queue."</string>
@@ -102,8 +101,8 @@
     <string name="action_save_playing_queue">Save playing queue</string>
     <string name="action_go_to_start_directory">Go to start directory</string>
     <string name="action_show_lyrics">Show lyrics</string>
-    <string name="light_theme_name">Material Light</string>
-    <string name="dark_theme_name">Material Dark</string>
+    <string name="light_theme_name">Classic Light</string>
+    <string name="dark_theme_name">Classic Dark</string>
     <string name="black_theme_name">Black</string>
     <string name="white_theme_name">White</string>
     <string name="starry_theme_name">Starry Sky (Animated)</string>
@@ -234,13 +233,9 @@
     <string name="maarten_corpel_summary">For making the Play Store illustration and the empty album cover.</string>
     <string name="aleksandar_tesic_summary">For helping me with the design.</string>
     <string name="website">Website</string>
-    <string name="loading_products">Loading products…</string>
     <string name="up_next">Up next</string>
     <string name="pref_title_now_playing_screen_appearance">Appearance</string>
     <string name="intro_label">Introduction</string>
-    <string name="welcome_to_phonograph" translatable="false">Welcome to Music Player</string>
-    <string name="open_playing_queue_instruction">Swipe the card in the now playing screen up to reveal the full playing queue.</string>
-    <string name="rearrange_playing_queue_instruction">Rearrange the playing queue by dragging a song from its track number.</string>
     <string name="library">Library</string>
     <string name="folders">Folders</string>
     <string name="saved_playlist_to">Saved playlist to %s.</string>
@@ -288,12 +283,8 @@
     <string name="playing_notification_description">The playing notification provides actions for play/pause etc.</string>
     <string name="playing_notification_name">Playing notification</string>
     <string name="only_the_first_5_colors_available">Only the first 5 colors are available in the free version.</string>
-    <string name="black_theme_is_a_pro_feature" translatable="false">This theme is a pro feature.</string>
     <string name="sleep_timer_is_a_pro_feature" translatable="false">Sleep timer is a Pro feature</string>
     <string name="folder_view_is_a_pro_feature" translatable="false">Folder view is a Pro feature.</string>
-    <string name="restoring_purchase">Restoring purchase…</string>
-    <string name="could_not_restore_purchase">Could not restore purchase.</string>
-    <string name="purchase">Purchase</string>
     <string name="restore">Restore</string>
     <string name="no_purchase_found">No purchase found.</string>
     <string name="eugene_cheung_summary">For his contributions to the source code.</string>
@@ -322,26 +313,10 @@
     <string name="finish_current_music_sleep_timer">Finish last song</string>
     <string name="dialog_ringtone_title">Set ringtone</string>
     <string name="dialog_ringtone_message" translatable="false">Allow Music Player to modify audio settings</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_credit">CreditActivity</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
     <string name="more">More</string>
     <string name="settings">Settings and info</string>
-    <string name="pro_features">Pro Features</string>
-    <string name="custom_themes">All Themes</string>
-    <string name="no_ads">No Ads</string>
     <string name="go_pro">Purchase</string>
-    <string name="buy_pro_pack">Unlock Everything</string>
-    <string name="future_updates">Future Pro Updates</string>
 
     <string name="app_eq">App EQ</string>
     <string name="system_eq">System EQ (if available)</string>
@@ -350,21 +325,9 @@
     <string name="rating_title">We\'re working hard for a better user experience</string>
 
     <string name="shop_title">Unlock Everything</string>
-    <string name="shop_sub">Pro pack unlocks all themes, pro features and supports development.</string>
     <string name="shop_desc0">No Ads</string>
-    <string name="shop_sub0">This app isn\'t ad supported and aims to stay that way. Pro version will always be ad free.</string>
     <string name="shop_desc1">All Themes</string>
-    <string name="shop_sub1">Animated starry night, blurry, energetic and more!</string>
     <string name="shop_desc2">Pro Features</string>
-    <string name="shop_sub2">Including sleep timer, customization and more!</string>
-    <string name="shop_desc3">All Now Playing Screens</string>
-    <string name="shop_sub3">Includes new Blur player with a clean minimal design.</string>
-    <string name="shop_desc4">Future Pro Updates</string>
-    <string name="shop_sub4">Includes any pro content added in future updates!</string>
-    <string name="shop_custom_bg">Change wallpaper</string>
-    <string name="shop_custom_bg_desc">Choose a wallpaper from your gallery</string>
-    <string name="shop_desc">Pro pack unlocks all themes, pro features and includes any future pro updates.</string>
-
 
     <string name="intro_dialog_title">Pick a theme</string>
     <string name="intro_dialog_sub">Change this at any time in settings.</string>
@@ -383,11 +346,8 @@
     <string name="this_is_pro">This is a premium feature</string>
 
     <string name="change_bg_dialog_title">Change Background</string>
-    <string name="change_bg_dialog_desc">Background will be applied along with current theme</string>
-    <string name="change_bg_dialog_reset_button">Reset background</string>
-    <string name="change_bg_dialog_pick_button">Pick background</string>
-
-
+    <string name="change_bg_dialog_reset_button">Reset</string>
+    <string name="change_bg_dialog_pick_button">Choose</string>
 
     <string-array name="labels_array">
         <item>@string/library</item>

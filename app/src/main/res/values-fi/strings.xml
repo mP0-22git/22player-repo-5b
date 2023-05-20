@@ -58,7 +58,6 @@
     <string name="label_sampling_rate">Samplausnopeus</string>
     <string name="action_go_to_artist">Näytä artisti</string>
     <string name="action_go_to_album">Näytä albumi</string>
-    <string name="label_playing_queue">Toistojono</string>
     <string name="no_results">Ei hakutuloksia</string>
     <string name="updating">Päivitetään...</string>
     <string name="added_title_to_playing_queue">"Kappale lisätty toistojonoon."</string>
@@ -215,13 +214,9 @@
     <string name="maarten_corpel_summary">Play-kaupan kuvituksesta ja tyhjän albumin kannesta.</string>
     <string name="aleksandar_tesic_summary">Sovelluksen ulkonäön kanssa auttamisesta.</string>
     <string name="website">Verkkosivu</string>
-    <string name="loading_products">Ladataan tuotteita...</string>
     <string name="up_next">Seuraavaksi</string>
     <string name="pref_title_now_playing_screen_appearance">Ulkonäkö</string>
     <string name="intro_label">Esittely</string>
-    <string name="welcome_to_phonograph">"Tervetuloa Phonographiin, kauniiseen ja kevyeen musiikkisoittimeen Androidille. "</string>
-    <string name="open_playing_queue_instruction">Vedä korttia Toistetaan parhaillaan -ikkunassa ylös, nähdäksesi koko toistojonon.</string>
-    <string name="rearrange_playing_queue_instruction">Järjestä toistojonoa vetämällä kappaletta sen raitanumerosta.</string>
     <string name="library">Kirjasto</string>
     <string name="folders">Kansiot</string>
     <string name="saved_playlist_to">Soittolista tallennettu paikkaan %s.</string>
@@ -269,12 +264,8 @@
     <string name="playing_notification_description">Toistoilmoitus sisältää nappeja musiikin toistolle/pysäyttämiselle jne.</string>
     <string name="playing_notification_name">Toistoilmoitus</string>
     <string name="only_the_first_5_colors_available">Sovelluksen ilmaisversio on rajoitettu 5 ensimmäiseen värivaihtoehtoon.</string>
-    <string name="black_theme_is_a_pro_feature">Musta teema on Phonograph Pro:n ominaisuus.</string>
     <string name="sleep_timer_is_a_pro_feature">Herätyskello on Phonograph Pro:n ominaisuus.</string>
     <string name="folder_view_is_a_pro_feature">Kansionäkymä on Phonograph Pro:n ominaisuus.</string>
-    <string name="restoring_purchase">Palautetaan ostoa...</string>
-    <string name="could_not_restore_purchase">Ei voitu palauttaa ostoa.</string>
-    <string name="purchase">Osta</string>
     <string name="restore">Palauta</string>
     <string name="no_purchase_found">Ostoa ei löytynyt.</string>
     <string name="eugene_cheung_summary">Työpanoksesta sovelluksen lähdekoodin parissa.</string>

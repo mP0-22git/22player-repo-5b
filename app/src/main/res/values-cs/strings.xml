@@ -58,7 +58,6 @@
     <string name="label_sampling_rate">Vzorkovací frekvence</string>
     <string name="action_go_to_artist">Přejít na interpreta</string>
     <string name="action_go_to_album">Přejít do alba</string>
-    <string name="label_playing_queue">Fronta</string>
     <string name="no_results">Žádné výsledky</string>
     <string name="updating">Aktualizace...</string>
     <string name="added_title_to_playing_queue">"Přidána 1 skladba do fronty."</string>
@@ -215,13 +214,9 @@
     <string name="maarten_corpel_summary">"Za vytvoření ilustrace do Play Store a prázdného obalu alba. "</string>
     <string name="aleksandar_tesic_summary">"Za pomoc s designem. "</string>
     <string name="website">"Stránka "</string>
-    <string name="loading_products">"Načítání výrobků... "</string>
     <string name="up_next">"Další "</string>
     <string name="pref_title_now_playing_screen_appearance">Vzhled</string>
     <string name="intro_label">"Úvod "</string>
-    <string name="welcome_to_phonograph">"Vítejte ve Phonographu, krásném a lehkém přehrávači pro Android. "</string>
-    <string name="open_playing_queue_instruction">"Potáhněte kartu v obrazovce Právě přehrávané nahoru pro zobrazení celé fronty přehrávání. "</string>
-    <string name="rearrange_playing_queue_instruction">"Změňte pořadí fronty přetažením skladby za její číslo. "</string>
     <string name="library">"Knihovna "</string>
     <string name="folders">"Složky "</string>
     <string name="saved_playlist_to">Uloženo do playlistu %s.</string>
@@ -269,12 +264,8 @@
     <string name="playing_notification_description">Oznámení o přehrávání obsahuje akce pro přehrávání/pauzu atd.</string>
     <string name="playing_notification_name">Oznámení o přehrávání</string>
     <string name="only_the_first_5_colors_available">Ve verzi zdarma je dostupných pouze prvních 5 barev.</string>
-    <string name="black_theme_is_a_pro_feature">Černý motiv je funkce Phonograph Pro.</string>
     <string name="sleep_timer_is_a_pro_feature">Časovač vypnutí je funkce Phonograph Pro.</string>
     <string name="folder_view_is_a_pro_feature">Prohlížení složek je funkce Phonograph Pro.</string>
-    <string name="restoring_purchase">Obnovení nákupu...</string>
-    <string name="could_not_restore_purchase">Nákup nelze obnovit.</string>
-    <string name="purchase">Zakoupit</string>
     <string name="restore">Obnovit</string>
     <string name="no_purchase_found">Nebyl nalezen žádný nákup.</string>
     <string name="eugene_cheung_summary">Pro příspěvky ke zdrojovému kódu.</string>

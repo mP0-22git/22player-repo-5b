@@ -55,7 +55,6 @@
     <string name="label_sampling_rate">Самплинг Рейт</string>
     <string name="action_go_to_artist">Отиди при артистът</string>
     <string name="action_go_to_album">Отиди в албум</string>
-    <string name="label_playing_queue">Възпроизвеждащи се файлове</string>
     <string name="no_results">Няма резултати</string>
     <string name="updating">Обновява се...</string>
     <string name="added_title_to_playing_queue">"1 заглавие бе добавено към възпроизвеждащите се песни"</string>
@@ -183,13 +182,9 @@
     <string name="maarten_corpel_summary">За направата на Play Store илюстрацията и обложката по подразбиране.</string>
     <string name="aleksandar_tesic_summary">За помощта относно дизайн</string>
     <string name="website">Уебсайт</string>
-    <string name="loading_products">Зареждане...</string>
     <string name="up_next">Следващи песни</string>
     <string name="pref_title_now_playing_screen_appearance">Изглед</string>
     <string name="intro_label">Въеведение</string>
-    <string name="welcome_to_phonograph">"Добре дошли във Phonograph, красив и лек музикален плеър за Андроид. "</string>
-    <string name="open_playing_queue_instruction">Плъзнете картата в екранът на текущо възпроизвеждащата се песен, за видите списъкът с песни.</string>
-    <string name="rearrange_playing_queue_instruction">Разместете списъкът с текущо възпроизвеждащи се песни, като хванете тракът за неговият номер.</string>
     <string name="library">Библиотека</string>
     <string name="folders">Папки</string>
     <string name="saved_playlist_to">Плейлистът бе запазен в %s.</string>

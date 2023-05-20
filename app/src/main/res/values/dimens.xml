@@ -12,7 +12,6 @@
     <dimen name="toolbar_scrim_height">168dp</dimen>
 
     <dimen name="progress_container_height">20dp</dimen>
-    <dimen name="fab_media_controller_container_height">100dp</dimen>
     <dimen name="media_controller_container_height">104dp</dimen>
 
     <dimen name="status_bar_padding">0dp</dimen>
@@ -61,8 +60,4 @@ http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
     <dimen name="app_widget_card_min_height">40dp</dimen>
     <dimen name="app_widget_card_buttons_width">128dp</dimen>
     <dimen name="app_widget_card_radius">2dp</dimen>
-
-    <dimen name="card_on_app_bar_side_padding">8dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
-
 </resources>

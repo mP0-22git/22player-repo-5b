@@ -58,7 +58,6 @@
     <string name="label_sampling_rate">Örnekleme oranı</string>
     <string name="action_go_to_artist">Sanatçıya git</string>
     <string name="action_go_to_album">Albüme git</string>
-    <string name="label_playing_queue">Çalma sırası</string>
     <string name="no_results">Sonuç bulunamadı</string>
     <string name="updating">Güncelleniyor...</string>
     <string name="added_title_to_playing_queue">"Çalma sırasına 1 başlık eklendi."</string>
@@ -215,13 +214,9 @@
     <string name="maarten_corpel_summary">Play Store ve boş albüm kapağı düzenlemeleri için.</string>
     <string name="aleksandar_tesic_summary">Tasarımda bana yardımcı olduğu için.</string>
     <string name="website">Web sitesi</string>
-    <string name="loading_products">İçerik yükleniyor...</string>
     <string name="up_next">Sırada olanlar</string>
     <string name="pref_title_now_playing_screen_appearance">Görünüm</string>
     <string name="intro_label">Tanıtım</string>
-    <string name="welcome_to_phonograph">"Phonograph'a Hoşgeldiniz, Android için muhteşem bir müzik çalar. "</string>
-    <string name="open_playing_queue_instruction">Şuan çalınıyor ekranı kartını yukarı kaydırmak çalma sırasının tamamını ortaya çıkarır.</string>
-    <string name="rearrange_playing_queue_instruction">Çalma sırasını yeniden düzenlemek için şarkının parça numarasını kaydırın</string>
     <string name="library">Kitaplık</string>
     <string name="folders">Klasörler</string>
     <string name="saved_playlist_to">Çalma listesi %s kaydedildi.</string>
@@ -269,12 +264,8 @@
     <string name="playing_notification_description">Çalma bildirimi, başlat/duraklat vb. işlemleri sağlar</string>
     <string name="playing_notification_name">Çalma bildirimi</string>
     <string name="only_the_first_5_colors_available">Ücretsiz sürümde sadece ilk 5 renk mevcuttur.</string>
-    <string name="black_theme_is_a_pro_feature">Siyah tema, Phonograph Pro özelliğidir.</string>
     <string name="sleep_timer_is_a_pro_feature">Uyku zamanlayıcı bir Phonograph Pro özelliğidir.</string>
     <string name="folder_view_is_a_pro_feature">Klasör görünümü bir Phonograph Pro özelliğidir.</string>
-    <string name="restoring_purchase">Satın alma geri yükleniyor...</string>
-    <string name="could_not_restore_purchase">Satın alma geri yüklenemedi.</string>
-    <string name="purchase">Satın Al</string>
     <string name="restore">Geri yükle</string>
     <string name="no_purchase_found">Satın alma bulunamadı.</string>
     <string name="eugene_cheung_summary">Kaynak koda yaptığı katkılardan dolayı.</string>

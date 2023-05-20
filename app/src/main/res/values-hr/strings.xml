@@ -58,7 +58,6 @@
     <string name="label_sampling_rate">Brzina uzorkovanja</string>
     <string name="action_go_to_artist">Idi na izvođača</string>
     <string name="action_go_to_album">Idi na album</string>
-    <string name="label_playing_queue">Red čekanja</string>
     <string name="no_results">Nema rezultata</string>
     <string name="updating">Ažuriranje...</string>
     <string name="added_title_to_playing_queue">"1 pjesma je dodana u red čekanja."</string>
@@ -215,13 +214,9 @@
     <string name="maarten_corpel_summary">Za izradu Play Store ilustracije i slike praznog omota albuma.</string>
     <string name="aleksandar_tesic_summary">Za pomoć u dizajnu.</string>
     <string name="website">Web-stranica</string>
-    <string name="loading_products">Učitavanje artikala...</string>
     <string name="up_next">Sljedeće na redu</string>
     <string name="pref_title_now_playing_screen_appearance">Izgled</string>
     <string name="intro_label">Uvod</string>
-    <string name="welcome_to_phonograph">"Dobrodošli u Phonograph, prekrasan i lagan glazbeni player za Android. "</string>
-    <string name="open_playing_queue_instruction">Povucite karticu na zaslonu za reprodukciju kako bi otvorili cijeli red čekanja.</string>
-    <string name="rearrange_playing_queue_instruction">Preuredite red čekanja povlačenjem pjesme za njen broj.</string>
     <string name="library">Biblioteka</string>
     <string name="folders">Mape</string>
     <string name="saved_playlist_to">Popis naslova spremljen u %s.</string>
@@ -269,12 +264,8 @@
     <string name="playing_notification_description">Obavijest reprodukcije pruža radnje za reprodukciju/pauzu itd.</string>
     <string name="playing_notification_name">Obavijest reprodukcije</string>
     <string name="only_the_first_5_colors_available">Samo je prvih 5 boja dostupno u besplatnoj verziji.</string>
-    <string name="black_theme_is_a_pro_feature">Crna tema je Phonograph Pro značajka.</string>
     <string name="sleep_timer_is_a_pro_feature">Tajmer za spavanje je Phonograph Pro značajka.</string>
     <string name="folder_view_is_a_pro_feature">Prikaz mapa je Phonograph Pro značajka.</string>
-    <string name="restoring_purchase">Vraćanje kupnje...</string>
-    <string name="could_not_restore_purchase">Nije moguće vratiti kupnju.</string>
-    <string name="purchase">Kupi</string>
     <string name="restore">Vrati</string>
     <string name="no_purchase_found">Nema pronađenih kupnji.</string>
     <string name="eugene_cheung_summary">Za njegov doprinos izvornom kodu.</string>

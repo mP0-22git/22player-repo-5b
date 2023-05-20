@@ -58,7 +58,6 @@
     <string name="label_sampling_rate">Частота</string>
     <string name="action_go_to_artist">Перейти к исполнителю</string>
     <string name="action_go_to_album">Перейти к альбому</string>
-    <string name="label_playing_queue">Очередь воспроизведения</string>
     <string name="no_results">Нет результатов</string>
     <string name="updating">Обновление...</string>
     <string name="added_title_to_playing_queue">"Композиция добавлена в очередь воспроизведения."</string>
@@ -215,13 +214,9 @@
     <string name="maarten_corpel_summary">За иллюстрации в Play Store и пустые обложки альбомов.</string>
     <string name="aleksandar_tesic_summary">За помощь с дизайном.</string>
     <string name="website">Вебсайт</string>
-    <string name="loading_products">Загрузка продуктов...</string>
     <string name="up_next">Далее</string>
     <string name="pref_title_now_playing_screen_appearance">Вид экрана воспроизведения</string>
     <string name="intro_label">Вступление</string>
-    <string name="welcome_to_phonograph">"Добро пожаловать в Phonograph, красивый и лёгкий плеер для Android"</string>
-    <string name="open_playing_queue_instruction">Проведите по карточке на экране воспроизведения, чтобы просмотреть очередь</string>
-    <string name="rearrange_playing_queue_instruction">Редактируйте очередь воспроизведения, перетаскивая песни за их номер</string>
     <string name="library">"Библиотека "</string>
     <string name="folders">Папки</string>
     <string name="saved_playlist_to">"Плейлист сохранён в %s "</string>
@@ -269,12 +264,8 @@
     <string name="playing_notification_description">С помощью уведомления о воспроизведении можно воспроизводить/ставить на паузу и т.д.</string>
     <string name="playing_notification_name">Уведомление о воспроизведении</string>
     <string name="only_the_first_5_colors_available">Только первые 5 цветов доступны в бесплатной версии.</string>
-    <string name="black_theme_is_a_pro_feature">Чёрная тема это функция Phonograph Pro.</string>
     <string name="sleep_timer_is_a_pro_feature">Таймер сна это функция Phonograph Pro.</string>
     <string name="folder_view_is_a_pro_feature">Просмотр по папкам это функция Phonograph Pro.</string>
-    <string name="restoring_purchase">Восстановление покупки...</string>
-    <string name="could_not_restore_purchase">Невозможно восстановить покупку.</string>
-    <string name="purchase">Купить</string>
     <string name="restore">Восстановить</string>
     <string name="no_purchase_found">Покупка не найдена.</string>
     <string name="eugene_cheung_summary">За его вклад в исходный код.</string>

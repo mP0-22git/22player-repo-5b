@@ -58,7 +58,6 @@
     <string name="label_sampling_rate">Częstotliwość próbkowania</string>
     <string name="action_go_to_artist">Przejdź do wykonawcy</string>
     <string name="action_go_to_album">Przejdź do albumu</string>
-    <string name="label_playing_queue">Kolejka odtwarzania</string>
     <string name="no_results">Brak wyników</string>
     <string name="updating">Aktualizowanie...</string>
     <string name="added_title_to_playing_queue">"Dodano 1 tytuł do kolejki odtwarzania"</string>
@@ -211,13 +210,9 @@
     <string name="maarten_corpel_summary">Za zilustrowanie aplikacji w sklepie Google Play</string>
     <string name="aleksandar_tesic_summary">Za pomoc w pracach nad wyglądem wizualnym</string>
     <string name="website">Strona internetowa</string>
-    <string name="loading_products">Ładowanie produktów...</string>
     <string name="up_next">Za chwilę zagra</string>
     <string name="pref_title_now_playing_screen_appearance">Wygląd</string>
     <string name="intro_label">Wprowadzenie</string>
-    <string name="welcome_to_phonograph">"Witaj w Phonograph, pięknym i lekkim odtwarzaczu muzyki na Androida "</string>
-    <string name="open_playing_queue_instruction">Przesuń kartę na ekranie Obecnie Grane w górę, aby odsłonić pełną kolejkę odtwarzania</string>
-    <string name="rearrange_playing_queue_instruction">Zmień kolejność odtwarzania, przeciągając numer utworu w górę lub w dół kolejki</string>
     <string name="library">Biblioteka</string>
     <string name="folders">Foldery</string>
     <string name="saved_playlist_to">Zapisz listę odtwarzania do %s</string>
@@ -265,12 +260,8 @@
     <string name="playing_notification_description">Powiadomienie odtwarzania pozwala na zatrzymywanie/wznawianie itd.</string>
     <string name="playing_notification_name">Powiadomienie o odtwarzaniu</string>
     <string name="only_the_first_5_colors_available">Tylko 5 pierwszych kolorów jest dostępnych w darmowej wersji.</string>
-    <string name="black_theme_is_a_pro_feature">Czarny motyw jest funkcją Phonograph Pro.</string>
     <string name="sleep_timer_is_a_pro_feature">Wyłączenie czasowe jest funkcją Phonograph Pro.</string>
     <string name="folder_view_is_a_pro_feature">Widok folderów jest funkcją Phonograph Pro.</string>
-    <string name="restoring_purchase">Przywracanie zakupu...</string>
-    <string name="could_not_restore_purchase">Nie można przywrócić zakupu.</string>
-    <string name="purchase">Zakup</string>
     <string name="restore">Przywróć</string>
     <string name="no_purchase_found">Nie znaleziono zakupu.</string>
     <string name="eugene_cheung_summary">Za jego wkład w kod źródłowy.</string>
@@ -298,11 +289,7 @@
     <string name="go_pro">kupno</string>
     <string name="more">Ustawienia</string>
     <string name="settings">Ustawienia</string>
-    <string name="pro_features">dodatkowe funkcje</string>
-    <string name="custom_themes">motywy niestandardowe</string>
-    <string name="no_ads">brak reklam</string>
-    <string name="future_updates">przyszłe aktualizacje premium</string>
-    <string name="buy_pro_pack">kup wersję premium</string>
     <string name="rating_text">Czy podoba Ci się aplikacja? Chcielibyśmy o tym wiedzieć! Dziękuję za poświęcony czas.</string>
     <string name="rating_title">Przepraszamy, że przerywam, ale Twoja ocena jest dla nas bardzo ważna :)</string>
+    <string name="shop_desc0">brak reklam</string>
 </resources>

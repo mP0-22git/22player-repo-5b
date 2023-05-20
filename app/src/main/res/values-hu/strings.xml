@@ -58,7 +58,6 @@
     <string name="label_sampling_rate">Mintavételezés</string>
     <string name="action_go_to_artist">Ugrás az előadóhoz</string>
     <string name="action_go_to_album">Ugrás az albumhoz</string>
-    <string name="label_playing_queue">Lejátszási sor</string>
     <string name="no_results">Nincs találat</string>
     <string name="updating">Frissítés...</string>
     <string name="added_title_to_playing_queue">"1 dal hozzáadva a lejátszási sorhoz."</string>
@@ -211,13 +210,9 @@
     <string name="maarten_corpel_summary">A Play Áruházas illusztrációért és az üres albumborítóért.</string>
     <string name="aleksandar_tesic_summary">A dizájnban való segítségért.</string>
     <string name="website">Weboldal</string>
-    <string name="loading_products">Termékek betöltése...</string>
     <string name="up_next">Lejátszási sor</string>
     <string name="pref_title_now_playing_screen_appearance">Megjelenés</string>
     <string name="intro_label">Bevezető</string>
-    <string name="welcome_to_phonograph">"Üdvözlöm! A Phonograph egy szép és kis méretű zenelejátszó Androidra. "</string>
-    <string name="open_playing_queue_instruction">Húzza fel a kártyát a most játszott képernyőn, hogy megnyissa a lejátszási sort.</string>
-    <string name="rearrange_playing_queue_instruction">A lejátszási sort átrendezheti, ha a dalokat a sorszámuknál megfogva húzni kezdi.</string>
     <string name="library">Könyvtár</string>
     <string name="folders">Mappák</string>
     <string name="saved_playlist_to">Lejátszási lista mentve ide: %s.</string>
@@ -265,12 +260,8 @@
     <string name="playing_notification_description">A lejátszási értesítés lejátszási / szüneteltetési intézkedéseket tartalmaz.</string>
     <string name="playing_notification_name">Értesítés lejátszása</string>
     <string name="only_the_first_5_colors_available">Csak az első 5 szín áll rendelkezésre az ingyenes verzióban.</string>
-    <string name="black_theme_is_a_pro_feature">A fekete téma a Phonograph Pro funkcióban van.</string>
     <string name="sleep_timer_is_a_pro_feature">Az elalvásidőzitő a Phonograph Pro funkcióban van.</string>
     <string name="folder_view_is_a_pro_feature">A mappa nézete a  Phonograph Pro funkcióban van.</string>
-    <string name="restoring_purchase">A vásárlás visszaállítása...</string>
-    <string name="could_not_restore_purchase">A vásárlást nem sikerült visszaállítani.</string>
-    <string name="purchase">Vásárlás</string>
     <string name="restore">Visszaállítás</string>
     <string name="no_purchase_found">Nem található vásárlás.</string>
     <string name="eugene_cheung_summary">A forráskódhoz való hozzájárulásáért.</string>
