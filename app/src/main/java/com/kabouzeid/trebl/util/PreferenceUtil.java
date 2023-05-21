@@ -3,6 +3,7 @@ package com.kabouzeid.trebl.util;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.TypedArray;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
@@ -128,12 +129,21 @@ public final class PreferenceUtil {
 
     @StyleRes
     public int getGeneralTheme() {
-        return getThemeResFromPrefValue(mPreferences.getString(GENERAL_THEME, "black"));
+        return getThemeResFromPrefValue(mPreferences.getString(GENERAL_THEME, "dark"));
     }
+
     public void setGeneralTheme(String theme) {
         final SharedPreferences.Editor editor = mPreferences.edit();
         editor.putString(GENERAL_THEME, theme);
         editor.commit();
+    }
+
+    public boolean checkProTheme(String themeValue, Context context) {
+        int themeName = getThemeResFromPrefValue(themeValue);
+        TypedArray typedArray = context.getTheme().obtainStyledAttributes(themeName, new int[]{R.attr.isProTheme});
+        boolean isProTheme = typedArray.getBoolean(0, false);
+        typedArray.recycle();
+        return isProTheme;
     }
 
     @StyleRes
@@ -141,16 +151,16 @@ public final class PreferenceUtil {
         switch (themePrefValue) {
             case "dark":
                 return R.style.Theme_Phonograph;
-            case "black":
-                return R.style.Theme_Phonograph_Black;
-            case "white":
-                return R.style.Theme_Phonograph_White;
             case "light":
                 return R.style.Theme_Phonograph_Light;
+            case "classiclight":
+                return R.style.Theme_Phonograph_ClassicLight;
+            case "classicdark":
+                return R.style.Theme_Phonograph_ClassicDark;
             case "starry":
                 return R.style.Theme_Phonograph_Stars;
             case "midnight":
-                return R.style.Theme_Phonograph_Midnight_;
+                return R.style.Theme_Phonograph_Midnight;
             case "blurry":
                 return R.style.Theme_Phonograph_Blur;
             case "retrowave":

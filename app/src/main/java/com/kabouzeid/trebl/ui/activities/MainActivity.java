@@ -165,12 +165,12 @@ public class MainActivity extends AbsSlidingMusicPanelActivity {
         proButton = dialog.findViewById(R.id.cl_pro);
 
         darkButton.setOnClickListener(v -> {
-            PreferenceUtil.getInstance(MainActivity.this).setGeneralTheme("black");
+            PreferenceUtil.getInstance(MainActivity.this).setGeneralTheme("dark");
             dialog.dismiss();
         });
 
         lightButton.setOnClickListener(v -> {
-            PreferenceUtil.getInstance(MainActivity.this).setGeneralTheme("white");
+            PreferenceUtil.getInstance(MainActivity.this).setGeneralTheme("light");
             dialog.dismiss();
         });
 

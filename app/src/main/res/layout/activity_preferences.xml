@@ -9,7 +9,8 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         style="@style/Toolbar"
-        android:background="@android:color/transparent" />
+        android:elevation="0dp"
+        android:background="?toolBarColor" />
 
     <FrameLayout
         android:id="@+id/content_frame"

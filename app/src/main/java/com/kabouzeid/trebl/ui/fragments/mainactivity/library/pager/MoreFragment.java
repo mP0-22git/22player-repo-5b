@@ -196,27 +196,23 @@ public class MoreFragment extends Fragment {
         themeList = themeDialog.findViewById(R.id.list_theme);
 
         String[] themeValues = getResources().getStringArray(R.array.pref_general_theme_list_values);
-
         String[] themeNames = getResources().getStringArray(R.array.pref_general_theme_list_titles);
 
         ArrayAdapter mAdapter = new ArrayAdapter(getActivity(), R.layout.list_item, R.id.text_view, themeNames);
-
         themeList.setAdapter(mAdapter);
 
         themeList.setOnItemClickListener((adapterView, view, i, l) -> {
-            if(i==0||i==1){
-                PreferenceUtil.getInstance(getActivity()).setGeneralTheme(themeValues[i]);
+            boolean isProTheme = PreferenceUtil.getInstance(getActivity()).checkProTheme(themeValues[i], getActivity());
+            if (!isProTheme || App.isProVersion()) {
+                PreferenceUtil.getInstance(getActivity()).setGeneralTheme((themeValues[i]));
                 themeDialog.dismiss();
                 getActivity().recreate();
-            }else if(App.isProVersion()){
-                PreferenceUtil.getInstance(getActivity()).setGeneralTheme(themeValues[i]);
-                themeDialog.dismiss();
-                getActivity().recreate();
-            }else{
+            } else {
                 themeDialog.dismiss();
                 startActivity(new Intent(getActivity(), PurchaseActivity.class));
             }
         });
+
         themeDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
         themeDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         themeDialog.getWindow().setWindowAnimations(R.style.DialogAnimation);

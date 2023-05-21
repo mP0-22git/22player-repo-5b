@@ -2,10 +2,6 @@ package com.kabouzeid.trebl.ui.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.graphics.Color;
-import android.media.audiofx.AudioEffect;
 import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.ColorInt;
@@ -37,7 +33,6 @@ import com.kabouzeid.trebl.preferences.LibraryPreferenceDialog;
 import com.kabouzeid.trebl.preferences.NowPlayingScreenPreference;
 import com.kabouzeid.trebl.preferences.NowPlayingScreenPreferenceDialog;
 import com.kabouzeid.trebl.ui.activities.base.AbsBaseActivity;
-import com.kabouzeid.trebl.util.NavigationUtil;
 import com.kabouzeid.trebl.util.PreferenceUtil;
 
 import java.util.Arrays;
@@ -65,14 +60,9 @@ public class SettingsActivity extends AbsBaseActivity implements ColorChooserDia
 
         mPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-        if(PreferenceUtil.getInstance(this).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("white")) {
-            toolbar.setBackgroundColor(Color.BLACK);
-        }else if(PreferenceUtil.getInstance(this).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("light")) {
+        int generalTheme = PreferenceUtil.getInstance(this).getGeneralTheme();
+        if (generalTheme == R.style.Theme_Phonograph_ClassicLight || generalTheme == R.style.Theme_Phonograph_ClassicDark) {
             toolbar.setBackgroundColor(ThemeStore.primaryColor(this));
-        }else if(PreferenceUtil.getInstance(this).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("dark")) {
-            toolbar.setBackgroundColor(ThemeStore.primaryColor(this));
-        }else{
-            toolbar.setBackgroundColor(Color.TRANSPARENT);
         }
 
         setSupportActionBar(toolbar);
@@ -210,48 +200,12 @@ public class SettingsActivity extends AbsBaseActivity implements ColorChooserDia
             generalTheme.setOnPreferenceChangeListener((preference, o) -> {
                 String themeName = (String) o;
 
-                // note: themes are activated based on version
-
-                if (themeName.equals("starry") && !App.isProVersion()) {
-                    Toast.makeText(getActivity(), "This theme is a pro feature", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(getContext(), PurchaseActivity.class));
-                    return false;
-                }
-
-                if (themeName.equals("midnight") && !App.isProVersion()) {
-                    Toast.makeText(getActivity(), "This theme is a pro feature", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(getContext(), PurchaseActivity.class));
-                    return false;
-                }
-
-                if (themeName.equals("blurry") && !App.isProVersion()) {
-                    Toast.makeText(getActivity(), "This theme is a pro feature", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(getContext(), PurchaseActivity.class));
-                    return false;
-                }
-
-                if (themeName.equals("light") && !App.isProVersion()) {
-                    Toast.makeText(getActivity(), "This theme is a pro feature", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(getContext(), PurchaseActivity.class));
-                    return false;
-                }
-
-                if (themeName.equals("dark") && !App.isProVersion()) {
-                    Toast.makeText(getActivity(), "This theme is a pro feature", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(getContext(), PurchaseActivity.class));
-                    return false;
-                }
-
-                if (themeName.equals("retrowave") && !App.isProVersion()) {
-                    Toast.makeText(getActivity(), "This theme is a pro feature", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(getContext(), PurchaseActivity.class));
-                    return false;
-                }
-
-                if (themeName.equals("energetic") && !App.isProVersion()) {
-                    Toast.makeText(getActivity(), "This theme is a pro feature", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(getContext(), PurchaseActivity.class));
-                    return false;
+                if (!App.isProVersion()) {
+                    boolean isProTheme = PreferenceUtil.getInstance(getActivity()).checkProTheme(themeName, getActivity());
+                    if (isProTheme) {
+                        startActivity(new Intent(getContext(), PurchaseActivity.class));
+                        return false;
+                    }
                 }
 
                 setSummary(generalTheme, o);

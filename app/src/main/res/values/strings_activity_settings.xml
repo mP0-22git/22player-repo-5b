@@ -13,10 +13,10 @@
     </string-array>
 
     <string-array name="pref_general_theme_list_values">
-        <item>black</item>
-        <item>white</item>
-        <item>light</item>
         <item>dark</item>
+        <item>light</item>
+        <item>classiclight</item>
+        <item>classicdark</item>
         <item>starry</item>
         <item>midnight</item>
         <item>blurry</item>

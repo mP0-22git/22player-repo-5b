@@ -13,6 +13,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:background="?appBarColor"
         app:elevation="0dp"
         tools:ignore="UnusedAttribute">
 
@@ -25,6 +26,7 @@
                 android:id="@+id/toolbar"
                 style="@style/Toolbar"
                 android:elevation="0dp"
+                android:background="?toolBarColor"
                 tools:ignore="UnusedAttribute">
 
             </androidx.appcompat.widget.Toolbar>

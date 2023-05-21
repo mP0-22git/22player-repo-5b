@@ -1,12 +1,9 @@
 package com.kabouzeid.trebl.ui.activities.base;
 
-import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.ColorInt;
-import androidx.preference.PreferenceManager;
-
+import android.util.TypedValue;
 import android.view.View;
 
 import com.kabouzeid.appthemehelper.ATH;
@@ -24,8 +21,6 @@ import com.kabouzeid.trebl.util.Util;
 
 public abstract class AbsThemeActivity extends ATHToolbarActivity {
 
-    SharedPreferences mPreferences;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(PreferenceUtil.getInstance(this).getGeneralTheme());
@@ -34,61 +29,28 @@ public abstract class AbsThemeActivity extends ATHToolbarActivity {
     }
 
     protected void setDrawUnderStatusbar() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             Util.setAllowDrawUnderStatusBar(getWindow());
-        else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
-            Util.setStatusBarTranslucent(getWindow());
     }
 
-    /**
-     * This will set the color of the view with the id "status_bar" on KitKat and Lollipop.
-     * On Lollipop if no such view is found it will set the statusbar color using the native method.
-     *
-     * @param color the new statusbar color (will be shifted down on Lollipop and above)
-     */
     public void setStatusbarColor(int color) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            final View statusBar = getWindow().getDecorView().getRootView().findViewById(R.id.status_bar);
-            if (statusBar != null) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    statusBar.setBackgroundColor(color);
-                    setLightStatusbarAuto(color);
-                } else {
-                    statusBar.setBackgroundColor(color);
-                }
-            } else if (Build.VERSION.SDK_INT >= 21) {
-                getWindow().setStatusBarColor(color);
-                setLightStatusbarAuto(color);
-            }
+        final View statusBar = getWindow().getDecorView().getRootView().findViewById(R.id.status_bar);
+        if (statusBar != null) {
+            statusBar.setBackgroundColor(color);
+        } else {
+            getWindow().setStatusBarColor(color);
         }
+        setLightStatusbarAuto(color);
     }
 
     public void setStatusbarColorAuto() {
-        // we don't want to use statusbar color because we are doing the color darkening on our own to support KitKat
-        //note: status bar color is assigned here in accordance with the active theme. This is done independently as the status bar is treated as a separate layer
-        setStatusbarColor(ThemeStore.primaryColor(this));
-        mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        if(PreferenceUtil.getInstance(this).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("dark")){
-            setStatusbarColor(ThemeStore.primaryColor(this));
-        }else if(PreferenceUtil.getInstance(this).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("light")){
-            setStatusbarColor(ThemeStore.primaryColor(this));
-        }else if(PreferenceUtil.getInstance(this).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("black")){
-            setStatusbarColor(Color.TRANSPARENT);
-        }else if(PreferenceUtil.getInstance(this).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("white")){
-            setStatusbarColor(Color.TRANSPARENT);
-            setLightStatusbar(true);
-        }else if(PreferenceUtil.getInstance(this).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("starry")){
-            setStatusbarColor(Color.TRANSPARENT);
-        }else if(PreferenceUtil.getInstance(this).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("midnight")){
-            setStatusbarColor(Color.TRANSPARENT);
-        }else if(PreferenceUtil.getInstance(this).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("blurry")){
-            setStatusbarColor(Color.TRANSPARENT);
-        }else if(PreferenceUtil.getInstance(this).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("retrowave")){
-            setStatusbarColor(Color.TRANSPARENT);
-        }
-        else if(PreferenceUtil.getInstance(this).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("energetic")){
-            setStatusbarColor(Color.YELLOW);
-            setLightStatusbar(true);
+        int generalTheme = PreferenceUtil.getInstance(this).getGeneralTheme();
+        if (generalTheme == R.style.Theme_Phonograph_ClassicLight || generalTheme == R.style.Theme_Phonograph_ClassicDark) {
+            setStatusbarColor(ThemeStore.primaryColor((this)));
+        } else {
+            TypedValue typedValue = new TypedValue();
+            getTheme().resolveAttribute(R.attr.statusBarColor, typedValue, true);
+            int statusBarColor = typedValue.data;
+            setLightStatusbarAuto(statusBarColor);
         }
     }
 

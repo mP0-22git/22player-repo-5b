@@ -2,7 +2,9 @@
 <resources>
 
     <attr name="roundSelector" format="reference" />
+
     <attr name="rectSelector" format="reference" />
+
     <attr name="rectSelectorStrong" format="reference" />
 
     <attr name="defaultFooterColor" format="color" />
@@ -10,19 +12,26 @@
     <attr name="toolbarPopupTheme" format="reference" />
 
     <attr name="iconColor" format="color" />
+
     <attr name="dividerColor" format="color" />
 
     <attr name="textColor" format="color" />
 
     <attr name="libraryTitleColor" format="color" />
 
-    <attr name="materialSecondary" format="color" />
-
     <attr name="playlistCardBackground" format="color" />
 
     <attr name="fabIconColor" format="color" />
 
     <attr name="circularProgressTrack" format="color" />
+
+    <attr name="statusBarColor" format="color" />
+
+    <attr name="appBarColor" format="color" />
+
+    <attr name="toolBarColor" format="color" />
+
+    <attr name="isProTheme" format="boolean" />
 
     <attr name="starsVisibilityMode" format="integer">
         <enum name="visible" value="0" />
@@ -44,22 +53,9 @@
         <enum name="gone" value="2" />
     </attr>
 
-    <attr name="lightKenVisibilityMode" format="integer">
-        <enum name="visible" value="0" />
-        <enum name="gone" value="2" />
-    </attr>
-
-    <attr name="darkKenVisibilityMode" format="integer">
-        <enum name="visible" value="0" />
-        <enum name="gone" value="2" />
-    </attr>
-
-    <attr name="KenVisibilityMode" format="integer">
-        <enum name="visible" value="0" />
-        <enum name="gone" value="2" />
-    </attr>
-
     <attr name="buttonBackground" format="color" />
+
+    <attr name="dialogBackgroundColor" format="color" />
 
     <array name="animated_gradient_text_colors">
         <item>#E9B17B</item>

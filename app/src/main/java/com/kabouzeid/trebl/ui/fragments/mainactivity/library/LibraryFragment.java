@@ -1,6 +1,5 @@
 package com.kabouzeid.trebl.ui.fragments.mainactivity.library;
 
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,7 +15,6 @@ import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import androidx.fragment.app.Fragment;
-import androidx.preference.PreferenceManager;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.widget.Toolbar;
 
@@ -29,7 +27,6 @@ import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.afollestad.materialcab.MaterialCab;
 import com.kabouzeid.appthemehelper.ThemeStore;
@@ -90,7 +87,6 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
 
     private String[] labels;
 
-    SharedPreferences mPreferences;
 
     private MusicLibraryPagerAdapter pagerAdapter;
     private MaterialCab cab;
@@ -127,7 +123,6 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         setUpToolbar();
         setUpViewPager();
         setUpShuffleFab();
-
     }
 
     @Override
@@ -146,47 +141,19 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     }
 
     private void setUpToolbar() {
-        int primaryColor = ThemeStore.primaryColor(getActivity());
-
-        //note : here we assign the color of the appbar and toolbar, in accordance with the active themes
-        //automatically uses primary color when material themes are active and defaults to transparent when pro themes are activated. (transparent looks cleaner)
-        mPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-
-        //note: overflow icon does not get colored with the rest of the toolbar icons so we set it here
         TypedValue typedValue = new TypedValue();
         Resources.Theme theme = getActivity().getTheme();
         theme.resolveAttribute(R.attr.libraryTitleColor, typedValue, true);
         @ColorInt int color = typedValue.data;
+        // note: overflow icon does not get colored with the rest of the toolbar icons so we set it here
         toolbar.getOverflowIcon().setColorFilter(color,PorterDuff.Mode.SRC_ATOP);
 
-        if(PreferenceUtil.getInstance(getActivity()).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("dark")){
-            appbar.setBackgroundColor(primaryColor);
-            toolbar.setBackgroundColor(primaryColor);
-        }else if(PreferenceUtil.getInstance(getActivity()).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("light")){
-            appbar.setBackgroundColor(primaryColor);
-            toolbar.setBackgroundColor(primaryColor);
-        }else if(PreferenceUtil.getInstance(getActivity()).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("black")){
-            appbar.setBackgroundColor(Color.TRANSPARENT);
-            toolbar.setBackgroundColor(Color.TRANSPARENT);
-        }else if(PreferenceUtil.getInstance(getActivity()).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("white")){
-            appbar.setBackgroundColor(Color.TRANSPARENT);
-            toolbar.setBackgroundColor(Color.TRANSPARENT);
-        }else if(PreferenceUtil.getInstance(getActivity()).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("starry")){
-            appbar.setBackgroundColor(Color.TRANSPARENT);
-            toolbar.setBackgroundColor(Color.TRANSPARENT);
-        }else if(PreferenceUtil.getInstance(getActivity()).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("midnight")){
-            appbar.setBackgroundColor(Color.TRANSPARENT);
-            toolbar.setBackgroundColor(Color.TRANSPARENT);
-        }else if(PreferenceUtil.getInstance(getActivity()).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("blurry")){
-            appbar.setBackgroundColor(Color.TRANSPARENT);
-            toolbar.setBackgroundColor(Color.TRANSPARENT);
-        }else if(PreferenceUtil.getInstance(getActivity()).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("retrowave")){
-            appbar.setBackgroundColor(Color.TRANSPARENT);
-            toolbar.setBackgroundColor(Color.TRANSPARENT);
-        }else if(PreferenceUtil.getInstance(getActivity()).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("energetic")){
-            appbar.setBackgroundColor(Color.YELLOW);
-            toolbar.setBackgroundColor(Color.YELLOW);
+        int generalTheme = PreferenceUtil.getInstance(getActivity()).getGeneralTheme();
+        if (generalTheme == R.style.Theme_Phonograph_ClassicLight || generalTheme == R.style.Theme_Phonograph_ClassicDark) {
+            appbar.setBackgroundColor(ThemeStore.primaryColor(getActivity()));
+            toolbar.setBackgroundColor(ThemeStore.primaryColor(getActivity()));
         }
+
         getActivity().setTitle(R.string.emptystring);
         getMainActivity().setSupportActionBar(toolbar);
     }
