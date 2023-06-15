@@ -97,7 +97,6 @@ public class MainActivity extends AbsSlidingMusicPanelActivity {
 
     int launchCount;
 
-    private Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,39 +151,6 @@ public class MainActivity extends AbsSlidingMusicPanelActivity {
         App.setOnProVersionChangedListener(null);
     }
 
-    private void showDialog(){
-        ImageView darkButton, lightButton;
-        ConstraintLayout proButton;
-
-        dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.intro_layout);
-
-        darkButton = dialog.findViewById(R.id.dark_button);
-        lightButton = dialog.findViewById(R.id.light_button);
-        proButton = dialog.findViewById(R.id.cl_pro);
-
-        darkButton.setOnClickListener(v -> {
-            PreferenceUtil.getInstance(MainActivity.this).setGeneralTheme("dark");
-            dialog.dismiss();
-        });
-
-        lightButton.setOnClickListener(v -> {
-            PreferenceUtil.getInstance(MainActivity.this).setGeneralTheme("light");
-            dialog.dismiss();
-        });
-
-        proButton.setOnClickListener(v -> startActivity((new Intent(MainActivity.this, PurchaseActivity.class))));
-
-        dialog.setOnDismissListener(dialog1 -> {
-            recreate(); //note: recreate here to show permission dialog on first launch
-        });
-
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.getWindow().setWindowAnimations(R.style.DialogAnimation);
-        dialog.getWindow().setGravity(Gravity.BOTTOM);
-        dialog.show();
     }
 
     private void setMusicChooser(int key) {
@@ -248,7 +214,6 @@ public class MainActivity extends AbsSlidingMusicPanelActivity {
     public void checkFirstRun() {
         boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE).getBoolean("isFirstRun", true);
         if (isFirstRun){
-            showDialog();
             mPreferences.edit().putInt("launchTimes",0).apply();
             mPreferences.edit().putInt("numOfAccess",0).apply();
             getSharedPreferences("PREFERENCE", MODE_PRIVATE)
@@ -412,9 +377,6 @@ public class MainActivity extends AbsSlidingMusicPanelActivity {
         super.onStop();
         if(PreferenceUtil.getInstance(this).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("starry")||PreferenceUtil.getInstance(this).getGeneralTheme()==PreferenceUtil.getThemeResFromPrefValue("midnight")) {
             starsView.onStop();
-        }
-        if(dialog!=null){
-            dialog.dismiss();
         }
     }
 
