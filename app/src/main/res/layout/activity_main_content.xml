@@ -12,7 +12,6 @@
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:visibility="?starsVisibilityMode"
-        android:src="@drawable/gradient_stars_1"
         />
 
     <ImageView
@@ -21,9 +20,6 @@
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:visibility="?blurVisibilityMode"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
-        android:src="@drawable/default_blur"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         />
