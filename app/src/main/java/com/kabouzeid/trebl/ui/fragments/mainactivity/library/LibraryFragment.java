@@ -36,6 +36,7 @@ import com.kabouzeid.trebl.App;
 import com.kabouzeid.trebl.R;
 import com.kabouzeid.trebl.adapter.MusicLibraryPagerAdapter;
 import com.kabouzeid.trebl.dialogs.CreatePlaylistDialog;
+import com.kabouzeid.trebl.dialogs.ScanMediaFolderChooserDialog;
 import com.kabouzeid.trebl.helper.MusicPlayerRemote;
 import com.kabouzeid.trebl.helper.SortOrder;
 import com.kabouzeid.trebl.interfaces.CabHolder;
@@ -258,9 +259,6 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
             menu.add(0, R.id.action_new_playlist, 0, R.string.new_playlist_title);
         }
 
-        MenuItem proMenuItem = menu.findItem(R.id.action_pro);
-        proMenuItem.setVisible(!App.isProVersion());
-
         Fragment currentFragment = getCurrentFragment();
         if (currentFragment instanceof AbsLibraryPagerRecyclerViewCustomGridSizeFragment && currentFragment.isAdded()) {
             AbsLibraryPagerRecyclerViewCustomGridSizeFragment absLibraryRecyclerViewCustomGridSizeFragment = (AbsLibraryPagerRecyclerViewCustomGridSizeFragment) currentFragment;
@@ -280,6 +278,10 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
             menu.removeItem(R.id.action_colored_footers);
             menu.removeItem(R.id.action_sort_order);
         }
+
+        MenuItem proMenuItem = menu.findItem(R.id.action_pro);
+        proMenuItem.setVisible(!App.isProVersion());
+
         Activity activity = getActivity();
         if (activity == null) return;
     }
