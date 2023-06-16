@@ -1,58 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialog_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/dialog_background"
+    android:background="?dialogBackgroundColor"
     android:padding="24dp"
     >
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline50"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
-
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/pick_button"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="19.2sp"
+        android:text="@string/change_bg_dialog_pick_button"
+        android:background="@android:color/transparent"
         android:fontFamily="@font/boldfont"
-        android:textColor="?textColor"
-        android:text="@string/change_bg_dialog_title"
+        android:elevation="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
 
     <Button
-        android:id="@+id/pick_button"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="6dp"
-        android:background="@drawable/button_active"
-        android:text="@string/change_bg_dialog_pick_button"
-        android:fontFamily="@font/semiboldfont"
-        android:elevation="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/guideline50"
-        app:layout_constraintTop_toBottomOf="@id/title" />
-
-    <Button
         android:id="@+id/reset_button"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/change_bg_dialog_reset_button"
-        android:fontFamily="@font/semiboldfont"
-        android:background="@drawable/button_passive"
-
+        android:fontFamily="@font/boldfont"
+        android:background="@android:color/transparent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/guideline50"
-        app:layout_constraintTop_toBottomOf="@id/title" />
+        app:layout_constraintTop_toBottomOf="@id/pick_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

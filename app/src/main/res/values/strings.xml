@@ -357,4 +357,12 @@
         <item>@string/playlists</item>
         <item>@string/more</item>
     </string-array>
+
+    <string-array name="more_array">
+        <item>@string/settings</item>
+        <item>@string/folders</item>
+        <item>@string/settings_change_player</item>
+        <item>@string/settings_change_theme</item>
+        <item>@string/settings_change_background</item>
+    </string-array>
 </resources>
