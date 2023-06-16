@@ -315,6 +315,10 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
 
         int id = item.getItemId();
         switch (id) {
+            case R.id.action_scan:
+                ScanMediaFolderChooserDialog dialog = ScanMediaFolderChooserDialog.create();
+                dialog.show(getActivity().getSupportFragmentManager(), "SCAN_MEDIA_FOLDER_CHOOSER");
+                return true;
             case R.id.action_shuffle_all:
                 MusicPlayerRemote.openAndShuffleQueue(SongLoader.getAllSongs(getActivity()), true);
                 return true;

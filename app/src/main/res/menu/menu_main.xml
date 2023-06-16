@@ -72,6 +72,12 @@
     </item>
 
     <item
+        android:id="@+id/action_scan"
+        android:icon="@drawable/ic_scanner_white_24dp"
+        android:title="@string/scan_media"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_colored_footers"
         android:visible="false"
         android:checkable="true"
