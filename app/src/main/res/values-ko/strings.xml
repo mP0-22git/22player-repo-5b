@@ -310,7 +310,6 @@
     <string name="settings_pro_title">프리미엄 받기</string>
     <string name="settings_pro_desc">모든 테마, 프로 기능 및 광고 없음 잠금 해제</string>
     <string name="this_is_pro">이것은 프리미엄 기능입니다</string>
-    <string name="change_bg_dialog_title">배경 변경</string>
     <string name="change_bg_dialog_reset_button">배경 재설정</string>
     <string name="change_bg_dialog_pick_button">배경 선택</string>
     <string name="energetic_theme_name">정력적인</string>

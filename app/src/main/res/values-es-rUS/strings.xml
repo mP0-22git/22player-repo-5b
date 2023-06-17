@@ -309,7 +309,6 @@
     <string name="this_is_pro">Esta es una característica premium</string>
     <string name="change_bg_dialog_pick_button">Elegir fondo</string>
     <string name="change_bg_dialog_reset_button">Restablecer fondo</string>
-    <string name="change_bg_dialog_title">Cambiar fondo</string>
     <string name="energetic_theme_name">Enérgico</string>
     <string name="retrowave_theme_name">Retro</string>
     <string name="blurry_theme_name">Desdibujar</string>

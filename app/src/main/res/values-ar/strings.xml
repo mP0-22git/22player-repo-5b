@@ -315,7 +315,6 @@
     <string name="settings_pro_title">احصل على بريميوم</string>
     <string name="settings_pro_desc">افتح جميع السمات والميزات الاحترافية وبدون إعلانات</string>
     <string name="this_is_pro">هذه ميزة احترافية</string>
-    <string name="change_bg_dialog_title">تغيير الخلفية</string>
     <string name="change_bg_dialog_reset_button">إعادة تعيين الخلفية</string>
     <string name="change_bg_dialog_pick_button">اختيار الخلفية</string>
     <string name="white_theme_name">أبيض</string>

@@ -317,7 +317,6 @@
     <string name="this_is_pro">これはプレミアム機能です</string>
     <string name="change_bg_dialog_pick_button">背景を選択</string>
     <string name="change_bg_dialog_reset_button">背景をリセット</string>
-    <string name="change_bg_dialog_title">背景を変更</string>
     <string name="midnight_theme_name">ミッドナイトスカイ(アニメーション)</string>
     <string name="starry_theme_name">星空(アニメ)</string>
     <string name="white_theme_name">白い</string>

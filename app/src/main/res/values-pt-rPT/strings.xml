@@ -231,7 +231,6 @@
     <string name="this_is_pro">O pacote premium desbloqueia todos os temas, funcionalidades premium e inclui futuras atualizações premium.</string>
     <string name="change_bg_dialog_pick_button">Escolha o fundo</string>
     <string name="change_bg_dialog_reset_button">Fundo de reset</string>
-    <string name="change_bg_dialog_title">Alterar fundo</string>
     <string name="white_theme_name">Branco</string>
     <string name="starry_theme_name">Céu Estrelado (Animado)</string>
     <string name="midnight_theme_name">Estrelas da Meia-Noite (Animada)</string>

@@ -107,7 +107,6 @@ Vill du radera <b>%1$d</b> låtar?
     <string name="this_is_pro">Detta är en premiumfunktion</string>
     <string name="change_bg_dialog_pick_button">Välj bakgrund</string>
     <string name="change_bg_dialog_reset_button">Återställ bakgrund</string>
-    <string name="change_bg_dialog_title">Ändra bakgrund</string>
     <string name="black_theme_name">Svart</string>
     <string name="white_theme_name">Vit</string>
     <string name="starry_theme_name">Stjärnhimmel (animerad)</string>

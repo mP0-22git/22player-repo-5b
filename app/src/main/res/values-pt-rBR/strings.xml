@@ -312,7 +312,6 @@
     <string name="settings_change_theme">Alterar tema</string>
     <string name="settings_change_background">Alterar papel de parede</string>
     <string name="this_is_pro">Este é um recurso premium</string>
-    <string name="change_bg_dialog_title">Alterar plano de fundo</string>
     <string name="change_bg_dialog_reset_button">Redefinir plano de fundo</string>
     <string name="change_bg_dialog_pick_button">Escolher plano de fundo</string>
     <string name="energetic_theme_name">Energético</string>

@@ -317,7 +317,6 @@
     <string name="this_is_pro">Il s\'agit d\'une fonctionnalité premium</string>
     <string name="change_bg_dialog_pick_button">Choisir l\'arrière-plan</string>
     <string name="change_bg_dialog_reset_button">Réinitialiser l\'arrière-plan</string>
-    <string name="change_bg_dialog_title">Changer d\'arrière-plan</string>
     <string name="white_theme_name">Blanc</string>
     <string name="starry_theme_name">Ciel étoilé (animé)</string>
     <string name="midnight_theme_name">Midnight Stars (animé)</string>

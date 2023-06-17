@@ -345,9 +345,8 @@
 
     <string name="this_is_pro">This is a premium feature</string>
 
-    <string name="change_bg_dialog_title">Change Background</string>
-    <string name="change_bg_dialog_reset_button">Reset</string>
-    <string name="change_bg_dialog_pick_button">Choose</string>
+    <string name="change_bg_dialog_reset_button">Reset Wallpaper</string>
+    <string name="change_bg_dialog_pick_button">Choose Wallpaper</string>
 
     <string-array name="labels_array">
         <item>@string/library</item>

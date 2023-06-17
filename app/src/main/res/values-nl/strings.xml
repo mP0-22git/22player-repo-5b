@@ -305,7 +305,6 @@
     <string name="settings_pro_title">Koop Premium</string>
     <string name="settings_pro_desc">Ontgrendel alle thema\'s, professionele functies en GEEN advertenties</string>
     <string name="this_is_pro">Dit is een premium functie</string>
-    <string name="change_bg_dialog_title">Achtergrond wijzigen</string>
     <string name="change_bg_dialog_reset_button">Achtergrond opnieuw instellen</string>
     <string name="change_bg_dialog_pick_button">Kies achtergrond</string>
     <string name="energetic_theme_name">Energiek</string>

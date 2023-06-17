@@ -314,7 +314,6 @@
     <string name="this_is_pro">这是一项高级功能</string>
     <string name="change_bg_dialog_pick_button">选择背景</string>
     <string name="change_bg_dialog_reset_button">重置背景</string>
-    <string name="change_bg_dialog_title">更改背景</string>
     <string name="white_theme_name">白</string>
     <string name="starry_theme_name">星空（动画）</string>
     <string name="midnight_theme_name">午夜星星（动画）</string>
