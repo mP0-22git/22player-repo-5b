@@ -56,7 +56,7 @@
         <item name="fabIconColor">@color/white</item>
         <item name="circularProgressTrack">#20000000</item>
         <item name="buttonBackground">#e1e1e1</item>
-        <item name="dialogBackgroundColor">#ffffff</item>
+        <item name="dialogBackgroundColor">#F5F5F5</item>
         <item name="md_background_color">@color/md_grey_900</item>
         <item name="statusBarColor">#ffffff</item>
         <item name="appBarColor">#ffffff</item>

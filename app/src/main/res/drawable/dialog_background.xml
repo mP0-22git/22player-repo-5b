@@ -7,7 +7,7 @@
                 android:topRightRadius="20dp"
                 />
             <solid
-                android:color="?cardBackgroundColor"
+                android:color="?dialogBackgroundColor"
                 />
         </shape>
     </item>
