@@ -18,7 +18,6 @@ import android.media.audiofx.AudioEffect;
 import android.media.session.MediaSession;
 import android.os.Binder;
 import android.os.Build;
-import android.net.Uri;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;

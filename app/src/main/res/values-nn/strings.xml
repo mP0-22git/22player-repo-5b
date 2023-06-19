@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_settings">"Innstillingar"</string>
-    <string name="action_about">Om</string>
     <string name="action_search">Søk</string>
     <string name="action_play_next">Spel som neste</string>
     <string name="action_add_to_playing_queue">Legg til i køen</string>
@@ -84,17 +83,9 @@
     <string name="shop_desc0">Ingen annonser noensinne</string>
     <string name="shop_desc1">All Themes</string>
     <string name="shop_desc2">Pro-funksjoner</string>
-    <string name="intro_dialog_title">Velg et tema</string>
-    <string name="intro_dialog_sub">Endre dette når som helst i innstillingene.</string>
-    <string name="intro_dialog_white_button">hvit</string>
-    <string name="intro_dialog_black_button">svart</string>
-    <string name="intro_dialog_pro_title">Lås opp pro-temaer</string>
-    <string name="intro_dialog_pro_pack">Pro-pakke</string>
-    <string name="intro_dialog_pro_desc">Lås opp alle temaer og pro-funksjoner.</string>
     <string name="settings_change_theme">Lås opp alle temaer, pro-funksjoner og INGEN annonser</string>
     <string name="settings_change_player">Spiller nå tema</string>
     <string name="settings_change_background">Endre bakgrunn</string>
-    <string name="settings_pro_title">Få Premium</string>
     <string name="settings_pro_desc">Lås opp alle temaer, pro-funksjoner og INGEN annonser</string>
     <string name="this_is_pro">Dette er en premiumfunksjon</string>
     <string name="change_bg_dialog_pick_button">Velg bakgrunn</string>

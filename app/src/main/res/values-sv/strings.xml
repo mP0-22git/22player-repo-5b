@@ -8,7 +8,6 @@
     <string name="action_share">Dela</string>
     <string name="action_settings">"Inställningar"</string>
     <string name="action_grant">Tillåt</string>
-    <string name="action_about">Om</string>
     <string name="action_clear_playlist">"Rensa spellista "</string>
     <string name="action_add_to_favorites">"Lägg till i favoriter "</string>
     <string name="action_remove_from_favorites">"Ta bort från favoriter "</string>
@@ -92,17 +91,9 @@ Vill du radera <b>%1$d</b> låtar?
     <string name="shop_desc0">Inga annonser någonsin</string>
     <string name="shop_desc1">Alla teman</string>
     <string name="shop_desc2">Pro-funktioner</string>
-    <string name="intro_dialog_title">Välj ett tema</string>
-    <string name="intro_dialog_sub">Ändra detta när som helst i inställningarna.</string>
-    <string name="intro_dialog_white_button">vit</string>
-    <string name="intro_dialog_black_button">svart</string>
-    <string name="intro_dialog_pro_title">Lås upp Pro-teman</string>
-    <string name="intro_dialog_pro_pack">Pro-paket</string>
-    <string name="intro_dialog_pro_desc">Unlock all themes and pro features.</string>
     <string name="settings_change_theme">Ändra tema</string>
     <string name="settings_change_player">Spelar nu tema</string>
     <string name="settings_change_background">Ändra bakgrundsbild</string>
-    <string name="settings_pro_title">Skaffa Premium</string>
     <string name="settings_pro_desc">Lås upp alla teman, proffsfunktioner och INGA annonser</string>
     <string name="this_is_pro">Detta är en premiumfunktion</string>
     <string name="change_bg_dialog_pick_button">Välj bakgrund</string>

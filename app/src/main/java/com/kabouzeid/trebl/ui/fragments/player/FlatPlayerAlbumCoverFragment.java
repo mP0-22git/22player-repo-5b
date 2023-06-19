@@ -23,7 +23,6 @@ import com.kabouzeid.trebl.model.lyrics.AbsSynchronizedLyrics;
 import com.kabouzeid.trebl.model.lyrics.Lyrics;
 import com.kabouzeid.trebl.ui.fragments.AbsMusicServiceFragment;
 import com.kabouzeid.trebl.util.PreferenceUtil;
-import com.kabouzeid.trebl.util.Util;
 import com.kabouzeid.trebl.util.ViewUtil;
 
 import butterknife.BindView;

@@ -13,8 +13,6 @@ import android.view.ViewGroup;
 
 import com.afollestad.materialcab.MaterialCab;
 import com.bumptech.glide.Glide;
-import com.kabouzeid.appthemehelper.util.ColorUtil;
-import com.kabouzeid.appthemehelper.util.MaterialValueHelper;
 import com.kabouzeid.trebl.R;
 import com.kabouzeid.trebl.adapter.base.AbsMultiSelectAdapter;
 import com.kabouzeid.trebl.adapter.base.MediaEntryViewHolder;

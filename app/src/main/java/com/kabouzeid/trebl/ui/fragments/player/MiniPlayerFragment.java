@@ -30,7 +30,6 @@ import com.kabouzeid.trebl.glide.SongGlideRequest;
 import com.kabouzeid.trebl.helper.MusicPlayerRemote;
 import com.kabouzeid.trebl.helper.MusicProgressViewUpdateHelper;
 import com.kabouzeid.trebl.helper.PlayPauseButtonOnClickHandler;
-import com.kabouzeid.trebl.ui.activities.EqualizerActivity;
 import com.kabouzeid.trebl.ui.fragments.AbsMusicServiceFragment;
 import com.kabouzeid.trebl.util.PreferenceUtil;
 import com.kabouzeid.trebl.views.PlayPauseDrawable;

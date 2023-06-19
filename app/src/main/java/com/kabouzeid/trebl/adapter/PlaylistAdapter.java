@@ -1,7 +1,6 @@
 package com.kabouzeid.trebl.adapter;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
 import android.os.Build;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;

@@ -51,7 +51,6 @@ import com.kabouzeid.trebl.helper.menu.SongMenuHelper;
 import com.kabouzeid.trebl.model.Song;
 import com.kabouzeid.trebl.model.lyrics.Lyrics;
 import com.kabouzeid.trebl.ui.activities.EqualizerActivity;
-import com.kabouzeid.trebl.ui.activities.MainActivity;
 import com.kabouzeid.trebl.ui.activities.base.AbsSlidingMusicPanelActivity;
 import com.kabouzeid.trebl.ui.fragments.player.AbsPlayerFragment;
 import com.kabouzeid.trebl.ui.fragments.player.BlurPlayerAlbumCoverFragment;

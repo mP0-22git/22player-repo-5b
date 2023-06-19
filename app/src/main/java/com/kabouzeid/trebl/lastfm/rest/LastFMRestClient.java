@@ -7,7 +7,6 @@ import androidx.annotation.Nullable;
 import com.kabouzeid.trebl.lastfm.rest.service.LastFMService;
 
 import java.io.File;
-import java.util.Locale;
 
 import okhttp3.Cache;
 import okhttp3.Call;

@@ -1,12 +1,9 @@
 package com.kabouzeid.trebl.views;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
+
 import androidx.appcompat.widget.AppCompatImageView;
 import android.util.AttributeSet;
-
-import com.kabouzeid.appthemehelper.util.ATHUtil;
-import com.kabouzeid.trebl.R;
 
 /**
  * @author Karim Abou Zeid (kabouzeid)

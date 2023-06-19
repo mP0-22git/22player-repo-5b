@@ -8,7 +8,6 @@ import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.kabouzeid.trebl.R;
-import com.kabouzeid.trebl.adapter.song.ShuffleButtonSongAdapter;
 import com.kabouzeid.trebl.adapter.song.SongAdapter;
 import com.kabouzeid.trebl.interfaces.LoaderIds;
 import com.kabouzeid.trebl.loader.SongLoader;
