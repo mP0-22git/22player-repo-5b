@@ -16,6 +16,7 @@ import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.PurchaseInfo;
 import com.anjlab.android.iab.v3.SkuDetails;
 import com.kabouzeid.trebl.App;
+import com.kabouzeid.trebl.BuildConfig;
 import com.kabouzeid.trebl.R;
 import com.kabouzeid.trebl.ui.activities.base.AbsBaseActivity;
 
@@ -70,7 +71,7 @@ public class PurchaseActivity extends AbsBaseActivity implements BillingProcesso
 
         closeButton.setOnClickListener(v -> onBackPressed());
 
-        billingProcessor = new BillingProcessor(this, App.GOOGLE_PLAY_LICENSE_KEY, this);
+        billingProcessor = new BillingProcessor(this, BuildConfig.GOOGLE_PLAY_LICENSE_KEY, this);
 
     }
 

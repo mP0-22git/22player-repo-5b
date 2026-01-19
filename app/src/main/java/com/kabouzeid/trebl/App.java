@@ -19,8 +19,7 @@ import java.lang.ref.WeakReference;
  */
 public class App extends Application {
 
-    public static final String GOOGLE_PLAY_LICENSE_KEY = "";
-    public static final String PRO_VERSION_PRODUCT_ID = "";
+    public static final String PRO_VERSION_PRODUCT_ID = "pro_pack";
 
     private static App app;
 
@@ -45,7 +44,7 @@ public class App extends Application {
         }
 
         // automatically restores purchases
-        billingProcessor = new BillingProcessor(this, App.GOOGLE_PLAY_LICENSE_KEY, new BillingProcessor.IBillingHandler() {
+        billingProcessor = new BillingProcessor(this, BuildConfig.GOOGLE_PLAY_LICENSE_KEY, new BillingProcessor.IBillingHandler() {
             @Override
             public void onProductPurchased(@NonNull String productId, PurchaseInfo details) {
             }

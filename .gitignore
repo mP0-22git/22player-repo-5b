@@ -78,3 +78,6 @@ Gemfile.lock
 # DS_Store Mac files
 .DS_Store
 
+# Secrets file (contains API keys, signing config)
+secrets.properties
+
