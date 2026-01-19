@@ -34,7 +34,7 @@
                 android:id="@+id/backButton"
                 android:layout_width="40dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/mcab_nav_back"
+                android:src="@drawable/ic_arrow_back_24dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:padding="3dp"

@@ -1,9 +1,7 @@
-import javax.annotation.Nullable
-
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-android'
-
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
 
 static def gitBranch() {
     def branch = 'GitHub'
@@ -32,31 +30,44 @@ def getProperties(String fileName) {
     return properties
 }
 
-static def getProperty(@Nullable Properties properties, String name) {
-    return properties.getProperty(name) ?: "$name missing"
+static def getProperty(Properties properties, String name, String defaultValue = "") {
+    return properties?.getProperty(name) ?: defaultValue
+}
+
+// Load secrets from secrets.properties (gitignored)
+def secretsFile = rootProject.file("secrets.properties")
+def secrets = new Properties()
+if (secretsFile.exists()) {
+    secrets.load(new FileInputStream(secretsFile))
 }
 
 android {
-    compileSdkVersion 32
-    buildToolsVersion '29.0.3'
+    namespace 'com.kabouzeid.trebl'
+    compileSdk 35
+
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 32
+        minSdk 21
+        targetSdk 35
 
         renderscriptTargetApi 30
         vectorDrawables.useSupportLibrary = true
 
         applicationId 'cyberwolf.musicplayer'
-        versionCode 130
-        versionName '3.0.7'
+        versionCode 147
+        versionName '3.0.10'
+
+        // Inject secrets as BuildConfig fields
+        buildConfigField "String", "GOOGLE_PLAY_LICENSE_KEY", "\"${secrets.getProperty('GOOGLE_PLAY_LICENSE_KEY', '')}\""
     }
     signingConfigs {
         release {
-            Properties properties = getProperties('/Users/karim/Documents/Phonograph/privatekeys/keystore.properties')
-            storeFile file(getProperty(properties, 'storeFile'))
-            keyAlias getProperty(properties, 'keyAlias')
-            storePassword getProperty(properties, 'storePassword')
-            keyPassword getProperty(properties, 'keyPassword')
+            def storeFilePath = secrets.getProperty('STORE_FILE', '')
+            if (storeFilePath && file(storeFilePath).exists()) {
+                storeFile file(storeFilePath)
+                keyAlias secrets.getProperty('KEY_ALIAS', '')
+                storePassword secrets.getProperty('STORE_PASSWORD', '')
+                keyPassword secrets.getProperty('KEY_PASSWORD', '')
+            }
         }
     }
     buildTypes {
@@ -71,37 +82,45 @@ android {
             versionNameSuffix ' (' + defaultConfig.versionCode + ') DEBUG (' + gitBranch() + ')'
         }
     }
-    packagingOptions {
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/NOTICE'
+    packaging {
+        resources {
+            excludes += ['META-INF/LICENSE', 'META-INF/NOTICE']
+        }
     }
-    lintOptions {
-        disable 'MissingTranslation'
-        disable 'InvalidPackage'
+    lint {
+        disable 'MissingTranslation', 'InvalidPackage'
         abortOnError false
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
     }
     buildFeatures {
         viewBinding true
+        buildConfig true
     }
 }
 
 dependencies {
-    implementation 'androidx.annotation:annotation:1.1.0'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.annotation:annotation:1.7.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'androidx.core:core:1.3.0'
-    implementation 'androidx.fragment:fragment:1.2.5'
-    implementation 'androidx.media:media:1.1.0'
-    implementation 'androidx.palette:palette:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.core:core-ktx:1.12.0'
+    implementation 'androidx.fragment:fragment-ktx:1.6.2'
+    implementation 'androidx.media:media:1.7.0'
+    implementation 'androidx.palette:palette-ktx:1.0.0'
     implementation 'androidx.percentlayout:percentlayout:1.0.0'
-    implementation 'androidx.preference:preference:1.1.1'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'androidx.preference:preference-ktx:1.2.1'
+    implementation 'androidx.recyclerview:recyclerview:1.3.2'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.7'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.7.7'
+
+    implementation 'com.google.android.material:material:1.11.0'
 
     implementation 'com.github.kabouzeid:app-theme-helper:1.3.10'
     implementation 'com.github.kabouzeid:RecyclerView-FastScroll:1.0.16-kmod'
@@ -109,51 +128,43 @@ dependencies {
     implementation 'com.github.kabouzeid:AndroidSlidingUpPanel:6'
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
     implementation 'com.afollestad.material-dialogs:commons:0.9.6.0'
-    implementation 'com.afollestad:material-cab:0.1.12'
+    implementation 'com.github.afollestad:material-cab:0.1.12'
     implementation 'com.github.ksoichiro:android-observablescrollview:1.6.0'
     implementation 'com.heinrichreimersoftware:material-intro:2.0.0'
     implementation 'me.zhanghai.android.materialprogressbar:library:1.6.1'
     implementation 'com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:1.0.0'
 
-    implementation 'com.jakewharton:butterknife:10.2.1'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.navigation:navigation-fragment:2.3.5'
-    implementation 'androidx.navigation:navigation-ui:2.3.5'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
+    implementation 'com.jakewharton:butterknife:10.2.3'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
 
-    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
-    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.google.code.gson:gson:2.10.1'
 
-    implementation 'com.anjlab.android.iab.v3:library:2.0.3'
-    implementation 'de.psdev.licensesdialog:licensesdialog:2.1.0'
+    implementation 'com.anjlab.android.iab.v3:library:2.1.0'
+    implementation 'de.psdev.licensesdialog:licensesdialog:2.2.0'
 
-    //Kotlin for starrybg
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-    // Kotlin
-    testImplementation 'junit:junit:4.12'
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.2.71'
-
+    testImplementation 'junit:junit:4.13.2'
 
     //starrybg
     implementation 'com.github.sofakingforever:animated-stars-android:1.1.3'
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.2.71'
 
     implementation 'com.github.bumptech.glide:glide:3.8.0'
     implementation 'com.github.bumptech.glide:okhttp3-integration:1.5.0'
+
     implementation 'org.eclipse.mylyn.github:org.eclipse.egit.github.core:2.1.5'
 
     implementation 'com.github.AdrienPoupa:jaudiotagger:2.2.3'
 
-    //google play ratings API
-    implementation 'com.google.android.play:core:1.8.0'
+    //google play ratings API (updated)
+    implementation 'com.google.android.play:review:2.0.1'
+    implementation 'com.google.android.play:app-update:2.1.0'
 
-    implementation 'com.h6ah4i.android.widget.verticalseekbar:verticalseekbar:0.7.0'
+    implementation 'com.h6ah4i.android.widget.verticalseekbar:verticalseekbar:1.0.0'
 
-    implementation 'me.tankery.lib:circularSeekBar:1.4.0'
+    implementation 'me.tankery.lib:circularSeekBar:1.4.2'
 
-    implementation 'com.google.android.material:material:1.5.0-alpha03'
-
-    implementation 'com.github.Mursaat:AnimatedGradientTextView:v0.0.6'
+    // AnimatedGradientTextView removed - repo no longer available
 }

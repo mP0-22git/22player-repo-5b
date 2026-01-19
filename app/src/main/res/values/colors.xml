@@ -31,4 +31,10 @@
         <item>@color/lightblue</item>
     </integer-array>
 
+    <!-- Material Design colors for dialogs -->
+    <color name="md_red_900">#B71C1C</color>
+    <color name="md_indigo_500">#3F51B5</color>
+    <color name="md_blue_grey_500">#607D8B</color>
+    <color name="md_grey_50">#FAFAFA</color>
+
 </resources>

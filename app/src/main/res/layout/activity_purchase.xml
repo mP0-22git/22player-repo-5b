@@ -65,7 +65,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             />
 
-        <com.mursaat.extendedtextview.AnimatedGradientTextView
+        <TextView
             android:id="@+id/desc0"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -78,14 +78,9 @@
             app:layout_constraintBottom_toTopOf="@id/desc1"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginBottom="12dp"
-            app:colors="@array/animated_gradient_text_colors"
-            app:simultaneousColors="2"
-            app:angle="45"
-            app:speed="3000"
-            app:maxFPS="30"
             />
 
-        <com.mursaat.extendedtextview.AnimatedGradientTextView
+        <TextView
             android:id="@+id/desc1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -98,14 +93,9 @@
             app:layout_constraintBottom_toTopOf="@id/desc2"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginBottom="12dp"
-            app:colors="@array/animated_gradient_text_colors"
-            app:simultaneousColors="2"
-            app:angle="45"
-            app:speed="3000"
-            app:maxFPS="30"
             />
 
-        <com.mursaat.extendedtextview.AnimatedGradientTextView
+        <TextView
             android:id="@+id/desc2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -118,11 +108,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/buy_button"
             android:layout_marginBottom="24dp"
-            app:colors="@array/animated_gradient_text_colors"
-            app:simultaneousColors="2"
-            app:angle="45"
-            app:speed="3000"
-            app:maxFPS="30"
             />
 
     <Button

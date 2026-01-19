@@ -37,7 +37,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
-            <com.mursaat.extendedtextview.AnimatedGradientTextView
+            <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -46,12 +46,7 @@
                 android:fontFamily="@font/semiboldfont"
                 android:textColor="?textColor"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:colors="@array/animated_gradient_text_colors"
-                app:simultaneousColors="2"
-                app:angle="45"
-                app:speed="3000"
-                app:maxFPS="30"/>
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
                 android:layout_width="match_parent"
