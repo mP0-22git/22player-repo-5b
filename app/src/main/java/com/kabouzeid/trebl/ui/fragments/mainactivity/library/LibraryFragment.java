@@ -11,6 +11,10 @@ import android.os.Bundle;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+//import com.google.android.gms.ads.MobileAds;
+//import com.google.android.gms.ads.initialization.InitializationStatus;
+//import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
@@ -60,6 +64,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+//import com.google.android.gms.ads.AdRequest;
+//import com.google.android.gms.ads.AdView;
+
 public class LibraryFragment extends AbsMainActivityFragment implements CabHolder, MainActivity.MainActivityFragmentCallbacks, ViewPager.OnPageChangeListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
     private Unbinder unbinder;
@@ -88,6 +95,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
 
     private String[] labels;
 
+//    private AdView mAdView;
 
     private MusicLibraryPagerAdapter pagerAdapter;
     private MaterialCab cab;
@@ -103,6 +111,16 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_library, container, false);
         unbinder = ButterKnife.bind(this, view);
+
+//        MobileAds.initialize(getActivity(), new OnInitializationCompleteListener() {
+//            @Override
+//            public void onInitializationComplete(InitializationStatus initializationStatus) {
+//            }
+//        });
+
+//        mAdView = view.findViewById(R.id.adView);
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        mAdView.loadAd(adRequest);
         return view;
     }
 

@@ -142,7 +142,14 @@ public class ArtistImageFetcher implements DataFetcher<InputStream> {
 
             }
         } finally {
-            retriever.release();
+            try { // idk just added a try catch cus it asked me to
+                retriever.release();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+//            retriever.release();
+
             try {
                 for (final InputStream stream : streams) {
                     stream.close();

@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 
@@ -211,9 +212,27 @@ public abstract class AbsMusicServiceActivity extends AbsBaseActivity implements
         sendBroadcast(intent);
     }
 
+//    @Nullable
+//    @Override
+//    protected String[] getPermissionsToRequest() {
+//        return new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+//
+//    }
     @Nullable
     @Override
-    protected String[] getPermissionsToRequest() {
-        return new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+    public String[] getPermissionsToRequest() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            return new String[] {
+                    Manifest.permission.READ_MEDIA_AUDIO,
+                    Manifest.permission.POST_NOTIFICATIONS
+            };
+        } else {
+            return new String[] {
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+            };
+        }
     }
+
+
 }
