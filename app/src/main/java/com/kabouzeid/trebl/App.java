@@ -1,17 +1,11 @@
 package com.kabouzeid.trebl;
 
 import android.app.Application;
-import android.os.AsyncTask;
 import android.os.Build;
 
-import androidx.annotation.NonNull;
-
-import com.anjlab.android.iab.v3.BillingProcessor;
-import com.anjlab.android.iab.v3.PurchaseInfo;
 import com.kabouzeid.appthemehelper.ThemeStore;
 import com.kabouzeid.trebl.appshortcuts.DynamicShortcutManager;
-
-import java.lang.ref.WeakReference;
+import com.kabouzeid.trebl.billing.BillingManager;
 
 
 /**
@@ -23,7 +17,7 @@ public class App extends Application {
 
     private static App app;
 
-    private BillingProcessor billingProcessor;
+    private BillingManager billingManager;
 
     @Override
     public void onCreate() {
@@ -43,32 +37,35 @@ public class App extends Application {
             new DynamicShortcutManager(this).initDynamicShortcuts();
         }
 
-        // automatically restores purchases
-        billingProcessor = new BillingProcessor(this, BuildConfig.GOOGLE_PLAY_LICENSE_KEY, new BillingProcessor.IBillingHandler() {
+        // Initialize billing - automatically restores purchases
+        billingManager = BillingManager.getInstance(this);
+        billingManager.addCallback(new BillingManager.BillingCallback() {
             @Override
-            public void onProductPurchased(@NonNull String productId, PurchaseInfo details) {
+            public void onPurchaseComplete(String productId) {
+                notifyProVersionChanged();
             }
 
             @Override
-            public void onPurchaseHistoryRestored() {
-                if (App.isProVersion()) {
-                    App.notifyProVersionChanged();
+            public void onPurchaseRestored(boolean hasPurchase) {
+                if (hasPurchase) {
+                    notifyProVersionChanged();
                 }
             }
 
             @Override
-            public void onBillingError(int errorCode, Throwable error) {
+            public void onBillingError(int errorCode, String message) {
+                // Errors are logged in BillingManager
             }
 
             @Override
-            public void onBillingInitialized() {
-                App.loadPurchases(); // runs in background
+            public void onBillingReady() {
+                // Billing is ready, purchases have been queried
             }
         });
     }
 
     public static boolean isProVersion() {
-        return BuildConfig.DEBUG || app.billingProcessor.isPurchased(PRO_VERSION_PRODUCT_ID);
+        return BuildConfig.DEBUG || app.billingManager.isPurchased(PRO_VERSION_PRODUCT_ID);
     }
 
     private static OnProVersionChangedListener onProVersionChangedListener;
@@ -88,60 +85,15 @@ public class App extends Application {
         return app;
     }
 
+    public static BillingManager getBillingManager() {
+        return app.billingManager;
+    }
+
     @Override
     public void onTerminate() {
         super.onTerminate();
-        billingProcessor.release();
-    }
-
-    private static LoadOwnedPurchasesFromGoogleAsyncTask loadOwnedPurchasesFromGoogleAsyncTask;
-    public static void loadPurchases() { // currently a bit unnecessary since it is only executed once and not outside of this class
-        if (loadOwnedPurchasesFromGoogleAsyncTask == null || loadOwnedPurchasesFromGoogleAsyncTask.getStatus() == AsyncTask.Status.FINISHED) {
-            loadOwnedPurchasesFromGoogleAsyncTask = new LoadOwnedPurchasesFromGoogleAsyncTask(App.getInstance().billingProcessor);
-            loadOwnedPurchasesFromGoogleAsyncTask.execute();
-        }
-    }
-
-    private static class LoadOwnedPurchasesFromGoogleAsyncTask extends AsyncTask<Void, Void, Void> {
-        private final WeakReference<BillingProcessor> billingProcessorWeakReference;
-        private boolean wasPro;
-
-        LoadOwnedPurchasesFromGoogleAsyncTask(BillingProcessor billingProcessor) {
-            this.billingProcessorWeakReference = new WeakReference<>(billingProcessor);
-        }
-
-        @Override
-        protected void onPreExecute() {
-            wasPro = App.isProVersion();
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            BillingProcessor billingProcessor = billingProcessorWeakReference.get();
-            if (billingProcessor != null) {
-                // The Google billing library has it's own cache for about 8 - 12 hours.
-                // The following only updates the billing processors cache if the Google billing library returns a value.
-                // Therefore, even if the user is longer than 8 - 12 hours without internet the purchase is cached.
-                billingProcessor.loadOwnedPurchasesFromGoogleAsync(new BillingProcessor.IPurchasesResponseListener() {
-                    @Override
-                    public void onPurchasesSuccess() {
-
-                    }
-
-                    @Override
-                    public void onPurchasesError() {
-
-                    }
-                });
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            if (wasPro != App.isProVersion()) {
-                App.notifyProVersionChanged();
-            }
+        if (billingManager != null) {
+            billingManager.destroy();
         }
     }
 }

@@ -203,7 +203,11 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
 
         uiThreadHandler = new Handler();
 
-        registerReceiver(widgetIntentReceiver, new IntentFilter(APP_WIDGET_UPDATE));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            registerReceiver(widgetIntentReceiver, new IntentFilter(APP_WIDGET_UPDATE), Context.RECEIVER_NOT_EXPORTED);
+        } else {
+            registerReceiver(widgetIntentReceiver, new IntentFilter(APP_WIDGET_UPDATE));
+        }
 
         initNotification();
 
@@ -866,7 +870,11 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
                     } else {
                         playback.start();
                         if (!becomingNoisyReceiverRegistered) {
-                            registerReceiver(becomingNoisyReceiver, becomingNoisyReceiverIntentFilter);
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                                registerReceiver(becomingNoisyReceiver, becomingNoisyReceiverIntentFilter, Context.RECEIVER_NOT_EXPORTED);
+                            } else {
+                                registerReceiver(becomingNoisyReceiver, becomingNoisyReceiverIntentFilter);
+                            }
                             becomingNoisyReceiverRegistered = true;
                         }
                         if (notHandledMetaChangedForCurrentTrack) {

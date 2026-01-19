@@ -2,8 +2,6 @@ package com.kabouzeid.trebl.ui.activities;
 
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.Window;
@@ -12,20 +10,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.anjlab.android.iab.v3.BillingProcessor;
-import com.anjlab.android.iab.v3.PurchaseInfo;
-import com.anjlab.android.iab.v3.SkuDetails;
-import com.kabouzeid.trebl.App;
-import com.kabouzeid.trebl.BuildConfig;
-import com.kabouzeid.trebl.R;
-import com.kabouzeid.trebl.ui.activities.base.AbsBaseActivity;
 
-import java.util.List;
+import com.kabouzeid.trebl.App;
+import com.kabouzeid.trebl.R;
+import com.kabouzeid.trebl.billing.BillingManager;
+import com.kabouzeid.trebl.ui.activities.base.AbsBaseActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class PurchaseActivity extends AbsBaseActivity implements BillingProcessor.IBillingHandler {
+public class PurchaseActivity extends AbsBaseActivity implements BillingManager.BillingCallback {
 
     public static final String TAG = PurchaseActivity.class.getSimpleName();
 
@@ -38,7 +32,7 @@ public class PurchaseActivity extends AbsBaseActivity implements BillingProcesso
     @BindView(R.id.close_button)
     ImageView closeButton;
 
-    private BillingProcessor billingProcessor;
+    private BillingManager billingManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,35 +49,32 @@ public class PurchaseActivity extends AbsBaseActivity implements BillingProcesso
         restoreButton.setEnabled(false);
         purchaseButton.setEnabled(false);
 
-        restoreButton.setOnClickListener(v -> billingProcessor.loadOwnedPurchasesFromGoogleAsync(new BillingProcessor.IPurchasesResponseListener() {
-            @Override
-            public void onPurchasesSuccess() {
+        // Get billing manager instance
+        billingManager = BillingManager.getInstance(this);
+        billingManager.addCallback(this);
 
-            }
+        // Set up button click listeners
+        restoreButton.setOnClickListener(v -> billingManager.restorePurchases());
 
-            @Override
-            public void onPurchasesError() {
-
-            }
-        }));
-
-        purchaseButton.setOnClickListener(v -> billingProcessor.purchase(PurchaseActivity.this, App.PRO_VERSION_PRODUCT_ID));
+        purchaseButton.setOnClickListener(v -> billingManager.purchase(PurchaseActivity.this, App.PRO_VERSION_PRODUCT_ID));
 
         closeButton.setOnClickListener(v -> onBackPressed());
 
-        billingProcessor = new BillingProcessor(this, BuildConfig.GOOGLE_PLAY_LICENSE_KEY, this);
-
+        // If billing is already ready, enable buttons and load price
+        if (billingManager.isReady()) {
+            onBillingReady();
+        }
     }
 
     @Override
-    public void onProductPurchased(@NonNull String productId, @Nullable PurchaseInfo details) {
+    public void onPurchaseComplete(String productId) {
         Toast.makeText(this, R.string.thank_you, Toast.LENGTH_SHORT).show();
         App.notifyProVersionChanged();
     }
 
     @Override
-    public void onPurchaseHistoryRestored() {
-        if (App.isProVersion()) {
+    public void onPurchaseRestored(boolean hasPurchase) {
+        if (hasPurchase) {
             Toast.makeText(this, R.string.restored_previous_purchase_please_restart, Toast.LENGTH_LONG).show();
             App.notifyProVersionChanged();
         } else {
@@ -92,25 +83,25 @@ public class PurchaseActivity extends AbsBaseActivity implements BillingProcesso
     }
 
     @Override
-    public void onBillingError(int errorCode, @Nullable Throwable error) {
-        Log.e(TAG, "Billing error: code = " + errorCode, error);
+    public void onBillingError(int errorCode, String message) {
+        Log.e(TAG, "Billing error: code = " + errorCode + ", message = " + message);
     }
 
     @Override
-    public void onBillingInitialized() {
+    public void onBillingReady() {
         restoreButton.setEnabled(true);
         purchaseButton.setEnabled(true);
-        billingProcessor.getPurchaseListingDetailsAsync(App.PRO_VERSION_PRODUCT_ID, new BillingProcessor.ISkuDetailsResponseListener() {
+
+        // Load product price
+        billingManager.queryProductDetails(App.PRO_VERSION_PRODUCT_ID, new BillingManager.ProductDetailsCallback() {
             @Override
-            public void onSkuDetailsResponse(@Nullable List<SkuDetails> products) {
-                if (products != null && !products.isEmpty()) {
-                    purchaseButton.setText(products.get(0).priceText);
-                }
+            public void onProductDetails(String price) {
+                purchaseButton.setText(price);
             }
 
             @Override
-            public void onSkuDetailsError(String error) {
-
+            public void onError(String error) {
+                Log.e(TAG, "Failed to get product details: " + error);
             }
         });
     }
@@ -128,8 +119,8 @@ public class PurchaseActivity extends AbsBaseActivity implements BillingProcesso
 
     @Override
     public void onDestroy() {
-        if (billingProcessor != null) {
-            billingProcessor.release();
+        if (billingManager != null) {
+            billingManager.removeCallback(this);
         }
         super.onDestroy();
     }

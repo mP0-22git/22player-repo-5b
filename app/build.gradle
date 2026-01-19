@@ -141,7 +141,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.google.code.gson:gson:2.10.1'
 
-    implementation 'com.anjlab.android.iab.v3:library:2.1.0'
+    implementation 'com.android.billingclient:billing:7.1.1'
     implementation 'de.psdev.licensesdialog:licensesdialog:2.2.0'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -159,7 +159,7 @@ dependencies {
     implementation 'com.github.AdrienPoupa:jaudiotagger:2.2.3'
 
     //google play ratings API (updated)
-    implementation 'com.google.android.play:review:2.0.1'
+    implementation 'com.google.android.play:review:2.0.2'
     implementation 'com.google.android.play:app-update:2.1.0'
 
     implementation 'com.h6ah4i.android.widget.verticalseekbar:verticalseekbar:1.0.0'
