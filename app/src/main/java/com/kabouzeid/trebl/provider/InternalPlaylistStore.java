@@ -29,7 +29,38 @@ import java.util.List;
 
 /**
  * Internal playlist database using Room.
- * This replaces MediaStore playlists which are broken on Android 11+.
+ *
+ * <h2>Why this exists (Android 11+ Scoped Storage issue):</h2>
+ * <p>
+ * On Android 11 (API 30) and above, Google introduced stricter Scoped Storage restrictions.
+ * Apps can no longer freely modify MediaStore playlists unless they "own" them (created them).
+ * This causes several issues:
+ * </p>
+ * <ul>
+ *   <li>{@code MediaStore.Audio.Playlists.Members.moveItem()} throws IllegalArgumentException</li>
+ *   <li>{@code ContentResolver.delete()} returns 0 (silently fails) for playlist songs</li>
+ *   <li>{@code ContentResolver.update()} silently fails for playlist modifications</li>
+ *   <li>No RecoverableSecurityException is thrown, so we can't request permission</li>
+ * </ul>
+ *
+ * <h2>Solution:</h2>
+ * <p>
+ * This class provides a complete internal database solution using Room that:
+ * </p>
+ * <ul>
+ *   <li>Stores playlists and their songs in a local SQLite database</li>
+ *   <li>Provides full CRUD operations that work on all Android versions</li>
+ *   <li>Supports Android Auto Backup for data persistence across reinstalls</li>
+ *   <li>Includes migration from existing MediaStore playlists</li>
+ * </ul>
+ *
+ * <h2>Database Schema:</h2>
+ * <ul>
+ *   <li><b>playlists</b>: id, name, created_at, modified_at</li>
+ *   <li><b>playlist_songs</b>: id, playlist_id (FK), audio_id (MediaStore ref), song_order, added_at</li>
+ * </ul>
+ *
+ * @see <a href="https://developer.android.com/about/versions/11/privacy/storage">Android 11 Storage Updates</a>
  */
 public class InternalPlaylistStore {
 

@@ -21,9 +21,26 @@ import java.util.List;
 
 /**
  * Utility class for playlist operations.
- * Uses internal Room database for reliable playlist management on all Android versions.
+ *
+ * <p>
+ * <b>Important:</b> As of the Android 11+ update, this class now uses an internal Room database
+ * ({@link InternalPlaylistStore}) instead of MediaStore for all playlist operations.
+ * </p>
+ *
+ * <p>
+ * <b>Why:</b> MediaStore playlist APIs are broken on Android 11+ due to Scoped Storage restrictions.
+ * Operations like reordering songs, removing songs, and modifying playlists silently fail
+ * unless the app "owns" the playlist. See {@link InternalPlaylistStore} for full details.
+ * </p>
+ *
+ * <p>
+ * <b>Migration:</b> Existing users with MediaStore playlists will see a migration dialog
+ * on first launch after the update, allowing them to import their playlists into the
+ * internal database.
+ * </p>
  *
  * @author Karim Abou Zeid (kabouzeid)
+ * @see InternalPlaylistStore
  */
 public class PlaylistsUtil {
 

@@ -16,7 +16,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Loader for playlists from internal database.
+ * Loader for playlists.
+ *
+ * <p>
+ * <b>Note:</b> Primary methods now load from internal Room database ({@link InternalPlaylistStore})
+ * instead of MediaStore. MediaStore methods are retained with "FromMediaStore" suffix for
+ * migration purposes only.
+ * </p>
+ *
+ * @see InternalPlaylistStore
+ * @see PlaylistsUtil
  */
 public class PlaylistLoader {
 

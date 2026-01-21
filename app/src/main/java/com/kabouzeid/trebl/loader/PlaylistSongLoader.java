@@ -19,7 +19,20 @@ import java.util.Map;
 
 /**
  * Loader for playlist songs.
- * Gets song references from internal database and metadata from MediaStore.
+ *
+ * <p>
+ * Gets song references (audio IDs and order) from internal Room database
+ * ({@link InternalPlaylistStore}), then fetches song metadata from MediaStore.
+ * This hybrid approach ensures playlist data is stored internally (fixing Android 11+ issues)
+ * while song metadata stays in sync with the device's media library.
+ * </p>
+ *
+ * <p>
+ * MediaStore methods are retained with "FromMediaStore" suffix for migration purposes only.
+ * </p>
+ *
+ * @see InternalPlaylistStore
+ * @see PlaylistsUtil
  */
 public class PlaylistSongLoader {
 
