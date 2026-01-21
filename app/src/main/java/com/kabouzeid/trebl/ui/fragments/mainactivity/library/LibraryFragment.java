@@ -1,6 +1,7 @@
 package com.kabouzeid.trebl.ui.fragments.mainactivity.library;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -47,8 +48,12 @@ import com.kabouzeid.trebl.helper.SortOrder;
 import com.kabouzeid.trebl.interfaces.CabHolder;
 import com.kabouzeid.trebl.loader.PlaylistLoader;
 import com.kabouzeid.trebl.loader.SongLoader;
+import com.kabouzeid.trebl.misc.WeakContextAsyncTask;
 import com.kabouzeid.trebl.model.Playlist;
+import com.kabouzeid.trebl.model.smartplaylist.AbsSmartPlaylist;
+import com.kabouzeid.trebl.util.PlaylistsUtil;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import com.kabouzeid.trebl.ui.activities.EqualizerActivity;
@@ -285,6 +290,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         if (isPlaylistPage()) {
             menu.add(0, R.id.action_new_playlist, 0, R.string.new_playlist_title);
             menu.add(0, R.id.action_import_playlists, 1, R.string.import_playlists);
+            menu.add(0, R.id.action_export_all_playlists, 2, R.string.export_all_playlists);
         }
 
         Fragment currentFragment = getCurrentFragment();
@@ -355,6 +361,9 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
                 return true;
             case R.id.action_import_playlists:
                 importPlaylistsFromMediaStore();
+                return true;
+            case R.id.action_export_all_playlists:
+                exportAllPlaylists();
                 return true;
             case R.id.action_search:
                 startActivity(new Intent(getActivity(), SearchActivity.class));
@@ -484,6 +493,67 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
                 }
             });
         }).start();
+    }
+
+    private void exportAllPlaylists() {
+        Activity activity = getActivity();
+        if (activity == null) return;
+
+        // Get all playlists
+        List<Playlist> playlists = PlaylistLoader.getAllPlaylists(activity);
+
+        // Filter out smart playlists (they can't be exported as they're dynamic)
+        List<Playlist> exportablePlaylists = new ArrayList<>();
+        for (Playlist playlist : playlists) {
+            if (!(playlist instanceof AbsSmartPlaylist)) {
+                exportablePlaylists.add(playlist);
+            }
+        }
+
+        if (exportablePlaylists.isEmpty()) {
+            Toast.makeText(activity, R.string.no_playlists_to_export, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Export using async task
+        new ExportAllPlaylistsTask(activity).execute(exportablePlaylists);
+    }
+
+    private static class ExportAllPlaylistsTask extends WeakContextAsyncTask<List<Playlist>, Void, String> {
+        public ExportAllPlaylistsTask(Context context) {
+            super(context);
+        }
+
+        @Override
+        protected String doInBackground(List<Playlist>... params) {
+            int successes = 0;
+            int failures = 0;
+            String dir = "";
+
+            for (Playlist playlist : params[0]) {
+                try {
+                    dir = PlaylistsUtil.savePlaylist(App.getInstance().getApplicationContext(), playlist).getParent();
+                    successes++;
+                } catch (IOException e) {
+                    failures++;
+                    e.printStackTrace();
+                }
+            }
+
+            Context context = App.getInstance().getApplicationContext();
+            return failures == 0
+                    ? String.format(context.getString(R.string.saved_x_playlists_to_x), successes, dir)
+                    : String.format(context.getString(R.string.saved_x_playlists_to_x_failed_to_save_x), successes, dir, failures);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            Context context = getContext();
+            if (context != null) {
+                Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
     private void setUpGridSizeMenu(@NonNull AbsLibraryPagerRecyclerViewCustomGridSizeFragment fragment, @NonNull SubMenu gridSizeMenu) {

@@ -1,7 +1,6 @@
 package com.kabouzeid.trebl.util;
 
 import android.content.Context;
-import android.os.Environment;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -154,6 +153,8 @@ public class PlaylistsUtil {
     }
 
     public static File savePlaylist(Context context, Playlist playlist) throws IOException {
-        return M3UWriter.write(context, new File(Environment.getExternalStorageDirectory(), "Playlists"), playlist);
+        // Use app's external files directory (works on Android 11+ with Scoped Storage)
+        File playlistsDir = context.getExternalFilesDir("Playlists");
+        return M3UWriter.write(context, playlistsDir, playlist);
     }
 }
