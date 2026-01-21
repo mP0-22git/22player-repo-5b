@@ -1,6 +1,7 @@
 package com.kabouzeid.trebl.dialogs;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
@@ -8,6 +9,7 @@ import android.text.InputType;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.kabouzeid.trebl.R;
+import com.kabouzeid.trebl.service.MusicService;
 import com.kabouzeid.trebl.util.PlaylistsUtil;
 
 /**
@@ -40,9 +42,12 @@ public class RenamePlaylistDialog extends DialogFragment {
                 .input(getString(R.string.playlist_name_empty), PlaylistsUtil.getNameForPlaylist(getActivity(), playlistId), false,
                         (materialDialog, charSequence) -> {
                             final String name = charSequence.toString().trim();
-                            if (!name.isEmpty()) {
+                            if (!name.isEmpty() && getActivity() != null) {
                                 long playlistId1 = getArguments().getLong(PLAYLIST_ID);
                                 PlaylistsUtil.renamePlaylist(getActivity(), playlistId1, name);
+                                // Notify UI to refresh
+                                getActivity().sendBroadcast(new Intent(MusicService.MEDIA_STORE_CHANGED)
+                                        .setPackage(getActivity().getPackageName()));
                             }
                         })
                 .build();

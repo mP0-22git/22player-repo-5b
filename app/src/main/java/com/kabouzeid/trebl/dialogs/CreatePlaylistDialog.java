@@ -1,6 +1,7 @@
 package com.kabouzeid.trebl.dialogs;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.kabouzeid.trebl.R;
 import com.kabouzeid.trebl.model.Song;
+import com.kabouzeid.trebl.service.MusicService;
 import com.kabouzeid.trebl.util.PlaylistsUtil;
 
 import java.util.ArrayList;
@@ -68,6 +70,9 @@ public class CreatePlaylistDialog extends DialogFragment {
                                 if (songs != null && !songs.isEmpty()) {
                                     PlaylistsUtil.addToPlaylist(getActivity(), songs, playlistId, true);
                                 }
+                                // Notify UI to refresh
+                                getActivity().sendBroadcast(new Intent(MusicService.MEDIA_STORE_CHANGED)
+                                        .setPackage(getActivity().getPackageName()));
                             }
                         } else {
                             Toast.makeText(getActivity(), getActivity().getResources().getString(

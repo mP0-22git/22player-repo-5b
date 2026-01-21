@@ -1,6 +1,7 @@
 package com.kabouzeid.trebl.dialogs;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
@@ -9,6 +10,7 @@ import android.text.Html;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.kabouzeid.trebl.R;
 import com.kabouzeid.trebl.model.Playlist;
+import com.kabouzeid.trebl.service.MusicService;
 import com.kabouzeid.trebl.util.PlaylistsUtil;
 
 import java.util.ArrayList;
@@ -59,6 +61,9 @@ public class DeletePlaylistDialog extends DialogFragment {
                     if (getActivity() == null)
                         return;
                     PlaylistsUtil.deletePlaylists(getActivity(), playlists);
+                    // Notify UI to refresh
+                    getActivity().sendBroadcast(new Intent(MusicService.MEDIA_STORE_CHANGED)
+                            .setPackage(getActivity().getPackageName()));
                 })
                 .build();
     }
