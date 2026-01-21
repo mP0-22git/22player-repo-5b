@@ -1064,7 +1064,11 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
     }
 
     private void sendChangeInternal(final String what) {
-        sendBroadcast(new Intent(what));
+        // Use explicit broadcast (setPackage) for Android 13+ compatibility.
+        // Receivers registered with RECEIVER_NOT_EXPORTED require explicit broadcasts.
+        final Intent intent = new Intent(what);
+        intent.setPackage(getPackageName());
+        sendBroadcast(intent);
         appWidgetBig.notifyChange(this, what);
         appWidgetClassic.notifyChange(this, what);
         appWidgetSmall.notifyChange(this, what);

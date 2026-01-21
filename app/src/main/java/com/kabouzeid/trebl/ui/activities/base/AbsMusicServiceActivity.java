@@ -213,6 +213,7 @@ public abstract class AbsMusicServiceActivity extends AbsBaseActivity implements
         super.onHasPermissionsChanged(hasPermissions);
         Intent intent = new Intent(MusicService.MEDIA_STORE_CHANGED);
         intent.putExtra("from_permissions_changed", true); // just in case we need to know this at some point
+        intent.setPackage(getPackageName()); // Explicit broadcast for Android 13+ compatibility
         sendBroadcast(intent);
     }
 
