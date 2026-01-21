@@ -46,18 +46,18 @@ public class M3UWriter implements M3UConstants {
 
     /**
      * Write playlist via MediaStore API (Android 10+).
-     * Saves to Music/Playlists/ which persists after app uninstall.
+     * Saves to Downloads/Playlists/ which persists after app uninstall.
      */
     private static File writeViaMediaStore(Context context, Playlist playlist, List<? extends Song> songs) throws IOException {
         String fileName = playlist.name + "." + EXTENSION;
-        String relativePath = Environment.DIRECTORY_MUSIC + "/Playlists";
+        String relativePath = Environment.DIRECTORY_DOWNLOADS + "/Playlists";
 
         ContentValues values = new ContentValues();
         values.put(MediaStore.MediaColumns.DISPLAY_NAME, fileName);
         values.put(MediaStore.MediaColumns.MIME_TYPE, "audio/x-mpegurl");
         values.put(MediaStore.MediaColumns.RELATIVE_PATH, relativePath);
 
-        Uri collection = MediaStore.Audio.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY);
+        Uri collection = MediaStore.Downloads.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY);
 
         // Delete existing file with same name if it exists
         context.getContentResolver().delete(
