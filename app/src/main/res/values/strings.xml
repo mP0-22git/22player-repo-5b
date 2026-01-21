@@ -311,4 +311,14 @@
         <item>@string/settings_change_theme</item>
         <item>@string/settings_change_background</item>
     </string-array>
+
+    <!-- Playlist migration -->
+    <string name="playlist_migration_title">Playlist Update</string>
+    <string name="playlist_migration_message">We\'ve improved how playlists are stored for better reliability. Import your existing playlists?</string>
+    <string name="import_all">Import All</string>
+    <string name="later">Later</string>
+    <string name="importing_playlists">Importing Playlists</string>
+    <string name="please_wait">Please wait…</string>
+    <string name="migration_complete">Migration Complete</string>
+    <string name="imported_x_playlists">Imported %1$d playlists.</string>
 </resources>

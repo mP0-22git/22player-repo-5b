@@ -167,4 +167,9 @@ dependencies {
     implementation 'me.tankery.lib:circularSeekBar:1.4.2'
 
     // AnimatedGradientTextView removed - repo no longer available
+
+    // Room database for internal playlists
+    def room_version = "2.6.1"
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
 }

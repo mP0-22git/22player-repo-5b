@@ -25,9 +25,11 @@ import com.kabouzeid.trebl.model.Song;
 import com.kabouzeid.trebl.service.MusicService;
 import com.kabouzeid.trebl.ui.activities.base.AbsSlidingMusicPanelActivity;
 import com.kabouzeid.trebl.ui.fragments.mainactivity.library.LibraryFragment;
+import com.kabouzeid.trebl.provider.InternalPlaylistStore;
 import com.kabouzeid.trebl.util.BackgroundUtil;
 import com.kabouzeid.trebl.util.PreferenceUtil;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.sofakingforever.stars.AnimatedStarsView;
 
 import java.util.ArrayList;
@@ -82,7 +84,64 @@ public class MainActivity extends AbsSlidingMusicPanelActivity {
         checkProBg();
         checkShowPro();
         checkRating();
+        checkPlaylistMigration();
         PreferenceUtil.getInstance(this).incrementLaunchCount();
+    }
+
+    private void checkPlaylistMigration() {
+        // Check if migration is needed and there are MediaStore playlists
+        if (PreferenceUtil.getInstance(this).needsPlaylistMigration()) {
+            // Run check in background to avoid blocking UI
+            new Thread(() -> {
+                InternalPlaylistStore store = InternalPlaylistStore.getInstance(this);
+
+                // Only show dialog if internal DB is empty and MediaStore has playlists
+                if (store.isEmpty() && store.hasMediaStorePlaylists(this)) {
+                    runOnUiThread(() -> showPlaylistMigrationDialog());
+                } else {
+                    // No migration needed - mark as completed
+                    PreferenceUtil.getInstance(this).setPlaylistMigrationCompleted();
+                }
+            }).start();
+        }
+    }
+
+    private void showPlaylistMigrationDialog() {
+        new MaterialDialog.Builder(this)
+                .title(R.string.playlist_migration_title)
+                .content(R.string.playlist_migration_message)
+                .positiveText(R.string.import_all)
+                .negativeText(R.string.later)
+                .onPositive((dialog, which) -> {
+                    // Show progress and run migration in background
+                    MaterialDialog progressDialog = new MaterialDialog.Builder(this)
+                            .title(R.string.importing_playlists)
+                            .content(R.string.please_wait)
+                            .progress(true, 0)
+                            .cancelable(false)
+                            .show();
+
+                    new Thread(() -> {
+                        InternalPlaylistStore store = InternalPlaylistStore.getInstance(this);
+                        int imported = store.importFromMediaStore(this);
+
+                        runOnUiThread(() -> {
+                            progressDialog.dismiss();
+                            PreferenceUtil.getInstance(this).setPlaylistMigrationCompleted();
+
+                            // Show success message
+                            new MaterialDialog.Builder(this)
+                                    .title(R.string.migration_complete)
+                                    .content(getString(R.string.imported_x_playlists, imported))
+                                    .positiveText(android.R.string.ok)
+                                    .show();
+                        });
+                    }).start();
+                })
+                .onNegative((dialog, which) -> {
+                    PreferenceUtil.getInstance(this).setPlaylistMigrationSkipped();
+                })
+                .show();
     }
 
     public void checkFirstRun() {

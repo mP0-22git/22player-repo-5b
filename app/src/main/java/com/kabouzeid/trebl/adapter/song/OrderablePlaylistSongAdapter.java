@@ -4,6 +4,7 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -27,6 +28,7 @@ import java.util.List;
 @SuppressWarnings("unchecked")
 public class OrderablePlaylistSongAdapter extends PlaylistSongAdapter implements DraggableItemAdapter<OrderablePlaylistSongAdapter.ViewHolder> {
 
+    private static final String TAG = "OrderablePlaylistAdapter";
     private OnMoveItemListener onMoveItemListener;
 
     public OrderablePlaylistSongAdapter(@NonNull AppCompatActivity activity, @NonNull List<PlaylistSong> dataSet, @LayoutRes int itemLayoutRes, boolean usePalette, @Nullable CabHolder cabHolder, @Nullable OnMoveItemListener onMoveItemListener) {
@@ -70,23 +72,33 @@ public class OrderablePlaylistSongAdapter extends PlaylistSongAdapter implements
 
     @Override
     public void onMoveItem(int fromPosition, int toPosition) {
+        Log.d(TAG, "onMoveItem called: fromPosition=" + fromPosition + ", toPosition=" + toPosition +
+              ", listener=" + (onMoveItemListener != null));
         if (onMoveItemListener != null && fromPosition != toPosition) {
+            Log.d(TAG, "onMoveItem: calling listener.onMoveItem(" + (fromPosition - 1) + ", " + (toPosition - 1) + ")");
             onMoveItemListener.onMoveItem(fromPosition - 1, toPosition - 1);
+        } else {
+            Log.d(TAG, "onMoveItem: NOT calling listener - listener null? " + (onMoveItemListener == null) +
+                  ", same position? " + (fromPosition == toPosition));
         }
     }
 
     @Override
     public boolean onCheckCanDrop(int draggingPosition, int dropPosition) {
-        return dropPosition > 0;
+        boolean canDrop = dropPosition > 0;
+        Log.d(TAG, "onCheckCanDrop: draggingPosition=" + draggingPosition + ", dropPosition=" + dropPosition + ", canDrop=" + canDrop);
+        return canDrop;
     }
 
     @Override
     public void onItemDragStarted(int position) {
+        Log.d(TAG, "onItemDragStarted: position=" + position);
         notifyDataSetChanged();
     }
 
     @Override
     public void onItemDragFinished(int fromPosition, int toPosition, boolean result) {
+        Log.d(TAG, "onItemDragFinished: fromPosition=" + fromPosition + ", toPosition=" + toPosition + ", result=" + result);
         notifyDataSetChanged();
     }
 

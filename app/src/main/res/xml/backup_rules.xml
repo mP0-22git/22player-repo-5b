@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Backup rules for Android Auto Backup.
+    This ensures the internal playlist database is backed up to Google Drive
+    and restored when the user reinstalls the app.
+-->
+<full-backup-content>
+    <!-- Include the internal playlist database -->
+    <include domain="database" path="internal_playlists.db" />
+    <include domain="database" path="internal_playlists.db-shm" />
+    <include domain="database" path="internal_playlists.db-wal" />
+
+    <!-- Include shared preferences (for settings and migration state) -->
+    <include domain="sharedpref" path="." />
+</full-backup-content>
