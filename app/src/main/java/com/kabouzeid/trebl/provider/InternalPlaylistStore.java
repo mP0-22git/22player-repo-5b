@@ -25,6 +25,7 @@ import com.kabouzeid.trebl.loader.PlaylistSongLoader;
 import com.kabouzeid.trebl.model.Playlist;
 import com.kabouzeid.trebl.model.PlaylistSong;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -370,6 +371,51 @@ public class InternalPlaylistStore {
     public boolean hasMediaStorePlaylists(@NonNull Context context) {
         List<Playlist> playlists = PlaylistLoader.getAllPlaylistsFromMediaStore(context);
         return !playlists.isEmpty();
+    }
+
+    /**
+     * Import specific playlists from MediaStore by their IDs.
+     * @param playlistIds list of MediaStore playlist IDs to import
+     * @return number of playlists imported
+     */
+    public int importSelectedFromMediaStore(@NonNull Context context, @NonNull List<Long> playlistIds) {
+        int imported = 0;
+
+        for (Long playlistId : playlistIds) {
+            Playlist playlist = PlaylistLoader.getPlaylistFromMediaStore(context, playlistId);
+            if (playlist.id == -1) continue;
+
+            long newPlaylistId = createPlaylist(playlist.name);
+            if (newPlaylistId != -1) {
+                List<PlaylistSong> songs = PlaylistSongLoader.getPlaylistSongListFromMediaStore(context, playlistId);
+                for (int i = 0; i < songs.size(); i++) {
+                    PlaylistSongEntity entity = new PlaylistSongEntity();
+                    entity.playlistId = newPlaylistId;
+                    entity.audioId = songs.get(i).id;
+                    entity.songOrder = i;
+                    entity.addedAt = System.currentTimeMillis();
+                    database.playlistDao().insertPlaylistSong(entity);
+                }
+                imported++;
+            }
+        }
+        return imported;
+    }
+
+    /**
+     * Get names of playlists that would be duplicates.
+     * @param playlistNames names to check
+     * @return list of names that already exist in internal database
+     */
+    @NonNull
+    public List<String> findDuplicateNames(@NonNull List<String> playlistNames) {
+        List<String> duplicates = new ArrayList<>();
+        for (String name : playlistNames) {
+            if (doesPlaylistExist(name)) {
+                duplicates.add(name);
+            }
+        }
+        return duplicates;
     }
 
     // ==================== Room Database ====================

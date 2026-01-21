@@ -321,4 +321,12 @@
     <string name="please_wait">Please wait…</string>
     <string name="migration_complete">Migration Complete</string>
     <string name="imported_x_playlists">Imported %1$d playlists.</string>
+    <string name="import_playlists">Import playlists from device</string>
+    <string name="no_playlists_to_import">No playlists found to import</string>
+    <string name="select_playlists_to_import">Select playlists to import</string>
+    <string name="clear_selection">Clear</string>
+    <string name="import_action">Import</string>
+    <string name="duplicate_playlists_title">Duplicate Playlists</string>
+    <string name="duplicate_playlists_warning">These playlists already exist:\n\n%1$s\n\nImporting will create duplicates. Continue?</string>
+    <string name="no_playlists_selected">No playlists selected</string>
 </resources>

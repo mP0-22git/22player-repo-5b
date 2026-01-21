@@ -33,6 +33,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.afollestad.materialcab.MaterialCab;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.kabouzeid.appthemehelper.ThemeStore;
 import com.kabouzeid.appthemehelper.util.TabLayoutUtil;
 import com.kabouzeid.appthemehelper.util.ToolbarContentTintHelper;
@@ -44,7 +45,12 @@ import com.kabouzeid.trebl.dialogs.ScanMediaFolderChooserDialog;
 import com.kabouzeid.trebl.helper.MusicPlayerRemote;
 import com.kabouzeid.trebl.helper.SortOrder;
 import com.kabouzeid.trebl.interfaces.CabHolder;
+import com.kabouzeid.trebl.loader.PlaylistLoader;
 import com.kabouzeid.trebl.loader.SongLoader;
+import com.kabouzeid.trebl.model.Playlist;
+
+import java.util.ArrayList;
+import java.util.List;
 import com.kabouzeid.trebl.ui.activities.EqualizerActivity;
 import com.kabouzeid.trebl.ui.activities.MainActivity;
 import com.kabouzeid.trebl.ui.activities.PurchaseActivity;
@@ -55,10 +61,13 @@ import com.kabouzeid.trebl.ui.fragments.mainactivity.library.pager.AlbumsFragmen
 import com.kabouzeid.trebl.ui.fragments.mainactivity.library.pager.ArtistsFragment;
 import com.kabouzeid.trebl.ui.fragments.mainactivity.library.pager.PlaylistsFragment;
 import com.kabouzeid.trebl.ui.fragments.mainactivity.library.pager.SongsFragment;
+import com.kabouzeid.trebl.provider.InternalPlaylistStore;
 import com.kabouzeid.trebl.util.NavigationUtil;
 import com.kabouzeid.trebl.util.PhonographColorUtil;
 import com.kabouzeid.trebl.util.PreferenceUtil;
 import com.kabouzeid.trebl.util.Util;
+
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -275,6 +284,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         inflater.inflate(R.menu.menu_main, menu);
         if (isPlaylistPage()) {
             menu.add(0, R.id.action_new_playlist, 0, R.string.new_playlist_title);
+            menu.add(0, R.id.action_import_playlists, 1, R.string.import_playlists);
         }
 
         Fragment currentFragment = getCurrentFragment();
@@ -343,6 +353,9 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
             case R.id.action_new_playlist:
                 CreatePlaylistDialog.create().show(getChildFragmentManager(), "CREATE_PLAYLIST");
                 return true;
+            case R.id.action_import_playlists:
+                importPlaylistsFromMediaStore();
+                return true;
             case R.id.action_search:
                 startActivity(new Intent(getActivity(), SearchActivity.class));
                 return true;
@@ -357,6 +370,120 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
                 }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void importPlaylistsFromMediaStore() {
+        Activity activity = getActivity();
+        if (activity == null) return;
+
+        InternalPlaylistStore store = InternalPlaylistStore.getInstance(activity);
+
+        // Get all MediaStore playlists
+        List<Playlist> mediaStorePlaylists = PlaylistLoader.getAllPlaylistsFromMediaStore(activity);
+
+        if (mediaStorePlaylists.isEmpty()) {
+            Toast.makeText(activity, R.string.no_playlists_to_import, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Build arrays for multi-choice dialog
+        final CharSequence[] playlistNames = new CharSequence[mediaStorePlaylists.size()];
+        final long[] playlistIds = new long[mediaStorePlaylists.size()];
+        for (int i = 0; i < mediaStorePlaylists.size(); i++) {
+            playlistNames[i] = mediaStorePlaylists.get(i).name;
+            playlistIds[i] = mediaStorePlaylists.get(i).id;
+        }
+
+        // All selected by default
+        Integer[] preselected = new Integer[mediaStorePlaylists.size()];
+        for (int i = 0; i < preselected.length; i++) {
+            preselected[i] = i;
+        }
+
+        // Show selection dialog
+        new MaterialDialog.Builder(activity)
+                .title(R.string.select_playlists_to_import)
+                .items(playlistNames)
+                .itemsCallbackMultiChoice(preselected, (dialog, which, text) -> true)
+                .alwaysCallMultiChoiceCallback()
+                .positiveText(R.string.import_action)
+                .negativeText(android.R.string.cancel)
+                .neutralText(R.string.clear_selection)
+                .onNeutral((dialog, which) -> dialog.clearSelectedIndices())
+                .onPositive((dialog, which) -> {
+                    Integer[] selectedIndices = dialog.getSelectedIndices();
+                    if (selectedIndices == null || selectedIndices.length == 0) {
+                        Toast.makeText(activity, R.string.no_playlists_selected, Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    // Build lists of selected playlists
+                    List<Long> selectedIds = new ArrayList<>();
+                    List<String> selectedNames = new ArrayList<>();
+                    for (int index : selectedIndices) {
+                        selectedIds.add(playlistIds[index]);
+                        selectedNames.add(playlistNames[index].toString());
+                    }
+
+                    // Check for duplicates
+                    List<String> duplicates = store.findDuplicateNames(selectedNames);
+
+                    if (!duplicates.isEmpty()) {
+                        showDuplicateWarning(activity, store, selectedIds, duplicates);
+                    } else {
+                        doImportPlaylists(activity, store, selectedIds);
+                    }
+                })
+                .show();
+    }
+
+    private void showDuplicateWarning(Activity activity, InternalPlaylistStore store,
+                                       List<Long> selectedIds, List<String> duplicates) {
+        // Build duplicate names list (limit to 5 for readability)
+        StringBuilder names = new StringBuilder();
+        int count = Math.min(duplicates.size(), 5);
+        for (int i = 0; i < count; i++) {
+            names.append("• ").append(duplicates.get(i));
+            if (i < count - 1) names.append("\n");
+        }
+        if (duplicates.size() > 5) {
+            names.append("\n• ... and ").append(duplicates.size() - 5).append(" more");
+        }
+
+        new MaterialDialog.Builder(activity)
+                .title(R.string.duplicate_playlists_title)
+                .content(getString(R.string.duplicate_playlists_warning, names.toString()))
+                .positiveText(R.string.import_action)
+                .negativeText(android.R.string.cancel)
+                .onPositive((dialog, which) -> doImportPlaylists(activity, store, selectedIds))
+                .show();
+    }
+
+    private void doImportPlaylists(Activity activity, InternalPlaylistStore store, List<Long> playlistIds) {
+        MaterialDialog progressDialog = new MaterialDialog.Builder(activity)
+                .title(R.string.importing_playlists)
+                .content(R.string.please_wait)
+                .progress(true, 0)
+                .cancelable(false)
+                .show();
+
+        new Thread(() -> {
+            int imported = store.importSelectedFromMediaStore(activity, playlistIds);
+            activity.runOnUiThread(() -> {
+                progressDialog.dismiss();
+                new MaterialDialog.Builder(activity)
+                        .title(R.string.migration_complete)
+                        .content(getString(R.string.imported_x_playlists, imported))
+                        .positiveText(android.R.string.ok)
+                        .show();
+
+                // Refresh the playlists list
+                Fragment currentFragment = getCurrentFragment();
+                if (currentFragment instanceof PlaylistsFragment) {
+                    ((PlaylistsFragment) currentFragment).onMediaStoreChanged();
+                }
+            });
+        }).start();
     }
 
     private void setUpGridSizeMenu(@NonNull AbsLibraryPagerRecyclerViewCustomGridSizeFragment fragment, @NonNull SubMenu gridSizeMenu) {
