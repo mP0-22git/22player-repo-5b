@@ -331,4 +331,28 @@
     <string name="no_playlists_selected">No playlists selected</string>
     <string name="export_all_playlists">Export all playlists</string>
     <string name="no_playlists_to_export">No playlists to export</string>
+
+    <!-- Cloud backup -->
+    <string name="cloud_backup">Cloud backup</string>
+    <string name="cloud_backup_description">Back up your playlists to Google Drive so you can restore them on any device.</string>
+    <string name="continue_action">Continue</string>
+    <string name="sign_out">Sign out</string>
+    <string name="signed_in_as">Signed in as %s</string>
+    <string name="sign_in_failed">Sign in failed: %s</string>
+    <string name="backup_now">Backup now</string>
+    <string name="previous_backups">Previous backups</string>
+    <string name="no_backups_found">No backups found</string>
+    <string name="backup_successful">Backed up %d playlists successfully</string>
+    <string name="backup_failed">Backup failed: %s</string>
+    <string name="failed_to_load_backups">Failed to load backups: %s</string>
+    <string name="restore_backup">Restore backup</string>
+    <string name="restore_backup_confirm">Restore playlists from backup created on %s? Existing playlists with the same name will be skipped.</string>
+    <string name="restore_action">Restore</string>
+    <string name="restore_successful">Restored %d playlists</string>
+    <string name="restore_successful_with_skipped">Restored %1$d playlists (%2$d skipped - already exist)</string>
+    <string name="restore_failed">Restore failed: %s</string>
+    <string name="delete_backup">Delete backup</string>
+    <string name="delete_backup_confirm">Delete backup from %s?</string>
+    <string name="backup_deleted">Backup deleted</string>
+    <string name="delete_failed">Delete failed: %s</string>
 </resources>

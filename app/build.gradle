@@ -84,7 +84,7 @@ android {
     }
     packaging {
         resources {
-            excludes += ['META-INF/LICENSE', 'META-INF/NOTICE']
+            excludes += ['META-INF/LICENSE', 'META-INF/NOTICE', 'META-INF/DEPENDENCIES', 'META-INF/INDEX.LIST']
         }
     }
     lint {
@@ -161,6 +161,11 @@ dependencies {
     //google play ratings API (updated)
     implementation 'com.google.android.play:review:2.0.2'
     implementation 'com.google.android.play:app-update:2.1.0'
+
+    // Google Sign-In and Drive API for cloud backup
+    implementation 'com.google.android.gms:play-services-auth:21.3.0'
+    implementation 'com.google.api-client:google-api-client-android:2.2.0'
+    implementation 'com.google.apis:google-api-services-drive:v3-rev20240123-2.0.0'
 
     implementation 'com.h6ah4i.android.widget.verticalseekbar:verticalseekbar:1.0.0'
 
