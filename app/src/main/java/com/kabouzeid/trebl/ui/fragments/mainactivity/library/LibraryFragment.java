@@ -13,9 +13,9 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-//import com.google.android.gms.ads.MobileAds;
-//import com.google.android.gms.ads.initialization.InitializationStatus;
-//import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
@@ -79,8 +79,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-//import com.google.android.gms.ads.AdRequest;
-//import com.google.android.gms.ads.AdView;
 
 public class LibraryFragment extends AbsMainActivityFragment implements CabHolder, MainActivity.MainActivityFragmentCallbacks, ViewPager.OnPageChangeListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -110,7 +108,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
 
     private String[] labels;
 
-//    private AdView mAdView;
+    private AdView mAdView;
 
     private MusicLibraryPagerAdapter pagerAdapter;
     private MaterialCab cab;
@@ -127,15 +125,15 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         View view = inflater.inflate(R.layout.fragment_library, container, false);
         unbinder = ButterKnife.bind(this, view);
 
-//        MobileAds.initialize(getActivity(), new OnInitializationCompleteListener() {
-//            @Override
-//            public void onInitializationComplete(InitializationStatus initializationStatus) {
-//            }
-//        });
+        // Initialize and show ads only for non-pro users
+        mAdView = view.findViewById(R.id.adView);
+        if (!App.isProVersion()) {
+            MobileAds.initialize(getActivity());
+            mAdView.setVisibility(View.VISIBLE);
+            AdRequest adRequest = new AdRequest.Builder().build();
+            mAdView.loadAd(adRequest);
+        }
 
-//        mAdView = view.findViewById(R.id.adView);
-//        AdRequest adRequest = new AdRequest.Builder().build();
-//        mAdView.loadAd(adRequest);
         return view;
     }
 
