@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kabouzeid.trebl.App;
+import com.kabouzeid.trebl.BuildConfig;
 import com.kabouzeid.trebl.R;
 import com.kabouzeid.trebl.billing.BillingManager;
 import com.kabouzeid.trebl.ui.activities.base.AbsBaseActivity;
@@ -31,6 +32,9 @@ public class PurchaseActivity extends AbsBaseActivity implements BillingManager.
 
     @BindView(R.id.close_button)
     ImageView closeButton;
+
+    @BindView(R.id.subscription_terms)
+    TextView subscriptionTerms;
 
     private BillingManager billingManager;
 
@@ -56,7 +60,7 @@ public class PurchaseActivity extends AbsBaseActivity implements BillingManager.
         // Set up button click listeners
         restoreButton.setOnClickListener(v -> billingManager.restorePurchases());
 
-        purchaseButton.setOnClickListener(v -> billingManager.purchase(PurchaseActivity.this, App.PRO_VERSION_PRODUCT_ID));
+        purchaseButton.setOnClickListener(v -> billingManager.purchaseSubscription(PurchaseActivity.this, App.PRO_SUBSCRIPTION_PRODUCT_ID, BuildConfig.SUBSCRIPTION_OFFER_ID));
 
         closeButton.setOnClickListener(v -> onBackPressed());
 
@@ -92,16 +96,18 @@ public class PurchaseActivity extends AbsBaseActivity implements BillingManager.
         restoreButton.setEnabled(true);
         purchaseButton.setEnabled(true);
 
-        // Load product price
-        billingManager.queryProductDetails(App.PRO_VERSION_PRODUCT_ID, new BillingManager.ProductDetailsCallback() {
+        // Load subscription details
+        billingManager.querySubscriptionDetails(App.PRO_SUBSCRIPTION_PRODUCT_ID, new BillingManager.SubscriptionDetailsCallback() {
             @Override
-            public void onProductDetails(String price) {
-                purchaseButton.setText(price);
+            public void onSubscriptionDetails(String weeklyPrice, String trialPeriod) {
+                purchaseButton.setText(R.string.start_free_trial);
+                subscriptionTerms.setText(getString(R.string.subscription_terms, weeklyPrice));
             }
 
             @Override
             public void onError(String error) {
-                Log.e(TAG, "Failed to get product details: " + error);
+                Log.e(TAG, "Failed to get subscription details: " + error);
+                purchaseButton.setText(R.string.start_free_trial);
             }
         });
     }

@@ -13,7 +13,8 @@ import com.kabouzeid.trebl.billing.BillingManager;
  */
 public class App extends Application {
 
-    public static final String PRO_VERSION_PRODUCT_ID = "pro_pack";
+    public static final String PRO_VERSION_PRODUCT_ID = BuildConfig.PRO_PRODUCT_ID;
+    public static final String PRO_SUBSCRIPTION_PRODUCT_ID = BuildConfig.PRO_SUBSCRIPTION_ID;
 
     private static App app;
 
@@ -65,7 +66,9 @@ public class App extends Application {
     }
 
     public static boolean isProVersion() {
-        return BuildConfig.DEBUG || app.billingManager.isPurchased(PRO_VERSION_PRODUCT_ID);
+        return BuildConfig.DEBUG ||
+                app.billingManager.isPurchased(PRO_VERSION_PRODUCT_ID) ||
+                app.billingManager.isPurchased(PRO_SUBSCRIPTION_PRODUCT_ID);
     }
 
     private static OnProVersionChangedListener onProVersionChangedListener;

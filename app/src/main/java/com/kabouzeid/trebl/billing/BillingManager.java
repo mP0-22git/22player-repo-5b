@@ -95,6 +95,7 @@ public class BillingManager {
                 .enablePendingPurchases(
                         PendingPurchasesParams.newBuilder()
                                 .enableOneTimeProducts()
+                                .enablePrepaidPlans()
                                 .build()
                 )
                 .build();
@@ -114,6 +115,7 @@ public class BillingManager {
                     isConnected = true;
                     retryAttempts = 0;
                     queryExistingPurchases();
+                    queryExistingSubscriptions();
                     notifyBillingReady();
                 } else {
                     Log.e(TAG, "Billing setup failed: " + billingResult.getResponseCode());
@@ -182,6 +184,39 @@ public class BillingManager {
     }
 
     /**
+     * Query existing subscriptions from Google Play.
+     */
+    private void queryExistingSubscriptions() {
+        if (!isConnected) {
+            Log.w(TAG, "Cannot query subscriptions - not connected");
+            return;
+        }
+
+        QueryPurchasesParams params = QueryPurchasesParams.newBuilder()
+                .setProductType(BillingClient.ProductType.SUBS)
+                .build();
+
+        billingClient.queryPurchasesAsync(params, (billingResult, purchases) -> {
+            if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+                for (Purchase purchase : purchases) {
+                    if (purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED) {
+                        purchasedProducts.addAll(purchase.getProducts());
+                        acknowledgePurchaseIfNeeded(purchase);
+                    }
+                }
+
+                Log.d(TAG, "Active subscriptions queried. Purchased products: " + purchasedProducts);
+
+                if (!purchasedProducts.isEmpty()) {
+                    notifyPurchaseRestored(true);
+                }
+            } else {
+                Log.e(TAG, "Failed to query subscriptions: " + billingResult.getResponseCode());
+            }
+        });
+    }
+
+    /**
      * Check if a product has been purchased.
      */
     public boolean isPurchased(String productId) {
@@ -245,38 +280,49 @@ public class BillingManager {
     }
 
     /**
-     * Restore purchases by querying Google Play.
+     * Restore purchases by querying Google Play (both INAPP and SUBS).
      */
     public void restorePurchases() {
         if (!isConnected) {
             Log.e(TAG, "Cannot restore - not connected");
-            // Try to reconnect first
             startConnection();
             return;
         }
 
-        QueryPurchasesParams params = QueryPurchasesParams.newBuilder()
+        purchasedProducts.clear();
+
+        // Query one-time purchases
+        QueryPurchasesParams inappParams = QueryPurchasesParams.newBuilder()
                 .setProductType(BillingClient.ProductType.INAPP)
                 .build();
 
-        billingClient.queryPurchasesAsync(params, (billingResult, purchases) -> {
+        billingClient.queryPurchasesAsync(inappParams, (billingResult, purchases) -> {
             if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-                purchasedProducts.clear();
-                boolean hasPurchase = false;
-
                 for (Purchase purchase : purchases) {
                     if (purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED) {
                         purchasedProducts.addAll(purchase.getProducts());
                         acknowledgePurchaseIfNeeded(purchase);
-                        hasPurchase = true;
+                    }
+                }
+            }
+
+            // Then query subscriptions
+            QueryPurchasesParams subsParams = QueryPurchasesParams.newBuilder()
+                    .setProductType(BillingClient.ProductType.SUBS)
+                    .build();
+
+            billingClient.queryPurchasesAsync(subsParams, (subsResult, subsPurchases) -> {
+                if (subsResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+                    for (Purchase purchase : subsPurchases) {
+                        if (purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED) {
+                            purchasedProducts.addAll(purchase.getProducts());
+                            acknowledgePurchaseIfNeeded(purchase);
+                        }
                     }
                 }
 
-                notifyPurchaseRestored(hasPurchase);
-            } else {
-                Log.e(TAG, "Failed to restore purchases: " + billingResult.getResponseCode());
-                notifyBillingError(billingResult.getResponseCode(), "Failed to restore purchases");
-            }
+                notifyPurchaseRestored(!purchasedProducts.isEmpty());
+            });
         });
     }
 
@@ -316,6 +362,149 @@ public class BillingManager {
                 }
             });
         });
+    }
+
+    /**
+     * Launch the purchase flow for a subscription.
+     */
+    public void purchaseSubscription(Activity activity, String productId, @Nullable String offerId) {
+        if (!isConnected) {
+            Log.e(TAG, "Cannot purchase subscription - not connected");
+            notifyBillingError(BillingClient.BillingResponseCode.SERVICE_DISCONNECTED, "Billing service not connected");
+            return;
+        }
+
+        List<QueryProductDetailsParams.Product> productList = new ArrayList<>();
+        productList.add(
+                QueryProductDetailsParams.Product.newBuilder()
+                        .setProductId(productId)
+                        .setProductType(BillingClient.ProductType.SUBS)
+                        .build()
+        );
+
+        QueryProductDetailsParams params = QueryProductDetailsParams.newBuilder()
+                .setProductList(productList)
+                .build();
+
+        billingClient.queryProductDetailsAsync(params, (billingResult, productDetailsList) -> {
+            if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && !productDetailsList.isEmpty()) {
+                ProductDetails productDetails = productDetailsList.get(0);
+                launchSubscriptionBillingFlow(activity, productDetails, offerId);
+            } else {
+                Log.e(TAG, "Failed to get subscription details: " + billingResult.getResponseCode());
+                notifyBillingError(billingResult.getResponseCode(), "Failed to get subscription details");
+            }
+        });
+    }
+
+    /**
+     * Launch the subscription billing flow with the correct offer token.
+     */
+    private void launchSubscriptionBillingFlow(Activity activity, ProductDetails productDetails, @Nullable String offerId) {
+        List<ProductDetails.SubscriptionOfferDetails> offers = productDetails.getSubscriptionOfferDetails();
+        if (offers == null || offers.isEmpty()) {
+            Log.e(TAG, "No subscription offers found");
+            notifyBillingError(BillingClient.BillingResponseCode.ITEM_UNAVAILABLE, "No subscription offers available");
+            return;
+        }
+
+        // Find the offer with the matching ID (e.g., free trial), fall back to first offer
+        ProductDetails.SubscriptionOfferDetails selectedOffer = null;
+        if (offerId != null) {
+            for (ProductDetails.SubscriptionOfferDetails offer : offers) {
+                if (offerId.equals(offer.getOfferId())) {
+                    selectedOffer = offer;
+                    break;
+                }
+            }
+        }
+        if (selectedOffer == null) {
+            selectedOffer = offers.get(0);
+        }
+
+        List<BillingFlowParams.ProductDetailsParams> productDetailsParamsList = new ArrayList<>();
+        productDetailsParamsList.add(
+                BillingFlowParams.ProductDetailsParams.newBuilder()
+                        .setProductDetails(productDetails)
+                        .setOfferToken(selectedOffer.getOfferToken())
+                        .build()
+        );
+
+        BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
+                .setProductDetailsParamsList(productDetailsParamsList)
+                .build();
+
+        BillingResult result = billingClient.launchBillingFlow(activity, billingFlowParams);
+        if (result.getResponseCode() != BillingClient.BillingResponseCode.OK) {
+            Log.e(TAG, "Failed to launch subscription billing flow: " + result.getResponseCode());
+            notifyBillingError(result.getResponseCode(), result.getDebugMessage());
+        }
+    }
+
+    /**
+     * Query subscription product details to get pricing and trial info.
+     */
+    public void querySubscriptionDetails(String productId, SubscriptionDetailsCallback callback) {
+        if (!isConnected) {
+            callback.onError("Billing service not connected");
+            return;
+        }
+
+        List<QueryProductDetailsParams.Product> productList = new ArrayList<>();
+        productList.add(
+                QueryProductDetailsParams.Product.newBuilder()
+                        .setProductId(productId)
+                        .setProductType(BillingClient.ProductType.SUBS)
+                        .build()
+        );
+
+        QueryProductDetailsParams params = QueryProductDetailsParams.newBuilder()
+                .setProductList(productList)
+                .build();
+
+        billingClient.queryProductDetailsAsync(params, (billingResult, productDetailsList) -> {
+            mainHandler.post(() -> {
+                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && !productDetailsList.isEmpty()) {
+                    ProductDetails productDetails = productDetailsList.get(0);
+                    List<ProductDetails.SubscriptionOfferDetails> offers = productDetails.getSubscriptionOfferDetails();
+
+                    if (offers != null && !offers.isEmpty()) {
+                        // Get the base plan price (last pricing phase of the base offer)
+                        String weeklyPrice = "";
+                        String trialPeriod = "";
+
+                        for (ProductDetails.SubscriptionOfferDetails offer : offers) {
+                            List<ProductDetails.PricingPhase> pricingPhases = offer.getPricingPhases().getPricingPhaseList();
+                            for (ProductDetails.PricingPhase phase : pricingPhases) {
+                                if (phase.getPriceAmountMicros() == 0) {
+                                    // This is the free trial phase
+                                    trialPeriod = phase.getBillingPeriod();
+                                } else {
+                                    // This is the paid phase
+                                    weeklyPrice = phase.getFormattedPrice();
+                                }
+                            }
+                            // Use the first offer that has pricing info
+                            if (!weeklyPrice.isEmpty()) break;
+                        }
+
+                        callback.onSubscriptionDetails(weeklyPrice, trialPeriod);
+                    } else {
+                        callback.onError("No subscription offers available");
+                    }
+                } else {
+                    callback.onError("Failed to get subscription details");
+                }
+            });
+        });
+    }
+
+    /**
+     * Callback for subscription product details.
+     */
+    public interface SubscriptionDetailsCallback {
+        void onSubscriptionDetails(String weeklyPrice, String trialPeriod);
+        void onError(String error);
     }
 
     /**

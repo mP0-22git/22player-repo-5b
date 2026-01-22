@@ -114,7 +114,7 @@
         android:id="@+id/buy_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/go_pro"
+        android:text="@string/start_free_trial"
         android:textColor="@color/white"
         android:textSize="18dp"
         android:textStyle="bold"
@@ -122,11 +122,28 @@
         android:padding="15dp"
         android:background="@drawable/buy_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/restore_button"
+        app:layout_constraintBottom_toTopOf="@id/subscription_terms"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
+        android:layout_marginBottom="8dp"
+        />
+
+    <TextView
+        android:id="@+id/subscription_terms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:alpha="0.7"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:fontFamily="@font/regularfont"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/restore_button"
         android:layout_marginBottom="12dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
         />
 
     <Button
