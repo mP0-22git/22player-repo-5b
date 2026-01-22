@@ -34,7 +34,7 @@ import java.util.List;
  */
 public class ScanMediaFolderChooserDialog extends DialogFragment implements MaterialDialog.ListCallback {
 
-    String initialPath = PreferenceUtil.getInstance(getContext()).getStartDirectory().getAbsolutePath();
+    private String initialPath;
     private File parentFolder;
     private File[] parentContents;
     private boolean canGoUp = false;
@@ -87,16 +87,31 @@ public class ScanMediaFolderChooserDialog extends DialogFragment implements Mate
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
-                && ActivityCompat.checkSelfPermission(
-                getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
+        // Check for appropriate permission based on Android version
+        boolean hasPermission;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            hasPermission = ActivityCompat.checkSelfPermission(
+                    getActivity(), Manifest.permission.READ_MEDIA_AUDIO)
+                    == PackageManager.PERMISSION_GRANTED;
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            hasPermission = ActivityCompat.checkSelfPermission(
+                    getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED;
+        } else {
+            hasPermission = true;
+        }
+
+        if (!hasPermission) {
             return new MaterialDialog.Builder(getActivity())
                     .title(R.string.md_error_label)
                     .content(R.string.md_storage_perm_error)
                     .positiveText(android.R.string.ok)
                     .build();
         }
+
+        // Initialize initialPath here where getContext() is valid
+        initialPath = PreferenceUtil.getInstance(getContext()).getStartDirectory().getAbsolutePath();
+
         if (savedInstanceState == null) {
             savedInstanceState = new Bundle();
         }
