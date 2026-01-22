@@ -97,7 +97,6 @@ public final class PreferenceUtil {
     private static final String IS_FIRST_RUN = "isFirstRun";
 
     private static final String PLAYLIST_MIGRATION_COMPLETED = "playlist_migration_completed";
-    private static final String PLAYLIST_MIGRATION_SKIPPED = "playlist_migration_skipped";
 
     private static PreferenceUtil sInstance;
 
@@ -640,19 +639,5 @@ public final class PreferenceUtil {
         final SharedPreferences.Editor editor = mPreferences.edit();
         editor.putBoolean(PLAYLIST_MIGRATION_COMPLETED, true);
         editor.apply();
-    }
-
-    public boolean isPlaylistMigrationSkipped() {
-        return mPreferences.getBoolean(PLAYLIST_MIGRATION_SKIPPED, false);
-    }
-
-    public void setPlaylistMigrationSkipped() {
-        final SharedPreferences.Editor editor = mPreferences.edit();
-        editor.putBoolean(PLAYLIST_MIGRATION_SKIPPED, true);
-        editor.apply();
-    }
-
-    public boolean needsPlaylistMigration() {
-        return !isPlaylistMigrationCompleted() && !isPlaylistMigrationSkipped();
     }
 }
