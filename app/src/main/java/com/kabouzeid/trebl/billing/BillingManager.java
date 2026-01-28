@@ -16,9 +16,11 @@ import com.android.billingclient.api.BillingFlowParams;
 import com.android.billingclient.api.BillingResult;
 import com.android.billingclient.api.PendingPurchasesParams;
 import com.android.billingclient.api.ProductDetails;
+import com.android.billingclient.api.ProductDetailsResponseListener;
 import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.android.billingclient.api.QueryProductDetailsParams;
+import com.android.billingclient.api.QueryProductDetailsResult;
 import com.android.billingclient.api.QueryPurchasesParams;
 
 import java.util.ArrayList;
@@ -27,7 +29,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Wrapper class for Google Play Billing Library 7.
+ * Wrapper class for Google Play Billing Library 8.
  * Provides a simple interface for in-app purchases.
  */
 public class BillingManager {
@@ -246,13 +248,17 @@ public class BillingManager {
                 .setProductList(productList)
                 .build();
 
-        billingClient.queryProductDetailsAsync(params, (billingResult, productDetailsList) -> {
-            if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && !productDetailsList.isEmpty()) {
-                ProductDetails productDetails = productDetailsList.get(0);
-                launchBillingFlow(activity, productDetails);
-            } else {
-                Log.e(TAG, "Failed to get product details: " + billingResult.getResponseCode());
-                notifyBillingError(billingResult.getResponseCode(), "Failed to get product details");
+        billingClient.queryProductDetailsAsync(params, new ProductDetailsResponseListener() {
+            @Override
+            public void onProductDetailsResponse(@NonNull BillingResult billingResult, @NonNull QueryProductDetailsResult result) {
+                List<ProductDetails> productDetailsList = result.getProductDetailsList();
+                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && !productDetailsList.isEmpty()) {
+                    ProductDetails productDetails = productDetailsList.get(0);
+                    launchBillingFlow(activity, productDetails);
+                } else {
+                    Log.e(TAG, "Failed to get product details: " + billingResult.getResponseCode());
+                    notifyBillingError(billingResult.getResponseCode(), "Failed to get product details");
+                }
             }
         });
     }
@@ -347,20 +353,24 @@ public class BillingManager {
                 .setProductList(productList)
                 .build();
 
-        billingClient.queryProductDetailsAsync(params, (billingResult, productDetailsList) -> {
-            mainHandler.post(() -> {
-                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && !productDetailsList.isEmpty()) {
-                    ProductDetails productDetails = productDetailsList.get(0);
-                    ProductDetails.OneTimePurchaseOfferDetails offerDetails = productDetails.getOneTimePurchaseOfferDetails();
-                    if (offerDetails != null) {
-                        callback.onProductDetails(offerDetails.getFormattedPrice());
+        billingClient.queryProductDetailsAsync(params, new ProductDetailsResponseListener() {
+            @Override
+            public void onProductDetailsResponse(@NonNull BillingResult billingResult, @NonNull QueryProductDetailsResult result) {
+                List<ProductDetails> productDetailsList = result.getProductDetailsList();
+                mainHandler.post(() -> {
+                    if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && !productDetailsList.isEmpty()) {
+                        ProductDetails productDetails = productDetailsList.get(0);
+                        ProductDetails.OneTimePurchaseOfferDetails offerDetails = productDetails.getOneTimePurchaseOfferDetails();
+                        if (offerDetails != null) {
+                            callback.onProductDetails(offerDetails.getFormattedPrice());
+                        } else {
+                            callback.onError("No price available");
+                        }
                     } else {
-                        callback.onError("No price available");
+                        callback.onError("Failed to get product details");
                     }
-                } else {
-                    callback.onError("Failed to get product details");
-                }
-            });
+                });
+            }
         });
     }
 
@@ -386,13 +396,17 @@ public class BillingManager {
                 .setProductList(productList)
                 .build();
 
-        billingClient.queryProductDetailsAsync(params, (billingResult, productDetailsList) -> {
-            if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && !productDetailsList.isEmpty()) {
-                ProductDetails productDetails = productDetailsList.get(0);
-                launchSubscriptionBillingFlow(activity, productDetails, offerId);
-            } else {
-                Log.e(TAG, "Failed to get subscription details: " + billingResult.getResponseCode());
-                notifyBillingError(billingResult.getResponseCode(), "Failed to get subscription details");
+        billingClient.queryProductDetailsAsync(params, new ProductDetailsResponseListener() {
+            @Override
+            public void onProductDetailsResponse(@NonNull BillingResult billingResult, @NonNull QueryProductDetailsResult result) {
+                List<ProductDetails> productDetailsList = result.getProductDetailsList();
+                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && !productDetailsList.isEmpty()) {
+                    ProductDetails productDetails = productDetailsList.get(0);
+                    launchSubscriptionBillingFlow(activity, productDetails, offerId);
+                } else {
+                    Log.e(TAG, "Failed to get subscription details: " + billingResult.getResponseCode());
+                    notifyBillingError(billingResult.getResponseCode(), "Failed to get subscription details");
+                }
             }
         });
     }
@@ -462,40 +476,44 @@ public class BillingManager {
                 .setProductList(productList)
                 .build();
 
-        billingClient.queryProductDetailsAsync(params, (billingResult, productDetailsList) -> {
-            mainHandler.post(() -> {
-                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && !productDetailsList.isEmpty()) {
-                    ProductDetails productDetails = productDetailsList.get(0);
-                    List<ProductDetails.SubscriptionOfferDetails> offers = productDetails.getSubscriptionOfferDetails();
+        billingClient.queryProductDetailsAsync(params, new ProductDetailsResponseListener() {
+            @Override
+            public void onProductDetailsResponse(@NonNull BillingResult billingResult, @NonNull QueryProductDetailsResult result) {
+                List<ProductDetails> productDetailsList = result.getProductDetailsList();
+                mainHandler.post(() -> {
+                    if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && !productDetailsList.isEmpty()) {
+                        ProductDetails productDetails = productDetailsList.get(0);
+                        List<ProductDetails.SubscriptionOfferDetails> offers = productDetails.getSubscriptionOfferDetails();
 
-                    if (offers != null && !offers.isEmpty()) {
-                        // Get the base plan price (last pricing phase of the base offer)
-                        String weeklyPrice = "";
-                        String trialPeriod = "";
+                        if (offers != null && !offers.isEmpty()) {
+                            // Get the base plan price (last pricing phase of the base offer)
+                            String weeklyPrice = "";
+                            String trialPeriod = "";
 
-                        for (ProductDetails.SubscriptionOfferDetails offer : offers) {
-                            List<ProductDetails.PricingPhase> pricingPhases = offer.getPricingPhases().getPricingPhaseList();
-                            for (ProductDetails.PricingPhase phase : pricingPhases) {
-                                if (phase.getPriceAmountMicros() == 0) {
-                                    // This is the free trial phase
-                                    trialPeriod = phase.getBillingPeriod();
-                                } else {
-                                    // This is the paid phase
-                                    weeklyPrice = phase.getFormattedPrice();
+                            for (ProductDetails.SubscriptionOfferDetails offer : offers) {
+                                List<ProductDetails.PricingPhase> pricingPhases = offer.getPricingPhases().getPricingPhaseList();
+                                for (ProductDetails.PricingPhase phase : pricingPhases) {
+                                    if (phase.getPriceAmountMicros() == 0) {
+                                        // This is the free trial phase
+                                        trialPeriod = phase.getBillingPeriod();
+                                    } else {
+                                        // This is the paid phase
+                                        weeklyPrice = phase.getFormattedPrice();
+                                    }
                                 }
+                                // Use the first offer that has pricing info
+                                if (!weeklyPrice.isEmpty()) break;
                             }
-                            // Use the first offer that has pricing info
-                            if (!weeklyPrice.isEmpty()) break;
-                        }
 
-                        callback.onSubscriptionDetails(weeklyPrice, trialPeriod);
+                            callback.onSubscriptionDetails(weeklyPrice, trialPeriod);
+                        } else {
+                            callback.onError("No subscription offers available");
+                        }
                     } else {
-                        callback.onError("No subscription offers available");
+                        callback.onError("Failed to get subscription details");
                     }
-                } else {
-                    callback.onError("Failed to get subscription details");
-                }
-            });
+                });
+            }
         });
     }
 

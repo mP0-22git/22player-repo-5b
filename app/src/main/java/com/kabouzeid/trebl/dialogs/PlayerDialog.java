@@ -24,8 +24,9 @@ import com.heinrichreimersoftware.materialintro.view.InkPageIndicator;
 import com.kabouzeid.appthemehelper.ThemeStore;
 import com.kabouzeid.trebl.App;
 import com.kabouzeid.trebl.R;
-import com.kabouzeid.trebl.ui.activities.PurchaseActivity;
 import com.kabouzeid.trebl.ui.fragments.player.NowPlayingScreen;
+import com.superwall.sdk.Superwall;
+import com.superwall.sdk.paywall.presentation.PublicPresentationKt;
 import com.kabouzeid.trebl.util.PreferenceUtil;
 import com.kabouzeid.trebl.util.ViewUtil;
 
@@ -75,8 +76,7 @@ public class PlayerDialog {
                 playerDialog.dismiss();
                 activity.recreate();
             }else{
-                Toast.makeText(activity, "This is a pro feature", Toast.LENGTH_LONG).show();
-                activity.startActivity(new Intent(activity, PurchaseActivity.class));
+                PublicPresentationKt.register(Superwall.Companion.getInstance(), "feature_now_playing");
             }
         });
 

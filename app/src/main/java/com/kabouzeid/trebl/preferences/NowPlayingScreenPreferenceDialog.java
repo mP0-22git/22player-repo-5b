@@ -22,8 +22,9 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.heinrichreimersoftware.materialintro.view.InkPageIndicator;
 import com.kabouzeid.trebl.App;
 import com.kabouzeid.trebl.R;
-import com.kabouzeid.trebl.ui.activities.PurchaseActivity;
 import com.kabouzeid.trebl.ui.fragments.player.NowPlayingScreen;
+import com.superwall.sdk.Superwall;
+import com.superwall.sdk.paywall.presentation.PublicPresentationKt;
 import com.kabouzeid.trebl.util.PreferenceUtil;
 import com.kabouzeid.trebl.util.ViewUtil;
 
@@ -76,8 +77,7 @@ public class NowPlayingScreenPreferenceDialog extends DialogFragment implements 
             }else if(App.isProVersion() && viewPagerPosition==2){
                 PreferenceUtil.getInstance(getContext()).setNowPlayingScreen(NowPlayingScreen.values()[viewPagerPosition]);
             }else{
-                Toast.makeText(getActivity(), "This is a pro feature", Toast.LENGTH_LONG).show();
-                startActivity(new Intent(getContext(), PurchaseActivity.class));
+                PublicPresentationKt.register(Superwall.Companion.getInstance(), "feature_now_playing");
             }
 
         }

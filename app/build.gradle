@@ -62,6 +62,7 @@ android {
         buildConfigField "String", "PRO_PRODUCT_ID", "\"${secrets.getProperty('PRO_PRODUCT_ID', '')}\""
         buildConfigField "String", "PRO_SUBSCRIPTION_ID", "\"${secrets.getProperty('PRO_SUBSCRIPTION_ID', '')}\""
         buildConfigField "String", "SUBSCRIPTION_OFFER_ID", "\"${secrets.getProperty('SUBSCRIPTION_OFFER_ID', '')}\""
+        buildConfigField "String", "SUPERWALL_API_KEY", "\"${secrets.getProperty('SUPERWALL_API_KEY', '')}\""
 
         // Manifest placeholders for AdMob
         manifestPlaceholders = [
@@ -189,4 +190,7 @@ dependencies {
     def room_version = "2.6.1"
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
+
+    // Superwall
+    implementation "com.superwall.sdk:superwall-android:2.6.5"
 }

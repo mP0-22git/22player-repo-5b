@@ -34,6 +34,8 @@ import com.kabouzeid.trebl.preferences.NowPlayingScreenPreference;
 import com.kabouzeid.trebl.preferences.NowPlayingScreenPreferenceDialog;
 import com.kabouzeid.trebl.ui.activities.base.AbsBaseActivity;
 import com.kabouzeid.trebl.util.PreferenceUtil;
+import com.superwall.sdk.Superwall;
+import com.superwall.sdk.paywall.presentation.PublicPresentationKt;
 
 import java.util.Arrays;
 
@@ -85,8 +87,7 @@ public class SettingsActivity extends AbsBaseActivity implements ColorChooserDia
                     Arrays.sort(NonProAllowedColors.PRIMARY_COLORS);
                     if (Arrays.binarySearch(NonProAllowedColors.PRIMARY_COLORS, selectedColor) < 0) {
                         // color wasn't found
-                        Toast.makeText(this, R.string.only_the_first_5_colors_available, Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(this, PurchaseActivity.class));
+                        PublicPresentationKt.register(Superwall.Companion.getInstance(), "feature_colors");
                         return;
                     }
                 }
@@ -100,8 +101,7 @@ public class SettingsActivity extends AbsBaseActivity implements ColorChooserDia
                     Arrays.sort(NonProAllowedColors.ACCENT_COLORS);
                     if (Arrays.binarySearch(NonProAllowedColors.ACCENT_COLORS, selectedColor) < 0) {
                         // color wasn't found
-                        Toast.makeText(this, R.string.only_the_first_5_colors_available, Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(this, PurchaseActivity.class));
+                        PublicPresentationKt.register(Superwall.Companion.getInstance(), "feature_colors");
                         return;
                     }
                 }
@@ -203,7 +203,7 @@ public class SettingsActivity extends AbsBaseActivity implements ColorChooserDia
                 if (!App.isProVersion()) {
                     boolean isProTheme = PreferenceUtil.getInstance(getActivity()).checkProTheme(themeName, getActivity());
                     if (isProTheme) {
-                        startActivity(new Intent(getContext(), PurchaseActivity.class));
+                        PublicPresentationKt.register(Superwall.Companion.getInstance(), "feature_theme");
                         return false;
                     }
                 }

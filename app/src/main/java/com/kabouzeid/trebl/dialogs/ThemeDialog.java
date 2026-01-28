@@ -13,8 +13,9 @@ import android.widget.ListView;
 
 import com.kabouzeid.trebl.App;
 import com.kabouzeid.trebl.R;
-import com.kabouzeid.trebl.ui.activities.PurchaseActivity;
 import com.kabouzeid.trebl.util.PreferenceUtil;
+import com.superwall.sdk.Superwall;
+import com.superwall.sdk.paywall.presentation.PublicPresentationKt;
 
 public class ThemeDialog {
     public static Dialog createThemeDialog(Activity activity){
@@ -38,7 +39,7 @@ public class ThemeDialog {
                 activity.recreate();
             } else {
                 themeDialog.dismiss();
-                activity.startActivity(new Intent(activity, PurchaseActivity.class));
+                PublicPresentationKt.register(Superwall.Companion.getInstance(), "feature_theme");
             }
         });
 

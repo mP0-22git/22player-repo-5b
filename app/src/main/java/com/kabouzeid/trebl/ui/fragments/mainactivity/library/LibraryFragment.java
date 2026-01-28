@@ -59,8 +59,9 @@ import java.util.ArrayList;
 import java.util.List;
 import com.kabouzeid.trebl.ui.activities.EqualizerActivity;
 import com.kabouzeid.trebl.ui.activities.MainActivity;
-import com.kabouzeid.trebl.ui.activities.PurchaseActivity;
 import com.kabouzeid.trebl.ui.activities.SearchActivity;
+import com.superwall.sdk.Superwall;
+import com.superwall.sdk.paywall.presentation.PublicPresentationKt;
 import com.kabouzeid.trebl.ui.fragments.mainactivity.AbsMainActivityFragment;
 import com.kabouzeid.trebl.ui.fragments.mainactivity.library.pager.AbsLibraryPagerRecyclerViewCustomGridSizeFragment;
 import com.kabouzeid.trebl.ui.fragments.mainactivity.library.pager.AlbumsFragment;
@@ -372,7 +373,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
                 startActivity(new Intent(getActivity(), SearchActivity.class));
                 return true;
             case R.id.action_pro:
-                startActivity(new Intent(getActivity(), PurchaseActivity.class));
+                PublicPresentationKt.register(Superwall.Companion.getInstance(), "campaign_pro_button");
                 return true;
             case R.id.action_equalizer:
                 if(PreferenceUtil.getInstance(getActivity()).readSharedPrefsString("select_equalizer","appeq").equals("appeq")){

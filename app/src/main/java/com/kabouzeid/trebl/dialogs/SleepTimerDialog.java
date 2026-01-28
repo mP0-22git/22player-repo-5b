@@ -24,7 +24,8 @@ import com.kabouzeid.trebl.App;
 import com.kabouzeid.trebl.R;
 import com.kabouzeid.trebl.helper.MusicPlayerRemote;
 import com.kabouzeid.trebl.service.MusicService;
-import com.kabouzeid.trebl.ui.activities.PurchaseActivity;
+import com.superwall.sdk.Superwall;
+import com.superwall.sdk.paywall.presentation.PublicPresentationKt;
 import com.kabouzeid.trebl.util.MusicUtil;
 import com.kabouzeid.trebl.util.PreferenceUtil;
 import com.triggertrap.seekarc.SeekArc;
@@ -65,8 +66,7 @@ public class SleepTimerDialog extends DialogFragment {
                         return;
                     }
                     if (!App.isProVersion()) {
-                        Toast.makeText(getActivity(), getString(R.string.sleep_timer_is_a_pro_feature), Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(getContext(), PurchaseActivity.class));
+                        PublicPresentationKt.register(Superwall.Companion.getInstance(), "feature_sleep_timer");
                         return;
                     }
 

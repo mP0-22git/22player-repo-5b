@@ -89,4 +89,8 @@
         <item name="android:colorForeground">#42221f1f</item>
     </style>
 
+    <style name="Theme.Superwall" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@android:color/black</item>
+    </style>
+
 </resources>

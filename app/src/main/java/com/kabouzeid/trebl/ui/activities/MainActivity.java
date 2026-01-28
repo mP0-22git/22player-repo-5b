@@ -28,6 +28,8 @@ import com.kabouzeid.trebl.ui.fragments.mainactivity.library.LibraryFragment;
 import com.kabouzeid.trebl.provider.InternalPlaylistStore;
 import com.kabouzeid.trebl.util.BackgroundUtil;
 import com.kabouzeid.trebl.util.PreferenceUtil;
+import com.superwall.sdk.Superwall;
+import com.superwall.sdk.paywall.presentation.PublicPresentationKt;
 
 import com.sofakingforever.stars.AnimatedStarsView;
 
@@ -121,7 +123,7 @@ public class MainActivity extends AbsSlidingMusicPanelActivity {
     private void checkShowPro() {
         int launchCount = PreferenceUtil.getInstance(this).getLaunchCount();
         if(launchCount % 5 == 0 && launchCount != 0 && !App.isProVersion()) {
-            startActivity(new Intent(this, PurchaseActivity.class));
+            PublicPresentationKt.register(Superwall.Companion.getInstance(), "campaign_periodic");
         }
     }
 

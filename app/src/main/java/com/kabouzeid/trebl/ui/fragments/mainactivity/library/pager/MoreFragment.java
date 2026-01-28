@@ -20,9 +20,10 @@ import com.kabouzeid.trebl.dialogs.PlayerDialog;
 import com.kabouzeid.trebl.dialogs.ThemeDialog;
 import com.kabouzeid.trebl.dialogs.WallpaperDialog;
 import com.kabouzeid.trebl.ui.activities.MainActivity;
-import com.kabouzeid.trebl.ui.activities.PurchaseActivity;
 import com.kabouzeid.trebl.ui.activities.SettingsActivity;
 import com.kabouzeid.trebl.ui.fragments.mainactivity.folders.FoldersFragment;
+import com.superwall.sdk.Superwall;
+import com.superwall.sdk.paywall.presentation.PublicPresentationKt;
 
 public class MoreFragment extends Fragment {
     private Dialog playerDialog;
@@ -54,7 +55,7 @@ public class MoreFragment extends Fragment {
         ListView listView = view.findViewById(R.id.list_more);
 
         proButton.setVisibility(App.isProVersion() ? View.GONE : View.VISIBLE);
-        proButton.setOnClickListener(v -> startActivity((new Intent(getActivity(), PurchaseActivity.class))));
+        proButton.setOnClickListener(v -> PublicPresentationKt.register(Superwall.Companion.getInstance(), "campaign_pro_button"));
 
         String [] more_items = getResources().getStringArray(R.array.more_array);
         ArrayAdapter adapter = new ArrayAdapter(getActivity(), R.layout.item_more, R.id.text_view, more_items);
@@ -69,8 +70,7 @@ public class MoreFragment extends Fragment {
                 break;
             case 1:
                 if (!App.isProVersion()) {
-                    Toast.makeText(getActivity(), R.string.folder_view_is_a_pro_feature, Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(getActivity(), PurchaseActivity.class));
+                    PublicPresentationKt.register(Superwall.Companion.getInstance(), "feature_folder");
                 }else{
                     setCurrentFragment(FoldersFragment.newInstance(getActivity()));
                 }

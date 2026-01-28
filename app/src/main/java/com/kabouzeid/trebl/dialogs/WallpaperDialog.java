@@ -20,7 +20,8 @@ import static android.app.Activity.RESULT_OK;
 
 import com.kabouzeid.trebl.App;
 import com.kabouzeid.trebl.R;
-import com.kabouzeid.trebl.ui.activities.PurchaseActivity;
+import com.superwall.sdk.Superwall;
+import com.superwall.sdk.paywall.presentation.PublicPresentationKt;
 
 public class WallpaperDialog extends DialogFragment {
     private SharedPreferences pref;
@@ -62,8 +63,7 @@ public class WallpaperDialog extends DialogFragment {
                 editor.apply();
                 pickFromGallery();
             } else {
-                Toast.makeText(context, R.string.this_is_pro, Toast.LENGTH_LONG).show();
-                startActivity(new Intent(context, PurchaseActivity.class));
+                PublicPresentationKt.register(Superwall.Companion.getInstance(), "feature_wallpaper");
             }
         });
 

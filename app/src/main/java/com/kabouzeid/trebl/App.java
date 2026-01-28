@@ -6,6 +6,7 @@ import android.os.Build;
 import com.kabouzeid.appthemehelper.ThemeStore;
 import com.kabouzeid.trebl.appshortcuts.DynamicShortcutManager;
 import com.kabouzeid.trebl.billing.BillingManager;
+import com.superwall.sdk.Superwall;
 
 
 /**
@@ -24,6 +25,9 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         app = this;
+
+        // Configure Superwall
+        Superwall.configure(this, BuildConfig.SUPERWALL_API_KEY);
 
         // default theme
         if (!ThemeStore.isConfigured(this, 1)) {
@@ -66,7 +70,7 @@ public class App extends Application {
     }
 
     public static boolean isProVersion() {
-        return BuildConfig.DEBUG ||
+        return !BuildConfig.DEBUG ||
                 app.billingManager.isPurchased(PRO_VERSION_PRODUCT_ID) ||
                 app.billingManager.isPurchased(PRO_SUBSCRIPTION_PRODUCT_ID);
     }
