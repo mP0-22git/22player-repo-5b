@@ -53,8 +53,8 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         applicationId 'cyberwolf.musicplayer'
-        versionCode 147
-        versionName '3.0.10'
+        versionCode 148
+        versionName '4.0.0'
 
         // Inject secrets as BuildConfig fields
         buildConfigField "String", "GOOGLE_PLAY_LICENSE_KEY", "\"${secrets.getProperty('GOOGLE_PLAY_LICENSE_KEY', '')}\""
