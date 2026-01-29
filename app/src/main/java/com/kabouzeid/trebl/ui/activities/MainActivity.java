@@ -77,6 +77,8 @@ public class MainActivity extends AbsSlidingMusicPanelActivity {
 
         generalTheme = PreferenceUtil.getInstance(this).getGeneralTheme();
 
+        App.setOnProVersionChangedListener(() -> runOnUiThread(this::recreate));
+
         runChecks();
     }
 

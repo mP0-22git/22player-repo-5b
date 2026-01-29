@@ -1,7 +1,9 @@
 package com.kabouzeid.trebl;
 
 import android.app.Application;
+import android.content.SharedPreferences;
 import android.os.Build;
+import android.preference.PreferenceManager;
 
 import com.kabouzeid.appthemehelper.ThemeStore;
 import com.kabouzeid.trebl.appshortcuts.DynamicShortcutManager;
@@ -16,6 +18,7 @@ public class App extends Application {
 
     public static final String PRO_VERSION_PRODUCT_ID = BuildConfig.PRO_PRODUCT_ID;
     public static final String PRO_SUBSCRIPTION_PRODUCT_ID = BuildConfig.PRO_SUBSCRIPTION_ID;
+    private static final String PREF_PRO_STATUS_CACHED = "pro_status_cached";
 
     private static App app;
 
@@ -47,12 +50,13 @@ public class App extends Application {
         billingManager.addCallback(new BillingManager.BillingCallback() {
             @Override
             public void onPurchaseComplete(String productId) {
+                updateCachedProStatus();
                 notifyProVersionChanged();
             }
 
             @Override
             public void onPurchaseRestored(boolean hasPurchase) {
-                if (hasPurchase) {
+                if (updateCachedProStatus()) {
                     notifyProVersionChanged();
                 }
             }
@@ -64,15 +68,32 @@ public class App extends Application {
 
             @Override
             public void onBillingReady() {
-                // Billing is ready, purchases have been queried
+                if (updateCachedProStatus()) {
+                    notifyProVersionChanged();
+                }
             }
         });
     }
 
     public static boolean isProVersion() {
-        return !BuildConfig.DEBUG ||
-                app.billingManager.isPurchased(PRO_VERSION_PRODUCT_ID) ||
+        boolean billingPro = app.billingManager.isPurchased(PRO_VERSION_PRODUCT_ID) ||
                 app.billingManager.isPurchased(PRO_SUBSCRIPTION_PRODUCT_ID);
+        if (billingPro) return true;
+        // Fall back to cached status while billing is still loading
+        return PreferenceManager.getDefaultSharedPreferences(app)
+                .getBoolean(PREF_PRO_STATUS_CACHED, false);
+    }
+
+    /**
+     * Updates cached pro status. Returns true if the status changed.
+     */
+    private static boolean updateCachedProStatus() {
+        boolean isPro = app.billingManager.isPurchased(PRO_VERSION_PRODUCT_ID) ||
+                app.billingManager.isPurchased(PRO_SUBSCRIPTION_PRODUCT_ID);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(app);
+        boolean wasPro = prefs.getBoolean(PREF_PRO_STATUS_CACHED, false);
+        prefs.edit().putBoolean(PREF_PRO_STATUS_CACHED, isPro).apply();
+        return isPro != wasPro;
     }
 
     private static OnProVersionChangedListener onProVersionChangedListener;
