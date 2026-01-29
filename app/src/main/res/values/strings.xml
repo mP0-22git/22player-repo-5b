@@ -328,6 +328,7 @@
     <string name="duplicate_playlists_warning">These playlists already exist:\n\n%1$s\n\nImporting will create duplicates. Continue?</string>
     <string name="no_playlists_selected">No playlists selected</string>
     <string name="export_all_playlists">Export all playlists</string>
+    <string name="manage_playlists">Manage Playlists</string>
     <string name="no_playlists_to_export">No playlists to export</string>
 
     <!-- Cloud backup -->

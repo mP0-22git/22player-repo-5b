@@ -385,7 +385,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         return super.onOptionsItemSelected(item);
     }
 
-    private void importPlaylistsFromMediaStore() {
+    public void importPlaylistsFromMediaStore() {
         Activity activity = getActivity();
         if (activity == null) return;
 
@@ -499,7 +499,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         }).start();
     }
 
-    private void exportAllPlaylists() {
+    public void exportAllPlaylists() {
         Activity activity = getActivity();
         if (activity == null) return;
 

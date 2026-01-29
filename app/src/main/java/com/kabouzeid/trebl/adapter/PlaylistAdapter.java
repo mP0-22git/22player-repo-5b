@@ -20,6 +20,7 @@ import com.kabouzeid.trebl.adapter.base.AbsMultiSelectAdapter;
 import com.kabouzeid.trebl.adapter.base.MediaEntryViewHolder;
 import com.kabouzeid.trebl.dialogs.ClearSmartPlaylistDialog;
 import com.kabouzeid.trebl.dialogs.DeletePlaylistDialog;
+import com.kabouzeid.trebl.dialogs.ManagePlaylistsDialog;
 import com.kabouzeid.trebl.helper.menu.PlaylistMenuHelper;
 import com.kabouzeid.trebl.helper.menu.SongsMenuHelper;
 import com.kabouzeid.trebl.interfaces.CabHolder;
@@ -45,6 +46,7 @@ public class PlaylistAdapter extends AbsMultiSelectAdapter<PlaylistAdapter.ViewH
 
     private static final int SMART_PLAYLIST = 0;
     private static final int DEFAULT_PLAYLIST = 1;
+    private static final int MANAGE_HEADER = 2;
 
     protected final AppCompatActivity activity;
     protected List<Playlist> dataSet;
@@ -69,7 +71,8 @@ public class PlaylistAdapter extends AbsMultiSelectAdapter<PlaylistAdapter.ViewH
 
     @Override
     public long getItemId(int position) {
-        return dataSet.get(position).id;
+        if (position == 0) return -200;
+        return dataSet.get(position - 1).id;
     }
 
     @Override
@@ -85,7 +88,18 @@ public class PlaylistAdapter extends AbsMultiSelectAdapter<PlaylistAdapter.ViewH
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final Playlist playlist = dataSet.get(position);
+        if (position == 0) {
+            holder.itemView.setActivated(false);
+            if (holder.title != null) {
+                holder.title.setText(R.string.manage_playlists);
+            }
+            if (holder.image != null) {
+                holder.image.setImageResource(R.drawable.ic_settings_white_24dp);
+            }
+            return;
+        }
+
+        final Playlist playlist = dataSet.get(position - 1);
 
         holder.itemView.setActivated(isChecked(playlist));
 
@@ -98,7 +112,7 @@ public class PlaylistAdapter extends AbsMultiSelectAdapter<PlaylistAdapter.ViewH
                 holder.shortSeparator.setVisibility(View.GONE);
             }
         } else {
-            if (holder.shortSeparator != null && !(dataSet.get(position) instanceof AbsSmartPlaylist)) {
+            if (holder.shortSeparator != null && !(dataSet.get(position - 1) instanceof AbsSmartPlaylist)) {
                 holder.shortSeparator.setVisibility(View.GONE);
             }
         }
@@ -117,17 +131,19 @@ public class PlaylistAdapter extends AbsMultiSelectAdapter<PlaylistAdapter.ViewH
 
     @Override
     public int getItemViewType(int position) {
-        return dataSet.get(position) instanceof AbsSmartPlaylist ? SMART_PLAYLIST : DEFAULT_PLAYLIST;
+        if (position == 0) return MANAGE_HEADER;
+        return dataSet.get(position - 1) instanceof AbsSmartPlaylist ? SMART_PLAYLIST : DEFAULT_PLAYLIST;
     }
 
     @Override
     public int getItemCount() {
-        return dataSet.size();
+        return dataSet.size() + 1;
     }
 
     @Override
     protected Playlist getIdentifier(int position) {
-        return dataSet.get(position);
+        if (position == 0) return null;
+        return dataSet.get(position - 1);
     }
 
     @Override
@@ -220,57 +236,74 @@ public class PlaylistAdapter extends AbsMultiSelectAdapter<PlaylistAdapter.ViewH
         public ViewHolder(@NonNull View itemView, int itemViewType) {
             super(itemView);
 
-            if (itemViewType == SMART_PLAYLIST) {
+            if (itemViewType == MANAGE_HEADER) {
                 if (shortSeparator != null) {
                     shortSeparator.setVisibility(View.GONE);
+                }
+                if (menu != null) {
+                    menu.setVisibility(View.GONE);
                 }
                 itemView.setBackgroundColor(ATHUtil.resolveColor(activity, R.attr.playlistCardBackground));
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     itemView.setElevation(activity.getResources().getDimensionPixelSize(R.dimen.card_elevation));
+                }
+            } else {
+                if (itemViewType == SMART_PLAYLIST) {
+                    if (shortSeparator != null) {
+                        shortSeparator.setVisibility(View.GONE);
+                    }
+                    itemView.setBackgroundColor(ATHUtil.resolveColor(activity, R.attr.playlistCardBackground));
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        itemView.setElevation(activity.getResources().getDimensionPixelSize(R.dimen.card_elevation));
+                    }
+                }
+
+                if (menu != null) {
+                    menu.setOnClickListener(view -> {
+                        final Playlist playlist = dataSet.get(getAdapterPosition() - 1);
+                        final PopupMenu popupMenu = new PopupMenu(activity, view);
+                        popupMenu.inflate(getItemViewType() == SMART_PLAYLIST ? R.menu.menu_item_smart_playlist : R.menu.menu_item_playlist);
+                        if (playlist instanceof LastAddedPlaylist) {
+                            popupMenu.getMenu().findItem(R.id.action_clear_playlist).setVisible(false);
+                        }
+                        popupMenu.setOnMenuItemClickListener(item -> {
+                            if (item.getItemId() == R.id.action_clear_playlist) {
+                                if (playlist instanceof AbsSmartPlaylist) {
+                                    ClearSmartPlaylistDialog.create((AbsSmartPlaylist) playlist).show(activity.getSupportFragmentManager(), "CLEAR_SMART_PLAYLIST_" + playlist.name);
+                                    return true;
+                                }
+                            }
+                            return PlaylistMenuHelper.handleMenuClick(
+                                    activity, dataSet.get(getAdapterPosition() - 1), item);
+                        });
+                        popupMenu.show();
+                    });
                 }
             }
 
             if (image != null) {
                 int iconPadding = activity.getResources().getDimensionPixelSize(R.dimen.list_item_image_icon_padding);
                 image.setPadding(iconPadding, iconPadding, iconPadding, iconPadding);
-                //image.setColorFilter(ATHUtil.resolveColor(activity, R.attr.iconColor), PorterDuff.Mode.SRC_IN);
-            }
-
-            if (menu != null) {
-                menu.setOnClickListener(view -> {
-                    final Playlist playlist = dataSet.get(getAdapterPosition());
-                    final PopupMenu popupMenu = new PopupMenu(activity, view);
-                    popupMenu.inflate(getItemViewType() == SMART_PLAYLIST ? R.menu.menu_item_smart_playlist : R.menu.menu_item_playlist);
-                    if (playlist instanceof LastAddedPlaylist) {
-                        popupMenu.getMenu().findItem(R.id.action_clear_playlist).setVisible(false);
-                    }
-                    popupMenu.setOnMenuItemClickListener(item -> {
-                        if (item.getItemId() == R.id.action_clear_playlist) {
-                            if (playlist instanceof AbsSmartPlaylist) {
-                                ClearSmartPlaylistDialog.create((AbsSmartPlaylist) playlist).show(activity.getSupportFragmentManager(), "CLEAR_SMART_PLAYLIST_" + playlist.name);
-                                return true;
-                            }
-                        }
-                        return PlaylistMenuHelper.handleMenuClick(
-                                activity, dataSet.get(getAdapterPosition()), item);
-                    });
-                    popupMenu.show();
-                });
             }
         }
 
         @Override
         public void onClick(View view) {
+            if (getAdapterPosition() == 0) {
+                ManagePlaylistsDialog.create().show(activity.getSupportFragmentManager(), "MANAGE_PLAYLISTS");
+                return;
+            }
             if (isInQuickSelectMode()) {
                 toggleChecked(getAdapterPosition());
             } else {
-                Playlist playlist = dataSet.get(getAdapterPosition());
+                Playlist playlist = dataSet.get(getAdapterPosition() - 1);
                 NavigationUtil.goToPlaylist(activity, playlist);
             }
         }
 
         @Override
         public boolean onLongClick(View view) {
+            if (getAdapterPosition() == 0) return false;
             toggleChecked(getAdapterPosition());
             return true;
         }
