@@ -25,7 +25,6 @@ public class ManagePlaylistsDialog extends DialogFragment {
                 .items(new CharSequence[]{
                         getString(R.string.import_playlists),
                         getString(R.string.export_all_playlists)
-                        // getString(R.string.cloud_backup) // TODO: re-enable when cloud backup is ready
                 })
                 .itemsCallback((dialog, itemView, position, text) -> {
                     LibraryFragment libraryFragment = findLibraryFragment();
@@ -38,10 +37,6 @@ public class ManagePlaylistsDialog extends DialogFragment {
                         case 1:
                             libraryFragment.exportAllPlaylists();
                             break;
-                        // case 2: // TODO: re-enable when cloud backup is ready
-                        //     CloudBackupDialog.create().show(
-                        //             libraryFragment.getChildFragmentManager(), "CLOUD_BACKUP");
-                        //     break;
                     }
                 })
                 .build();

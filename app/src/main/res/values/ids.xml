@@ -3,7 +3,6 @@
     <item name="action_new_playlist" type="id" />
     <item name="action_import_playlists" type="id" />
     <item name="action_export_all_playlists" type="id" />
-    <item name="action_cloud_backup" type="id" />
     <item name="action_show_lyrics" type="id" />
 
     <item name="action_album_sort_order_asc" type="id" />

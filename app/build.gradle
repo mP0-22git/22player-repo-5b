@@ -53,7 +53,7 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         applicationId 'cyberwolf.musicplayer'
-        versionCode 151
+        versionCode 152
         versionName '4.0.0'
 
         // Inject secrets as BuildConfig fields
@@ -174,11 +174,6 @@ dependencies {
 
     // AdMob
     implementation 'com.google.android.gms:play-services-ads:23.6.0'
-
-    // Google Sign-In and Drive API for cloud backup
-    implementation 'com.google.android.gms:play-services-auth:21.3.0'
-    implementation 'com.google.api-client:google-api-client-android:2.2.0'
-    implementation 'com.google.apis:google-api-services-drive:v3-rev20240123-2.0.0'
 
     implementation 'com.h6ah4i.android.widget.verticalseekbar:verticalseekbar:1.0.0'
 
