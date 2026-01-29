@@ -1,42 +1,76 @@
 Privacy Policy
 
-This app is open source and can be viewed on our GitHub page.
-This page is used to inform visitors regarding my policies with the collection, use, and disclosure of Personal Information if anyone decided to use my Service.
-If you choose to use my Service, then you agree to the collection and use of information in relation to this policy. The Personal Information that I collect is used for providing and improving the Service. I will not use or share your information with anyone except as described in this Privacy Policy.
+Last updated: January 29, 2026
 
-Information Collection and Use
-For a better experience, while using our Service, I may require you to provide us with certain personally identifiable information. The information that I request will be retained on your device and is not collected by me in any way.
-The app does use third party services that may collect information used to identify you.
+Music Player - MP3 & Audio ("the App") is developed by Elysium Group. This privacy policy explains how information is collected, used, and disclosed when you use our App.
 
-Link to privacy policy of third party service providers used by the app
-* Google Play Services
+The App is open source and the source code can be viewed on our GitHub page.
 
-Log Data
-I want to inform you that whenever you use my Service, in a case of an error in the app I collect data and information (through third party products) on your phone called Log Data. This Log Data may include information such as your device Internet Protocol (“IP”) address, device name, operating system version, the configuration of the app when utilizing my Service, the time and date of your use of the Service, and other statistics.
+Information We Collect
 
-Cookies
-Cookies are files with a small amount of data that are commonly used as anonymous unique identifiers. These are sent to your browser from the websites that you visit and are stored on your device's internal memory.
-This Service does not use these “cookies” explicitly. However, the app may use third party code and libraries that use “cookies” to collect information and improve their services. You have the option to either accept or refuse these cookies and know when a cookie is being sent to your device. If you choose to refuse our cookies, you may not be able to use some portions of this Service.
+We do not directly collect, store, or process any personal information from users. The App operates primarily on your device, and your music library, playlists, and preferences are stored locally on your device.
 
-Service Providers
-I may employ third-party companies and individuals due to the following reasons:
-* To facilitate our Service;
-* To provide the Service on our behalf;
-* To perform Service-related services; or
-* To assist us in analyzing how our Service is used.
-I want to inform users of this Service that these third parties have access to your Personal Information. The reason is to perform the tasks assigned to them on our behalf. However, they are obligated not to disclose or use the information for any other purpose.
+However, the App uses third-party services that may collect information. These services operate under their own privacy policies, which we encourage you to review.
 
-Security
-I value your trust in providing us your Personal Information, thus we are striving to use commercially acceptable means of protecting it. But remember that no method of transmission over the internet, or method of electronic storage is 100% secure and reliable, and I cannot guarantee its absolute security.
+Third-Party Services
+
+The App uses the following third-party services:
+
+Google Play Services
+Used for core app functionality and distribution through the Google Play Store.
+Privacy Policy: https://policies.google.com/privacy
+
+Google AdMob
+The App displays banner advertisements provided by Google AdMob. AdMob may collect and use data to serve ads, including personalized ads based on your interests. This data may include:
+- Device advertising identifier
+- IP address (used to estimate general location)
+- Device information (model, operating system version)
+- App interaction data
+
+You can opt out of personalized advertising by adjusting your device settings:
+- On Android: Settings > Google > Ads > Opt out of Ads Personalization
+
+For more information, see Google's advertising privacy policy: https://policies.google.com/technologies/ads
+
+Superwall
+The App uses Superwall to display and manage subscription offerings. Superwall collects data to facilitate paywall presentation and to analyze the effectiveness of different subscription screens. This may include device identifiers and information about how you interact with subscription screens. Superwall does not have access to your payment information.
+Privacy Policy: https://superwall.com/privacy
+
+Google Play Billing
+Subscriptions and purchases are processed through Google Play. We do not have access to your payment details such as credit card numbers. Google handles all payment processing and billing. Your purchase history with our App may be visible to us through the Google Play Console for the purpose of providing customer support and honoring your subscription status.
+Privacy Policy: https://policies.google.com/privacy
+
+Last.fm
+The App uses the Last.fm API to retrieve artist biographies and album information, including artwork. When you view artist or album details, the App sends the artist and album names to Last.fm's servers to fetch this content. No personal or device information is sent — only the music metadata needed to look up the relevant artist or album. This data is used solely to display supplementary information within the App.
+Privacy Policy: https://www.last.fm/legal/privacy
+
+Advertising
+
+The free version of the App displays banner advertisements served by Google AdMob. If you purchase a subscription or have previously purchased the Pro version, advertisements are not displayed.
+
+Ads shown may be personalized based on your interests, or you may see non-personalized ads depending on your device settings and regional regulations.
+
+Children's Privacy
+
+The App is not directed at children under the age of 13. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided personal information through one of our third-party service providers, please contact us so we can take appropriate action.
+
+Data Security
+
+While we do not collect personal data ourselves, we are committed to ensuring that any third-party services we use employ commercially reasonable security measures. However, no method of electronic transmission or storage is completely secure.
 
 Links to Other Sites
-This Service may contain links to other sites. If you click on a third-party link, you will be directed to that site. Note that these external sites are not operated by me. Therefore, I strongly advise you to review the Privacy Policy of these websites. I have no control over and assume no responsibility for the content, privacy policies, or practices of any third-party sites or services.
-Children’s Privacy
-These Services do not address anyone under the age of 13. I do not knowingly collect personally identifiable information from children under 13 years of age. In the case I discover that a child under 13 has provided me with personal information, I immediately delete this from our servers. If you are a parent or guardian and you are aware that your child has provided us with personal information, please contact me so that I will be able to do necessary actions.
+
+The App may contain links to external websites or services. We are not responsible for the privacy practices of these external sites and encourage you to review their privacy policies.
 
 Changes to This Privacy Policy
-I may update our Privacy Policy from time to time. Thus, you are advised to review this page periodically for any changes. I will notify you of any changes by posting the new Privacy Policy on this page.
-This policy is effective as of 3-19-2022
+
+We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated effective date. We encourage you to review this policy periodically.
+
+Your Consent
+
+By using the App, you consent to this Privacy Policy and agree to its terms.
 
 Contact Us
-If you have any questions or suggestions about my Privacy Policy, do not hesitate to contact me.
+
+If you have any questions about this Privacy Policy, please contact us at:
+contactmyriadstudios@gmail.com
