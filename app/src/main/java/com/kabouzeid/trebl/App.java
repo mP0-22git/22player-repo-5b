@@ -76,6 +76,7 @@ public class App extends Application {
     }
 
     public static boolean isProVersion() {
+        if (BuildConfig.DEBUG) return true;
         boolean billingPro = app.billingManager.isPurchased(PRO_VERSION_PRODUCT_ID) ||
                 app.billingManager.isPurchased(PRO_SUBSCRIPTION_PRODUCT_ID);
         if (billingPro) return true;
