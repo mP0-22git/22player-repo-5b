@@ -111,6 +111,16 @@ public class DriveBackupManager {
         return currentAccount != null && hasRequiredScopes(currentAccount) && driveService != null;
     }
 
+    public void refreshSignInState() {
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(applicationContext);
+        if (account != null && hasRequiredScopes(account)) {
+            currentAccount = account;
+            if (driveService == null) {
+                initDriveService(account);
+            }
+        }
+    }
+
     @Nullable
     public String getSignedInEmail() {
         return currentAccount != null ? currentAccount.getEmail() : null;

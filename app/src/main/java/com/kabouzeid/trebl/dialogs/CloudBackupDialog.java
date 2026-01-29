@@ -21,6 +21,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.kabouzeid.trebl.R;
 import com.kabouzeid.trebl.backup.DriveBackupManager;
@@ -68,6 +69,10 @@ public class CloudBackupDialog extends DialogFragment {
                             public void onSuccess(String email) {
                                 updateUI();
                                 loadBackupList();
+                                Dialog d = getDialog();
+                                if (d instanceof MaterialDialog) {
+                                    ((MaterialDialog) d).getActionButton(DialogAction.POSITIVE).setVisibility(View.GONE);
+                                }
                             }
 
                             @Override
@@ -103,6 +108,7 @@ public class CloudBackupDialog extends DialogFragment {
         backupButton.setOnClickListener(v -> performBackup());
         signOutButton.setOnClickListener(v -> signOut());
 
+        backupManager.refreshSignInState();
         updateUI();
 
         if (backupManager.isSignedIn()) {
@@ -113,7 +119,9 @@ public class CloudBackupDialog extends DialogFragment {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(requireContext())
                 .title(R.string.cloud_backup)
                 .customView(view, false)
-                .negativeText(android.R.string.cancel);
+                .negativeText(android.R.string.cancel)
+                .autoDismiss(false)
+                .onNegative((dialog, which) -> dismiss());
 
         if (!backupManager.isSignedIn()) {
             builder.positiveText(R.string.continue_action)

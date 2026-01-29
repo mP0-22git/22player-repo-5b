@@ -291,7 +291,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
             menu.add(0, R.id.action_new_playlist, 0, R.string.new_playlist_title);
             menu.add(0, R.id.action_import_playlists, 1, R.string.import_playlists);
             menu.add(0, R.id.action_export_all_playlists, 2, R.string.export_all_playlists);
-            menu.add(0, R.id.action_cloud_backup, 3, R.string.cloud_backup);
+            // menu.add(0, R.id.action_cloud_backup, 3, R.string.cloud_backup); // TODO: re-enable when cloud backup is ready
         }
 
         Fragment currentFragment = getCurrentFragment();
@@ -366,9 +366,9 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
             case R.id.action_export_all_playlists:
                 exportAllPlaylists();
                 return true;
-            case R.id.action_cloud_backup:
-                CloudBackupDialog.create().show(getChildFragmentManager(), "CLOUD_BACKUP");
-                return true;
+            // case R.id.action_cloud_backup: // TODO: re-enable when cloud backup is ready
+            //     CloudBackupDialog.create().show(getChildFragmentManager(), "CLOUD_BACKUP");
+            //     return true;
             case R.id.action_search:
                 startActivity(new Intent(getActivity(), SearchActivity.class));
                 return true;
