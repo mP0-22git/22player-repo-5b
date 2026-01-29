@@ -26,7 +26,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             ads:adSize="BANNER"
-            ads:adUnitId="@string/admob_banner_id"
             android:visibility="gone" />
 
     </LinearLayout>

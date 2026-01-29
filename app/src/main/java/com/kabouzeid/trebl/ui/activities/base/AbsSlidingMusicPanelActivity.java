@@ -18,6 +18,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.kabouzeid.trebl.App;
+import com.kabouzeid.trebl.BuildConfig;
 import com.kabouzeid.trebl.R;
 import com.kabouzeid.trebl.helper.MusicPlayerRemote;
 import com.kabouzeid.trebl.ui.fragments.player.AbsPlayerFragment;
@@ -111,6 +112,7 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
         mAdView = findViewById(R.id.adView);
         if (!App.isProVersion()) {
             MobileAds.initialize(this);
+            mAdView.setAdUnitId(BuildConfig.ADMOB_BANNER_ID);
             mAdView.setVisibility(View.VISIBLE);
             AdRequest adRequest = new AdRequest.Builder().build();
             mAdView.loadAd(adRequest);

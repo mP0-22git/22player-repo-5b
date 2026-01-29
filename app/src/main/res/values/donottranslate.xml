@@ -2,9 +2,6 @@
 <resources>
     <string name="app_name" translatable="false">Music Player</string>
 
-    <!-- AdMob test ID - replace with real ID in secrets or before release -->
-    <string name="admob_banner_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
-
     <string name="card" translatable="false">Card</string>
     <string name="flat" translatable="false">Flat</string>
     <string name="blur" translatable="false">Blur Pro (Beta)</string>
