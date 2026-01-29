@@ -15,6 +15,7 @@ import android.view.ViewTreeObserver;
 import android.view.animation.PathInterpolator;
 
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.kabouzeid.trebl.App;
@@ -112,6 +113,7 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
         mAdView = findViewById(R.id.adView);
         if (!App.isProVersion()) {
             MobileAds.initialize(this);
+            mAdView.setAdSize(AdSize.BANNER);
             mAdView.setAdUnitId(BuildConfig.ADMOB_BANNER_ID);
             mAdView.setVisibility(View.VISIBLE);
             AdRequest adRequest = new AdRequest.Builder().build();
