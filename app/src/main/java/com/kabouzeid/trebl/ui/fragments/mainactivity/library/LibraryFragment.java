@@ -13,9 +13,6 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
@@ -108,8 +105,6 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
 
     private String[] labels;
 
-    private AdView mAdView;
-
     private MusicLibraryPagerAdapter pagerAdapter;
     private MaterialCab cab;
 
@@ -124,15 +119,6 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_library, container, false);
         unbinder = ButterKnife.bind(this, view);
-
-        // Initialize and show ads only for non-pro users
-        mAdView = view.findViewById(R.id.adView);
-        if (!App.isProVersion()) {
-            MobileAds.initialize(getActivity());
-            mAdView.setVisibility(View.VISIBLE);
-            AdRequest adRequest = new AdRequest.Builder().build();
-            mAdView.loadAd(adRequest);
-        }
 
         return view;
     }

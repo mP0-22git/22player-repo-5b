@@ -14,6 +14,10 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.PathInterpolator;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.kabouzeid.trebl.App;
 import com.kabouzeid.trebl.R;
 import com.kabouzeid.trebl.helper.MusicPlayerRemote;
 import com.kabouzeid.trebl.ui.fragments.player.AbsPlayerFragment;
@@ -50,6 +54,8 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
 
     private ValueAnimator navigationBarColorAnimator;
     private ArgbEvaluator argbEvaluator = new ArgbEvaluator();
+
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +106,15 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
             }
         });
         slidingUpPanelLayout.addPanelSlideListener(this);
+
+        // Initialize banner ad for non-pro users
+        mAdView = findViewById(R.id.adView);
+        if (!App.isProVersion()) {
+            MobileAds.initialize(this);
+            mAdView.setVisibility(View.VISIBLE);
+            AdRequest adRequest = new AdRequest.Builder().build();
+            mAdView.loadAd(adRequest);
+        }
     }
 
     @Override
@@ -108,6 +123,17 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
         if (currentNowPlayingScreen != PreferenceUtil.getInstance(this).getNowPlayingScreen()) {
             postRecreate();
         }
+        if (mAdView != null) {
+            mAdView.resume();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        if (mAdView != null) {
+            mAdView.pause();
+        }
+        super.onPause();
     }
 
     public void setAntiDragView(View antiDragView) {
@@ -141,6 +167,11 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
         setMiniPlayerAlphaProgress(slideOffset);
         if (navigationBarColorAnimator != null) navigationBarColorAnimator.cancel();
         super.setNavigationbarColor((int) argbEvaluator.evaluate(slideOffset, navigationbarColor, playerFragment.getPaletteColor()));
+
+        // Fade out ad banner as player expands
+        if (mAdView != null && mAdView.getVisibility() == View.VISIBLE) {
+            mAdView.setAlpha(1 - slideOffset);
+        }
     }
 
     @Override
@@ -167,6 +198,11 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
         playerFragment.setMenuVisibility(false);
         playerFragment.setUserVisibleHint(false);
         playerFragment.onHide();
+
+        if (mAdView != null && !App.isProVersion()) {
+            mAdView.setVisibility(View.VISIBLE);
+            mAdView.setAlpha(1f);
+        }
     }
 
     public void onPanelExpanded(View panel) {
@@ -179,6 +215,10 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
         playerFragment.setMenuVisibility(true);
         playerFragment.setUserVisibleHint(true);
         playerFragment.onShow();
+
+        if (mAdView != null) {
+            mAdView.setVisibility(View.GONE);
+        }
     }
 
     private void setMiniPlayerAlphaProgress(@FloatRange(from = 0, to = 1) float progress) {
@@ -277,6 +317,9 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
     protected void onDestroy() {
         super.onDestroy();
         if (navigationBarColorAnimator != null) navigationBarColorAnimator.cancel(); // just in case
+        if (mAdView != null) {
+            mAdView.destroy();
+        }
     }
 
     @Override
