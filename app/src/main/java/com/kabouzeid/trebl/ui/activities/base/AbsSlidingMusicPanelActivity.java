@@ -5,6 +5,7 @@ import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import androidx.annotation.ColorInt;
 import androidx.annotation.FloatRange;
 import androidx.annotation.LayoutRes;
@@ -58,6 +59,7 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
     private ArgbEvaluator argbEvaluator = new ArgbEvaluator();
 
     private AdView mAdView;
+    private ViewGroup mAdContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,12 +112,17 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
         slidingUpPanelLayout.addPanelSlideListener(this);
 
         // Initialize banner ad for non-pro users
-        mAdView = findViewById(R.id.adView);
+        mAdContainer = findViewById(R.id.ad_container);
         if (!App.isProVersion()) {
             MobileAds.initialize(this);
-            mAdView.setAdSize(AdSize.BANNER);
+            mAdView = new AdView(this);
+            DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+            int adWidthPixels = displayMetrics.widthPixels;
+            int adWidthDp = (int) (adWidthPixels / displayMetrics.density);
+            mAdView.setAdSize(AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this, adWidthDp));
             mAdView.setAdUnitId(BuildConfig.ADMOB_BANNER_ID);
-            mAdView.setVisibility(View.VISIBLE);
+            mAdContainer.addView(mAdView);
+            mAdContainer.setVisibility(View.VISIBLE);
             AdRequest adRequest = new AdRequest.Builder().build();
             mAdView.loadAd(adRequest);
         }
@@ -173,8 +180,8 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
         super.setNavigationbarColor((int) argbEvaluator.evaluate(slideOffset, navigationbarColor, playerFragment.getPaletteColor()));
 
         // Fade out ad banner as player expands
-        if (mAdView != null && mAdView.getVisibility() == View.VISIBLE) {
-            mAdView.setAlpha(1 - slideOffset);
+        if (mAdContainer != null && mAdContainer.getVisibility() == View.VISIBLE) {
+            mAdContainer.setAlpha(1 - slideOffset);
         }
     }
 
@@ -203,9 +210,9 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
         playerFragment.setUserVisibleHint(false);
         playerFragment.onHide();
 
-        if (mAdView != null && !App.isProVersion()) {
-            mAdView.setVisibility(View.VISIBLE);
-            mAdView.setAlpha(1f);
+        if (mAdContainer != null && !App.isProVersion()) {
+            mAdContainer.setVisibility(View.VISIBLE);
+            mAdContainer.setAlpha(1f);
         }
     }
 
@@ -220,8 +227,8 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
         playerFragment.setUserVisibleHint(true);
         playerFragment.onShow();
 
-        if (mAdView != null) {
-            mAdView.setVisibility(View.GONE);
+        if (mAdContainer != null) {
+            mAdContainer.setVisibility(View.GONE);
         }
     }
 
