@@ -1,6 +1,5 @@
 package com.kabouzeid.trebl.util;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ContentUris;
 import android.content.Context;
@@ -13,6 +12,7 @@ import android.os.Build;
 import androidx.annotation.AttrRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.WindowCompat;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.View;
@@ -44,17 +44,8 @@ public class Util {
         return size;
     }
 
-    @TargetApi(Build.VERSION_CODES.KITKAT)
-    public static void setStatusBarTranslucent(@NonNull Window window) {
-        window.setFlags(
-                WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
-                WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-    }
-
     public static void setAllowDrawUnderStatusBar(@NonNull Window window) {
-        window.getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        WindowCompat.setDecorFitsSystemWindows(window, false);
     }
 
     public static Uri getAlbumArtUri(long albumId) {
@@ -86,12 +77,9 @@ public class Util {
         return dimensionPixelSize;
     }
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     public static boolean isRTL(@NonNull Context context) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            Configuration config = context.getResources().getConfiguration();
-            return config.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
-        } else return false;
+        Configuration config = context.getResources().getConfiguration();
+        return config.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
     }
 
 }

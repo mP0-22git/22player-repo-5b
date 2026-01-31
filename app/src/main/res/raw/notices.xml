@@ -99,10 +99,10 @@
         <license>MIT License</license>
     </notice>
     <notice>
-        <name>Material Intro</name>
-        <url>https://github.com/HeinrichReimer/material-intro</url>
-        <copyright>Copyright 2016 Heinrich Reimer</copyright>
-        <license>MIT License</license>
+        <name>dotsindicator</name>
+        <url>https://github.com/tommybuonomo/dotsindicator</url>
+        <copyright>Copyright 2016 Tommy Buonomo</copyright>
+        <license>Apache Software License 2.0</license>
     </notice>
     <notice>
         <name>OkHttp</name>

@@ -12,6 +12,9 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
@@ -120,6 +123,13 @@ public class FlatPlayerFragment extends AbsPlayerFragment implements FlatPlayerA
         setUpSubFragments();
 
         setUpRecyclerView();
+
+        ViewCompat.setOnApplyWindowInsetsListener(recyclerView, (v, insets) -> {
+            Insets navInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars());
+            v.setPadding(v.getPaddingLeft(), v.getPaddingTop(), v.getPaddingRight(), navInsets.bottom);
+            ((RecyclerView) v).setClipToPadding(false);
+            return insets;
+        });
 
         if (slidingUpPanelLayout != null) {
             slidingUpPanelLayout.addPanelSlideListener(this);

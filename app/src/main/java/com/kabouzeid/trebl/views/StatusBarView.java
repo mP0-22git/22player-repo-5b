@@ -1,34 +1,41 @@
 package com.kabouzeid.trebl.views;
 
 import android.content.Context;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowInsets;
+
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 public class StatusBarView extends View {
 
     public StatusBarView(Context context) {
         super(context);
+        init();
     }
 
     public StatusBarView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init();
     }
 
     public StatusBarView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init();
     }
 
-    @Override
-    public WindowInsets onApplyWindowInsets(WindowInsets insets) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            ViewGroup.LayoutParams lp = getLayoutParams();
-            lp.height = insets.getSystemWindowInsetTop();
-            setLayoutParams(lp);
-        }
-        return super.onApplyWindowInsets(insets);
+    private void init() {
+        ViewCompat.setOnApplyWindowInsetsListener(this, (v, insets) -> {
+            Insets statusBarInsets = insets.getInsets(WindowInsetsCompat.Type.statusBars());
+            ViewGroup.LayoutParams lp = v.getLayoutParams();
+            if (lp != null) {
+                lp.height = statusBarInsets.top;
+                v.setLayoutParams(lp);
+            }
+            return insets;
+        });
     }
 
 }

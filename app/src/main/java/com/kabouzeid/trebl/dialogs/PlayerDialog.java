@@ -20,7 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.heinrichreimersoftware.materialintro.view.InkPageIndicator;
+import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 import com.kabouzeid.appthemehelper.ThemeStore;
 import com.kabouzeid.trebl.App;
 import com.kabouzeid.trebl.R;
@@ -45,9 +45,8 @@ public class PlayerDialog {
         Button selectButton = playerDialog.findViewById(R.id.button_select_player);
         selectButton.setTextColor(ThemeStore.accentColor(activity));
 
-        InkPageIndicator pageIndicator = playerDialog.findViewById(R.id.page_indicator);
+        DotsIndicator pageIndicator = playerDialog.findViewById(R.id.page_indicator);
         pageIndicator.setViewPager(viewPager);
-        pageIndicator.onPageSelected(viewPager.getCurrentItem());
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

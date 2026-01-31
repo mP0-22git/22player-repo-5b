@@ -13,6 +13,9 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
@@ -141,6 +144,15 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         setUpToolbar();
         setUpViewPager();
         setUpShuffleFab();
+
+        ViewCompat.setOnApplyWindowInsetsListener(fab_shuffle, (v, insets) -> {
+            Insets navInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars());
+            ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
+            int fabMargin = getResources().getDimensionPixelSize(R.dimen.fab_margin_top_left_right);
+            lp.bottomMargin = fabMargin + navInsets.bottom;
+            v.setLayoutParams(lp);
+            return insets;
+        });
     }
 
     @Override

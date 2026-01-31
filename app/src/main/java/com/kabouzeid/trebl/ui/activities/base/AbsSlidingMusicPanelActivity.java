@@ -3,12 +3,14 @@ package com.kabouzeid.trebl.ui.activities.base;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import androidx.annotation.ColorInt;
 import androidx.annotation.FloatRange;
 import androidx.annotation.LayoutRes;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +50,7 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
     SlidingUpPanelLayout slidingUpPanelLayout;
 
     private int navigationbarColor;
+    private int currentNavBarViewColor;
     private int taskColor;
     private boolean lightStatusbar;
 
@@ -61,11 +64,31 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
     private AdView mAdView;
     private ViewGroup mAdContainer;
 
+    private View navigationBarView;
+    private int navigationBarBottomInset;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(createContentView());
         ButterKnife.bind(this);
+
+        navigationBarView = findViewById(R.id.navigation_bar);
+        if (navigationBarView != null) {
+            ViewCompat.setOnApplyWindowInsetsListener(navigationBarView, (v, insets) -> {
+                Insets navInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars());
+                navigationBarBottomInset = navInsets.bottom;
+                ViewGroup.LayoutParams lp = v.getLayoutParams();
+                lp.height = navInsets.bottom;
+                v.setLayoutParams(lp);
+                // Re-apply panel height if currently showing
+                if (slidingUpPanelLayout != null && slidingUpPanelLayout.getPanelHeight() > 0) {
+                    slidingUpPanelLayout.setPanelHeight(
+                            getResources().getDimensionPixelSize(R.dimen.mini_player_height) + navigationBarBottomInset);
+                }
+                return insets;
+            });
+        }
 
         currentNowPlayingScreen = PreferenceUtil.getInstance(this).getNowPlayingScreen();
         Fragment fragment; // must implement AbsPlayerFragment
@@ -177,7 +200,9 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
     public void onPanelSlide(View panel, @FloatRange(from = 0, to = 1) float slideOffset) {
         setMiniPlayerAlphaProgress(slideOffset);
         if (navigationBarColorAnimator != null) navigationBarColorAnimator.cancel();
-        super.setNavigationbarColor((int) argbEvaluator.evaluate(slideOffset, navigationbarColor, playerFragment.getPaletteColor()));
+        int color = (int) argbEvaluator.evaluate(slideOffset, navigationbarColor, playerFragment.getPaletteColor());
+        super.setNavigationbarColor(color);
+        currentNavBarViewColor = color;
 
         // Fade out ad banner as player expands
         if (mAdContainer != null && mAdContainer.getVisibility() == View.VISIBLE) {
@@ -205,6 +230,7 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
         super.setLightStatusbar(lightStatusbar);
         super.setTaskDescriptionColor(taskColor);
         super.setNavigationbarColor(navigationbarColor);
+        currentNavBarViewColor = navigationbarColor;
 
         playerFragment.setMenuVisibility(false);
         playerFragment.setUserVisibleHint(false);
@@ -222,6 +248,7 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
         super.setLightStatusbar(false);
         super.setTaskDescriptionColor(playerFragmentColor);
         super.setNavigationbarColor(playerFragmentColor);
+        currentNavBarViewColor = playerFragmentColor;
 
         playerFragment.setMenuVisibility(true);
         playerFragment.setUserVisibleHint(true);
@@ -258,7 +285,8 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
             slidingUpPanelLayout.setPanelHeight(0);
             collapsePanel();
         } else {
-            slidingUpPanelLayout.setPanelHeight(getResources().getDimensionPixelSize(R.dimen.mini_player_height));
+            slidingUpPanelLayout.setPanelHeight(
+                    getResources().getDimensionPixelSize(R.dimen.mini_player_height) + navigationBarBottomInset);
         }
     }
 
@@ -309,19 +337,22 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
         if (getPanelState() == SlidingUpPanelLayout.PanelState.COLLAPSED) {
             if (navigationBarColorAnimator != null) navigationBarColorAnimator.cancel();
             super.setNavigationbarColor(color);
+            currentNavBarViewColor = color;
         }
     }
 
     private void animateNavigationBarColor(int color) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            if (navigationBarColorAnimator != null) navigationBarColorAnimator.cancel();
-            navigationBarColorAnimator = ValueAnimator
-                    .ofArgb(getWindow().getNavigationBarColor(), color)
-                    .setDuration(ViewUtil.PHONOGRAPH_ANIM_TIME);
-            navigationBarColorAnimator.setInterpolator(new PathInterpolator(0.4f, 0f, 1f, 1f));
-            navigationBarColorAnimator.addUpdateListener(animation -> AbsSlidingMusicPanelActivity.super.setNavigationbarColor((Integer) animation.getAnimatedValue()));
-            navigationBarColorAnimator.start();
-        }
+        if (navigationBarColorAnimator != null) navigationBarColorAnimator.cancel();
+        navigationBarColorAnimator = ValueAnimator
+                .ofArgb(currentNavBarViewColor, color)
+                .setDuration(ViewUtil.PHONOGRAPH_ANIM_TIME);
+        navigationBarColorAnimator.setInterpolator(new PathInterpolator(0.4f, 0f, 1f, 1f));
+        navigationBarColorAnimator.addUpdateListener(animation -> {
+            int animatedColor = (Integer) animation.getAnimatedValue();
+            AbsSlidingMusicPanelActivity.super.setNavigationbarColor(animatedColor);
+            currentNavBarViewColor = animatedColor;
+        });
+        navigationBarColorAnimator.start();
     }
 
     @Override

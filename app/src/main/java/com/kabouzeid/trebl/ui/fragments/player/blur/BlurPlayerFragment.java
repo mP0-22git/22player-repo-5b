@@ -27,6 +27,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -143,6 +147,24 @@ public class BlurPlayerFragment extends AbsPlayerFragment implements BlurPlayerA
         setUpSubFragments();
 
         setUpRecyclerView();
+
+        ViewCompat.setOnApplyWindowInsetsListener(recyclerView, (v, insets) -> {
+            Insets navInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars());
+            v.setPadding(v.getPaddingLeft(), v.getPaddingTop(), v.getPaddingRight(), navInsets.bottom + 8);
+            ((RecyclerView) v).setClipToPadding(false);
+            return insets;
+        });
+
+        View optionsPanel = view.findViewById(R.id.options_panel);
+        if (optionsPanel != null) {
+            ViewCompat.setOnApplyWindowInsetsListener(optionsPanel, (v, insets) -> {
+                Insets navInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars());
+                ConstraintLayout.LayoutParams lp = (ConstraintLayout.LayoutParams) v.getLayoutParams();
+                lp.bottomMargin = 12 + navInsets.bottom;
+                v.setLayoutParams(lp);
+                return insets;
+            });
+        }
 
         slidingUpPanelLayout.addPanelSlideListener(this);
         slidingUpPanelLayout.setAntiDragView(view.findViewById(R.id.draggable_area));

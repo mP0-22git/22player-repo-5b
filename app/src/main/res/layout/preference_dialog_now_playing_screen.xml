@@ -14,14 +14,14 @@
         android:paddingLeft="72dp"
         android:paddingRight="72dp" />
 
-    <com.heinrichreimersoftware.materialintro.view.InkPageIndicator
+    <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
         android:id="@+id/page_indicator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        app:currentPageIndicatorColor="?android:textColorPrimary"
-        app:dotDiameter="8dp"
-        app:dotGap="8dp"
-        app:pageIndicatorColor="?android:textColorHint" />
+        app:dotsColor="?android:textColorHint"
+        app:selectedDotColor="?android:textColorPrimary"
+        app:dotsSize="8dp"
+        app:dotsSpacing="8dp" />
 
 </LinearLayout>

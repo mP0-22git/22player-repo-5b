@@ -12,6 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
@@ -119,6 +122,13 @@ public class CardPlayerFragment extends AbsPlayerFragment implements PlayerAlbum
         setUpSubFragments();
 
         setUpRecyclerView();
+
+        ViewCompat.setOnApplyWindowInsetsListener(recyclerView, (v, insets) -> {
+            Insets navInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars());
+            v.setPadding(v.getPaddingLeft(), v.getPaddingTop(), v.getPaddingRight(), navInsets.bottom + 8);
+            ((RecyclerView) v).setClipToPadding(false);
+            return insets;
+        });
 
         slidingUpPanelLayout.addPanelSlideListener(this);
         slidingUpPanelLayout.setAntiDragView(view.findViewById(R.id.draggable_area));

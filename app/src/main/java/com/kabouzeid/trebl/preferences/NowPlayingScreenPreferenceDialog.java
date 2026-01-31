@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.heinrichreimersoftware.materialintro.view.InkPageIndicator;
+import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 import com.kabouzeid.trebl.App;
 import com.kabouzeid.trebl.R;
 import com.kabouzeid.trebl.ui.fragments.player.NowPlayingScreen;
@@ -50,9 +50,8 @@ public class NowPlayingScreenPreferenceDialog extends DialogFragment implements 
         viewPager.setPageMargin((int) ViewUtil.convertDpToPixel(32, getResources()));
         viewPager.setCurrentItem(PreferenceUtil.getInstance(getContext()).getNowPlayingScreen().ordinal());
 
-        InkPageIndicator pageIndicator = view.findViewById(R.id.page_indicator);
+        DotsIndicator pageIndicator = view.findViewById(R.id.page_indicator);
         pageIndicator.setViewPager(viewPager);
-        pageIndicator.onPageSelected(viewPager.getCurrentItem());
 
         return new MaterialDialog.Builder(getContext())
                 .title(R.string.pref_title_now_playing_screen_appearance)

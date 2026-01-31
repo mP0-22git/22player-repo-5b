@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -20,11 +19,15 @@ import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.Switch;
 
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import com.kabouzeid.trebl.R;
 import com.kabouzeid.trebl.util.NavigationUtil;
@@ -52,17 +55,24 @@ public class EqualizerActivity extends AppCompatActivity
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        EdgeToEdge.enable(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_equalizer);
-
-        Window window = this.getWindow();
-        window.setStatusBarColor(ContextCompat.getColor(this, R.color.black));
 
         currentEqProfile = PreferenceUtil.getInstance(EqualizerActivity.this).readSharedPrefsInt("currentEqProfile", 0);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.white));
         setSupportActionBar(toolbar);
+
+        View rootView = findViewById(android.R.id.content);
+        ViewCompat.setOnApplyWindowInsetsListener(rootView, (v, insets) -> {
+            Insets statusBarInsets = insets.getInsets(WindowInsetsCompat.Type.statusBars());
+            Insets navBarInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars());
+            toolbar.setPadding(toolbar.getPaddingLeft(), statusBarInsets.top, toolbar.getPaddingRight(), toolbar.getPaddingBottom());
+            v.setPadding(0, 0, 0, navBarInsets.bottom);
+            return insets;
+        });
 
         if (getSupportActionBar() != null) {
             Drawable upArrow = ContextCompat.getDrawable(this, R.drawable.ic_baseline_arrow_back_24);
@@ -388,4 +398,3 @@ public class EqualizerActivity extends AppCompatActivity
         super.onDestroy();
     }
 }
-
