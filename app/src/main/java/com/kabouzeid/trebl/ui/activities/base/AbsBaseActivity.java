@@ -99,13 +99,17 @@ public abstract class AbsBaseActivity extends AbsThemeActivity {
         }
     }
 
+    private String getStoragePermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            return Manifest.permission.READ_MEDIA_AUDIO;
+        } else {
+            return Manifest.permission.READ_EXTERNAL_STORAGE;
+        }
+    }
+
     protected boolean hasPermissions() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && permissions != null) {
-            for (String permission : permissions) {
-                if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
-                    return false;
-                }
-            }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            return checkSelfPermission(getStoragePermission()) == PackageManager.PERMISSION_GRANTED;
         }
         return true;
     }
@@ -114,34 +118,45 @@ public abstract class AbsBaseActivity extends AbsThemeActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == PERMISSION_REQUEST) {
-            for (int grantResult : grantResults) {
-                if (grantResult != PackageManager.PERMISSION_GRANTED) {
-                    if (ActivityCompat.shouldShowRequestPermissionRationale(AbsBaseActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                        //User has deny from permission dialog
-                        Snackbar.make(getSnackBarContainer(), getPermissionDeniedMessage(),
-                                Snackbar.LENGTH_INDEFINITE)
-                                .setAction(R.string.action_grant, view -> requestPermissions())
-                                .setActionTextColor(ThemeStore.accentColor(this))
-                                .show();
-                    } else {
-                        // User has deny permission and checked never show permission dialog so you can redirect to Application settings page
-                        Snackbar.make(getSnackBarContainer(), getPermissionDeniedMessage(),
-                                Snackbar.LENGTH_INDEFINITE)
-                                .setAction(R.string.action_settings, view -> {
-                                    Intent intent = new Intent();
-                                    intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                    Uri uri = Uri.fromParts("package", AbsBaseActivity.this.getPackageName(), null);
-                                    intent.setData(uri);
-                                    startActivity(intent);
-                                })
-                                .setActionTextColor(ThemeStore.accentColor(this))
-                                .show();
-                    }
-                    return;
+            // Find the storage/music permission in the results
+            String storagePermission = getStoragePermission();
+            int storagePermissionIndex = -1;
+            for (int i = 0; i < permissions.length; i++) {
+                if (permissions[i].equals(storagePermission)) {
+                    storagePermissionIndex = i;
+                    break;
                 }
             }
-            hadPermissions = true;
-            onHasPermissionsChanged(true);
+
+            boolean storageGranted = storagePermissionIndex != -1
+                    && grantResults[storagePermissionIndex] == PackageManager.PERMISSION_GRANTED;
+
+            if (!storageGranted) {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this, storagePermission)) {
+                    // User has denied from permission dialog
+                    Snackbar.make(getSnackBarContainer(), getPermissionDeniedMessage(),
+                            Snackbar.LENGTH_INDEFINITE)
+                            .setAction(R.string.action_grant, view -> requestPermissions())
+                            .setActionTextColor(ThemeStore.accentColor(this))
+                            .show();
+                } else {
+                    // User has denied permission and checked never show permission dialog so redirect to Application settings page
+                    Snackbar.make(getSnackBarContainer(), getPermissionDeniedMessage(),
+                            Snackbar.LENGTH_INDEFINITE)
+                            .setAction(R.string.action_settings, view -> {
+                                Intent intent = new Intent();
+                                intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                Uri uri = Uri.fromParts("package", getPackageName(), null);
+                                intent.setData(uri);
+                                startActivity(intent);
+                            })
+                            .setActionTextColor(ThemeStore.accentColor(this))
+                            .show();
+                }
+            } else {
+                hadPermissions = true;
+                onHasPermissionsChanged(true);
+            }
         }
     }
 }
