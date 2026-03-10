@@ -23,6 +23,7 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.kabouzeid.trebl.App;
 import com.kabouzeid.trebl.BuildConfig;
+import com.kabouzeid.trebl.ads.ConsentManager;
 import com.kabouzeid.trebl.R;
 import com.kabouzeid.trebl.helper.MusicPlayerRemote;
 import com.kabouzeid.trebl.ui.fragments.player.AbsPlayerFragment;
@@ -137,18 +138,27 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
         // Initialize banner ad for non-pro users
         mAdContainer = findViewById(R.id.ad_container);
         if (!App.isProVersion()) {
-            MobileAds.initialize(this);
-            mAdView = new AdView(this);
-            DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-            int adWidthPixels = displayMetrics.widthPixels;
-            int adWidthDp = (int) (adWidthPixels / displayMetrics.density);
-            mAdView.setAdSize(AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this, adWidthDp));
-            mAdView.setAdUnitId(BuildConfig.ADMOB_BANNER_ID);
-            mAdContainer.addView(mAdView);
-            mAdContainer.setVisibility(View.VISIBLE);
-            AdRequest adRequest = new AdRequest.Builder().build();
-            mAdView.loadAd(adRequest);
+            ConsentManager consentManager = new ConsentManager(this);
+            consentManager.requestConsentIfRequired(this, canRequestAds -> {
+                if (canRequestAds) {
+                    runOnUiThread(this::initializeAds);
+                }
+            });
         }
+    }
+
+    private void initializeAds() {
+        MobileAds.initialize(this);
+        mAdView = new AdView(this);
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        int adWidthPixels = displayMetrics.widthPixels;
+        int adWidthDp = (int) (adWidthPixels / displayMetrics.density);
+        mAdView.setAdSize(AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this, adWidthDp));
+        mAdView.setAdUnitId(BuildConfig.ADMOB_BANNER_ID);
+        mAdContainer.addView(mAdView);
+        mAdContainer.setVisibility(View.VISIBLE);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     @Override

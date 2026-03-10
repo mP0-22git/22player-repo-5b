@@ -46,7 +46,7 @@ android {
     compileSdk 35
 
     defaultConfig {
-        minSdk 21
+        minSdk 23
         targetSdk 35
 
         renderscriptTargetApi 30
@@ -175,6 +175,7 @@ dependencies {
 
     // AdMob
     implementation 'com.google.android.gms:play-services-ads:23.6.0'
+    implementation 'com.google.android.ump:user-messaging-platform:4.0.0'
 
     implementation 'com.h6ah4i.android.widget.verticalseekbar:verticalseekbar:1.0.0'
 
