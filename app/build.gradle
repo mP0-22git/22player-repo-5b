@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.gms.google-services'
 }
 
 static def gitBranch() {
@@ -190,4 +191,8 @@ dependencies {
 
     // Superwall
     implementation "com.superwall.sdk:superwall-android:2.6.5"
+
+    // Firebase
+    implementation platform('com.google.firebase:firebase-bom:33.7.0')
+    implementation 'com.google.firebase:firebase-analytics'
 }

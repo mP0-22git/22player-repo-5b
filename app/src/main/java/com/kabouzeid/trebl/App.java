@@ -9,6 +9,7 @@ import com.kabouzeid.appthemehelper.ThemeStore;
 import com.kabouzeid.trebl.appshortcuts.DynamicShortcutManager;
 import com.kabouzeid.trebl.billing.BillingManager;
 import com.superwall.sdk.Superwall;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 
 /**
@@ -23,11 +24,15 @@ public class App extends Application {
     private static App app;
 
     private BillingManager billingManager;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     public void onCreate() {
         super.onCreate();
         app = this;
+
+        // Initialize Firebase Analytics
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         // Configure Superwall
         Superwall.configure(this, BuildConfig.SUPERWALL_API_KEY);

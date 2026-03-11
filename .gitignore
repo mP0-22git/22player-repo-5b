@@ -81,3 +81,6 @@ Gemfile.lock
 # Secrets file (contains API keys, signing config)
 secrets.properties
 
+# Firebase config file
+google-services.json
+
