@@ -35,6 +35,11 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="${ADMOB_APP_ID}"/>
 
+        <!-- Disable native ad validator popup (only appears on test ads anyway) -->
+        <meta-data
+            android:name="com.google.android.gms.ads.flag.NATIVE_AD_DEBUGGER_ENABLED"
+            android:value="false"/>
+
         <!-- Resolve conflict between AdMob and Firebase Analytics ad services config -->
         <property
             android:name="android.adservices.AD_SERVICES_CONFIG"

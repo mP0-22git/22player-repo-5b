@@ -24,8 +24,11 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.util.DialogUtils;
 import com.bumptech.glide.Glide;
 import com.github.ksoichiro.android.observablescrollview.ObservableRecyclerView;
+import com.kabouzeid.trebl.App;
 import com.kabouzeid.trebl.R;
 import com.kabouzeid.trebl.adapter.song.AlbumSongAdapter;
+import com.kabouzeid.trebl.adapter.song.NativeAdSongAdapter;
+import com.kabouzeid.trebl.ads.NativeAdManager;
 import com.kabouzeid.trebl.dialogs.AddToPlaylistDialog;
 import com.kabouzeid.trebl.dialogs.DeleteSongsDialog;
 import com.kabouzeid.trebl.dialogs.SleepTimerDialog;
@@ -98,6 +101,11 @@ public class AlbumDetailActivity extends AbsSlidingMusicPanelActivity implements
 
     private AlbumSongAdapter adapter;
 
+    @Nullable
+    private NativeAdManager nativeAdManager;
+    @Nullable
+    private NativeAdSongAdapter nativeAdSongAdapter;
+
     private MaterialCab cab;
     private int headerViewHeight;
     private int toolbarColor;
@@ -114,6 +122,11 @@ public class AlbumDetailActivity extends AbsSlidingMusicPanelActivity implements
         ButterKnife.bind(this);
 
         lastFMRestClient = new LastFMRestClient(this);
+
+        // Initialize native ad manager (if not pro)
+        if (!App.isProVersion()) {
+            nativeAdManager = new NativeAdManager(this);
+        }
 
         setUpObservableListViewParams();
         setUpToolBar();
@@ -210,7 +223,22 @@ public class AlbumDetailActivity extends AbsSlidingMusicPanelActivity implements
     private void setUpSongsAdapter() {
         adapter = new AlbumSongAdapter(this, getAlbum().songs, R.layout.item_list_playing_queue, false, this);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
-        recyclerView.setAdapter(adapter);
+
+        // Wrap with native ad adapter if ads are enabled
+        if (nativeAdManager != null && nativeAdManager.shouldShowAds()) {
+            nativeAdSongAdapter = new NativeAdSongAdapter(adapter, nativeAdManager);
+            recyclerView.setAdapter(nativeAdSongAdapter);
+
+            // Refresh adapter when ads become available - use targeted updates to avoid rebinding all items
+            nativeAdManager.setAdLoadCallback(() -> {
+                if (nativeAdSongAdapter != null) {
+                    runOnUiThread(() -> nativeAdSongAdapter.notifyAdPositionsChanged());
+                }
+            });
+        } else {
+            recyclerView.setAdapter(adapter);
+        }
+
         adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onChanged() {
@@ -431,6 +459,20 @@ public class AlbumDetailActivity extends AbsSlidingMusicPanelActivity implements
     public void onLoaderReset(Loader<Album> loader) {
         this.album = new Album();
         adapter.swapDataSet(album.songs);
+    }
+
+    @Override
+    protected void onDestroy() {
+        // Cleanup native ad resources
+        if (nativeAdSongAdapter != null) {
+            nativeAdSongAdapter.cleanup();
+            nativeAdSongAdapter = null;
+        }
+        if (nativeAdManager != null) {
+            nativeAdManager.destroy();
+            nativeAdManager = null;
+        }
+        super.onDestroy();
     }
 
     private static class AsyncAlbumLoader extends WrappedAsyncTaskLoader<Album> {

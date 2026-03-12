@@ -3,6 +3,7 @@ package com.kabouzeid.trebl.ui.activities;
 import android.content.Context;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,8 +17,11 @@ import android.widget.TextView;
 import com.afollestad.materialcab.MaterialCab;
 import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils;
 import com.kabouzeid.appthemehelper.ThemeStore;
+import com.kabouzeid.trebl.App;
 import com.kabouzeid.trebl.R;
+import com.kabouzeid.trebl.adapter.song.NativeAdSongAdapter;
 import com.kabouzeid.trebl.adapter.song.SongAdapter;
+import com.kabouzeid.trebl.ads.NativeAdManager;
 import com.kabouzeid.trebl.helper.MusicPlayerRemote;
 import com.kabouzeid.trebl.interfaces.CabHolder;
 import com.kabouzeid.trebl.interfaces.LoaderIds;
@@ -54,6 +58,11 @@ public class GenreDetailActivity extends AbsSlidingMusicPanelActivity implements
     private MaterialCab cab;
     private SongAdapter adapter;
 
+    @Nullable
+    private NativeAdManager nativeAdManager;
+    @Nullable
+    private NativeAdSongAdapter nativeAdSongAdapter;
+
     private RecyclerView.Adapter wrappedAdapter;
 
     @Override
@@ -67,6 +76,11 @@ public class GenreDetailActivity extends AbsSlidingMusicPanelActivity implements
         setTaskDescriptionColorAuto();
 
         genre = getIntent().getExtras().getParcelable(EXTRA_GENRE);
+
+        // Initialize native ad manager (if not pro)
+        if (!App.isProVersion()) {
+            nativeAdManager = new NativeAdManager(this);
+        }
 
         setUpRecyclerView();
 
@@ -85,7 +99,21 @@ public class GenreDetailActivity extends AbsSlidingMusicPanelActivity implements
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         adapter = new SongAdapter(this, new ArrayList<>(), R.layout.item_list, false, this);
-        recyclerView.setAdapter(adapter);
+
+        // Wrap with native ad adapter if ads are enabled
+        if (nativeAdManager != null && nativeAdManager.shouldShowAds()) {
+            nativeAdSongAdapter = new NativeAdSongAdapter(adapter, nativeAdManager);
+            recyclerView.setAdapter(nativeAdSongAdapter);
+
+            // Refresh adapter when ads become available - use targeted updates to avoid rebinding all items
+            nativeAdManager.setAdLoadCallback(() -> {
+                if (nativeAdSongAdapter != null) {
+                    runOnUiThread(() -> nativeAdSongAdapter.notifyAdPositionsChanged());
+                }
+            });
+        } else {
+            recyclerView.setAdapter(adapter);
+        }
 
         adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
@@ -159,6 +187,16 @@ public class GenreDetailActivity extends AbsSlidingMusicPanelActivity implements
 
     @Override
     protected void onDestroy() {
+        // Cleanup native ad resources
+        if (nativeAdSongAdapter != null) {
+            nativeAdSongAdapter.cleanup();
+            nativeAdSongAdapter = null;
+        }
+        if (nativeAdManager != null) {
+            nativeAdManager.destroy();
+            nativeAdManager = null;
+        }
+
         if (recyclerView != null) {
             recyclerView.setAdapter(null);
             recyclerView = null;

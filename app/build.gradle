@@ -60,6 +60,7 @@ android {
         // Inject secrets as BuildConfig fields
         buildConfigField "String", "GOOGLE_PLAY_LICENSE_KEY", "\"${secrets.getProperty('GOOGLE_PLAY_LICENSE_KEY', '')}\""
         buildConfigField "String", "ADMOB_BANNER_ID", "\"${secrets.getProperty('ADMOB_BANNER_ID', 'ca-app-pub-3940256099942544/6300978111')}\""
+        buildConfigField "String", "ADMOB_NATIVE_ID", "\"${secrets.getProperty('ADMOB_NATIVE_ID', 'ca-app-pub-3940256099942544/2247696110')}\""
         buildConfigField "String", "PRO_PRODUCT_ID", "\"${secrets.getProperty('PRO_PRODUCT_ID', '')}\""
         buildConfigField "String", "PRO_SUBSCRIPTION_ID", "\"${secrets.getProperty('PRO_SUBSCRIPTION_ID', '')}\""
         buildConfigField "String", "SUBSCRIPTION_OFFER_ID", "\"${secrets.getProperty('SUBSCRIPTION_OFFER_ID', '')}\""
@@ -91,6 +92,10 @@ android {
         debug {
             applicationIdSuffix '.debug'
             versionNameSuffix ' (' + defaultConfig.versionCode + ') DEBUG (' + gitBranch() + ')'
+
+            // Use test ad IDs for debug builds
+            buildConfigField "String", "ADMOB_BANNER_ID", "\"ca-app-pub-3940256099942544/6300978111\""
+            buildConfigField "String", "ADMOB_NATIVE_ID", "\"ca-app-pub-3940256099942544/2247696110\""
         }
     }
     packaging {

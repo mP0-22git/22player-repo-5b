@@ -36,6 +36,14 @@ import java.util.List;
  */
 public class SongAdapter extends AbsMultiSelectAdapter<SongAdapter.ViewHolder, Song> implements MaterialCab.Callback, FastScrollRecyclerView.SectionedAdapter {
 
+    /**
+     * Interface for mapping adapter positions to actual song positions.
+     * Used when a wrapper adapter inserts additional items (like ads).
+     */
+    public interface PositionMapper {
+        int map(int adapterPosition);
+    }
+
     protected final AppCompatActivity activity;
     protected List<Song> dataSet;
 
@@ -43,6 +51,8 @@ public class SongAdapter extends AbsMultiSelectAdapter<SongAdapter.ViewHolder, S
 
     protected boolean usePalette = false;
     protected boolean showSectionName = true;
+
+    private PositionMapper positionMapper = pos -> pos; // default identity mapper
 
     public SongAdapter(AppCompatActivity activity, List<Song> dataSet, @LayoutRes int itemLayoutRes, boolean usePalette, @Nullable CabHolder cabHolder) {
         this(activity, dataSet, itemLayoutRes, usePalette, cabHolder, true);
@@ -66,6 +76,21 @@ public class SongAdapter extends AbsMultiSelectAdapter<SongAdapter.ViewHolder, S
     public void usePalette(boolean usePalette) {
         this.usePalette = usePalette;
         notifyDataSetChanged();
+    }
+
+    /**
+     * Set a position mapper for use with wrapper adapters that insert additional items.
+     * @param mapper The mapper to convert wrapper adapter positions to song positions, or null to reset.
+     */
+    public void setPositionMapper(PositionMapper mapper) {
+        this.positionMapper = mapper != null ? mapper : (pos -> pos);
+    }
+
+    /**
+     * Get the mapped song position for a given adapter position.
+     */
+    protected int getMappedPosition(int adapterPosition) {
+        return positionMapper.map(adapterPosition);
     }
 
     public List<Song> getDataSet() {
@@ -219,7 +244,11 @@ public class SongAdapter extends AbsMultiSelectAdapter<SongAdapter.ViewHolder, S
         }
 
         protected Song getSong() {
-            return dataSet.get(getAdapterPosition());
+            int mappedPosition = getMappedPosition(getAdapterPosition());
+            if (mappedPosition >= 0 && mappedPosition < dataSet.size()) {
+                return dataSet.get(mappedPosition);
+            }
+            return dataSet.get(getAdapterPosition()); // fallback
         }
 
         protected int getSongMenuRes() {
@@ -242,16 +271,18 @@ public class SongAdapter extends AbsMultiSelectAdapter<SongAdapter.ViewHolder, S
 
         @Override
         public void onClick(View v) {
+            int mappedPosition = getMappedPosition(getAdapterPosition());
             if (isInQuickSelectMode()) {
-                toggleChecked(getAdapterPosition());
+                toggleChecked(mappedPosition);
             } else {
-                MusicPlayerRemote.openQueue(dataSet, getAdapterPosition(), true);
+                MusicPlayerRemote.openQueue(dataSet, mappedPosition, true);
             }
         }
 
         @Override
         public boolean onLongClick(View view) {
-            return toggleChecked(getAdapterPosition());
+            int mappedPosition = getMappedPosition(getAdapterPosition());
+            return toggleChecked(mappedPosition);
         }
     }
 }

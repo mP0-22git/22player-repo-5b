@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
@@ -20,8 +21,11 @@ import com.h6ah4i.android.widget.advrecyclerview.animator.RefactoredDefaultItemA
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager;
 import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils;
 import com.kabouzeid.appthemehelper.ThemeStore;
+import com.kabouzeid.trebl.App;
 import com.kabouzeid.trebl.R;
+import com.kabouzeid.trebl.adapter.song.NativeAdSongAdapter;
 import com.kabouzeid.trebl.adapter.song.OrderablePlaylistSongAdapter;
+import com.kabouzeid.trebl.ads.NativeAdManager;
 import com.kabouzeid.trebl.adapter.song.PlaylistSongAdapter;
 import com.kabouzeid.trebl.adapter.song.SongAdapter;
 import com.kabouzeid.trebl.helper.MusicPlayerRemote;
@@ -65,6 +69,11 @@ public class PlaylistDetailActivity extends AbsSlidingMusicPanelActivity impleme
     private MaterialCab cab;
     private SongAdapter adapter;
 
+    @Nullable
+    private NativeAdManager nativeAdManager;
+    @Nullable
+    private NativeAdSongAdapter nativeAdSongAdapter;
+
     private RecyclerView.Adapter wrappedAdapter;
     private RecyclerViewDragDropManager recyclerViewDragDropManager;
 
@@ -79,6 +88,11 @@ public class PlaylistDetailActivity extends AbsSlidingMusicPanelActivity impleme
         setTaskDescriptionColorAuto();
 
         playlist = getIntent().getExtras().getParcelable(EXTRA_PLAYLIST);
+
+        // Initialize native ad manager (if not pro) - only for custom playlists (non-orderable)
+        if (!App.isProVersion() && playlist instanceof AbsCustomPlaylist) {
+            nativeAdManager = new NativeAdManager(this);
+        }
 
         setUpRecyclerView();
 
@@ -97,8 +111,23 @@ public class PlaylistDetailActivity extends AbsSlidingMusicPanelActivity impleme
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         if (playlist instanceof AbsCustomPlaylist) {
             adapter = new PlaylistSongAdapter(this, new ArrayList<>(), R.layout.item_list, false, this);
-            recyclerView.setAdapter(adapter);
+
+            // Wrap with native ad adapter if ads are enabled (only for custom playlists)
+            if (nativeAdManager != null && nativeAdManager.shouldShowAds()) {
+                nativeAdSongAdapter = new NativeAdSongAdapter(adapter, nativeAdManager);
+                recyclerView.setAdapter(nativeAdSongAdapter);
+
+                // Refresh adapter when ads become available - use targeted updates to avoid rebinding all items
+                nativeAdManager.setAdLoadCallback(() -> {
+                    if (nativeAdSongAdapter != null) {
+                        runOnUiThread(() -> nativeAdSongAdapter.notifyAdPositionsChanged());
+                    }
+                });
+            } else {
+                recyclerView.setAdapter(adapter);
+            }
         } else {
+            // Orderable playlists - no ads (drag-drop would conflict)
             recyclerViewDragDropManager = new RecyclerViewDragDropManager();
             final GeneralItemAnimator animator = new RefactoredDefaultItemAnimator();
             adapter = new OrderablePlaylistSongAdapter(this, new ArrayList<>(), R.layout.item_list, false, this, (fromPosition, toPosition) -> {
@@ -217,6 +246,16 @@ public class PlaylistDetailActivity extends AbsSlidingMusicPanelActivity impleme
 
     @Override
     protected void onDestroy() {
+        // Cleanup native ad resources
+        if (nativeAdSongAdapter != null) {
+            nativeAdSongAdapter.cleanup();
+            nativeAdSongAdapter = null;
+        }
+        if (nativeAdManager != null) {
+            nativeAdManager.destroy();
+            nativeAdManager = null;
+        }
+
         if (recyclerViewDragDropManager != null) {
             recyclerViewDragDropManager.release();
             recyclerViewDragDropManager = null;
