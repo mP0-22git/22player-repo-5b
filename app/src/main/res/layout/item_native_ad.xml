@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="72dp"
+    android:layout_height="80dp"
     android:background="?attr/cardBackgroundColor">
 
     <LinearLayout
@@ -52,28 +52,35 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:baselineAligned="false">
 
                 <TextView
                     android:id="@+id/ad_badge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:background="@drawable/ad_badge_background"
                     android:text="Ad"
                     android:textColor="#000000"
-                    android:textSize="9sp"
+                    android:textSize="9dp"
                     android:textStyle="bold"
                     android:layout_marginEnd="6dp" />
 
                 <TextView
                     android:id="@+id/ad_headline"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:textColor="?attr/textColor"
                     android:textSize="15sp"
                     android:textStyle="bold"
+                    app:autoSizeTextType="uniform"
+                    app:autoSizeMinTextSize="6sp"
+                    app:autoSizeMaxTextSize="15sp"
+                    app:autoSizeStepGranularity="1sp"
                     tools:text="Ad Headline" />
 
             </LinearLayout>
@@ -81,13 +88,17 @@
             <!-- Body text -->
             <TextView
                 android:id="@+id/ad_body"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:alpha="0.7"
                 android:ellipsize="end"
-                android:maxLines="1"
+                android:maxLines="2"
                 android:textColor="?attr/textColor"
                 android:textSize="12sp"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="6sp"
+                app:autoSizeMaxTextSize="12sp"
+                app:autoSizeStepGranularity="1sp"
                 tools:text="Ad body text goes here" />
 
         </LinearLayout>
@@ -98,14 +109,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="12dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
+            android:gravity="center"
+            android:maxLines="1"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
             android:paddingTop="6dp"
             android:paddingBottom="6dp"
             android:textColor="?attr/colorAccent"
-            android:textSize="12sp"
+            android:textSize="10dp"
             android:textStyle="bold"
             tools:text="Install" />
 
