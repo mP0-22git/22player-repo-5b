@@ -1,6 +1,6 @@
 Privacy Policy
 
-Last updated: January 29, 2026
+Last updated: March 12, 2026
 
 Music Player - MP3 & Audio ("the App") is developed by Elysium Group. This privacy policy explains how information is collected, used, and disclosed when you use our App.
 
@@ -21,7 +21,7 @@ Used for core app functionality and distribution through the Google Play Store.
 Privacy Policy: https://policies.google.com/privacy
 
 Google AdMob
-The App displays banner advertisements provided by Google AdMob. AdMob may collect and use data to serve ads, including personalized ads based on your interests. This data may include:
+The App displays advertisements (including banner ads and native ads within content lists) provided by Google AdMob. AdMob may collect and use data to serve ads, including personalized ads based on your interests. This data may include:
 - Device advertising identifier
 - IP address (used to estimate general location)
 - Device information (model, operating system version)
@@ -31,6 +31,14 @@ You can opt out of personalized advertising by adjusting your device settings:
 - On Android: Settings > Google > Ads > Opt out of Ads Personalization
 
 For more information, see Google's advertising privacy policy: https://policies.google.com/technologies/ads
+
+Google Firebase Analytics
+The App uses Firebase Analytics to collect anonymous usage statistics and crash reports. This helps us understand how the App is used and identify technical issues. Firebase may automatically collect:
+- App usage data (installs, updates, crashes)
+- Device information (model, operating system version)
+- General usage patterns
+
+This data is aggregated and does not personally identify you. For more information, see Google's privacy policy: https://policies.google.com/privacy
 
 Superwall
 The App uses Superwall to display and manage subscription offerings. Superwall collects data to facilitate paywall presentation and to analyze the effectiveness of different subscription screens. This may include device identifiers and information about how you interact with subscription screens. Superwall does not have access to your payment information.
@@ -46,9 +54,15 @@ Privacy Policy: https://www.last.fm/legal/privacy
 
 Advertising
 
-The free version of the App displays banner advertisements served by Google AdMob. If you purchase a subscription or have previously purchased the Pro version, advertisements are not displayed.
+The free version of the App displays advertisements (banner ads and native ads) served by Google AdMob. If you purchase a subscription or have previously purchased the Pro version, advertisements are not displayed.
 
 Ads shown may be personalized based on your interests, or you may see non-personalized ads depending on your device settings and regional regulations.
+
+GDPR and Consent Management
+
+For users in the European Economic Area (EEA), United Kingdom, and Switzerland, the App uses Google's User Messaging Platform to obtain consent before displaying personalized advertisements. You may be shown a consent dialog when first using the App, allowing you to choose whether to receive personalized or non-personalized ads.
+
+Your consent preferences are stored on your device and can be updated through the App's settings or by reinstalling the App.
 
 Children's Privacy
 
