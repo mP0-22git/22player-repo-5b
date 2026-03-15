@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -244,11 +245,13 @@ public class SongAdapter extends AbsMultiSelectAdapter<SongAdapter.ViewHolder, S
         }
 
         protected Song getSong() {
-            int mappedPosition = getMappedPosition(getAdapterPosition());
+            int position = getAdapterPosition();
+            if (position == RecyclerView.NO_POSITION) return Song.EMPTY_SONG;
+            int mappedPosition = getMappedPosition(position);
             if (mappedPosition >= 0 && mappedPosition < dataSet.size()) {
                 return dataSet.get(mappedPosition);
             }
-            return dataSet.get(getAdapterPosition()); // fallback
+            return Song.EMPTY_SONG;
         }
 
         protected int getSongMenuRes() {
@@ -271,6 +274,7 @@ public class SongAdapter extends AbsMultiSelectAdapter<SongAdapter.ViewHolder, S
 
         @Override
         public void onClick(View v) {
+            if (getAdapterPosition() == RecyclerView.NO_POSITION) return;
             int mappedPosition = getMappedPosition(getAdapterPosition());
             if (isInQuickSelectMode()) {
                 toggleChecked(mappedPosition);
@@ -281,6 +285,7 @@ public class SongAdapter extends AbsMultiSelectAdapter<SongAdapter.ViewHolder, S
 
         @Override
         public boolean onLongClick(View view) {
+            if (getAdapterPosition() == RecyclerView.NO_POSITION) return false;
             int mappedPosition = getMappedPosition(getAdapterPosition());
             return toggleChecked(mappedPosition);
         }
