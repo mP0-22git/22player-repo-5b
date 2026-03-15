@@ -245,6 +245,9 @@ public class SongAdapter extends AbsMultiSelectAdapter<SongAdapter.ViewHolder, S
         }
 
         protected Song getSong() {
+            // getAdapterPosition() returns NO_POSITION (-1) when the ViewHolder is
+            // unbound during a data set change. Using -1 as an index would crash with
+            // IndexOutOfBoundsException. Return EMPTY_SONG as a safe fallback.
             int position = getAdapterPosition();
             if (position == RecyclerView.NO_POSITION) return Song.EMPTY_SONG;
             int mappedPosition = getMappedPosition(position);
@@ -274,6 +277,7 @@ public class SongAdapter extends AbsMultiSelectAdapter<SongAdapter.ViewHolder, S
 
         @Override
         public void onClick(View v) {
+            // Guard against clicks on unbound ViewHolders during data set changes.
             if (getAdapterPosition() == RecyclerView.NO_POSITION) return;
             int mappedPosition = getMappedPosition(getAdapterPosition());
             if (isInQuickSelectMode()) {
@@ -285,6 +289,7 @@ public class SongAdapter extends AbsMultiSelectAdapter<SongAdapter.ViewHolder, S
 
         @Override
         public boolean onLongClick(View view) {
+            // Guard against long-clicks on unbound ViewHolders during data set changes.
             if (getAdapterPosition() == RecyclerView.NO_POSITION) return false;
             int mappedPosition = getMappedPosition(getAdapterPosition());
             return toggleChecked(mappedPosition);

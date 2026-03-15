@@ -115,6 +115,8 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
     private static final int DUCK = 7;
     private static final int UNDUCK = 8;
     public static final int RESTORE_QUEUES = 9;
+    // Used to dispatch play() to the handler thread, preventing the UI thread
+    // from blocking on the synchronized lock while MediaPlayer.prepare() runs.
     private static final int RESUME = 10;
 
     public static final int SHUFFLE_MODE_NONE = 0;
@@ -868,6 +870,13 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
         playerHandler.sendEmptyMessage(RESUME);
     }
 
+    /**
+     * Internal play implementation that runs on the PlaybackHandler thread.
+     * Split from play() to avoid blocking the main thread on the synchronized
+     * lock, which can be held for a long time during MediaPlayer.prepare().
+     * Called directly by code already on the handler thread (playSongAtImpl,
+     * AUDIOFOCUS_GAIN), and indirectly via RESUME message from play().
+     */
     private void playImpl() {
         synchronized (this) {
             if (requestFocus()) {
@@ -959,6 +968,8 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
     }
 
     public int getSongProgressMillis() {
+        // playback can be null after onDestroy() nulls it, but savePositionInTrack()
+        // may still be called via notifyChange() during shutdown.
         return playback != null ? playback.position() : -1;
     }
 
@@ -1265,6 +1276,8 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
                     service.playSongAtImpl(msg.arg1);
                     break;
 
+                // Dispatched from play() to run playImpl() on the handler thread,
+                // avoiding main thread lock contention with MediaPlayer.prepare().
                 case RESUME:
                     service.playImpl();
                     break;

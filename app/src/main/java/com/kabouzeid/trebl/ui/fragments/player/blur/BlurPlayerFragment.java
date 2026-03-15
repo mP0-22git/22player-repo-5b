@@ -292,6 +292,9 @@ public class BlurPlayerFragment extends AbsPlayerFragment implements BlurPlayerA
         blurAlbumBackground.setScaleY(1);
 
         handler.postDelayed(() -> {
+            // Guard against NPE: the fragment can be destroyed before this 500ms
+            // delayed callback fires, causing getActivity() to return null and
+            // Glide.with() to crash calling activity.isDestroyed() on null.
             Activity activity = getActivity();
             if (activity == null || activity.isDestroyed()) return;
 

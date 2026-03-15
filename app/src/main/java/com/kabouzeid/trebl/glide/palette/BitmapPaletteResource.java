@@ -29,6 +29,11 @@ public class BitmapPaletteResource implements Resource<BitmapPaletteWrapper> {
 
     @Override
     public void recycle() {
+        // Only return to pool — never call bitmap.recycle() manually.
+        // A recycled bitmap can still be referenced by an ImageView in a
+        // RecyclerView, and drawing it causes RuntimeException in
+        // RecordingCanvas.throwIfCannotDraw(). Let the GC collect
+        // unreferenced bitmaps naturally if the pool rejects them.
         bitmapPool.put(bitmapPaletteWrapper.getBitmap());
     }
 }

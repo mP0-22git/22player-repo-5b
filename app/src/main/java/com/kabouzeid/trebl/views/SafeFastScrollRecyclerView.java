@@ -25,6 +25,9 @@ public class SafeFastScrollRecyclerView extends FastScrollRecyclerView {
 
     @Override
     public String scrollToPositionAtProgress(float touchFraction) {
+        // The library divides by mScrollPosState.rowHeight which can be 0
+        // when the first visible child hasn't been measured yet (e.g. during
+        // layout transitions or with empty adapters), causing ArithmeticException.
         try {
             return super.scrollToPositionAtProgress(touchFraction);
         } catch (ArithmeticException e) {

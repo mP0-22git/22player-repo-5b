@@ -47,6 +47,12 @@ public class PlayingQueueAdapter extends SongAdapter implements DraggableItemAda
         recyclerViewRef = null;
     }
 
+    /**
+     * End all running RecyclerView item animations before data changes.
+     * The advrecyclerview RefactoredDefaultItemAnimator can crash with
+     * IllegalArgumentException in recycleViewHolderInternal if notifyDataSetChanged()
+     * is called while add/move/remove animations are still running.
+     */
     private void endAnimationsIfNeeded() {
         if (recyclerViewRef != null) {
             RecyclerView rv = recyclerViewRef.get();
@@ -125,6 +131,9 @@ public class PlayingQueueAdapter extends SongAdapter implements DraggableItemAda
 
     @Override
     public boolean onCheckCanStartDrag(ViewHolder holder, int position, int x, int y) {
+        // Reject drags on invalid positions or empty songs (id == -1 == RecyclerView.NO_ID).
+        // advrecyclerview requires valid stable IDs and throws IllegalStateException
+        // ("dragging target must provides valid ID") if the item has NO_ID.
         if (position < 0 || position >= dataSet.size()) return false;
         if (dataSet.get(position).id == -1) return false;
         return ViewUtil.hitTest(holder.imageText, x, y);
