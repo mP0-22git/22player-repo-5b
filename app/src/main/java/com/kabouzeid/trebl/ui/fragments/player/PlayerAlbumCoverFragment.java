@@ -91,18 +91,14 @@ public class PlayerAlbumCoverFragment extends AbsMusicServiceFragment implements
 
         //note: carousel implementation
         if(!Util.isLandscape(getResources())){
-            try {
-                viewPager.setPageMargin((int) (getResources().getDisplayMetrics().widthPixels * -0.33));
-                viewPager.setOffscreenPageLimit(14);
-                viewPager.setPageTransformer(false, (page, position) -> {
-                    page.setScaleX(0.7f - Math.abs(position * 0.4f));
-                    page.setScaleY(0.7f - Math.abs(position * 0.4f));
-                    page.setAlpha(1.0f - Math.abs(position * 0.7f));
-                });
-            }catch(IllegalArgumentException ignored){
-                //note: Suppress rare crash here java.lang.IllegalArgumentException: Cannot set 'scaleX' to Float.NaN
-                //bug solution unknown
-            }
+            viewPager.setPageMargin((int) (getResources().getDisplayMetrics().widthPixels * -0.33));
+            viewPager.setOffscreenPageLimit(14);
+            viewPager.setPageTransformer(false, (page, position) -> {
+                if (Float.isNaN(position)) return;
+                page.setScaleX(0.7f - Math.abs(position * 0.4f));
+                page.setScaleY(0.7f - Math.abs(position * 0.4f));
+                page.setAlpha(1.0f - Math.abs(position * 0.7f));
+            });
         }
     }
 
