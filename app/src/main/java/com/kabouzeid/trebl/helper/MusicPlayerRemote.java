@@ -55,20 +55,16 @@ public class MusicPlayerRemote {
 
         final ContextWrapper contextWrapper = new ContextWrapper(realActivity);
         //contextWrapper.startService(new Intent(contextWrapper, MusicService.class));
-        //IMPORTANT NOTE: Android 12 foreground limitations causes a crash here, and this tries to suppress it
-        final Intent intent = new Intent(context, MusicService.class);
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.R) {
+        //IMPORTANT NOTE: Android 8+ background execution limits can cause a crash here
+        final Intent intent = new Intent(contextWrapper, MusicService.class);
+        try {
+            contextWrapper.startService(intent);
+        } catch (IllegalStateException ignored) {
             try {
-                contextWrapper.startService(new Intent(contextWrapper, MusicService.class));
-            } catch (IllegalStateException ignored) {
-                try {
-                    ContextCompat.startForegroundService(context, intent);
-                } catch (IllegalStateException e) {
-
-                }
+                ContextCompat.startForegroundService(contextWrapper, intent);
+            } catch (IllegalStateException e) {
+                // App is in background and can't start services
             }
-        }else{
-            contextWrapper.startService(new Intent(contextWrapper, MusicService.class));
         }
 
         final ServiceBinder binder = new ServiceBinder(callback);
