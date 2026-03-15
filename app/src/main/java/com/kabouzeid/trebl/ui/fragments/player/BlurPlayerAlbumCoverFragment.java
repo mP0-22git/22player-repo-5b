@@ -130,7 +130,10 @@ public class BlurPlayerAlbumCoverFragment extends AbsMusicServiceFragment implem
     }
 
     private void updatePlayingQueue() {
-        viewPager.setAdapter(new BlurAlbumCoverPagerAdapter(getFragmentManager(), MusicPlayerRemote.getPlayingQueue()));
+        // Must use getChildFragmentManager() since this is a nested fragment.
+        // Using getFragmentManager() registers ViewPager fragments with the
+        // activity's manager, causing IllegalStateException on recreation.
+        viewPager.setAdapter(new BlurAlbumCoverPagerAdapter(getChildFragmentManager(), MusicPlayerRemote.getPlayingQueue()));
         viewPager.setCurrentItem(MusicPlayerRemote.getPosition());
         onPageSelected(MusicPlayerRemote.getPosition());
     }
