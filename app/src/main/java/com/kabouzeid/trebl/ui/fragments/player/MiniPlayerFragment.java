@@ -146,9 +146,9 @@ public class MiniPlayerFragment extends AbsMusicServiceFragment implements Music
                             lastColor = color;
                         }
                     });
-        }catch (IllegalStateException e){
-            //note : suppress rare illegalstatexception occurs here:
-            //You must provide a Model of a type for which there is a registered ModelLoader
+        }catch (Exception e){
+            //note : suppress rare exception from Glide when song data is empty/invalid
+            //e.g. IllegalStateException or IllegalArgumentException from loadGeneric
         }
 
     }
