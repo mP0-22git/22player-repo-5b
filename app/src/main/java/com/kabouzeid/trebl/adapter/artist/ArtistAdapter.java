@@ -111,20 +111,24 @@ public class ArtistAdapter extends AbsMultiSelectAdapter<ArtistAdapter.ViewHolde
 
     protected void loadArtistImage(Artist artist, final ViewHolder holder) {
         if (holder.image == null) return;
-        ArtistGlideRequest.Builder.from(Glide.with(activity), artist)
-                .generatePalette(activity).build()
-                .into(new PhonographColoredTarget(holder.image) {
-                    @Override
-                    public void onLoadCleared(Drawable placeholder) {
-                        super.onLoadCleared(placeholder);
+        try {
+            ArtistGlideRequest.Builder.from(Glide.with(activity), artist)
+                    .generatePalette(activity).build()
+                    .into(new PhonographColoredTarget(holder.image) {
+                        @Override
+                        public void onLoadCleared(Drawable placeholder) {
+                            super.onLoadCleared(placeholder);
 
-                    }
+                        }
 
-                    @Override
-                    public void onColorReady(int color) {
+                        @Override
+                        public void onColorReady(int color) {
 
-                    }
-                });
+                        }
+                    });
+        } catch (Exception e) {
+            // Suppress Glide errors from invalid artist data
+        }
     }
 
     @Override
