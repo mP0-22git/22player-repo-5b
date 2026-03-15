@@ -2,7 +2,9 @@ package com.kabouzeid.trebl.ui.activities.base;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Parcel;
 import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
 import androidx.activity.EdgeToEdge;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
@@ -84,5 +86,30 @@ public abstract class AbsThemeActivity extends ATHToolbarActivity {
 
     public void setLightStatusbarAuto(int bgColor) {
         setLightStatusbar(ColorUtil.isColorLight(bgColor));
+    }
+
+    /**
+     * Guard against TransactionTooLargeException during onSaveInstanceState.
+     *
+     * Dialog fragments (CreatePlaylistDialog, AddToPlaylistDialog, DeleteSongsDialog, etc.)
+     * pass entire ArrayList<Song> via Bundle arguments. When a user selects hundreds of songs,
+     * the parceled Bundle can exceed Android's ~500KB Binder transaction limit, crashing the
+     * app with TransactionTooLargeException. We proactively clear the Bundle when it approaches
+     * the limit. The trade-off is losing dialog state on process death, which is acceptable
+     * since the user can re-open the dialog.
+     */
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        try {
+            Parcel parcel = Parcel.obtain();
+            outState.writeToParcel(parcel, 0);
+            int bundleSize = parcel.dataSize();
+            parcel.recycle();
+            if (bundleSize > 400_000) {
+                outState.clear();
+            }
+        } catch (Exception ignored) {
+        }
     }
 }
