@@ -18,6 +18,9 @@ import com.kabouzeid.trebl.interfaces.CabHolder;
 import com.kabouzeid.trebl.model.Song;
 import com.kabouzeid.trebl.util.ViewUtil;
 
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 /**
@@ -30,6 +33,28 @@ public class PlayingQueueAdapter extends SongAdapter implements DraggableItemAda
     private static final int UP_NEXT = 2;
 
     private int current;
+    private WeakReference<RecyclerView> recyclerViewRef;
+
+    @Override
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        recyclerViewRef = new WeakReference<>(recyclerView);
+    }
+
+    @Override
+    public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView);
+        recyclerViewRef = null;
+    }
+
+    private void endAnimationsIfNeeded() {
+        if (recyclerViewRef != null) {
+            RecyclerView rv = recyclerViewRef.get();
+            if (rv != null && rv.getItemAnimator() != null) {
+                rv.getItemAnimator().endAnimations();
+            }
+        }
+    }
 
     public PlayingQueueAdapter(AppCompatActivity activity, List<Song> dataSet, int current, @LayoutRes int itemLayoutRes, boolean usePalette, @Nullable CabHolder cabHolder) {
         super(activity, dataSet, itemLayoutRes, usePalette, cabHolder);
@@ -70,11 +95,13 @@ public class PlayingQueueAdapter extends SongAdapter implements DraggableItemAda
     public void swapDataSet(List<Song> dataSet, int position) {
         this.dataSet = dataSet;
         current = position;
+        endAnimationsIfNeeded();
         notifyDataSetChanged();
     }
 
     public void setCurrent(int current) {
         this.current = current;
+        endAnimationsIfNeeded();
         notifyDataSetChanged();
     }
 
@@ -118,11 +145,13 @@ public class PlayingQueueAdapter extends SongAdapter implements DraggableItemAda
 
     @Override
     public void onItemDragStarted(int position) {
+        endAnimationsIfNeeded();
         notifyDataSetChanged();
     }
 
     @Override
     public void onItemDragFinished(int fromPosition, int toPosition, boolean result) {
+        endAnimationsIfNeeded();
         notifyDataSetChanged();
     }
 
