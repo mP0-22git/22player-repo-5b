@@ -40,7 +40,7 @@
         android:textSize="@dimen/empty_text_size"
         android:visibility="gone" />
 
-    <com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
+    <com.kabouzeid.trebl.views.SafeFastScrollRecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
