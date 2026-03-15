@@ -115,6 +115,7 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
     private static final int DUCK = 7;
     private static final int UNDUCK = 8;
     public static final int RESTORE_QUEUES = 9;
+    private static final int RESUME = 10;
 
     public static final int SHUFFLE_MODE_NONE = 0;
     public static final int SHUFFLE_MODE_SHUFFLE = 1;
@@ -847,7 +848,7 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
 
     private void playSongAtImpl(int position) {
         if (openTrackAndPrepareNextAt(position)) {
-            play();
+            playImpl();
         } else {
             Toast.makeText(this, getResources().getString(R.string.unplayable_file), Toast.LENGTH_SHORT).show();
         }
@@ -862,6 +863,12 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
     }
 
     public void play() {
+        // handle this on the handlers thread to avoid blocking the ui thread
+        playerHandler.removeMessages(RESUME);
+        playerHandler.sendEmptyMessage(RESUME);
+    }
+
+    private void playImpl() {
         synchronized (this) {
             if (requestFocus()) {
                 if (!playback.isPlaying()) {
@@ -1258,6 +1265,10 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
                     service.playSongAtImpl(msg.arg1);
                     break;
 
+                case RESUME:
+                    service.playImpl();
+                    break;
+
                 case SET_POSITION:
                     service.openTrackAndPrepareNextAt(msg.arg1);
                     service.notifyChange(PLAY_STATE_CHANGED);
@@ -1275,7 +1286,7 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
                     switch (msg.arg1) {
                         case AudioManager.AUDIOFOCUS_GAIN:
                             if (!service.isPlaying() && service.pausedByTransientLossOfFocus) {
-                                service.play();
+                                service.playImpl();
                                 service.pausedByTransientLossOfFocus = false;
                             }
                             removeMessages(DUCK);
