@@ -125,6 +125,8 @@ public class PlayingQueueAdapter extends SongAdapter implements DraggableItemAda
 
     @Override
     public boolean onCheckCanStartDrag(ViewHolder holder, int position, int x, int y) {
+        if (position < 0 || position >= dataSet.size()) return false;
+        if (dataSet.get(position).id == -1) return false;
         return ViewUtil.hitTest(holder.imageText, x, y);
     }
 
