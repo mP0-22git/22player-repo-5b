@@ -16,7 +16,7 @@ import com.kabouzeid.appthemehelper.util.ColorUtil;
 import com.kabouzeid.appthemehelper.util.MaterialDialogsUtil;
 import com.kabouzeid.trebl.R;
 import com.kabouzeid.trebl.util.PreferenceUtil;
-import com.kabouzeid.trebl.util.Util;
+
 
 /**
  * @author Karim Abou Zeid (kabouzeid)
@@ -30,10 +30,6 @@ public abstract class AbsThemeActivity extends ATHToolbarActivity {
         EdgeToEdge.enable(this);
         super.onCreate(savedInstanceState);
         MaterialDialogsUtil.updateMaterialDialogsThemeSingleton(this);
-    }
-
-    protected void setDrawUnderStatusbar() {
-            Util.setAllowDrawUnderStatusBar(getWindow());
     }
 
     public void setStatusbarColor(int color) {

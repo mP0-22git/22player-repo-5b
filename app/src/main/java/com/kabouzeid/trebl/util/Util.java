@@ -8,15 +8,12 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Point;
 import android.net.Uri;
-import android.os.Build;
 import androidx.annotation.AttrRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.view.WindowCompat;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
@@ -42,10 +39,6 @@ public class Util {
         Point size = new Point();
         display.getSize(size);
         return size;
-    }
-
-    public static void setAllowDrawUnderStatusBar(@NonNull Window window) {
-        WindowCompat.setDecorFitsSystemWindows(window, false);
     }
 
     public static Uri getAlbumArtUri(long albumId) {

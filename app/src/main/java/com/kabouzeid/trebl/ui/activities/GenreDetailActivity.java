@@ -68,7 +68,6 @@ public class GenreDetailActivity extends AbsSlidingMusicPanelActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setDrawUnderStatusbar();
         ButterKnife.bind(this);
 
         setStatusbarColorAuto();
