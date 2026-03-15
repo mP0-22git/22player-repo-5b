@@ -292,8 +292,11 @@ public class BlurPlayerFragment extends AbsPlayerFragment implements BlurPlayerA
         blurAlbumBackground.setScaleY(1);
 
         handler.postDelayed(() -> {
-            Glide.with(getActivity()).load(Util.getAlbumArtUri(MusicPlayerRemote.getCurrentSong().albumId))
-                    .transform(new BlurTransformation.Builder(getActivity()).build())
+            Activity activity = getActivity();
+            if (activity == null || activity.isDestroyed()) return;
+
+            Glide.with(activity).load(Util.getAlbumArtUri(MusicPlayerRemote.getCurrentSong().albumId))
+                    .transform(new BlurTransformation.Builder(activity).build())
                     .placeholder(R.drawable.default_blur)
                     .error(R.drawable.default_blur)
                     .override(30,30)
