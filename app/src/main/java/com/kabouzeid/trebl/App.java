@@ -82,11 +82,15 @@ public class App extends Application {
 
     public static boolean isProVersion() {
         if (BuildConfig.DEBUG) return true;
-        boolean billingPro = app.billingManager.isPurchased(PRO_VERSION_PRODUCT_ID) ||
-                app.billingManager.isPurchased(PRO_SUBSCRIPTION_PRODUCT_ID);
-        if (billingPro) return true;
-        // Fall back to cached status while billing is still loading
-        return PreferenceManager.getDefaultSharedPreferences(app)
+        // billingManager may be null if called before App.onCreate() completes
+        // or if the Application instance was recreated by the system.
+        // Fall back to cached pro status from SharedPreferences.
+        if (app != null && app.billingManager != null) {
+            boolean billingPro = app.billingManager.isPurchased(PRO_VERSION_PRODUCT_ID) ||
+                    app.billingManager.isPurchased(PRO_SUBSCRIPTION_PRODUCT_ID);
+            if (billingPro) return true;
+        }
+        return app != null && PreferenceManager.getDefaultSharedPreferences(app)
                 .getBoolean(PREF_PRO_STATUS_CACHED, false);
     }
 
