@@ -959,7 +959,7 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
     }
 
     public int getSongProgressMillis() {
-        return playback.position();
+        return playback != null ? playback.position() : -1;
     }
 
     public int getSongDurationMillis() {
