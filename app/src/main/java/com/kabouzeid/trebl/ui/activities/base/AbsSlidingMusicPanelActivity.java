@@ -87,11 +87,11 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
                     slidingUpPanelLayout.setPanelHeight(
                             getResources().getDimensionPixelSize(R.dimen.mini_player_height) + navigationBarBottomInset);
                 }
-                // Push banner ad above the navigation bar so it's not overlapped
-                // when the mini player is hidden (e.g. first launch, nothing playing).
-                if (mAdContainer != null) {
+                // Apply ad container margin based on whether mini player is visible.
+                // When panel is hidden (height 0), ad needs margin to clear the nav bar.
+                if (mAdContainer != null && slidingUpPanelLayout != null) {
                     ViewGroup.MarginLayoutParams adLp = (ViewGroup.MarginLayoutParams) mAdContainer.getLayoutParams();
-                    adLp.bottomMargin = navInsets.bottom;
+                    adLp.bottomMargin = slidingUpPanelLayout.getPanelHeight() == 0 ? navInsets.bottom : 0;
                     mAdContainer.setLayoutParams(adLp);
                 }
                 return insets;
@@ -304,6 +304,14 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
         } else {
             slidingUpPanelLayout.setPanelHeight(
                     getResources().getDimensionPixelSize(R.dimen.mini_player_height) + navigationBarBottomInset);
+        }
+        // When the mini player is hidden, the banner ad sits at the bottom and needs
+        // margin to clear the navigation bar. When visible, the panel already accounts
+        // for the nav bar inset so no extra margin is needed.
+        if (mAdContainer != null) {
+            ViewGroup.MarginLayoutParams adLp = (ViewGroup.MarginLayoutParams) mAdContainer.getLayoutParams();
+            adLp.bottomMargin = hide ? navigationBarBottomInset : 0;
+            mAdContainer.setLayoutParams(adLp);
         }
     }
 
