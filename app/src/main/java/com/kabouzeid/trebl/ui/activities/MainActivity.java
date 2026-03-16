@@ -122,9 +122,11 @@ public class MainActivity extends AbsSlidingMusicPanelActivity {
     }
 
     private void checkShowPro() {
-        // Show pro upgrade paywall on first launch and every 5th launch thereafter.
         int launchCount = PreferenceUtil.getInstance(this).getLaunchCount();
-        if ((launchCount == 1 || launchCount % 5 == 0) && !App.isProVersion()) {
+        // Skip paywall on first launch — permission dialogs (storage, notifications)
+        // take priority and would overlap with the paywall. Show on 2nd launch
+        // (highest conversion window after permissions are settled) and every 5th after.
+        if ((launchCount == 2 || launchCount % 5 == 0) && !App.isProVersion()) {
             PublicPresentationKt.register(Superwall.Companion.getInstance(), "campaign_periodic");
         }
     }
