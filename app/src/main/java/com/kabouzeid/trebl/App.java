@@ -81,7 +81,7 @@ public class App extends Application {
     }
 
     public static boolean isProVersion() {
-        if (BuildConfig.DEBUG) return true;
+        if (BuildConfig.DEBUG) return false;
         // billingManager may be null if called before App.onCreate() completes
         // or if the Application instance was recreated by the system.
         // Fall back to cached pro status from SharedPreferences.
