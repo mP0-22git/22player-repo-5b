@@ -123,10 +123,20 @@ public class MainActivity extends AbsSlidingMusicPanelActivity {
 
     private void checkShowPro() {
         int launchCount = PreferenceUtil.getInstance(this).getLaunchCount();
-        // Skip paywall on first launch — permission dialogs (storage, notifications)
-        // take priority and would overlap with the paywall. Show on 2nd launch
-        // (highest conversion window after permissions are settled) and every 5th after.
-        if ((launchCount == 2 || launchCount % 5 == 0) && !App.isProVersion()) {
+        // On first launch, paywall is deferred to onHasPermissionsChanged() so it
+        // shows after permission dialogs complete. On subsequent launches, show
+        // every 5th open.
+        if (launchCount > 1 && launchCount % 5 == 0 && !App.isProVersion()) {
+            PublicPresentationKt.register(Superwall.Companion.getInstance(), "campaign_periodic");
+        }
+    }
+
+    @Override
+    protected void onHasPermissionsChanged(boolean hasPermissions) {
+        super.onHasPermissionsChanged(hasPermissions);
+        // Show paywall on first launch after permissions are granted,
+        // so it doesn't compete with permission dialogs.
+        if (hasPermissions && PreferenceUtil.getInstance(this).getLaunchCount() == 1 && !App.isProVersion()) {
             PublicPresentationKt.register(Superwall.Companion.getInstance(), "campaign_periodic");
         }
     }
