@@ -122,11 +122,9 @@ public class MainActivity extends AbsSlidingMusicPanelActivity {
     }
 
     private void checkShowPro() {
-        // Register Superwall placement on every app open for non-pro users.
-        // Display frequency is controlled remotely via Superwall dashboard rules
-        // (e.g. first open, every Nth open, audience targeting, A/B tests)
-        // rather than hardcoded in the app.
-        if (!App.isProVersion()) {
+        // Show pro upgrade paywall on first launch and every 5th launch thereafter.
+        int launchCount = PreferenceUtil.getInstance(this).getLaunchCount();
+        if ((launchCount == 1 || launchCount % 5 == 0) && !App.isProVersion()) {
             PublicPresentationKt.register(Superwall.Companion.getInstance(), "campaign_periodic");
         }
     }
