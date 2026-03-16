@@ -1,6 +1,5 @@
 package com.kabouzeid.trebl.adapter.song;
 
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +25,7 @@ import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 public class NativeAdSongAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         implements FastScrollRecyclerView.SectionedAdapter, SongAdapter.PositionMapper {
 
-    private static final String TAG = "NativeAdSongAdapter";
+
 
     // Use a high value for ad view type to avoid conflicts with wrapped adapter's view types
     private static final int VIEW_TYPE_AD = Integer.MAX_VALUE - 1;
@@ -169,7 +168,6 @@ public class NativeAdSongAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     adCache.put(position, ad);
                 }
             }
-            Log.d(TAG, "onBindViewHolder() position=" + position + ", cachedAd=" + (ad != null ? System.identityHashCode(ad) : "null"));
             ((NativeAdViewHolder) holder).bind(ad, position);
         } else {
             int songPosition = getSongPosition(position);
@@ -236,7 +234,6 @@ public class NativeAdSongAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         int itemCount = getItemCount();
         for (int i = 0; i < itemCount; i++) {
             if (isAdAtPosition(i)) {
-                Log.d(TAG, "notifyAdPositionsChanged() notifying position " + i);
                 notifyItemChanged(i);
             }
         }
@@ -271,10 +268,7 @@ public class NativeAdSongAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
 
         void bind(@Nullable NativeAd ad, int position) {
-            Log.d(TAG, "bind() called for position " + position + ", ad=" + (ad != null ? System.identityHashCode(ad) : "null"));
-
             if (ad == null) {
-                Log.d(TAG, "  -> No ad available, collapsing view");
                 collapseView();
                 boundAdIdentity = 0;
                 return;
@@ -310,11 +304,9 @@ public class NativeAdSongAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             // Only skip setNativeAd() if this exact ad is already bound to this exact ViewHolder
             // Position-level tracking doesn't work because ViewHolders get recycled across positions
             if (boundAdIdentity == adIdentity) {
-                Log.d(TAG, "  -> Same ad already bound to this ViewHolder (identity=" + adIdentity + "), skipping setNativeAd()");
                 return;
             }
 
-            Log.d(TAG, "  -> Calling setNativeAd() (identity=" + adIdentity + ", old=" + boundAdIdentity + ")");
             boundAdIdentity = adIdentity;
             adView.setNativeAd(ad);
         }
@@ -324,7 +316,6 @@ public class NativeAdSongAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             // The ViewHolder should remember what ad is bound to it.
             // When bind() is called again with the same ad, we'll skip setNativeAd().
             // Only clear when binding a null ad or a different ad.
-            Log.d(TAG, "unbind() called, keeping boundAdIdentity=" + boundAdIdentity);
         }
 
         private void collapseView() {
