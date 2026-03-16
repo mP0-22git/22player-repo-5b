@@ -122,8 +122,11 @@ public class MainActivity extends AbsSlidingMusicPanelActivity {
     }
 
     private void checkShowPro() {
-        int launchCount = PreferenceUtil.getInstance(this).getLaunchCount();
-        if(launchCount % 5 == 0 && launchCount != 0 && !App.isProVersion()) {
+        // Register Superwall placement on every app open for non-pro users.
+        // Display frequency is controlled remotely via Superwall dashboard rules
+        // (e.g. first open, every Nth open, audience targeting, A/B tests)
+        // rather than hardcoded in the app.
+        if (!App.isProVersion()) {
             PublicPresentationKt.register(Superwall.Companion.getInstance(), "campaign_periodic");
         }
     }
