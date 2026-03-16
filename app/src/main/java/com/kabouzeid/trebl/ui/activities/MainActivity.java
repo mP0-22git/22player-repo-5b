@@ -123,14 +123,12 @@ public class MainActivity extends AbsSlidingMusicPanelActivity {
 
     private void checkShowPro() {
         int launchCount = PreferenceUtil.getInstance(this).getLaunchCount();
-        if (launchCount == 1) {
-            // First launch: if permissions are already granted (no dialog needed),
-            // show paywall now. Otherwise, onRequestPermissionsResult will trigger
-            // it after the user has dealt with all permission dialogs.
-            if (hasPermissions() && !App.isProVersion()) {
-                PublicPresentationKt.register(Superwall.Companion.getInstance(), "campaign_periodic");
-            }
-        } else if (launchCount % 5 == 0 && !App.isProVersion()) {
+        // First launch: always defer to onRequestPermissionsResult() to avoid
+        // competing with permission dialogs. On Samsung API 36+, storage is
+        // auto-granted but POST_NOTIFICATIONS still shows a dialog, so
+        // hasPermissions() returning true doesn't mean all dialogs are done.
+        if (launchCount == 1) return;
+        if (launchCount % 5 == 0 && !App.isProVersion()) {
             PublicPresentationKt.register(Superwall.Companion.getInstance(), "campaign_periodic");
         }
     }
