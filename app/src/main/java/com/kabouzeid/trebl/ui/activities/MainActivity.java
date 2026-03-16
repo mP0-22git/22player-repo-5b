@@ -123,20 +123,25 @@ public class MainActivity extends AbsSlidingMusicPanelActivity {
 
     private void checkShowPro() {
         int launchCount = PreferenceUtil.getInstance(this).getLaunchCount();
-        // On first launch, paywall is deferred to onHasPermissionsChanged() so it
-        // shows after permission dialogs complete. On subsequent launches, show
-        // every 5th open.
-        if (launchCount > 1 && launchCount % 5 == 0 && !App.isProVersion()) {
+        if (launchCount == 1) {
+            // First launch: if permissions are already granted (no dialog needed),
+            // show paywall now. Otherwise, onRequestPermissionsResult will trigger
+            // it after the user has dealt with all permission dialogs.
+            if (hasPermissions() && !App.isProVersion()) {
+                PublicPresentationKt.register(Superwall.Companion.getInstance(), "campaign_periodic");
+            }
+        } else if (launchCount % 5 == 0 && !App.isProVersion()) {
             PublicPresentationKt.register(Superwall.Companion.getInstance(), "campaign_periodic");
         }
     }
 
     @Override
-    protected void onHasPermissionsChanged(boolean hasPermissions) {
-        super.onHasPermissionsChanged(hasPermissions);
-        // Show paywall on first launch after permissions are granted,
-        // so it doesn't compete with permission dialogs.
-        if (hasPermissions && PreferenceUtil.getInstance(this).getLaunchCount() == 1 && !App.isProVersion()) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        // Show paywall on first launch after permission dialogs are dismissed.
+        // This handles all devices consistently (AVD, Samsung OneUI, etc.)
+        // regardless of how the OS sequences permission dialogs.
+        if (PreferenceUtil.getInstance(this).getLaunchCount() == 1 && !App.isProVersion()) {
             PublicPresentationKt.register(Superwall.Companion.getInstance(), "campaign_periodic");
         }
     }
