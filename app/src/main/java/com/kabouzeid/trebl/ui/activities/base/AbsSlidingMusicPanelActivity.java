@@ -87,6 +87,13 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
                     slidingUpPanelLayout.setPanelHeight(
                             getResources().getDimensionPixelSize(R.dimen.mini_player_height) + navigationBarBottomInset);
                 }
+                // Push banner ad above the navigation bar so it's not overlapped
+                // when the mini player is hidden (e.g. first launch, nothing playing).
+                if (mAdContainer != null) {
+                    ViewGroup.MarginLayoutParams adLp = (ViewGroup.MarginLayoutParams) mAdContainer.getLayoutParams();
+                    adLp.bottomMargin = navInsets.bottom;
+                    mAdContainer.setLayoutParams(adLp);
+                }
                 return insets;
             });
         }
