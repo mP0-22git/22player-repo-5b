@@ -4,6 +4,7 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.MenuItem;
 import android.view.View;
@@ -61,6 +62,12 @@ public class OrderablePlaylistSongAdapter extends PlaylistSongAdapter implements
 
     @Override
     public boolean onCheckCanStartDrag(ViewHolder holder, int position, int x, int y) {
+        // Reject the drag if the ViewHolder's cached itemId is NO_ID, which
+        // happens after notifyDataSetChanged invalidates holders (including
+        // from our own onItemDrag{Started,Finished}). Without this guard the
+        // advrecyclerview library throws IllegalStateException from
+        // DraggableItemWrapperAdapter.startDraggingItem.
+        if (holder.getItemId() == RecyclerView.NO_ID) return false;
         return onMoveItemListener != null && position > 0 &&
                 (ViewUtil.hitTest(holder.dragView, x, y) || ViewUtil.hitTest(holder.image, x, y));
     }
