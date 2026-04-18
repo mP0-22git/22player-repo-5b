@@ -309,7 +309,13 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
     public int onStartCommand(@Nullable Intent intent, int flags, int startId) {
         if (intent != null) {
             if (intent.getAction() != null) {
-                restoreQueuesAndPositionIfNecessary();
+                // Dispatch queue restoration to the playback handler instead of
+                // calling it directly: the synchronized method can block for
+                // seconds waiting on the service monitor while PlaybackHandler
+                // runs MediaPlayer.prepare() inside another synchronized block,
+                // which caused main-thread ANRs.
+                playerHandler.removeMessages(RESTORE_QUEUES);
+                playerHandler.sendEmptyMessage(RESTORE_QUEUES);
                 String action = intent.getAction();
                 switch (action) {
                     case ACTION_TOGGLE_PAUSE:
