@@ -283,7 +283,12 @@ public class AlbumDetailActivity extends AbsSlidingMusicPanelActivity implements
                             return;
                         }
 
-                        if (!PreferenceUtil.isAllowedToDownloadMetadata(AlbumDetailActivity.this)) {
+                        // Guard wikiDialog: loadWiki() also runs from setAlbum()
+                        // before the user has opened the Wiki menu, so the field
+                        // can still be null when the response lands (especially
+                        // if the "allow metadata download" preference was toggled
+                        // mid-request). Nothing to update if there's no dialog.
+                        if (!PreferenceUtil.isAllowedToDownloadMetadata(AlbumDetailActivity.this) && wikiDialog != null) {
                             if (wiki != null) {
                                 wikiDialog.setContent(wiki);
                             } else {
