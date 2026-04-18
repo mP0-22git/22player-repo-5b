@@ -6,6 +6,7 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -291,22 +292,28 @@ public class PlaylistAdapter extends AbsMultiSelectAdapter<PlaylistAdapter.ViewH
 
         @Override
         public void onClick(View view) {
-            if (getAdapterPosition() == 0) {
+            int position = getAdapterPosition();
+            if (position == RecyclerView.NO_POSITION) return;
+            if (position == 0) {
                 ManagePlaylistsDialog.create().show(activity.getSupportFragmentManager(), "MANAGE_PLAYLISTS");
                 return;
             }
             if (isInQuickSelectMode()) {
-                toggleChecked(getAdapterPosition());
+                toggleChecked(position);
             } else {
-                Playlist playlist = dataSet.get(getAdapterPosition() - 1);
+                int index = position - 1;
+                if (index < 0 || index >= dataSet.size()) return;
+                Playlist playlist = dataSet.get(index);
                 NavigationUtil.goToPlaylist(activity, playlist);
             }
         }
 
         @Override
         public boolean onLongClick(View view) {
-            if (getAdapterPosition() == 0) return false;
-            toggleChecked(getAdapterPosition());
+            int position = getAdapterPosition();
+            if (position == RecyclerView.NO_POSITION) return false;
+            if (position == 0) return false;
+            toggleChecked(position);
             return true;
         }
     }
