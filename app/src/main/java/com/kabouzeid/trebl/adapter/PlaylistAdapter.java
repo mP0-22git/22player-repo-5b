@@ -143,7 +143,9 @@ public class PlaylistAdapter extends AbsMultiSelectAdapter<PlaylistAdapter.ViewH
     @Override
     protected Playlist getIdentifier(int position) {
         if (position == 0) return null;
-        return dataSet.get(position - 1);
+        int index = position - 1;
+        if (index < 0 || index >= dataSet.size()) return null;
+        return dataSet.get(index);
     }
 
     @Override

@@ -138,6 +138,7 @@ public class ArtistAdapter extends AbsMultiSelectAdapter<ArtistAdapter.ViewHolde
 
     @Override
     protected Artist getIdentifier(int position) {
+        if (position < 0 || position >= dataSet.size()) return null;
         return dataSet.get(position);
     }
 

@@ -163,6 +163,7 @@ public class AlbumAdapter extends AbsMultiSelectAdapter<AlbumAdapter.ViewHolder,
 
     @Override
     protected Album getIdentifier(int position) {
+        if (position < 0 || position >= dataSet.size()) return null;
         return dataSet.get(position);
     }
 

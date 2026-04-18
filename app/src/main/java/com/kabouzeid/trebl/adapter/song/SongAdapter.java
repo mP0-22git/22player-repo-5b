@@ -177,6 +177,7 @@ public class SongAdapter extends AbsMultiSelectAdapter<SongAdapter.ViewHolder, S
 
     @Override
     protected Song getIdentifier(int position) {
+        if (position < 0 || position >= dataSet.size()) return null;
         return dataSet.get(position);
     }
 

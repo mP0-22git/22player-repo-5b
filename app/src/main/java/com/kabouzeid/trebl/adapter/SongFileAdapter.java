@@ -141,6 +141,7 @@ public class SongFileAdapter extends AbsMultiSelectAdapter<SongFileAdapter.ViewH
 
     @Override
     protected File getIdentifier(int position) {
+        if (position < 0 || position >= dataSet.size()) return null;
         return dataSet.get(position);
     }
 
