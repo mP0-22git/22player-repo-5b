@@ -4,6 +4,7 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,6 +73,11 @@ public abstract class AbsOffsetSongAdapter extends SongAdapter {
         return position == 0 ? OFFSET_ITEM : SONG;
     }
 
+    @Override
+    protected int getMappedPosition(int adapterPosition) {
+        return adapterPosition - 1;
+    }
+
     @NonNull
     @Override
     public String getSectionName(int position) {
@@ -87,25 +93,23 @@ public abstract class AbsOffsetSongAdapter extends SongAdapter {
         }
 
         @Override
-        protected Song getSong() {
-            if (getItemViewType() == OFFSET_ITEM)
-                return Song.EMPTY_SONG; // could also return null, just to be safe return empty song
-            return dataSet.get(getAdapterPosition() - 1);
-        }
-
-        @Override
         public void onClick(View v) {
+            int position = getAdapterPosition();
+            if (position == RecyclerView.NO_POSITION) return;
+            int songPosition = position - 1;
             if (isInQuickSelectMode() && getItemViewType() != OFFSET_ITEM) {
-                toggleChecked(getAdapterPosition());
-            } else {
-                MusicPlayerRemote.openQueue(dataSet, getAdapterPosition() - 1, true);
+                toggleChecked(position);
+            } else if (songPosition >= 0 && songPosition < dataSet.size()) {
+                MusicPlayerRemote.openQueue(dataSet, songPosition, true);
             }
         }
 
         @Override
         public boolean onLongClick(View view) {
+            int position = getAdapterPosition();
+            if (position == RecyclerView.NO_POSITION) return false;
             if (getItemViewType() == OFFSET_ITEM) return false;
-            toggleChecked(getAdapterPosition());
+            toggleChecked(position);
             return true;
         }
     }
