@@ -180,8 +180,14 @@ dependencies {
     implementation 'com.google.android.play:app-update:2.1.0'
 
     // AdMob
-    implementation 'com.google.android.gms:play-services-ads:23.6.0'
+    implementation 'com.google.android.gms:play-services-ads:25.1.0'
     implementation 'com.google.android.ump:user-messaging-platform:4.0.0'
+
+    // AdMob mediation adapters
+    implementation 'com.google.ads.mediation:inmobi:11.2.0.0'
+    implementation 'com.google.ads.mediation:vungle:7.7.2.0'
+    implementation 'com.unity3d.ads:unity-ads:4.16.5'
+    implementation 'com.google.ads.mediation:unity:4.17.0.0'
 
     implementation 'com.h6ah4i.android.widget.verticalseekbar:verticalseekbar:1.0.0'
 

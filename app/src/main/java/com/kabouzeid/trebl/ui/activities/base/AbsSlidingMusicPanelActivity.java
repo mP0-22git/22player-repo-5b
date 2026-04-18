@@ -20,9 +20,9 @@ import android.view.animation.PathInterpolator;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
 import com.kabouzeid.trebl.App;
 import com.kabouzeid.trebl.BuildConfig;
+import com.kabouzeid.trebl.ads.AdInitializer;
 import com.kabouzeid.trebl.ads.ConsentManager;
 import com.kabouzeid.trebl.R;
 import com.kabouzeid.trebl.helper.MusicPlayerRemote;
@@ -155,17 +155,20 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
     }
 
     private void initializeAds() {
-        MobileAds.initialize(this);
-        mAdView = new AdView(this);
-        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        int adWidthPixels = displayMetrics.widthPixels;
-        int adWidthDp = (int) (adWidthPixels / displayMetrics.density);
-        mAdView.setAdSize(AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this, adWidthDp));
-        mAdView.setAdUnitId(BuildConfig.ADMOB_BANNER_ID);
-        mAdContainer.addView(mAdView);
-        mAdContainer.setVisibility(View.VISIBLE);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        AdInitializer.runWhenReady(this, () -> {
+            if (isFinishing() || isDestroyed()) {
+                return;
+            }
+            mAdView = new AdView(this);
+            DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+            int adWidthPixels = displayMetrics.widthPixels;
+            int adWidthDp = (int) (adWidthPixels / displayMetrics.density);
+            mAdView.setAdSize(AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this, adWidthDp));
+            mAdView.setAdUnitId(BuildConfig.ADMOB_BANNER_ID);
+            mAdContainer.addView(mAdView);
+            mAdContainer.setVisibility(View.VISIBLE);
+            mAdView.loadAd(new AdRequest.Builder().build());
+        });
     }
 
     @Override

@@ -116,34 +116,29 @@ public class NativeAdManager {
         }
 
         isLoading = true;
-        final int[] loaded = {0};
         final int targetCount = count;
 
-        for (int i = 0; i < count; i++) {
-            AdLoader adLoader = new AdLoader.Builder(activity, BuildConfig.ADMOB_NATIVE_ID)
-                    .forNativeAd(nativeAd -> {
-                        if (adCache.size() < CACHE_SIZE) {
-                            adCache.offer(nativeAd);
-                            // Notify listener that an ad is now available
-                            if (adLoadCallback != null) {
-                                adLoadCallback.onAdLoaded();
-                            }
-                        } else {
-                            nativeAd.destroy();
-                        }
+        AdInitializer.runWhenReady(activity, () -> {
+            Activity act = activityRef.get();
+            if (act == null || act.isFinishing() || act.isDestroyed()) {
+                isLoading = false;
+                return;
+            }
 
-                        loaded[0]++;
-                        if (loaded[0] >= targetCount) {
-                            isLoading = false;
-                            if (callback != null) {
-                                callback.onAdLoaded();
+            final int[] loaded = {0};
+
+            for (int i = 0; i < targetCount; i++) {
+                AdLoader adLoader = new AdLoader.Builder(act, BuildConfig.ADMOB_NATIVE_ID)
+                        .forNativeAd(nativeAd -> {
+                            if (adCache.size() < CACHE_SIZE) {
+                                adCache.offer(nativeAd);
+                                if (adLoadCallback != null) {
+                                    adLoadCallback.onAdLoaded();
+                                }
+                            } else {
+                                nativeAd.destroy();
                             }
-                        }
-                    })
-                    .withAdListener(new AdListener() {
-                        @Override
-                        public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                            Log.e(TAG, "Native ad failed to load: " + loadAdError.getMessage());
+
                             loaded[0]++;
                             if (loaded[0] >= targetCount) {
                                 isLoading = false;
@@ -151,12 +146,25 @@ public class NativeAdManager {
                                     callback.onAdLoaded();
                                 }
                             }
-                        }
-                    })
-                    .build();
+                        })
+                        .withAdListener(new AdListener() {
+                            @Override
+                            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                                Log.e(TAG, "Native ad failed to load: " + loadAdError.getMessage());
+                                loaded[0]++;
+                                if (loaded[0] >= targetCount) {
+                                    isLoading = false;
+                                    if (callback != null) {
+                                        callback.onAdLoaded();
+                                    }
+                                }
+                            }
+                        })
+                        .build();
 
-            adLoader.loadAd(new AdRequest.Builder().build());
-        }
+                adLoader.loadAd(new AdRequest.Builder().build());
+            }
+        });
     }
 
     /**
