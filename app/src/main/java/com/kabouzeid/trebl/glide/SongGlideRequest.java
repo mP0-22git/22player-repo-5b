@@ -110,10 +110,17 @@ public class SongGlideRequest {
     }
 
     public static DrawableTypeRequest createBaseRequest(RequestManager requestManager, Song song, boolean ignoreMediaStore) {
-        if (ignoreMediaStore) {
-            return requestManager.load(new AudioFileCover(song.data));
-        } else {
-            return requestManager.loadFromMediaStore(MusicUtil.getMediaStoreAlbumCoverUri(song.albumId));
+        try {
+            if (ignoreMediaStore) {
+                return requestManager.load(new AudioFileCover(song.data));
+            } else {
+                return requestManager.loadFromMediaStore(MusicUtil.getMediaStoreAlbumCoverUri(song.albumId));
+            }
+        } catch (IllegalArgumentException | NullPointerException e) {
+            // Glide throws IAE when no ModelLoader is registered for the model
+            // (rare OEM/module-init races); NPE guards a null song/data.
+            // Fall back to the default album art so fragment creation can't crash.
+            return requestManager.load(DEFAULT_ERROR_IMAGE);
         }
     }
 
