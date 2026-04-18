@@ -19,6 +19,7 @@ import com.kabouzeid.trebl.misc.CustomFragmentStatePagerAdapter;
 import com.kabouzeid.trebl.model.Song;
 import com.kabouzeid.trebl.util.PreferenceUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -37,7 +38,10 @@ public class BlurAlbumCoverPagerAdapter extends CustomFragmentStatePagerAdapter 
 
     public BlurAlbumCoverPagerAdapter(FragmentManager fm, List<Song> dataSet) {
         super(fm);
-        this.dataSet = dataSet;
+        // Snapshot the queue so later mutations on the service side don't
+        // change getCount() under ViewPager, which triggers
+        // IllegalStateException in ViewPager.populate.
+        this.dataSet = new ArrayList<>(dataSet);
     }
 
     @Override
