@@ -10,7 +10,6 @@ import android.os.Environment;
 import androidx.annotation.NonNull;
 
 import com.kabouzeid.trebl.service.MusicService;
-import com.kabouzeid.trebl.util.FileUtil;
 import com.kabouzeid.trebl.util.PreferenceUtil;
 
 import java.io.File;
@@ -71,7 +70,12 @@ public class BlacklistStore extends SQLiteOpenHelper {
         if (file == null || contains(file)) {
             return;
         }
-        String path = FileUtil.safeGetCanonicalPath(file);
+        // Use absolute path (not canonical): MediaStore's AudioColumns.DATA
+        // stores the user-facing /storage/emulated/0/... form, but
+        // getCanonicalPath resolves symlinks to /mnt/user/0/... or similar
+        // on many OEM / modern Android devices, so a canonical-path LIKE
+        // filter never matches and the blacklist has no effect.
+        String path = file.getAbsolutePath();
 
         final SQLiteDatabase database = getWritableDatabase();
         database.beginTransaction();
@@ -92,7 +96,7 @@ public class BlacklistStore extends SQLiteOpenHelper {
         if (file == null) {
             return false;
         }
-        String path = FileUtil.safeGetCanonicalPath(file);
+        String path = file.getAbsolutePath();
 
         final SQLiteDatabase database = getReadableDatabase();
         Cursor cursor = database.query(BlacklistStoreColumns.NAME,
@@ -110,7 +114,7 @@ public class BlacklistStore extends SQLiteOpenHelper {
 
     public void removePath(File file) {
         final SQLiteDatabase database = getWritableDatabase();
-        String path = FileUtil.safeGetCanonicalPath(file);
+        String path = file.getAbsolutePath();
 
         database.delete(BlacklistStoreColumns.NAME,
                 BlacklistStoreColumns.PATH + "=?",
