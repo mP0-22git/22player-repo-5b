@@ -71,8 +71,8 @@ public class NowPlayingPickerDialog extends DialogFragment implements MaterialDi
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
         if (whichButtonClicked == DialogAction.POSITIVE) {
-            // Only the default screen (CARD, position 0) is free; the rest are pro.
-            if(viewPagerPosition==0 || App.isProVersion()){
+            // CARD (0) and FLAT (1) are free; BLUR (2) is pro.
+            if(viewPagerPosition!=2 || App.isProVersion()){
                 PreferenceUtil.getInstance(getContext()).setNowPlayingScreen(NowPlayingScreen.values()[viewPagerPosition]);
                 getActivity().recreate();
             }else{
