@@ -69,11 +69,7 @@ public class MoreFragment extends Fragment {
                 startActivity(new Intent(getActivity(), SettingsActivity.class));
                 break;
             case 1:
-                if (!App.isProVersion()) {
-                    PublicPresentationKt.register(Superwall.Companion.getInstance(), "feature_folder");
-                }else{
-                    setCurrentFragment(FoldersFragment.newInstance(getActivity()));
-                }
+                setCurrentFragment(FoldersFragment.newInstance(getActivity()));
                 break;
             case 2:
                 playerDialog = PlayerDialog.createPlayerDialog(getActivity());

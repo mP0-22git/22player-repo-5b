@@ -20,12 +20,9 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.internal.ThemeSingleton;
-import com.kabouzeid.trebl.App;
 import com.kabouzeid.trebl.R;
 import com.kabouzeid.trebl.helper.MusicPlayerRemote;
 import com.kabouzeid.trebl.service.MusicService;
-import com.superwall.sdk.Superwall;
-import com.superwall.sdk.paywall.presentation.PublicPresentationKt;
 import com.kabouzeid.trebl.util.MusicUtil;
 import com.kabouzeid.trebl.util.PreferenceUtil;
 import com.triggertrap.seekarc.SeekArc;
@@ -65,11 +62,6 @@ public class SleepTimerDialog extends DialogFragment {
                     if (getActivity() == null) {
                         return;
                     }
-                    if (!App.isProVersion()) {
-                        PublicPresentationKt.register(Superwall.Companion.getInstance(), "feature_sleep_timer");
-                        return;
-                    }
-
                     PreferenceUtil.getInstance(getActivity()).setSleepTimerFinishMusic(shouldFinishLastSong.isChecked());
 
                     final int minutes = seekArcProgress;

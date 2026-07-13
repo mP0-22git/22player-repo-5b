@@ -66,11 +66,8 @@ public class PlayerDialog {
         });
 
         selectButton.setOnClickListener(view -> {
-            if(viewPagerPosition!=2){
-                PreferenceUtil.getInstance(activity).setNowPlayingScreen(NowPlayingScreen.values()[viewPagerPosition]);
-                playerDialog.dismiss();
-                activity.recreate();
-            }else if(App.isProVersion() && viewPagerPosition==2){
+            // Only the default screen (CARD, position 0) is free; the rest are pro.
+            if(viewPagerPosition==0 || App.isProVersion()){
                 PreferenceUtil.getInstance(activity).setNowPlayingScreen(NowPlayingScreen.values()[viewPagerPosition]);
                 playerDialog.dismiss();
                 activity.recreate();
