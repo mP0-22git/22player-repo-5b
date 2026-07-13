@@ -30,7 +30,12 @@ public class NativeAdSongAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     // Use a high value for ad view type to avoid conflicts with wrapped adapter's view types
     private static final int VIEW_TYPE_AD = Integer.MAX_VALUE - 1;
 
-    private static final int AD_INTERVAL = 10; // Show ad every 10 songs
+    private static final int FIRST_AD_OFFSET = 4;  // First ad after the first 4 songs
+    private static final int AD_INTERVAL = 15;     // Then one ad every 15 songs
+
+    // Any non-empty list shorter than FIRST_AD_OFFSET still gets a single ad, placed
+    // at the end. (A list needs at least this many songs to show an ad.)
+    private static final int MIN_ITEMS_FOR_AD = 1;
 
     private final SongAdapter wrappedAdapter;
     private final NativeAdManager adManager;
@@ -89,16 +94,25 @@ public class NativeAdSongAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
      * Check if the item at the given position is an ad.
      * Uses O(1) math instead of iteration.
      *
-     * Ad positions follow the pattern: AD_INTERVAL, 2*AD_INTERVAL+1, 3*AD_INTERVAL+2, ...
-     * i.e., 10, 21, 32, 43, ... (for AD_INTERVAL=10)
+     * Long lists: first ad at index 4, then every (AD_INTERVAL + 1): 4, 20, 36, ...
+     * Short lists (fewer than FIRST_AD_OFFSET songs): a single ad at the end.
      */
     private boolean isAdAtPosition(int position) {
-        if (!showAds || position < AD_INTERVAL) {
+        if (!showAds) {
             return false;
         }
-        // Ads appear at positions: AD_INTERVAL + k*(AD_INTERVAL+1) for k=0,1,2,...
-        // i.e., position 10, 21, 32, 43, ...
-        return (position - AD_INTERVAL) % (AD_INTERVAL + 1) == 0;
+        int songCount = wrappedAdapter.getItemCount();
+        if (songCount < MIN_ITEMS_FOR_AD) {
+            return false;
+        }
+        // The first ad sits after min(FIRST_AD_OFFSET, songCount) songs: for a short
+        // list that places a single ad at the very end; for a long list the first ad is
+        // at index 4 and then repeats every (AD_INTERVAL + 1): 4, 20, 36, ...
+        int firstAd = Math.min(FIRST_AD_OFFSET, songCount);
+        if (position < firstAd) {
+            return false;
+        }
+        return (position - firstAd) % (AD_INTERVAL + 1) == 0;
     }
 
     /**
@@ -106,13 +120,19 @@ public class NativeAdSongAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
      * Uses O(1) math instead of iteration.
      */
     public int getSongPosition(int adapterPosition) {
-        if (!showAds || adapterPosition < AD_INTERVAL) {
+        if (!showAds) {
             return adapterPosition;
         }
-        // Count how many ads appear at positions <= adapterPosition
-        // For non-ad positions > AD_INTERVAL:
-        // adCount = floor((position - AD_INTERVAL) / (AD_INTERVAL + 1)) + 1
-        int adCount = (adapterPosition - AD_INTERVAL) / (AD_INTERVAL + 1) + 1;
+        int songCount = wrappedAdapter.getItemCount();
+        if (songCount < MIN_ITEMS_FOR_AD) {
+            return adapterPosition;
+        }
+        int firstAd = Math.min(FIRST_AD_OFFSET, songCount);
+        if (adapterPosition < firstAd) {
+            return adapterPosition;
+        }
+        // Subtract the number of ads that appear at or before adapterPosition.
+        int adCount = (adapterPosition - firstAd) / (AD_INTERVAL + 1) + 1;
         return adapterPosition - adCount;
     }
 
@@ -129,10 +149,15 @@ public class NativeAdSongAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public int getItemCount() {
         int songCount = wrappedAdapter.getItemCount();
-        if (!showAds || songCount == 0) {
+        if (!showAds || songCount < MIN_ITEMS_FOR_AD) {
             return songCount;
         }
-        int adCount = (songCount - 1) / AD_INTERVAL; // Number of ads to insert
+        int adCount;
+        if (songCount <= FIRST_AD_OFFSET) {
+            adCount = 1; // single ad placed at the end of a short list
+        } else {
+            adCount = (songCount - FIRST_AD_OFFSET) / AD_INTERVAL + 1;
+        }
         return songCount + adCount;
     }
 

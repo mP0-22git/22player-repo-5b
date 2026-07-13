@@ -23,7 +23,9 @@ import java.util.Queue;
  */
 public class NativeAdManager {
     private static final String TAG = "NativeAdManager";
-    private static final int CACHE_SIZE = 3;
+    // Keep only one ad staged. We refill it lazily the first time an ad slot is
+    // actually bound, so screens that never render a slot never issue a request.
+    private static final int CACHE_SIZE = 1;
 
     private final WeakReference<Activity> activityRef;
     private final Queue<NativeAd> adCache = new LinkedList<>();
@@ -44,9 +46,9 @@ public class NativeAdManager {
         // Check if we can show ads (not pro, has consent)
         if (!App.isProVersion()) {
             canShowAds = consentManager.canRequestAds();
-            if (canShowAds) {
-                preloadAds();
-            }
+            // Deliberately no preload here. Loading is lazy: the first time an ad
+            // slot is bound, getAd() triggers a load. This avoids requesting ads on
+            // screens (short lists, quick open-and-back-out) that show no ad.
         }
     }
 
@@ -90,10 +92,9 @@ public class NativeAdManager {
 
         NativeAd ad = adCache.poll();
 
-        // Preload more ads if cache is running low
-        if (adCache.size() < CACHE_SIZE / 2) {
-            preloadAds();
-        }
+        // Refill the pool for the next slot. preloadAds() is a no-op if the pool is
+        // already full or a load is in flight, so it is safe to call every time.
+        preloadAds();
 
         return ad;
     }
@@ -193,9 +194,7 @@ public class NativeAdManager {
 
         consentManager.requestConsentIfRequired(activity, canRequest -> {
             canShowAds = canRequest;
-            if (canShowAds) {
-                preloadAds();
-            }
+            // Loading is lazy (see getAd), so there is nothing to preload here.
             if (onComplete != null) {
                 onComplete.run();
             }
