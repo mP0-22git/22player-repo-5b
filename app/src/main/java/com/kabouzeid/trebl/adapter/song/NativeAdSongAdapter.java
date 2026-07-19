@@ -1,5 +1,10 @@
 package com.kabouzeid.trebl.adapter.song;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -319,21 +324,59 @@ public class NativeAdSongAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ctaView.setVisibility(View.GONE);
             }
 
-            if (ad.getIcon() != null) {
-                iconView.setImageDrawable(ad.getIcon().getDrawable());
+            // Register the ad with the SDK first (this populates the asset views).
+            // Only skip setNativeAd() if this exact ad is already bound to this exact
+            // ViewHolder — position-level tracking doesn't work because ViewHolders
+            // get recycled across positions.
+            if (boundAdIdentity != adIdentity) {
+                boundAdIdentity = adIdentity;
+                adView.setNativeAd(ad);
+            }
+
+            // Decouple the icon from the ad SDK's bitmap. setNativeAd() (and some
+            // mediation adapters) hand us an icon Drawable backed by a bitmap the SDK
+            // can recycle out from under us; if this RecyclerView ImageView still
+            // holds it, the next draw crashes in BaseCanvas.throwIfCannotDraw().
+            // Snapshot it into an app-owned bitmap that only we control. Runs on every
+            // bind (after any setNativeAd) so the ImageView never keeps the SDK's copy.
+            Bitmap iconBitmap = ad.getIcon() != null ? toOwnedBitmap(ad.getIcon().getDrawable()) : null;
+            if (iconBitmap != null) {
+                iconView.setImageBitmap(iconBitmap);
                 iconView.setVisibility(View.VISIBLE);
             } else {
+                iconView.setImageDrawable(null);
                 iconView.setVisibility(View.INVISIBLE);
             }
+        }
 
-            // Only skip setNativeAd() if this exact ad is already bound to this exact ViewHolder
-            // Position-level tracking doesn't work because ViewHolders get recycled across positions
-            if (boundAdIdentity == adIdentity) {
-                return;
+        /**
+         * Render a native-ad icon Drawable into a fresh, app-owned Bitmap so the
+         * RecyclerView never draws a bitmap the ad SDK / mediation can recycle.
+         * Returns null (caller hides the icon) if anything goes wrong — never crashes.
+         */
+        @Nullable
+        private static Bitmap toOwnedBitmap(@Nullable Drawable d) {
+            if (d == null) return null;
+            try {
+                if (d instanceof BitmapDrawable) {
+                    Bitmap src = ((BitmapDrawable) d).getBitmap();
+                    if (src != null && !src.isRecycled()) {
+                        Bitmap.Config cfg = src.getConfig() != null ? src.getConfig() : Bitmap.Config.ARGB_8888;
+                        return src.copy(cfg, false);
+                    }
+                }
+                int w = Math.max(1, d.getIntrinsicWidth());
+                int h = Math.max(1, d.getIntrinsicHeight());
+                Rect savedBounds = new Rect(d.getBounds());
+                Bitmap bmp = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(bmp);
+                d.setBounds(0, 0, w, h);
+                d.draw(canvas);
+                d.setBounds(savedBounds);
+                return bmp;
+            } catch (Exception | OutOfMemoryError e) {
+                return null;
             }
-
-            boundAdIdentity = adIdentity;
-            adView.setNativeAd(ad);
         }
 
         void unbind() {

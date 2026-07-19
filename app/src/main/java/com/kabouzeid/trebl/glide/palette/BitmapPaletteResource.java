@@ -29,11 +29,12 @@ public class BitmapPaletteResource implements Resource<BitmapPaletteWrapper> {
 
     @Override
     public void recycle() {
-        // Only return to pool — never call bitmap.recycle() manually.
-        // A recycled bitmap can still be referenced by an ImageView in a
-        // RecyclerView, and drawing it causes RuntimeException in
-        // RecordingCanvas.throwIfCannotDraw(). Let the GC collect
-        // unreferenced bitmaps naturally if the pool rejects them.
-        bitmapPool.put(bitmapPaletteWrapper.getBitmap());
+        // Intentionally a no-op. BitmapPaletteTarget displays this exact Bitmap via
+        // ImageView.setImageBitmap(), so returning it to Glide's BitmapPool (as this
+        // used to do) let Glide reuse/recycle it for another decode while a
+        // RecyclerView row was still drawing it — the "trying to use a recycled
+        // bitmap" crash in BaseCanvas.throwIfCannotDraw(). We now leave the bitmap
+        // for the GC to reclaim once no view references it. This gives up some
+        // bitmap-pool reuse in exchange for not recycling on-screen thumbnails.
     }
 }
