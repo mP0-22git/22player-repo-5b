@@ -66,4 +66,20 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <TextView
+        android:id="@+id/restore_purchase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:padding="8dp"
+        android:background="?attr/selectableItemBackground"
+        android:text="@string/restore_purchase"
+        android:textSize="13dp"
+        android:fontFamily="@font/regularfont"
+        android:textColor="?textColor"
+        android:alpha="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pro_layout" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

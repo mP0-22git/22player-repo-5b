@@ -44,6 +44,9 @@ public class BillingManager {
     private final List<BillingCallback> callbacks = new ArrayList<>();
     private boolean isConnected = false;
     private int retryAttempts = 0;
+    // Set when restorePurchases() is called while disconnected, so the restore
+    // resumes (with user-facing feedback) once the connection is established.
+    private boolean pendingManualRestore = false;
     private final Handler mainHandler = new Handler(Looper.getMainLooper());
 
     // Callback interfaces
@@ -116,12 +119,18 @@ public class BillingManager {
                     Log.d(TAG, "Billing client connected");
                     isConnected = true;
                     retryAttempts = 0;
-                    queryExistingPurchases();
-                    queryExistingSubscriptions();
-                    notifyBillingReady();
+                    boolean manual = pendingManualRestore;
+                    pendingManualRestore = false;
+                    refreshPurchases(manual);
                 } else {
                     Log.e(TAG, "Billing setup failed: " + billingResult.getResponseCode());
                     isConnected = false;
+                    // A restore was requested but we couldn't connect — report it so
+                    // the user isn't left with a "Restoring…" spinner and no outcome.
+                    if (pendingManualRestore) {
+                        pendingManualRestore = false;
+                        notifyBillingError(billingResult.getResponseCode(), billingResult.getDebugMessage());
+                    }
                 }
             }
 
@@ -149,72 +158,72 @@ public class BillingManager {
     }
 
     /**
-     * Query existing purchases from Google Play.
+     * Authoritatively re-query Google Play for all entitlements (INAPP + SUBS).
+     * The in-memory purchase set is only replaced once BOTH queries succeed, so a
+     * failed or slow query can never transiently mark a paying user as non-pro
+     * (which is what caused pro status to flicker off on some cold starts). The
+     * two product types are queried sequentially and accumulated, so neither can
+     * clear the other's results mid-flight.
+     *
+     * @param manual true when triggered by an explicit "Restore purchases" tap, in
+     *               which case the outcome is always reported to callbacks via
+     *               onPurchaseRestored / onBillingError even if nothing changed.
      */
-    private void queryExistingPurchases() {
+    private void refreshPurchases(final boolean manual) {
         if (!isConnected) {
-            Log.w(TAG, "Cannot query purchases - not connected");
             return;
         }
 
-        QueryPurchasesParams params = QueryPurchasesParams.newBuilder()
+        final Set<String> found = new HashSet<>();
+
+        QueryPurchasesParams inappParams = QueryPurchasesParams.newBuilder()
                 .setProductType(BillingClient.ProductType.INAPP)
                 .build();
 
-        billingClient.queryPurchasesAsync(params, (billingResult, purchases) -> {
-            if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-                boolean hadPurchases = !purchasedProducts.isEmpty();
+        billingClient.queryPurchasesAsync(inappParams, (inappResult, inappPurchases) -> {
+            if (inappResult.getResponseCode() != BillingClient.BillingResponseCode.OK) {
+                Log.e(TAG, "Failed to query purchases: " + inappResult.getResponseCode());
+                if (manual) notifyBillingError(inappResult.getResponseCode(), inappResult.getDebugMessage());
+                return; // don't downgrade on a failed query
+            }
+            for (Purchase purchase : inappPurchases) {
+                if (purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED) {
+                    found.addAll(purchase.getProducts());
+                    acknowledgePurchaseIfNeeded(purchase);
+                }
+            }
+
+            QueryPurchasesParams subsParams = QueryPurchasesParams.newBuilder()
+                    .setProductType(BillingClient.ProductType.SUBS)
+                    .build();
+
+            billingClient.queryPurchasesAsync(subsParams, (subsResult, subsPurchases) -> {
+                if (subsResult.getResponseCode() != BillingClient.BillingResponseCode.OK) {
+                    Log.e(TAG, "Failed to query subscriptions: " + subsResult.getResponseCode());
+                    if (manual) notifyBillingError(subsResult.getResponseCode(), subsResult.getDebugMessage());
+                    return; // don't downgrade on a failed query
+                }
+                for (Purchase purchase : subsPurchases) {
+                    if (purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED) {
+                        found.addAll(purchase.getProducts());
+                        acknowledgePurchaseIfNeeded(purchase);
+                    }
+                }
+
+                // Both queries succeeded — this snapshot is authoritative.
                 purchasedProducts.clear();
+                purchasedProducts.addAll(found);
+                Log.d(TAG, "Entitlements resolved. Purchased products: " + purchasedProducts);
 
-                for (Purchase purchase : purchases) {
-                    if (purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED) {
-                        purchasedProducts.addAll(purchase.getProducts());
-                        acknowledgePurchaseIfNeeded(purchase);
-                    }
+                // App.onBillingReady() re-derives and caches pro status, upgrading
+                // or downgrading as needed and notifying the UI only when it changes.
+                notifyBillingReady();
+
+                // For an explicit restore, always report the outcome to the caller.
+                if (manual) {
+                    notifyPurchaseRestored(!purchasedProducts.isEmpty());
                 }
-
-                Log.d(TAG, "Purchased products: " + purchasedProducts);
-
-                // Notify if this was a restore operation and we found purchases
-                if (!hadPurchases && !purchasedProducts.isEmpty()) {
-                    notifyPurchaseRestored(true);
-                }
-            } else {
-                Log.e(TAG, "Failed to query purchases: " + billingResult.getResponseCode());
-            }
-        });
-    }
-
-    /**
-     * Query existing subscriptions from Google Play.
-     */
-    private void queryExistingSubscriptions() {
-        if (!isConnected) {
-            Log.w(TAG, "Cannot query subscriptions - not connected");
-            return;
-        }
-
-        QueryPurchasesParams params = QueryPurchasesParams.newBuilder()
-                .setProductType(BillingClient.ProductType.SUBS)
-                .build();
-
-        billingClient.queryPurchasesAsync(params, (billingResult, purchases) -> {
-            if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-                for (Purchase purchase : purchases) {
-                    if (purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED) {
-                        purchasedProducts.addAll(purchase.getProducts());
-                        acknowledgePurchaseIfNeeded(purchase);
-                    }
-                }
-
-                Log.d(TAG, "Active subscriptions queried. Purchased products: " + purchasedProducts);
-
-                if (!purchasedProducts.isEmpty()) {
-                    notifyPurchaseRestored(true);
-                }
-            } else {
-                Log.e(TAG, "Failed to query subscriptions: " + billingResult.getResponseCode());
-            }
+            });
         });
     }
 
@@ -286,50 +295,17 @@ public class BillingManager {
     }
 
     /**
-     * Restore purchases by querying Google Play (both INAPP and SUBS).
+     * Restore purchases by re-querying Google Play (both INAPP and SUBS).
+     * Safe to call while disconnected: it reconnects first, then restores.
      */
     public void restorePurchases() {
         if (!isConnected) {
-            Log.e(TAG, "Cannot restore - not connected");
+            Log.d(TAG, "Restore requested while disconnected - reconnecting");
+            pendingManualRestore = true;
             startConnection();
             return;
         }
-
-        purchasedProducts.clear();
-
-        // Query one-time purchases
-        QueryPurchasesParams inappParams = QueryPurchasesParams.newBuilder()
-                .setProductType(BillingClient.ProductType.INAPP)
-                .build();
-
-        billingClient.queryPurchasesAsync(inappParams, (billingResult, purchases) -> {
-            if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-                for (Purchase purchase : purchases) {
-                    if (purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED) {
-                        purchasedProducts.addAll(purchase.getProducts());
-                        acknowledgePurchaseIfNeeded(purchase);
-                    }
-                }
-            }
-
-            // Then query subscriptions
-            QueryPurchasesParams subsParams = QueryPurchasesParams.newBuilder()
-                    .setProductType(BillingClient.ProductType.SUBS)
-                    .build();
-
-            billingClient.queryPurchasesAsync(subsParams, (subsResult, subsPurchases) -> {
-                if (subsResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-                    for (Purchase purchase : subsPurchases) {
-                        if (purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED) {
-                            purchasedProducts.addAll(purchase.getProducts());
-                            acknowledgePurchaseIfNeeded(purchase);
-                        }
-                    }
-                }
-
-                notifyPurchaseRestored(!purchasedProducts.isEmpty());
-            });
-        });
+        refreshPurchases(true);
     }
 
     /**

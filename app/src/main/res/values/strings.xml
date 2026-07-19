@@ -245,6 +245,9 @@
     <string name="folder_view_is_a_pro_feature" translatable="false">Folder view is a Pro feature.</string>
     <string name="restore">Restore</string>
     <string name="no_purchase_found">No purchase found.</string>
+    <string name="restore_purchase">Restore purchase</string>
+    <string name="restoring">Restoring…</string>
+    <string name="could_not_restore">Couldn\'t reach the Play Store. Please try again.</string>
     <string name="add_action">Add</string>
     <string name="blacklist">Blacklist</string>
     <string name="remove_from_blacklist">Remove from blacklist</string>
