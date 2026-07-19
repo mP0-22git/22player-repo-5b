@@ -222,6 +222,9 @@
     <string name="folder_view_is_a_pro_feature">Kansionäkymä on Phonograph Pro:n ominaisuus.</string>
     <string name="restore">Palauta</string>
     <string name="no_purchase_found">Ostoa ei löytynyt.</string>
+    <string name="restore_purchase">Palauta ostot</string>
+    <string name="restoring">Palautetaan…</string>
+    <string name="could_not_restore">Play Storeen ei saatu yhteyttä. Yritä uudelleen.</string>
     <string name="add_action">Lisää</string>
     <string name="blacklist">Estolista</string>
     <string name="remove_from_blacklist">Poista estolistalta</string>

@@ -222,6 +222,9 @@
     <string name="folder_view_is_a_pro_feature">عرض المجلدات هي ميزة في Phonograph Pro.</string>
     <string name="restore">استعادة</string>
     <string name="no_purchase_found">لم يتم العثور على عملية شراء.</string>
+    <string name="restore_purchase">استعادة المشتريات</string>
+    <string name="restoring">جارٍ الاستعادة…</string>
+    <string name="could_not_restore">تعذّر الوصول إلى Play Store. يُرجى إعادة المحاولة.</string>
     <string name="add_action">إضافة</string>
     <string name="blacklist">القائمة السوداء</string>
     <string name="remove_from_blacklist">إزالة من القائمة السوداء</string>

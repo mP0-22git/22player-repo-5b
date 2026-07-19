@@ -222,6 +222,9 @@
     <string name="folder_view_is_a_pro_feature">Klasör görünümü bir Phonograph Pro özelliğidir.</string>
     <string name="restore">Geri yükle</string>
     <string name="no_purchase_found">Satın alma bulunamadı.</string>
+    <string name="restore_purchase">Satın almayı geri yükle</string>
+    <string name="restoring">Geri yükleniyor…</string>
+    <string name="could_not_restore">Play Store\'a ulaşılamadı. Lütfen tekrar deneyin.</string>
     <string name="add_action">Ekle</string>
     <string name="blacklist">Kara liste</string>
     <string name="remove_from_blacklist">Kara listeden kaldır</string>

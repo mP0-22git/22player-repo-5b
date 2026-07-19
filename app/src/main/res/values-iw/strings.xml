@@ -222,6 +222,9 @@
     <string name="folder_view_is_a_pro_feature">תצוגת תיקיות היא אפשרות הזמינה ב-Phonograph Pro בלבד.</string>
     <string name="restore">שחזר</string>
     <string name="no_purchase_found">לא נמצאה רכישה.</string>
+    <string name="restore_purchase">שחזר רכישה</string>
+    <string name="restoring">משחזר…</string>
+    <string name="could_not_restore">לא ניתן להתחבר ל-Play Store. יש לנסות שוב.</string>
     <string name="add_action">הוסף</string>
     <string name="blacklist">רשימה שחורה</string>
     <string name="remove_from_blacklist">הסר מהרשימה השחורה</string>

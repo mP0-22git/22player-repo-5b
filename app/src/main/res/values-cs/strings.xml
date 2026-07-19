@@ -222,6 +222,9 @@
     <string name="folder_view_is_a_pro_feature">Prohlížení složek je funkce Phonograph Pro.</string>
     <string name="restore">Obnovit</string>
     <string name="no_purchase_found">Nebyl nalezen žádný nákup.</string>
+    <string name="restore_purchase">Obnovit nákup</string>
+    <string name="restoring">Obnovování…</string>
+    <string name="could_not_restore">Nepodařilo se připojit k Play Store. Zkuste to znovu.</string>
     <string name="add_action">Přidat</string>
     <string name="blacklist">Blacklist</string>
     <string name="remove_from_blacklist">Odstranit z blacklistu</string>

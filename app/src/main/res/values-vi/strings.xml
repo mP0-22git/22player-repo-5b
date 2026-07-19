@@ -222,6 +222,9 @@
     <string name="folder_view_is_a_pro_feature">Xem thư mục là một tính năng của Phonograph Pro.</string>
     <string name="restore">Khôi phục</string>
     <string name="no_purchase_found">Không tìm thấy hàng mua.</string>
+    <string name="restore_purchase">Khôi phục giao dịch mua</string>
+    <string name="restoring">Đang khôi phục…</string>
+    <string name="could_not_restore">Không thể kết nối với Play Store. Vui lòng thử lại.</string>
     <string name="add_action">Thêm</string>
     <string name="blacklist">Danh sách đen</string>
     <string name="remove_from_blacklist">Xóa khỏi danh sách đen</string>

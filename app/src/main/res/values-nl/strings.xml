@@ -218,6 +218,9 @@
     <string name="folder_view_is_a_pro_feature">Mappenweergave is een Phonograph Pro functie.</string>
     <string name="restore">Herstel</string>
     <string name="no_purchase_found">Geen aankoop gevonden.</string>
+    <string name="restore_purchase">Aankopen herstellen</string>
+    <string name="restoring">Bezig met herstellen…</string>
+    <string name="could_not_restore">Kan de Play Store niet bereiken. Probeer het opnieuw.</string>
     <string name="add_action">Toevoegen</string>
     <string name="blacklist">Zwarte lijst</string>
     <string name="remove_from_blacklist">Verwijderen van zwarte lijst</string>

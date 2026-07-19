@@ -218,6 +218,9 @@
     <string name="folder_view_is_a_pro_feature">Afișarea dosarelor este disponibilă doar în versiunea Phonograph Pro.</string>
     <string name="restore">Restabilire</string>
     <string name="no_purchase_found">Nu s-a găsit nicio achiziție.</string>
+    <string name="restore_purchase">Restabilește achiziția</string>
+    <string name="restoring">Se restabilește…</string>
+    <string name="could_not_restore">Nu s-a putut stabili conexiunea cu Play Store. Încercați din nou.</string>
     <string name="add_action">Adăugare</string>
     <string name="blacklist">Listă neagră</string>
     <string name="remove_from_blacklist">Eliminați din lista neagră</string>

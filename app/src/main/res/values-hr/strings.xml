@@ -222,6 +222,9 @@
     <string name="folder_view_is_a_pro_feature">Prikaz mapa je Phonograph Pro značajka.</string>
     <string name="restore">Vrati</string>
     <string name="no_purchase_found">Nema pronađenih kupnji.</string>
+    <string name="restore_purchase">Vrati kupnju</string>
+    <string name="restoring">Vraćanje…</string>
+    <string name="could_not_restore">Nije moguće povezati se na Play Store. Pokušajte ponovno.</string>
     <string name="add_action">Dodaj</string>
     <string name="blacklist">Crni popis</string>
     <string name="remove_from_blacklist">Ukloni sa crnog popisa</string>

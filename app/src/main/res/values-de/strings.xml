@@ -222,6 +222,9 @@
     <string name="folder_view_is_a_pro_feature">Die Ordner-Ansicht ist ein Phonograph Pro-Feature.</string>
     <string name="restore">Wiederherstellen</string>
     <string name="no_purchase_found">Kein Kauf gefunden.</string>
+    <string name="restore_purchase">Kauf wiederherstellen</string>
+    <string name="restoring">Wird wiederhergestellt…</string>
+    <string name="could_not_restore">Der Play Store konnte nicht erreicht werden. Bitte versuche es noch einmal.</string>
     <string name="add_action">Hinzufügen</string>
     <string name="blacklist">Blacklist</string>
     <string name="remove_from_blacklist">Von Blacklist entfernen</string>

@@ -218,6 +218,9 @@
     <string name="folder_view_is_a_pro_feature">A mappa nézete a  Phonograph Pro funkcióban van.</string>
     <string name="restore">Visszaállítás</string>
     <string name="no_purchase_found">Nem található vásárlás.</string>
+    <string name="restore_purchase">Vásárlások visszaállítása</string>
+    <string name="restoring">Visszaállítás…</string>
+    <string name="could_not_restore">Nem sikerült elérni a Play Store-t. Próbálja újra.</string>
     <string name="add_action">Hozzáadás</string>
     <string name="blacklist">Tiltólista</string>
     <string name="remove_from_blacklist">Eltávolítás a tiltólistáról</string>

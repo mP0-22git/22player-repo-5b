@@ -220,6 +220,9 @@
     <string name="folder_view_is_a_pro_feature">폴더 보기는 프로 기능입니다.</string>
     <string name="restore">복원</string>
     <string name="no_purchase_found">구매 내역이 없습니다.</string>
+    <string name="restore_purchase">구매 복원</string>
+    <string name="restoring">복원 중…</string>
+    <string name="could_not_restore">Play Store에 연결할 수 없습니다. 다시 시도해 주세요.</string>
     <string name="add_action">추가</string>
     <string name="blacklist">제외할 목록</string>
     <string name="remove_from_blacklist">제외 목록에서 제거</string>

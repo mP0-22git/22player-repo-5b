@@ -222,6 +222,9 @@
     <string name="folder_view_is_a_pro_feature">フォルダビューはPhonograph Proの機能です。</string>
     <string name="restore">復元</string>
     <string name="no_purchase_found">購入履歴がありませんでした。</string>
+    <string name="restore_purchase">購入を復元</string>
+    <string name="restoring">復元中…</string>
+    <string name="could_not_restore">Play Storeに接続できませんでした。もう一度お試しください。</string>
     <string name="add_action">追加</string>
     <string name="blacklist">ブラックリスト</string>
     <string name="remove_from_blacklist">ブラックリストから除去</string>

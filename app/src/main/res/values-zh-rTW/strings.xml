@@ -223,6 +223,9 @@
     <string name="folder_view_is_a_pro_feature">文件夾檢視僅供 Phonograph Pro 使用</string>
     <string name="restore">恢復</string>
     <string name="no_purchase_found">找不到購買紀錄</string>
+    <string name="restore_purchase">恢復購買</string>
+    <string name="restoring">正在恢復…</string>
+    <string name="could_not_restore">無法連線至 Play Store。請再試一次。</string>
     <string name="add_action">新增</string>
     <string name="blacklist">黑名單</string>
     <string name="remove_from_blacklist">從黑名單中移除</string>

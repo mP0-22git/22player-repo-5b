@@ -222,6 +222,9 @@
     <string name="folder_view_is_a_pro_feature">La vue par dossier est une fonctionnalité Phonograph Pro.</string>
     <string name="restore">Restaurer</string>
     <string name="no_purchase_found">Aucun achat trouvé.</string>
+    <string name="restore_purchase">Restaurer l\'achat</string>
+    <string name="restoring">Restauration…</string>
+    <string name="could_not_restore">Impossible de se connecter au Play Store. Veuillez réessayer.</string>
     <string name="add_action">Ajouter</string>
     <string name="blacklist">Liste noire</string>
     <string name="remove_from_blacklist">Retirer de la liste noire</string>

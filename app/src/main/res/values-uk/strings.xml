@@ -213,6 +213,9 @@
     <string name="folder_view_is_a_pro_feature">Перегляд тек доступний у платній версії.</string>
     <string name="restore">Відновити купівлю</string>
     <string name="no_purchase_found">Не знайдено купівель.</string>
+    <string name="restore_purchase">Відновити купівлю</string>
+    <string name="restoring">Відновлення…</string>
+    <string name="could_not_restore">Не вдалося підключитися до Play Store. Спробуйте ще раз.</string>
     <string name="add_action">Додати</string>
     <string name="blacklist">Чорний список</string>
     <string name="remove_from_blacklist">Видалити з чорного списку</string>

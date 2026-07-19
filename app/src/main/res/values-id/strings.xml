@@ -222,6 +222,9 @@
     <string name="folder_view_is_a_pro_feature">Tampilan folder adalah fitur Phonograph Pro.</string>
     <string name="restore">Pulihkan</string>
     <string name="no_purchase_found">Tidak ada pembelian yang ditemukan.</string>
+    <string name="restore_purchase">Pulihkan pembelian</string>
+    <string name="restoring">Memulihkan…</string>
+    <string name="could_not_restore">Tidak dapat terhubung ke Play Store. Silakan coba lagi.</string>
     <string name="add_action">Tambah</string>
     <string name="blacklist">Daftar hitam</string>
     <string name="remove_from_blacklist">Hapus dari daftar hitam</string>

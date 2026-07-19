@@ -222,6 +222,9 @@
     <string name="folder_view_is_a_pro_feature">Просмотр по папкам это функция Phonograph Pro.</string>
     <string name="restore">Восстановить</string>
     <string name="no_purchase_found">Покупка не найдена.</string>
+    <string name="restore_purchase">Восстановить покупку</string>
+    <string name="restoring">Восстановление…</string>
+    <string name="could_not_restore">Не удалось подключиться к Play Store. Повторите попытку.</string>
     <string name="add_action">Добавить</string>
     <string name="blacklist">Чёрный список</string>
     <string name="remove_from_blacklist">Убрать из чёрного списка</string>

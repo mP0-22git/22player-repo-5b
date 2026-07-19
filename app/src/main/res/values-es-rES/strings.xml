@@ -222,6 +222,9 @@
     <string name="folder_view_is_a_pro_feature">La vista de carpetas es una característica de Phonograph Pro.</string>
     <string name="restore">Restablecer</string>
     <string name="no_purchase_found">No purchase found.</string>
+    <string name="restore_purchase">Restaurar la compra</string>
+    <string name="restoring">Restaurando…</string>
+    <string name="could_not_restore">No se ha podido conectar con Play Store. Inténtelo de nuevo.</string>
     <string name="add_action">Añadir</string>
     <string name="blacklist">Lista Negra</string>
     <string name="remove_from_blacklist">Remover de la lista negra</string>

@@ -222,6 +222,9 @@
     <string name="folder_view_is_a_pro_feature">A exibição de pastas é um recurso do Phonograph Pro.</string>
     <string name="restore">Restaurar</string>
     <string name="no_purchase_found">Nenhuma compra feita.</string>
+    <string name="restore_purchase">Restaurar compra</string>
+    <string name="restoring">Restaurando…</string>
+    <string name="could_not_restore">Não foi possível se conectar à Play Store. Tente novamente.</string>
     <string name="add_action">Adicionar</string>
     <string name="blacklist">Lista negra</string>
     <string name="remove_from_blacklist">Remover da lista negra</string>

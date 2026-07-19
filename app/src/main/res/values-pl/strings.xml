@@ -218,6 +218,9 @@
     <string name="folder_view_is_a_pro_feature">Widok folderów jest funkcją Phonograph Pro.</string>
     <string name="restore">Przywróć</string>
     <string name="no_purchase_found">Nie znaleziono zakupu.</string>
+    <string name="restore_purchase">Przywróć zakup</string>
+    <string name="restoring">Przywracanie…</string>
+    <string name="could_not_restore">Nie udało się połączyć z Play Store. Spróbuj ponownie.</string>
     <string name="add_action">Dodaj</string>
     <string name="blacklist">Czarna lista</string>
     <string name="remove_from_blacklist">Usuń z czarnej listy</string>

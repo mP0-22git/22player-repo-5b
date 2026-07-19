@@ -222,6 +222,9 @@
     <string name="folder_view_is_a_pro_feature">La visualizzazione delle cartelle è una funzionalità di Phonograph Pro.</string>
     <string name="restore">Ripristina</string>
     <string name="no_purchase_found">Nessun acquisto trovato.</string>
+    <string name="restore_purchase">Ripristina acquisto</string>
+    <string name="restoring">Ripristino in corso…</string>
+    <string name="could_not_restore">Impossibile collegarsi al Play Store. Riprova.</string>
     <string name="add_action">Aggiungi</string>
     <string name="blacklist">Lista nera</string>
     <string name="remove_from_blacklist">Rimuovi dalla lista nera</string>
